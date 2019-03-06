@@ -1,0 +1,531 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CoffeeShopDB" Class="CoffeeShopDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-HA2TCUF;Initial Catalog=CoffeeShopDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CoffeeShopDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.BasicSalary" Member="BasicSalaries">
+    <Type Name="BasicSalary">
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SalaryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Employee_BasicSalary" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
+      <Association Name="Salary_BasicSalary" Member="Salary" ThisKey="SalaryID" OtherKey="SalaryID" Type="Salary" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CoffeeBrewings" Member="CoffeeBrewings">
+    <Type Name="CoffeeBrewing">
+      <Column Name="FDID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Employee_CoffeeBrewing" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
+      <Association Name="FoodAndDrink_CoffeeBrewing" Member="FoodAndDrink" ThisKey="FDID" OtherKey="FDID" Type="FoodAndDrink" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CoffeeLandScape" Member="CoffeeLandScapes">
+    <Type Name="CoffeeLandScape">
+      <Column Name="CLSID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CSID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FloorID" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="MapRatio" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="CoffeeLandScape_CoffeeLandScapeDetail" Member="CoffeeLandScapeDetails" ThisKey="CLSID" OtherKey="CLSID" Type="CoffeeLandScapeDetail" />
+      <Association Name="CoffeeShop_CoffeeLandScape" Member="CoffeeShop" ThisKey="CSID" OtherKey="CSID" Type="CoffeeShop" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CoffeeLandScapeDetail" Member="CoffeeLandScapeDetails">
+    <Type Name="CoffeeLandScapeDetail">
+      <Column Name="ItemID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CLSID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShapeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RowID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ColID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Width" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Length" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ItemType" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="CoffeeLandScape_CoffeeLandScapeDetail" Member="CoffeeLandScape" ThisKey="CLSID" OtherKey="CLSID" Type="CoffeeLandScape" IsForeignKey="true" />
+      <Association Name="Shape_CoffeeLandScapeDetail" Member="Shape" ThisKey="ShapeID" OtherKey="ShapeID" Type="Shape" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CoffeeShop" Member="CoffeeShops">
+    <Type Name="CoffeeShop">
+      <Column Name="CSID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="CoffeeShop_CoffeeLandScape" Member="CoffeeLandScapes" ThisKey="CSID" OtherKey="CSID" Type="CoffeeLandScape" />
+      <Association Name="CoffeeShop_Employee" Member="Employees" ThisKey="CSID" OtherKey="CSID" Type="Employee" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Customer" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="DOB" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IdentityNum" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Point" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Customer_Order" Member="Orders" ThisKey="CustomerID" OtherKey="CustomerID" Type="Order" />
+      <Association Name="Customer_Reservation" Member="Reservations" ThisKey="CustomerID" OtherKey="CustomerID" Type="Reservation" />
+      <Association Name="Customer_Server" Member="Servers" ThisKey="CustomerID" OtherKey="CustomerID" Type="Server" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Employee" Member="Employees">
+    <Type Name="Employee">
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CSID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Employee_BasicSalary" Member="BasicSalaries" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="BasicSalary" />
+      <Association Name="Employee_CoffeeBrewing" Member="CoffeeBrewings" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="CoffeeBrewing" />
+      <Association Name="Employee_Server" Member="Servers" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Server" />
+      <Association Name="Employee_Ship" Member="Ships" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Ship" />
+      <Association Name="Employee_TimeSheet" Member="TimeSheets" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="TimeSheet" />
+      <Association Name="CoffeeShop_Employee" Member="CoffeeShop" ThisKey="CSID" OtherKey="CSID" Type="CoffeeShop" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ESTIngredient" Member="ESTIngredients">
+    <Type Name="ESTIngredient">
+      <Column Name="IngreID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="ReceiptAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ESTAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Unit" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="Ingredient_ESTIngredient" Member="Ingredient" ThisKey="IngreID" OtherKey="IngreID" Type="Ingredient" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ExtraDetail" Member="ExtraDetails">
+    <Type Name="ExtraDetail">
+      <Column Name="ExpenseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Hour" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="Day" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SpecificDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="IngreId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FDID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FacilitiesID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Unit" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Association Name="ExtraExpense_ExtraDetail" Member="ExtraExpense" ThisKey="ExpenseID" OtherKey="ExpenseID" Type="ExtraExpense" IsForeignKey="true" />
+      <Association Name="Facility_ExtraDetail" Member="Facility" ThisKey="FacilitiesID" OtherKey="FacilitiesID" Type="Facility" IsForeignKey="true" />
+      <Association Name="FoodAndDrink_ExtraDetail" Member="FoodAndDrink" ThisKey="FDID" OtherKey="FDID" Type="FoodAndDrink" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ExtraDetail" Member="ExtraDetail1s">
+    <Type Name="ExtraDetail1">
+      <Column Name="ExpenseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Hour" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="Day" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="SpecificDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="IngreId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FDID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FacilitiesID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Unit" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Association Name="ExtraExpense_ExtraDetail1" Member="ExtraExpense" ThisKey="ExpenseID" OtherKey="ExpenseID" Type="ExtraExpense" IsForeignKey="true" />
+      <Association Name="Facility_ExtraDetail1" Member="Facility" ThisKey="FacilitiesID" OtherKey="FacilitiesID" Type="Facility" IsForeignKey="true" />
+      <Association Name="FoodAndDrink_ExtraDetail1" Member="FoodAndDrink" ThisKey="FDID" OtherKey="FDID" Type="FoodAndDrink" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ExtraExpense" Member="ExtraExpenses">
+    <Type Name="ExtraExpense">
+      <Column Name="ExpenseID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Period" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Price" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="ExtraExpense_ExtraDetail" Member="ExtraDetails" ThisKey="ExpenseID" OtherKey="ExpenseID" Type="ExtraDetail" />
+      <Association Name="ExtraExpense_ExtraDetail1" Member="ExtraDetail1s" ThisKey="ExpenseID" OtherKey="ExpenseID" Type="ExtraDetail1" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Facilities" Member="Facilities">
+    <Type Name="Facility">
+      <Column Name="FacilitiesID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SupplierID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Unit" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="UnitPrice" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Facility_ExtraDetail" Member="ExtraDetails" ThisKey="FacilitiesID" OtherKey="FacilitiesID" Type="ExtraDetail" />
+      <Association Name="Facility_ExtraDetail1" Member="ExtraDetail1s" ThisKey="FacilitiesID" OtherKey="FacilitiesID" Type="ExtraDetail1" />
+      <Association Name="Facility_ReceiptDetail" Member="ReceiptDetails" ThisKey="FacilitiesID" OtherKey="FacilitiesID" Type="ReceiptDetail" />
+      <Association Name="Supplier_Facility" Member="Supplier" ThisKey="SupplierID" OtherKey="SupplierID" Type="Supplier" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Gift" Member="Gifts">
+    <Type Name="Gift">
+      <Column Name="GiftID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SupplierID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="UnitPrice" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Gift_ProOnDrinkQuantity" Member="ProOnDrinkQuantities" ThisKey="GiftID" OtherKey="GiftID" Type="ProOnDrinkQuantity" />
+      <Association Name="Gift_ProOnOrderAmount" Member="ProOnOrderAmounts" ThisKey="GiftID" OtherKey="GiftID" Type="ProOnOrderAmount" />
+      <Association Name="Gift_ReceiptDetail" Member="ReceiptDetails" ThisKey="GiftID" OtherKey="GiftID" Type="ReceiptDetail" />
+      <Association Name="Supplier_Gift" Member="Supplier" ThisKey="SupplierID" OtherKey="SupplierID" Type="Supplier" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HistoryOrder" Member="HistoryOrders">
+    <Type Name="HistoryOrder">
+      <Column Name="OrderID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OrderDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FDID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UnitPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HistoryOrderPromotion" Member="HistoryOrderPromotions">
+    <Type Name="HistoryOrderPromotion">
+      <Column Name="OrderID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PromotionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HistoryReceipt" Member="HistoryReceipts">
+    <Type Name="HistoryReceipt">
+      <Column Name="IngreID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GiftID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FacilitiesID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReferenceDesc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ReceiptAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ESTAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HistoryTimeSheet" Member="HistoryTimeSheets">
+    <Type Name="HistoryTimeSheet">
+      <Column Name="TimeSheetID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TimeIn" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="TimeOut" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="Bonus" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Ingredients" Member="Ingredients">
+    <Type Name="Ingredient">
+      <Column Name="IngreID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SupplierID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Unit" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Ingredient_ESTIngredient" Member="ESTIngredients" ThisKey="IngreID" OtherKey="IngreID" Type="ESTIngredient" />
+      <Association Name="Ingredient_IngreExchange" Member="IngreExchanges" ThisKey="IngreID" OtherKey="IngreID" Type="IngreExchange" />
+      <Association Name="Ingredient_ReceiptDetail" Member="ReceiptDetails" ThisKey="IngreID" OtherKey="IngreID" Type="ReceiptDetail" />
+      <Association Name="Ingredient_RecipeDetail" Member="RecipeDetails" ThisKey="IngreID" OtherKey="IngreID" Type="RecipeDetail" />
+      <Association Name="Supplier_Ingredient" Member="Supplier" ThisKey="SupplierID" OtherKey="SupplierID" Type="Supplier" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.IngreExchange" Member="IngreExchanges">
+    <Type Name="IngreExchange">
+      <Column Name="IngreID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FDID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Unit" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Ingredient_IngreExchange" Member="Ingredient" ThisKey="IngreID" OtherKey="IngreID" Type="Ingredient" IsForeignKey="true" />
+      <Association Name="FoodAndDrink_IngreExchange" Member="FoodAndDrink" ThisKey="FDID" OtherKey="FDID" Type="FoodAndDrink" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Order]" Member="Orders">
+    <Type Name="Order">
+      <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PosID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OrderDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PaidDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DiscountMoney" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TotalAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Order_OrderItem" Member="OrderItems" ThisKey="OrderID" OtherKey="OrderID" Type="OrderItem" />
+      <Association Name="Order_OrderPromotion" Member="OrderPromotions" ThisKey="OrderID" OtherKey="OrderID" Type="OrderPromotion" />
+      <Association Name="Order_ShipDetail" Member="ShipDetails" ThisKey="OrderID" OtherKey="OrderID" Type="ShipDetail" />
+      <Association Name="Customer_Order" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
+      <Association Name="Position_Order" Member="Position" ThisKey="PosID" OtherKey="PosID" Type="Position" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OrderItem" Member="OrderItems">
+    <Type Name="OrderItem">
+      <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FDID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Order_OrderItem" Member="Order" ThisKey="OrderID" OtherKey="OrderID" Type="Order" IsForeignKey="true" />
+      <Association Name="FoodAndDrink_OrderItem" Member="FoodAndDrink" ThisKey="FDID" OtherKey="FDID" Type="FoodAndDrink" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OrderPromotion" Member="OrderPromotions">
+    <Type Name="OrderPromotion">
+      <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PromotionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Order_OrderPromotion" Member="Order" ThisKey="OrderID" OtherKey="OrderID" Type="Order" IsForeignKey="true" />
+      <Association Name="Promotion_OrderPromotion" Member="Promotion" ThisKey="PromotionID" OtherKey="PromotionID" Type="Promotion" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Position" Member="Positions">
+    <Type Name="Position">
+      <Column Name="PosID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Position_Order" Member="Orders" ThisKey="PosID" OtherKey="PosID" Type="Order" />
+      <Association Name="Position_Reservation" Member="Reservations" ThisKey="PosID" OtherKey="PosID" Type="Reservation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Promotion" Member="Promotions">
+    <Type Name="Promotion">
+      <Column Name="PromotionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Promotion_OrderPromotion" Member="OrderPromotions" ThisKey="PromotionID" OtherKey="PromotionID" Type="OrderPromotion" />
+      <Association Name="Promotion_ProOnDrinkQuantity" Member="ProOnDrinkQuantities" ThisKey="PromotionID" OtherKey="PromotionID" Type="ProOnDrinkQuantity" />
+      <Association Name="Promotion_ProOnOrderAmount" Member="ProOnOrderAmounts" ThisKey="PromotionID" OtherKey="PromotionID" Type="ProOnOrderAmount" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProOnDrinkQuantity" Member="ProOnDrinkQuantities">
+    <Type Name="ProOnDrinkQuantity">
+      <Column Name="PromotionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FDID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FDQuantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PromotionFDID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GiftID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PromotionQuantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DiscountMoney" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="Gift_ProOnDrinkQuantity" Member="Gift" ThisKey="GiftID" OtherKey="GiftID" Type="Gift" IsForeignKey="true" />
+      <Association Name="Promotion_ProOnDrinkQuantity" Member="Promotion" ThisKey="PromotionID" OtherKey="PromotionID" Type="Promotion" IsForeignKey="true" />
+      <Association Name="FoodAndDrink_ProOnDrinkQuantity" Member="FoodAndDrink" ThisKey="FDID" OtherKey="FDID" Type="FoodAndDrink" IsForeignKey="true" />
+      <Association Name="FoodAndDrink_ProOnDrinkQuantity1" Member="FoodAndDrink1" ThisKey="PromotionFDID" OtherKey="FDID" Type="FoodAndDrink" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProOnOrderAmount" Member="ProOnOrderAmounts">
+    <Type Name="ProOnOrderAmount">
+      <Column Name="PromotionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MinOrderTotalAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="GiftID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PromotionFDID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PromotionQuantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DiscountRate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DirectDiscountMoney" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="Gift_ProOnOrderAmount" Member="Gift" ThisKey="GiftID" OtherKey="GiftID" Type="Gift" IsForeignKey="true" />
+      <Association Name="Promotion_ProOnOrderAmount" Member="Promotion" ThisKey="PromotionID" OtherKey="PromotionID" Type="Promotion" IsForeignKey="true" />
+      <Association Name="FoodAndDrink_ProOnOrderAmount" Member="FoodAndDrink" ThisKey="PromotionFDID" OtherKey="FDID" Type="FoodAndDrink" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Receipt" Member="Receipts">
+    <Type Name="Receipt">
+      <Column Name="ReceiptID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="TotalAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Receipt_ReceiptDetail" Member="ReceiptDetails" ThisKey="ReceiptID" OtherKey="ReceiptID" Type="ReceiptDetail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReceiptDetail" Member="ReceiptDetails">
+    <Type Name="ReceiptDetail">
+      <Column Name="ReceiptID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IngreID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GiftID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FacilitiesID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SupplierID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReferenceDesc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Unit" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="UnitPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Facility_ReceiptDetail" Member="Facility" ThisKey="FacilitiesID" OtherKey="FacilitiesID" Type="Facility" IsForeignKey="true" />
+      <Association Name="Gift_ReceiptDetail" Member="Gift" ThisKey="GiftID" OtherKey="GiftID" Type="Gift" IsForeignKey="true" />
+      <Association Name="Ingredient_ReceiptDetail" Member="Ingredient" ThisKey="IngreID" OtherKey="IngreID" Type="Ingredient" IsForeignKey="true" />
+      <Association Name="Receipt_ReceiptDetail" Member="Receipt" ThisKey="ReceiptID" OtherKey="ReceiptID" Type="Receipt" IsForeignKey="true" />
+      <Association Name="Supplier_ReceiptDetail" Member="Supplier" ThisKey="SupplierID" OtherKey="SupplierID" Type="Supplier" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Recipe" Member="Recipes">
+    <Type Name="Recipe">
+      <Column Name="RecID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FDID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Recipe_RecipeDetail" Member="RecipeDetails" ThisKey="RecID" OtherKey="RecID" Type="RecipeDetail" />
+      <Association Name="FoodAndDrink_Recipe" Member="FoodAndDrink" ThisKey="FDID" OtherKey="FDID" Type="FoodAndDrink" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RecipeDetail" Member="RecipeDetails">
+    <Type Name="RecipeDetail">
+      <Column Name="RecID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Step" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="IngreID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Unit" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Ingredient_RecipeDetail" Member="Ingredient" ThisKey="IngreID" OtherKey="IngreID" Type="Ingredient" IsForeignKey="true" />
+      <Association Name="Recipe_RecipeDetail" Member="Recipe" ThisKey="RecID" OtherKey="RecID" Type="Recipe" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Reservation" Member="Reservations">
+    <Type Name="Reservation">
+      <Column Name="ResvID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PosID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CustName" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ResvDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Reservation_ReservationDetail" Member="ReservationDetails" ThisKey="ResvID" OtherKey="ResvID" Type="ReservationDetail" />
+      <Association Name="Customer_Reservation" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
+      <Association Name="Position_Reservation" Member="Position" ThisKey="PosID" OtherKey="PosID" Type="Position" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReservationDetail" Member="ReservationDetails">
+    <Type Name="ReservationDetail">
+      <Column Name="ResvID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FDID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Reservation_ReservationDetail" Member="Reservation" ThisKey="ResvID" OtherKey="ResvID" Type="Reservation" IsForeignKey="true" />
+      <Association Name="FoodAndDrink_ReservationDetail" Member="FoodAndDrink" ThisKey="FDID" OtherKey="FDID" Type="FoodAndDrink" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Role" Member="Roles">
+    <Type Name="Role">
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RoleName" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="Role_RoleMap" Member="RoleMaps" ThisKey="RoleID" OtherKey="RoleID" Type="RoleMap" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RoleMap" Member="RoleMaps">
+    <Type Name="RoleMap">
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AccType" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Position" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="Role_RoleMap" Member="Role" ThisKey="RoleID" OtherKey="RoleID" Type="Role" IsForeignKey="true" />
+      <Association Name="Account_RoleMap" Member="Account" ThisKey="UserID" OtherKey="UserID" Type="Account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Salary" Member="Salaries">
+    <Type Name="Salary">
+      <Column Name="SalaryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Hour" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UnitPrice" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Salary_BasicSalary" Member="BasicSalaries" ThisKey="SalaryID" OtherKey="SalaryID" Type="BasicSalary" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Server" Member="Servers">
+    <Type Name="Server">
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Customer_Server" Member="Customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="Customer" IsForeignKey="true" />
+      <Association Name="Employee_Server" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Shape" Member="Shapes">
+    <Type Name="Shape">
+      <Column Name="ShapeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ImagePath" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Shape_CoffeeLandScapeDetail" Member="CoffeeLandScapeDetails" ThisKey="ShapeID" OtherKey="ShapeID" Type="CoffeeLandScapeDetail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Ship" Member="Ships">
+    <Type Name="Ship">
+      <Column Name="ShipID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShipDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="Ship_ShipDetail" Member="ShipDetails" ThisKey="ShipID" OtherKey="ShipID" Type="ShipDetail" />
+      <Association Name="Employee_Ship" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ShipDetail" Member="ShipDetails">
+    <Type Name="ShipDetail">
+      <Column Name="ShipID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustName" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Order_ShipDetail" Member="Order" ThisKey="OrderID" OtherKey="OrderID" Type="Order" IsForeignKey="true" />
+      <Association Name="Ship_ShipDetail" Member="Ship" ThisKey="ShipID" OtherKey="ShipID" Type="Ship" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Supplier" Member="Suppliers">
+    <Type Name="Supplier">
+      <Column Name="SupplierID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Supplier_Facility" Member="Facilities" ThisKey="SupplierID" OtherKey="SupplierID" Type="Facility" />
+      <Association Name="Supplier_Gift" Member="Gifts" ThisKey="SupplierID" OtherKey="SupplierID" Type="Gift" />
+      <Association Name="Supplier_Ingredient" Member="Ingredients" ThisKey="SupplierID" OtherKey="SupplierID" Type="Ingredient" />
+      <Association Name="Supplier_ReceiptDetail" Member="ReceiptDetails" ThisKey="SupplierID" OtherKey="SupplierID" Type="ReceiptDetail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TimeSheet" Member="TimeSheets">
+    <Type Name="TimeSheet">
+      <Column Name="TimeSheetID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TotalDay" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="TotalAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="TimeSheet_TimeSheetDetail" Member="TimeSheetDetails" ThisKey="TimeSheetID" OtherKey="TimeSheetID" Type="TimeSheetDetail" />
+      <Association Name="Employee_TimeSheet" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TimeSheetDetail" Member="TimeSheetDetails">
+    <Type Name="TimeSheetDetail">
+      <Column Name="TimeSheetID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Day" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="RegisterTimeIn" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="RegisterTimeOut" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="TimeIn" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="TimeOut" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="Bonus" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="TimeSheet_TimeSheetDetail" Member="TimeSheet" ThisKey="TimeSheetID" OtherKey="TimeSheetID" Type="TimeSheet" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FoodAndDrink" Member="FoodAndDrinks">
+    <Type Name="FoodAndDrink">
+      <Column Name="FDID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ImagePath" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Size" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="UnitPrice" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="FoodAndDrink_CoffeeBrewing" Member="CoffeeBrewings" ThisKey="FDID" OtherKey="FDID" Type="CoffeeBrewing" />
+      <Association Name="FoodAndDrink_ExtraDetail" Member="ExtraDetails" ThisKey="FDID" OtherKey="FDID" Type="ExtraDetail" />
+      <Association Name="FoodAndDrink_ExtraDetail1" Member="ExtraDetail1s" ThisKey="FDID" OtherKey="FDID" Type="ExtraDetail1" />
+      <Association Name="FoodAndDrink_IngreExchange" Member="IngreExchanges" ThisKey="FDID" OtherKey="FDID" Type="IngreExchange" />
+      <Association Name="FoodAndDrink_OrderItem" Member="OrderItems" ThisKey="FDID" OtherKey="FDID" Type="OrderItem" />
+      <Association Name="FoodAndDrink_ProOnDrinkQuantity" Member="ProOnDrinkQuantities" ThisKey="FDID" OtherKey="FDID" Type="ProOnDrinkQuantity" />
+      <Association Name="FoodAndDrink_ProOnDrinkQuantity1" Member="ProOnDrinkQuantities1" ThisKey="FDID" OtherKey="PromotionFDID" Type="ProOnDrinkQuantity" />
+      <Association Name="FoodAndDrink_ProOnOrderAmount" Member="ProOnOrderAmounts" ThisKey="FDID" OtherKey="PromotionFDID" Type="ProOnOrderAmount" />
+      <Association Name="FoodAndDrink_Recipe" Member="Recipes" ThisKey="FDID" OtherKey="FDID" Type="Recipe" />
+      <Association Name="FoodAndDrink_ReservationDetail" Member="ReservationDetails" ThisKey="FDID" OtherKey="FDID" Type="ReservationDetail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Account" Member="Accounts">
+    <Type Name="Account">
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="AccType" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Position" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Avatar" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="Account_RoleMap" Member="RoleMaps" ThisKey="UserID" OtherKey="UserID" Type="RoleMap" />
+    </Type>
+  </Table>
+</Database>
