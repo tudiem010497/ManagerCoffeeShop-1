@@ -8,10 +8,7 @@ namespace ManagerCoffeeShopASPNet.DAO
 {
     interface AccountDAO
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        
         IEnumerable<Account> GetAllAccount();
     }
 }
