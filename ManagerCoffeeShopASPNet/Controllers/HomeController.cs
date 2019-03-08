@@ -8,7 +8,7 @@ namespace ManagerCoffeeShopASPNet.Controllers
 {
     public class HomeController : Controller
     {
-        
+        ///
         /// 
         /// </summary>
         /// <returns></returns>
