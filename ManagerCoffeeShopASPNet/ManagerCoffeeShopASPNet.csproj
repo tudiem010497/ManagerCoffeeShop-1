@@ -219,9 +219,15 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAOImpl\AccountDAOImpl.cs" />
+    <Compile Include="DAOImpl\BannerImageDAOImpl.cs" />
     <Compile Include="DAOImpl\FoodAndDrinkDAOImpl.cs" />
+    <Compile Include="DAOImpl\InfoIndexDAOImpl.cs" />
+    <Compile Include="DAOImpl\MenuDAOImpl.cs" />
     <Compile Include="DAO\AccountDAO.cs" />
+    <Compile Include="DAO\BannerImageDAO.cs" />
     <Compile Include="DAO\FoodAndDrinkDAO.cs" />
+    <Compile Include="DAO\InfoIndexDAO.cs" />
+    <Compile Include="DAO\MenuDAO.cs" />
     <Compile Include="DatabaseConnection\DataSQLConnection.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -324,6 +330,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

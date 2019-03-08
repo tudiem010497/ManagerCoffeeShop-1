@@ -528,4 +528,45 @@
       <Association Name="Account_RoleMap" Member="RoleMaps" ThisKey="UserID" OtherKey="UserID" Type="RoleMap" />
     </Type>
   </Table>
+  <Table Name="dbo.BannerImage" Member="BannerImages">
+    <Type Name="BannerImage">
+      <Column Name="BannerImageID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BannerImagePath" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Blog" Member="Blogs">
+    <Type Name="Blog">
+      <Column Name="BlogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BlogName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="BlogTitle" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="BlogDesc" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="BlogDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="BlogHref" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InfoIndex" Member="InfoIndexes">
+    <Type Name="InfoIndex">
+      <Column Name="InfoIndexID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BannerInfo" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="BookTile" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="BookInfo" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Menu" Member="Menus">
+    <Type Name="Menu">
+      <Column Name="MenuID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MenuName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MenuHref" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Association Name="Menu_MenuDetail" Member="MenuDetails" ThisKey="MenuID" OtherKey="MenuID" Type="MenuDetail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MenuDetail" Member="MenuDetails">
+    <Type Name="MenuDetail">
+      <Column Name="MenuDetailID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MenuID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MenuDetailName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MenuDetailHref" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Association Name="Menu_MenuDetail" Member="Menu" ThisKey="MenuID" OtherKey="MenuID" Type="Menu" IsForeignKey="true" />
+    </Type>
+  </Table>
 </Database>

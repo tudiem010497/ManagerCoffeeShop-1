@@ -44,15 +44,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @*<link rel="icon" href="img/express-favicon.png" type="image/x-icon" />*@
+    <link rel="icon" href="img/express-favicon.png" type="image/x-icon" />
 
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>RedCaynne Re</title>
 
     <!-- Icon css link -->
     @*<link href="vendors/material-icon/css/materialdesignicons.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="vendors/linears-icon/style.css" rel="stylesheet">*@
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="vendors/linears-icon/style.css" rel="stylesheet">*@
     <link href="~/Assets/Main/vendors/material-icon/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="~/Assets/Main/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/Assets/Main/vendors/linears-icon/style.css" rel="stylesheet">
@@ -63,22 +63,22 @@
 
     <!-- Rev slider css -->
     @*<link href="vendors/revolution/css/settings.css" rel="stylesheet">
-    <link href="vendors/revolution/css/layers.css" rel="stylesheet">
-    <link href="vendors/revolution/css/navigation.css" rel="stylesheet">*@
+        <link href="vendors/revolution/css/layers.css" rel="stylesheet">
+        <link href="vendors/revolution/css/navigation.css" rel="stylesheet">*@
     <link href="~/Assets/Main/vendors/revolution/css/settings.css" rel="stylesheet">
     <link href="~/Assets/Main/vendors/revolution/css/layers.css" rel="stylesheet">
     <link href="~/Assets/Main/vendors/revolution/css/navigation.css" rel="stylesheet">
 
     <!-- Extra plugin css -->
     @*<link href="vendors/bootstrap-selector/bootstrap-select.css" rel="stylesheet">
-    <link href="vendors/bootatrap-date-time/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <link href="vendors/owl-carousel/assets/owl.carousel.css" rel="stylesheet">*@
+        <link href="vendors/bootatrap-date-time/bootstrap-datetimepicker.min.css" rel="stylesheet">
+        <link href="vendors/owl-carousel/assets/owl.carousel.css" rel="stylesheet">*@
     <link href="~/Assets/Main/vendors/bootstrap-selector/bootstrap-select.css" rel="stylesheet">
     <link href="~/Assets/Main/vendors/bootatrap-date-time/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="~/Assets/Main/vendors/owl-carousel/assets/owl.carousel.css" rel="stylesheet">*
 
     @*<link href="css/style.css" rel="stylesheet">
-    <link href="css/responsive.css" rel="stylesheet">*@
+        <link href="css/responsive.css" rel="stylesheet">*@
     <link href="~/Assets/Main/css/style.css" rel="stylesheet">
     <link href="~/Assets/Main/css/responsive.css" rel="stylesheet">
 
@@ -146,37 +146,41 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="index.html">Home</a></li>
-                        <li class="dropdown submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About US <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="about-us.html">About Us</a></li>
-                                <li><a href="about-us2.html">About Us2</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="menu-grid.html">Menu Grid</a></li>
-                                <li><a href="menu-list.html">Menu List</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="event.html">Event</a></li>
-                                <li><a href="table.html">Table</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown submenu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">News <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="blog-gallery.html">Blog Gallery</a></li>
-                                <li><a href="blog-details.html">Blog Details</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="contact.html">Contact US</a></li>
+                        @*<li class="active"><a href="index.html">Home</a></li>
+                            <li class="dropdown submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About US <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="about-us.html">About Us</a></li>
+                                    <li><a href="about-us2.html">About Us2</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="menu-grid.html">Menu Grid</a></li>
+                                    <li><a href="menu-list.html">Menu List</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="event.html">Event</a></li>
+                                    <li><a href="table.html">Table</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">News <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="blog-gallery.html">Blog Gallery</a></li>
+                                    <li><a href="blog-details.html">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="contact.html">Contact US</a></li>*@
+                        @foreach (Menu item in (IEnumerable<Menu>)ViewData["menus"])
+                        {
+                            <li><a href="@item.MenuHref">@item.MenuName</a></li>
+                        }
                         <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -192,7 +196,7 @@
         <div class="footer_widget_area">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <aside class="f_widget about_widget">
                             <div class="f_w_title">
                                 <h4>ABOUT RedCayenne</h4>
@@ -206,7 +210,7 @@
                             </ul>
                         </aside>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <aside class="f_widget contact_widget">
                             <div class="f_w_title">
                                 <h4>CONTACT US</h4>
@@ -219,22 +223,22 @@
                             </ul>
                         </aside>
                     </div>
-                    <div class="col-md-3">
-                        <aside class="f_widget twitter_widget">
-                            <div class="f_w_title">
-                                <h4>Twitter Feed</h4>
-                            </div>
-                            <ul>
-                                <li>
-                                    <a href="#">abc:</a> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.
-                                </li>
-                                <li>
-                                    <a href="#">abc:</a> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.
-                                </li>
-                            </ul>
-                        </aside>
-                    </div>
-                    <div class="col-md-3">
+                    @*<div class="col-md-3">
+                            <aside class="f_widget twitter_widget">
+                                <div class="f_w_title">
+                                    <h4>Twitter Feed</h4>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <a href="#">abc:</a> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.
+                                    </li>
+                                    <li>
+                                        <a href="#">abc:</a> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.
+                                    </li>
+                                </ul>
+                            </aside>
+                        </div>*@
+                    <div class="col-md-4">
                         <aside class="f_widget gallery_widget">
                             <div class="f_w_title">
                                 <h4>Gallery On Flickr</h4>
@@ -289,12 +293,12 @@
 
     <!-- Rev slider js -->
     @*<script src="vendors/revolution/js/jquery.themepunch.tools.min.js"></script>
-    <script src="vendors/revolution/js/jquery.themepunch.revolution.min.js"></script>
-    <script src="vendors/revolution/js/extensions/revolution.extension.video.min.js"></script>
-    <script src="vendors/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
-    <script src="vendors/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
-    <script src="vendors/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
-    <script src="vendors/revolution/js/extensions/revolution.extension.parallax.min.js"></script>*@
+        <script src="vendors/revolution/js/jquery.themepunch.revolution.min.js"></script>
+        <script src="vendors/revolution/js/extensions/revolution.extension.video.min.js"></script>
+        <script src="vendors/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+        <script src="vendors/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+        <script src="vendors/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+        <script src="vendors/revolution/js/extensions/revolution.extension.parallax.min.js"></script>*@
     <script src="~/Assets/Main/vendors/revolution/js/jquery.themepunch.tools.min.js"></script>
     <script src="~/Assets/Main/vendors/revolution/js/jquery.themepunch.revolution.min.js"></script>
     <script src="~/Assets/Main/vendors/revolution/js/extensions/revolution.extension.video.min.js"></script>
@@ -305,12 +309,12 @@
 
     <!-- Extra plugin js -->
     @*<script src="vendors/bootstrap-selector/bootstrap-select.js"></script>
-    <script src="vendors/bootatrap-date-time/bootstrap-datetimepicker.min.js"></script>
-    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-    <script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
-    <script src="vendors/isotope/isotope.pkgd.min.js"></script>
-    <script src="vendors/countdown/jquery.countdown.js"></script>
-    <script src="vendors/js-calender/zabuto_calendar.min.js"></script>*@
+        <script src="vendors/bootatrap-date-time/bootstrap-datetimepicker.min.js"></script>
+        <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+        <script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
+        <script src="vendors/isotope/isotope.pkgd.min.js"></script>
+        <script src="vendors/countdown/jquery.countdown.js"></script>
+        <script src="vendors/js-calender/zabuto_calendar.min.js"></script>*@
     <script src="~/Assets/Main/vendors/bootstrap-selector/bootstrap-select.js"></script>
     <script src="~/Assets/Main/vendors/bootatrap-date-time/bootstrap-datetimepicker.min.js"></script>
     <script src="~/Assets/Main/vendors/owl-carousel/owl.carousel.min.js"></script>

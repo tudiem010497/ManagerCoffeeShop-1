@@ -13,13 +13,17 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
     public class HomeController : Controller
     {
 
-        InformationIndex infoIndex = new InformationIndex();
+        private InformationIndex infomationIndex = new InformationIndex();
         // GET: Main/Home
         public ActionResult Index()
         {
-            // IEnumerable<Account> accounts = infoIndex.GetInformationAccount();
-            // ViewData["accounts"] = accounts;
-            IEnumerable<FoodAndDrink> fds = infoIndex.GetInformationFoodAndDrink();
+            IEnumerable<Menu> menus = infomationIndex.GetMenu();
+            IEnumerable<BannerImage> bannerImgs = infomationIndex.GetBannerImage();
+            IEnumerable<InfoIndex> infoIndex = infomationIndex.GetInfoIndex();
+            IEnumerable<FoodAndDrink> fds = infomationIndex.GetFoodAndDrink();
+            ViewData["infoIndex"] = infoIndex;
+            ViewData["menus"] = menus;
+            ViewData["bannerImgs"] = bannerImgs;
             ViewData["fds"] = fds;
             return View();
         }

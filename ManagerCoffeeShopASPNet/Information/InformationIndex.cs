@@ -9,18 +9,36 @@ namespace ManagerCoffeeShopASPNet.Information
 {
     public class InformationIndex
     {
-        AccountDAO accDAO;
-        FoodAndDrinkDAO foodAndDrinkDAO;
+        private FoodAndDrinkDAO _foodAndDrinkDAO;
+        private MenuDAO _menuDAO;
+        private BannerImageDAO _bannerImageDAO;
+        private InfoIndexDAO _infoIndexDAO;
+
         public InformationIndex()
         {
-            // this.accDAO = (AccountDAO)new AccountDAOImpl();
-            this.foodAndDrinkDAO = (FoodAndDrinkDAO)new FoodAndDrinkDAOImpl();
+            this._foodAndDrinkDAO = (FoodAndDrinkDAO)new FoodAndDrinkDAOImpl();
+            this._menuDAO = (MenuDAO)new MenuDAOImpl();
+            this._bannerImageDAO = (BannerImageDAO)new BannerImageDAOImpl();
+            this._infoIndexDAO = (InfoIndexDAO)new InfoIndexDAOImpl();
         }
-        public IEnumerable<FoodAndDrink> GetInformationFoodAndDrink(){
+        public IEnumerable<FoodAndDrink> GetFoodAndDrink()
+        {
             //IEnumerable<Account> accounts = accDAO.GetAllAccount();
-            //return accounts;
-            IEnumerable<FoodAndDrink> fds = foodAndDrinkDAO.GetAllFoodAndDrink();
+            //return accounts
+            IEnumerable<FoodAndDrink> fds = _foodAndDrinkDAO.GetAllFoodAndDrink();
             return fds;
+        }
+        public IEnumerable<Menu> GetMenu()
+        {
+            return _menuDAO.getAllMenu();
+        }
+        public IEnumerable<BannerImage> GetBannerImage()
+        {
+            return _bannerImageDAO.GetAllBannerImage();
+        }
+        public IEnumerable<InfoIndex> GetInfoIndex()
+        {
+            return _infoIndexDAO.GetInfoIndex();
         }
 
     }

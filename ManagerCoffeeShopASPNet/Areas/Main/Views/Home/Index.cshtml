@@ -1,78 +1,308 @@
-﻿@model IEnumerable<ManagerCoffeeShopASPNet.FoodAndDrink>
+﻿@model ManagerCoffeeShopASPNet.InfoIndex
 
 @{
-    Layout = null;
+    Layout = "~/Areas/Main/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+<section class="slider_area">
+    <div class=slider_inner>
+        <div class="rev_slider fullwidthabanner" data-version="5.3.0.2" id="home-slider">
+            <ul>
+                
+                @foreach (BannerImage item in (IEnumerable<BannerImage>)ViewData["bannerImgs"])
+                {
+                    <li data-slotamount="7" data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="600" data-rotate="0" data-saveperformance="off">
+                        <!-- MAIN IMAGE -->
+                        <img src="@item.BannerImagePath" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+                        <!-- LAYERS -->
+                        <!-- LAYER NR. 1 -->
+                        <div class="slider_text_box text_box2">
+                            <div class="tp-caption bg_box"
+                                 data-width="none"
+                                 data-height="none"
+                                 data-whitespace="nowrap"
+                                 data-x="center"
+                                 data-y="['350','350','300','250']"
+                                 data-fontsize="['55']"
+                                 data-lineheight="['60']"
+                                 data-transform_idle="o:1;"
+                                 data-transform_in="y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power4.easeInOut;"
+                                 data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                                 data-mask_in="x:0px;y:0px;"
+                                 data-mask_out="x:inherit;y:inherit;"
+                                 data-start="2000"
+                                 data-splitin="none"
+                                 data-splitout="none"
+                                 data-responsive_offset="on">
+                            </div>
+                            <div class="tp-caption first_text"
+                                 data-x="center"
+                                 data-y="center"
+                                 data-voffset="['-20']"
+                                 data-Hoffset="['0']"
+                                 data-fontsize="['42','42','42','42','25']"
+                                 data-lineheight="['52','52','52','52','35']"
+                                 data-width="none"
+                                 data-height="none"
+                                 data-transform_idle="o:1;"
+                                 data-whitespace="nowrap"
+                                 data-transform_in="x:[105%];z:0;rX:45deg;rY:0deg;rZ:90deg;sX:1;sY:1;skX:0;skY:0;s:2000;e:Power4.easeInOut;"
+                                 data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                                 data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-start="1000"
+                                 data-splitin="none"
+                                 data-splitout="none"
+                                 data-responsive_offset="on"
+                                 data-elementdelay="0.05">
+                                 @foreach(InfoIndex info in (IEnumerable<InfoIndex>)ViewData["infoIndex"])
+                                 {
+                                     <div>@info.BannerInfo</div>
+                                 }
+                            </div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Desc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImagePath)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Size)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Currency)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in (IEnumerable<FoodAndDrink>)@ViewData["fds"]) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Desc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImagePath)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Size)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Currency)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.FDID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.FDID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.FDID })
-            </td>
-        </tr>
-    }
-    
-    </table>
-</body>
-</html>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div><!-- END REVOLUTION SLIDER -->
+    </div>
+</section>
+<!--================End Slider Area =================-->
+<!--================Booking Table Area =================-->
+<section class="booking_table_area">
+    <div class="container">
+        <div class="s_white_title">
+            <h3>Book a</h3>
+            <h2>Table</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="input-append date form_datetime">
+                    <input size="16" type="text" value="" readonly placeholder="Date">
+                    <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="input-append date form_time">
+                    <input size="16" type="text" value="" readonly placeholder="Dining Time">
+                    <span class="add-on"><i class="icon-th"></i></span>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="party_size">
+                    <select class="selectpicker">
+                        <option>Party Size</option>
+                        <option>Party Size 2</option>
+                        <option>Party Size 3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <button type="button" class="btn btn-default submit_btn">BOOK MY TABLE</button>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Booking Table Area =================-->
+<!--================Our feature Area =================-->
 
+<!--================End Our feature Area =================-->
+<!--================End Our feature Area =================-->
+<section class="most_popular_item_area">
+    <div class="container">
+        <div class="s_white_title">
+            <h3>Most Popular</h3>
+            <h2>Today's Menu</h2>
+        </div>
+        <div class="popular_filter">
+            <ul>
+                <li class="active" data-filter="*"><a href="">All</a></li>
+                <li data-filter=".coffee"><a href="">Coffee</a></li>
+                <li data-filter=".snacks"><a href="">Snacks</a></li>
+
+            </ul>
+        </div>
+        <div class="p_recype_item_main">
+            <div class="row p_recype_item_active">
+                <div class="col-md-6 break snacks">
+                    <div class="media">
+                        <div class="media-left">
+                            <img src="~/Assets/Main/img/recype/recype-1.jpg" alt="">
+                        </div>
+                        <div class="media-body">
+                            <a href="#"><h3>Vegetable Flavour</h3></a>
+                            <h4>$32</h4>
+                            <p>Lorem ipsum dolor sit amets, consectetur adipiscing </p>
+                            <a class="read_mor_btn" href="#">Add To Cart</a>
+                            <ul>
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+               
+                @foreach (FoodAndDrink item in (IEnumerable<FoodAndDrink>)ViewData["fds"])
+                {
+                    <div class="col-md-6 @item.Type">
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="@item.ImagePath" alt="">
+                            </div>
+                            <div class="media-body">
+                                <a href="#"><h3>@item.Name</h3></a>
+                                <h4>$32</h4>
+                                <p>@item.Desc </p>
+                                <a class="read_mor_btn" href="#">Add To Cart</a>
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Our feature Area =================-->
+<!--================End Our Chefs Area =================-->
+<section class="next_event_area">
+    <div class="container">
+        <div class="s_white_red_title">
+            <h3>Events</h3>
+            <h2>Next Event</h2>
+        </div>
+        <div class="next_event_slider">
+            <div class="item">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="left_event_img">
+                            <img src="~/Assets/Main/img/next-event/next-event-1.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="right_event_text">
+                            <a href="#"><h3>Opening Party - themeXart IT Farm</h3></a>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusqs enm tempor incididunt ut labore et dolore magna aliqua. Ut enim advastmi sunt veniam, quis nostrud exercitation... <a href="#">View Detail</a></p>
+                            <div class="event_shedule">
+                                <time datetime="P65DT05H16M22S"></time>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="left_event_img">
+                            <img src="img/next-event/next-event-1.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="right_event_text">
+                            <a href="#"><h3>Opening Party - themeXart IT Farm</h3></a>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusqs enm tempor incididunt ut labore et dolore magna aliqua. Ut enim advastmi sunt veniam, quis nostrud exercitation... <a href="#">View Detail</a></p>
+                            <div class="event_shedule">
+                                <time datetime="P65DT05H16M22S"></time>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="left_event_img">
+                            <img src="img/next-event/next-event-1.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="right_event_text">
+                            <a href="#"><h3>Opening Party - themeXart IT Farm</h3></a>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusqs enm tempor incididunt ut labore et dolore magna aliqua. Ut enim advastmi sunt veniam, quis nostrud exercitation... <a href="#">View Detail</a></p>
+                            <div class="event_shedule">
+                                <time datetime="P65DT05H16M22S"></time>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Our Chefs Area =================-->
+<!--================Recent Blog Area =================-->
+<section class="recent_bloger_area">
+    <div class="container">
+        <div class="s_black_title">
+            <h3>News</h3>
+            <h2>Recent Blog</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="recent_blog_item">
+                    <div class="blog_img">
+                        <img src="~/Assets/Main/img/blog/recent-blog/recent-blog-1.jpg" alt="">
+                    </div>
+                    <div class="recent_blog_text">
+                        <div class="recent_blog_text_inner">
+                            <h6><a href="#">Articles</a></h6>
+                            <a href="blog-details.html"><h5>Restaurant Industry & News</h5></a>
+                            <p>Lorem Ipsum is simpily dummy texts printing and typesetting industry.</p>
+                            <a href="#">Feb 11,ac 2017 <span>/</span></a>
+                            <a href="#">No Comments</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="recent_blog_item">
+                    <div class="blog_img">
+                        <img src="~/Assets/Main/img/blog/recent-blog/recent-blog-2.jpg" alt="">
+                    </div>
+                    <div class="recent_blog_text">
+                        <div class="recent_blog_text_inner">
+                            <h6><a href="#">Articles</a></h6>
+                            <a href="blog-details.html"><h5>Restaurant Industry & News</h5></a>
+                            <p>Lorem Ipsum is simpily dummy texts printing and typesetting industry.</p>
+                            <a href="#">Feb 11,ac 2017 <span>/</span></a>
+                            <a href="#">No Comments</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="recent_blog_item">
+                    <div class="blog_img">
+                        <img src="~/Assets/Main/img/blog/recent-blog/recent-blog-3.jpg" alt="">
+                    </div>
+                    <div class="recent_blog_text">
+                        <div class="recent_blog_text_inner">
+                            <h6><a href="#">Articles</a></h6>
+                            <a href="blog-details.html"><h5>Restaurant Industry & News</h5></a>
+                            <p>Lorem Ipsum is simpily dummy texts printing and typesetting industry.</p>
+                            <a href="#">Feb 11,ac 2017 <span>/</span></a>
+                            <a href="#">No Comments</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
