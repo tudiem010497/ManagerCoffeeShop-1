@@ -21,10 +21,12 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
             IEnumerable<BannerImage> bannerImgs = infomationIndex.GetBannerImage();
             IEnumerable<InfoIndex> infoIndex = infomationIndex.GetInfoIndex();
             IEnumerable<FoodAndDrink> fds = infomationIndex.GetFoodAndDrink();
+            //IEnumerable<Blog> blogs = infomationIndex.GetBlog();
             ViewData["infoIndex"] = infoIndex;
             ViewData["menus"] = menus;
             ViewData["bannerImgs"] = bannerImgs;
             ViewData["fds"] = fds;
+            //ViewData["blogs"] = blogs;
             return View();
         }
     }

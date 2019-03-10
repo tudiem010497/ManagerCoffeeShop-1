@@ -1,6 +1,4 @@
-﻿@model ManagerCoffeeShopASPNet.InfoIndex
-
-@{
+﻿@{
     Layout = "~/Areas/Main/Views/Shared/_Layout.cshtml";
 }
 
@@ -73,9 +71,11 @@
 <section class="booking_table_area">
     <div class="container">
         <div class="s_white_title">
-            <h3>Book a</h3>
-            <h2>Table</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+            @foreach(InfoIndex info in (IEnumerable<InfoIndex>)ViewData["infoIndex"])
+            {
+                <h3>@info.BookTile</h3>
+                <p>@info.BookInfo</p>
+            }
         </div>
         <div class="row">
             <div class="col-sm-3">
@@ -176,76 +176,7 @@
 </section>
 <!--================End Our feature Area =================-->
 <!--================End Our Chefs Area =================-->
-<section class="next_event_area">
-    <div class="container">
-        <div class="s_white_red_title">
-            <h3>Events</h3>
-            <h2>Next Event</h2>
-        </div>
-        <div class="next_event_slider">
-            <div class="item">
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="left_event_img">
-                            <img src="~/Assets/Main/img/next-event/next-event-1.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="right_event_text">
-                            <a href="#"><h3>Opening Party - themeXart IT Farm</h3></a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusqs enm tempor incididunt ut labore et dolore magna aliqua. Ut enim advastmi sunt veniam, quis nostrud exercitation... <a href="#">View Detail</a></p>
-                            <div class="event_shedule">
-                                <time datetime="P65DT05H16M22S"></time>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="left_event_img">
-                            <img src="img/next-event/next-event-1.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="right_event_text">
-                            <a href="#"><h3>Opening Party - themeXart IT Farm</h3></a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusqs enm tempor incididunt ut labore et dolore magna aliqua. Ut enim advastmi sunt veniam, quis nostrud exercitation... <a href="#">View Detail</a></p>
-                            <div class="event_shedule">
-                                <time datetime="P65DT05H16M22S"></time>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="left_event_img">
-                            <img src="img/next-event/next-event-1.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="right_event_text">
-                            <a href="#"><h3>Opening Party - themeXart IT Farm</h3></a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusqs enm tempor incididunt ut labore et dolore magna aliqua. Ut enim advastmi sunt veniam, quis nostrud exercitation... <a href="#">View Detail</a></p>
-                            <div class="event_shedule">
-                                <time datetime="P65DT05H16M22S"></time>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 <!--================End Our Chefs Area =================-->
 <!--================Recent Blog Area =================-->
 <section class="recent_bloger_area">
@@ -304,5 +235,16 @@
                 </div>
             </div>
         </div>
+        @*@{
+            int i = 0;
+        }
+        @foreach (Blog item in (IEnumerable<Blog>)ViewData["blogs"])
+        {
+            if (i % 3 == 0)
+            {
+                
+            }
+        }*@
+        
     </div>
 </section>

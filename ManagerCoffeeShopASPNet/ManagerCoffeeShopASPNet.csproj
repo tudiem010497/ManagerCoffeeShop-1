@@ -207,6 +207,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Main\Controllers\HomeController.cs" />
     <Compile Include="Areas\Main\MainAreaRegistration.cs" />
     <Compile Include="CoffeeShopDB.designer.cs">
@@ -220,11 +221,13 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAOImpl\AccountDAOImpl.cs" />
     <Compile Include="DAOImpl\BannerImageDAOImpl.cs" />
+    <Compile Include="DAOImpl\BlogDAOImpl.cs" />
     <Compile Include="DAOImpl\FoodAndDrinkDAOImpl.cs" />
     <Compile Include="DAOImpl\InfoIndexDAOImpl.cs" />
     <Compile Include="DAOImpl\MenuDAOImpl.cs" />
     <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DAO\BannerImageDAO.cs" />
+    <Compile Include="DAO\BlogDAO.cs" />
     <Compile Include="DAO\FoodAndDrinkDAO.cs" />
     <Compile Include="DAO\InfoIndexDAO.cs" />
     <Compile Include="DAO\MenuDAO.cs" />
@@ -285,6 +288,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\Main\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\ServiceEmployee.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -297,7 +302,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -334,8 +341,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\ServiceEmployee\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Main\Models\" />
     <Folder Include="Assets\Admin\" />

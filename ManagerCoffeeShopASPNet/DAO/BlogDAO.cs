@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ManagerCoffeeShopASPNet.DAO
 {
-    interface AccountDAO
+    interface BlogDAO
     {
-        IEnumerable<Account> GetAllAccount();
+        IEnumerable<Blog> GetAllBlog();
     }
 }

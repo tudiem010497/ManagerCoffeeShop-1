@@ -13,6 +13,7 @@ namespace ManagerCoffeeShopASPNet.Information
         private MenuDAO _menuDAO;
         private BannerImageDAO _bannerImageDAO;
         private InfoIndexDAO _infoIndexDAO;
+        private BlogDAO _blogDAO;
 
         public InformationIndex()
         {
@@ -40,6 +41,9 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return _infoIndexDAO.GetInfoIndex();
         }
-
+        //public IEnumerable<Blog> GetBlog()
+        //{
+        //    return _blogDAO.GetAllBlog();
+        //}
     }
 }
