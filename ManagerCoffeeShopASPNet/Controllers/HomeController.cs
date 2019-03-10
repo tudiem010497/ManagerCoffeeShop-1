@@ -8,6 +8,10 @@ namespace ManagerCoffeeShopASPNet.Controllers
 {
     public class HomeController : Controller
     {
+        ///
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View();

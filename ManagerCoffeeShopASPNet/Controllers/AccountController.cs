@@ -15,6 +15,9 @@ namespace ManagerCoffeeShopASPNet.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
