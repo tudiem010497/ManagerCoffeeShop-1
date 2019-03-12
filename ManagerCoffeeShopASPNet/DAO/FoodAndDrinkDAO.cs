@@ -9,5 +9,6 @@ namespace ManagerCoffeeShopASPNet.DAO
     interface FoodAndDrinkDAO
     {
         IEnumerable<FoodAndDrink> GetAllFoodAndDrink();
+        FoodAndDrink GetFoodAndDrinkByID(int id);
     }
 }

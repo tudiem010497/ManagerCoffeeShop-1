@@ -207,7 +207,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BatenderController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ServiceController.cs" />
     <Compile Include="Areas\Main\Controllers\HomeController.cs" />
     <Compile Include="Areas\Main\MainAreaRegistration.cs" />
     <Compile Include="CoffeeShopDB.designer.cs">
@@ -235,6 +237,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Information\InformationService.cs" />
     <Compile Include="Information\InformationIndex.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -265,6 +268,13 @@
     <Compile Include="Utilities\Language.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Admin\css\bootstrap.min.css" />
+    <Content Include="Assets\Admin\css\font-awesome.min.css" />
+    <Content Include="Assets\Admin\css\style.css" />
+    <Content Include="Assets\Admin\js\jquery.min.js" />
+    <Content Include="Assets\Admin\js\main.js" />
+    <Content Include="Assets\resource\img\recype-1.jpg" />
+    <Content Include="Assets\resource\img\recype\recype-1.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -289,7 +299,10 @@
     </Content>
     <Content Include="Areas\Main\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\ServiceEmployee.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutService.cshtml" />
+    <Content Include="Assets\Admin\fonts\Roboto-Medium.ttf" />
+    <Content Include="Areas\Admin\Views\Shared\ServiceEmployee.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\ServiceEmployee.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -342,10 +355,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Batender\" />
     <Folder Include="Areas\Admin\Views\ServiceEmployee\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Main\Models\" />
-    <Folder Include="Assets\Admin\" />
     <Folder Include="Assets\Main\api\" />
     <Folder Include="Assets\Main\css\" />
     <Folder Include="Assets\Main\fonts\" />
