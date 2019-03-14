@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
 {
+    [RouteArea("admin")]
+    [RoutePrefix("batender")]
     public class BatenderController : Controller
     {
         // GET: Admin/Batender
@@ -13,5 +15,6 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             return View();
         }
+        //[Route("AddOrder")]
     }
 }

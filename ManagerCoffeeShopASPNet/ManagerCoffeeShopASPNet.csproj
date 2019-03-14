@@ -210,6 +210,7 @@
     <Compile Include="Areas\Admin\Controllers\BatenderController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ServiceController.cs" />
+    <Compile Include="Areas\Admin\Models\OrderModel.cs" />
     <Compile Include="Areas\Main\Controllers\HomeController.cs" />
     <Compile Include="Areas\Main\MainAreaRegistration.cs" />
     <Compile Include="CoffeeShopDB.designer.cs">
@@ -227,12 +228,18 @@
     <Compile Include="DAOImpl\FoodAndDrinkDAOImpl.cs" />
     <Compile Include="DAOImpl\InfoIndexDAOImpl.cs" />
     <Compile Include="DAOImpl\MenuDAOImpl.cs" />
+    <Compile Include="DAOImpl\OrderDAOImpl.cs" />
+    <Compile Include="DAOImpl\OrderItemDAOImpl.cs" />
+    <Compile Include="DAOImpl\PositionDAOImpl.cs" />
     <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DAO\BannerImageDAO.cs" />
     <Compile Include="DAO\BlogDAO.cs" />
     <Compile Include="DAO\FoodAndDrinkDAO.cs" />
     <Compile Include="DAO\InfoIndexDAO.cs" />
     <Compile Include="DAO\MenuDAO.cs" />
+    <Compile Include="DAO\OrderDAO.cs" />
+    <Compile Include="DAO\OrderItemDAO.cs" />
+    <Compile Include="DAO\PositionDAO.cs" />
     <Compile Include="DatabaseConnection\DataSQLConnection.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -260,6 +267,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderItem.cs" />
+    <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\OrderPromotion.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Promotion.cs" />
@@ -271,6 +279,7 @@
     <Content Include="Assets\Admin\css\bootstrap.min.css" />
     <Content Include="Assets\Admin\css\font-awesome.min.css" />
     <Content Include="Assets\Admin\css\style.css" />
+    <Content Include="Assets\Admin\js\bootstrap.min.js" />
     <Content Include="Assets\Admin\js\jquery.min.js" />
     <Content Include="Assets\Admin\js\main.js" />
     <Content Include="Assets\resource\img\recype-1.jpg" />
@@ -303,6 +312,7 @@
     <Content Include="Assets\Admin\fonts\Roboto-Medium.ttf" />
     <Content Include="Areas\Admin\Views\Shared\ServiceEmployee.cshtml" />
     <Content Include="Areas\Admin\Views\Service\ServiceEmployee.cshtml" />
+    <Content Include="Areas\Admin\Views\Batender\_LayoutBatender.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -354,8 +364,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Batender\" />
     <Folder Include="Areas\Admin\Views\ServiceEmployee\" />
     <Folder Include="Areas\Main\Models\" />
     <Folder Include="Assets\Main\api\" />

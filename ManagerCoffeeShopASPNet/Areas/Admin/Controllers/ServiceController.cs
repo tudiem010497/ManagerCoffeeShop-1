@@ -1,7 +1,11 @@
 ﻿using ManagerCoffeeShopASPNet.Information;
+using ManagerCoffeeShopASPNet.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
@@ -22,6 +26,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
 
             IEnumerable<FoodAndDrink> fds = info.GetFoodAndDrink();
+            IEnumerable<Position> positions = info.GetAllPosition();
+            ViewData["positions"] = positions;
             ViewData["fds"] = fds;
             return View();
         }
@@ -37,5 +43,12 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             FoodAndDrink fd = info.GetFoodAndDrinkByID(id);
             return Json(new { FDID = fd.FDID, Name = fd.Name, UnitPrice = fd.UnitPrice }, JsonRequestBehavior.AllowGet);
         }
+        //[Route("SendOrderToBatender")]
+        //public ActionResult SendOrderToBatender()
+        //{
+
+        //}
+
+
     }
 }

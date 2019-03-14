@@ -114,6 +114,9 @@ namespace ManagerCoffeeShopASPNet
     partial void InsertMenuDetail(MenuDetail instance);
     partial void UpdateMenuDetail(MenuDetail instance);
     partial void DeleteMenuDetail(MenuDetail instance);
+    partial void InsertOrderItem(OrderItem instance);
+    partial void UpdateOrderItem(OrderItem instance);
+    partial void DeleteOrderItem(OrderItem instance);
     #endregion
 		
 		public CoffeeShopDBDataContext() : 
@@ -303,14 +306,6 @@ namespace ManagerCoffeeShopASPNet
 			get
 			{
 				return this.GetTable<Order>();
-			}
-		}
-		
-		public System.Data.Linq.Table<OrderItem> OrderItems
-		{
-			get
-			{
-				return this.GetTable<OrderItem>();
 			}
 		}
 		
@@ -535,6 +530,14 @@ namespace ManagerCoffeeShopASPNet
 			get
 			{
 				return this.GetTable<MenuDetail>();
+			}
+		}
+		
+		public System.Data.Linq.Table<OrderItem> OrderItems
+		{
+			get
+			{
+				return this.GetTable<OrderItem>();
 			}
 		}
 	}
@@ -3766,6 +3769,8 @@ namespace ManagerCoffeeShopASPNet
 		
 		private string _Status;
 		
+		private EntitySet<OrderItem> _OrderItems;
+		
 		private EntityRef<Customer> _Customer;
 		
 		private EntityRef<Position> _Position;
@@ -3798,6 +3803,7 @@ namespace ManagerCoffeeShopASPNet
 		
 		public Order()
 		{
+			this._OrderItems = new EntitySet<OrderItem>(new Action<OrderItem>(this.attach_OrderItems), new Action<OrderItem>(this.detach_OrderItems));
 			this._Customer = default(EntityRef<Customer>);
 			this._Position = default(EntityRef<Position>);
 			OnCreated();
@@ -4011,6 +4017,19 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Order_OrderItem", Storage="_OrderItems", ThisKey="OrderID", OtherKey="OrderID")]
+		public EntitySet<OrderItem> OrderItems
+		{
+			get
+			{
+				return this._OrderItems;
+			}
+			set
+			{
+				this._OrderItems.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Order", Storage="_Customer", ThisKey="CustomerID", OtherKey="CustomerID", IsForeignKey=true)]
 		public Customer Customer
 		{
@@ -4098,104 +4117,17 @@ namespace ManagerCoffeeShopASPNet
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.OrderItem")]
-	public partial class OrderItem
-	{
 		
-		private int _OrderID;
-		
-		private int _FDID;
-		
-		private int _Quantity;
-		
-		private string _Desc;
-		
-		private string _Status;
-		
-		public OrderItem()
+		private void attach_OrderItems(OrderItem entity)
 		{
+			this.SendPropertyChanging();
+			entity.Order = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderID", DbType="Int NOT NULL")]
-		public int OrderID
+		private void detach_OrderItems(OrderItem entity)
 		{
-			get
-			{
-				return this._OrderID;
-			}
-			set
-			{
-				if ((this._OrderID != value))
-				{
-					this._OrderID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FDID", DbType="Int NOT NULL")]
-		public int FDID
-		{
-			get
-			{
-				return this._FDID;
-			}
-			set
-			{
-				if ((this._FDID != value))
-				{
-					this._FDID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int NOT NULL")]
-		public int Quantity
-		{
-			get
-			{
-				return this._Quantity;
-			}
-			set
-			{
-				if ((this._Quantity != value))
-				{
-					this._Quantity = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Desc]", Storage="_Desc", DbType="NVarChar(50)")]
-		public string Desc
-		{
-			get
-			{
-				return this._Desc;
-			}
-			set
-			{
-				if ((this._Desc != value))
-				{
-					this._Desc = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
-		public string Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this._Status = value;
-				}
-			}
+			this.SendPropertyChanging();
+			entity.Order = null;
 		}
 	}
 	
@@ -7282,6 +7214,8 @@ namespace ManagerCoffeeShopASPNet
 		
 		private EntitySet<Recipe> _Recipes;
 		
+		private EntitySet<OrderItem> _OrderItems;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -7307,6 +7241,7 @@ namespace ManagerCoffeeShopASPNet
 		public FoodAndDrink()
 		{
 			this._Recipes = new EntitySet<Recipe>(new Action<Recipe>(this.attach_Recipes), new Action<Recipe>(this.detach_Recipes));
+			this._OrderItems = new EntitySet<OrderItem>(new Action<OrderItem>(this.attach_OrderItems), new Action<OrderItem>(this.detach_OrderItems));
 			OnCreated();
 		}
 		
@@ -7483,6 +7418,19 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FoodAndDrink_OrderItem", Storage="_OrderItems", ThisKey="FDID", OtherKey="FDID")]
+		public EntitySet<OrderItem> OrderItems
+		{
+			get
+			{
+				return this._OrderItems;
+			}
+			set
+			{
+				this._OrderItems.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -7510,6 +7458,18 @@ namespace ManagerCoffeeShopASPNet
 		}
 		
 		private void detach_Recipes(Recipe entity)
+		{
+			this.SendPropertyChanging();
+			entity.FoodAndDrink = null;
+		}
+		
+		private void attach_OrderItems(OrderItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.FoodAndDrink = this;
+		}
+		
+		private void detach_OrderItems(OrderItem entity)
 		{
 			this.SendPropertyChanging();
 			entity.FoodAndDrink = null;
@@ -8388,6 +8348,270 @@ namespace ManagerCoffeeShopASPNet
 						this._MenuID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Menu");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.OrderItem")]
+	public partial class OrderItem : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _OrderItemID;
+		
+		private int _OrderID;
+		
+		private int _FDID;
+		
+		private int _Quantity;
+		
+		private string _Desc;
+		
+		private string _Status;
+		
+		private EntityRef<FoodAndDrink> _FoodAndDrink;
+		
+		private EntityRef<Order> _Order;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnOrderItemIDChanging(int value);
+    partial void OnOrderItemIDChanged();
+    partial void OnOrderIDChanging(int value);
+    partial void OnOrderIDChanged();
+    partial void OnFDIDChanging(int value);
+    partial void OnFDIDChanged();
+    partial void OnQuantityChanging(int value);
+    partial void OnQuantityChanged();
+    partial void OnDescChanging(string value);
+    partial void OnDescChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
+    #endregion
+		
+		public OrderItem()
+		{
+			this._FoodAndDrink = default(EntityRef<FoodAndDrink>);
+			this._Order = default(EntityRef<Order>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderItemID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int OrderItemID
+		{
+			get
+			{
+				return this._OrderItemID;
+			}
+			set
+			{
+				if ((this._OrderItemID != value))
+				{
+					this.OnOrderItemIDChanging(value);
+					this.SendPropertyChanging();
+					this._OrderItemID = value;
+					this.SendPropertyChanged("OrderItemID");
+					this.OnOrderItemIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderID", DbType="Int NOT NULL")]
+		public int OrderID
+		{
+			get
+			{
+				return this._OrderID;
+			}
+			set
+			{
+				if ((this._OrderID != value))
+				{
+					if (this._Order.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnOrderIDChanging(value);
+					this.SendPropertyChanging();
+					this._OrderID = value;
+					this.SendPropertyChanged("OrderID");
+					this.OnOrderIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FDID", DbType="Int NOT NULL")]
+		public int FDID
+		{
+			get
+			{
+				return this._FDID;
+			}
+			set
+			{
+				if ((this._FDID != value))
+				{
+					if (this._FoodAndDrink.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFDIDChanging(value);
+					this.SendPropertyChanging();
+					this._FDID = value;
+					this.SendPropertyChanged("FDID");
+					this.OnFDIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int NOT NULL")]
+		public int Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this.OnQuantityChanging(value);
+					this.SendPropertyChanging();
+					this._Quantity = value;
+					this.SendPropertyChanged("Quantity");
+					this.OnQuantityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Desc]", Storage="_Desc", DbType="NVarChar(50)")]
+		public string Desc
+		{
+			get
+			{
+				return this._Desc;
+			}
+			set
+			{
+				if ((this._Desc != value))
+				{
+					this.OnDescChanging(value);
+					this.SendPropertyChanging();
+					this._Desc = value;
+					this.SendPropertyChanged("Desc");
+					this.OnDescChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FoodAndDrink_OrderItem", Storage="_FoodAndDrink", ThisKey="FDID", OtherKey="FDID", IsForeignKey=true)]
+		public FoodAndDrink FoodAndDrink
+		{
+			get
+			{
+				return this._FoodAndDrink.Entity;
+			}
+			set
+			{
+				FoodAndDrink previousValue = this._FoodAndDrink.Entity;
+				if (((previousValue != value) 
+							|| (this._FoodAndDrink.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._FoodAndDrink.Entity = null;
+						previousValue.OrderItems.Remove(this);
+					}
+					this._FoodAndDrink.Entity = value;
+					if ((value != null))
+					{
+						value.OrderItems.Add(this);
+						this._FDID = value.FDID;
+					}
+					else
+					{
+						this._FDID = default(int);
+					}
+					this.SendPropertyChanged("FoodAndDrink");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Order_OrderItem", Storage="_Order", ThisKey="OrderID", OtherKey="OrderID", IsForeignKey=true)]
+		public Order Order
+		{
+			get
+			{
+				return this._Order.Entity;
+			}
+			set
+			{
+				Order previousValue = this._Order.Entity;
+				if (((previousValue != value) 
+							|| (this._Order.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Order.Entity = null;
+						previousValue.OrderItems.Remove(this);
+					}
+					this._Order.Entity = value;
+					if ((value != null))
+					{
+						value.OrderItems.Add(this);
+						this._OrderID = value.OrderID;
+					}
+					else
+					{
+						this._OrderID = default(int);
+					}
+					this.SendPropertyChanged("Order");
 				}
 			}
 		}
