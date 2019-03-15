@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model ManagerCoffeeShopASPNet.Areas.Main.Models.LoginModel
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -41,7 +43,10 @@
         <link href="css/responsive.css" rel="stylesheet">*@
     <link href="~/Assets/Main/css/style.css" rel="stylesheet">
     <link href="~/Assets/Main/css/responsive.css" rel="stylesheet">
+    <link href="~/Assets/Main/css/styleLogin.css" rel="stylesheet"/>
 
+    <script src="~/Assets/Main/js/scriptLogin.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -100,7 +105,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><img src="img/logo-1.png" alt=""></a>
+                    <a class="navbar-brand" href="#"><img src="~/Assets/resource/img/logo-1.png" alt=""></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -141,6 +146,59 @@
                         {
                             <li><a href="@item.MenuHref">@item.MenuName</a></li>
                         }
+                        <li>
+                            @*<script>
+                               function prelogin() {
+                                    console.log('test')
+                                    document.getElementById('id01').style.display='block'
+                               }
+                               function login() {
+                                   let username = $('#username').val()
+                                   let password = $('#password').val()
+                                   console.log(username)
+                                   console.log(password)
+
+                               }
+                            </script>*@
+                            <a  onclick="prelogin()">Login</a>
+
+                            <div id="id01" class="modal">
+
+                                @*<form class="modal-content animate">*@
+                                @using (Html.BeginForm())
+                                {
+                                    <div class="imgcontainer">
+                                        <h2>LOGIN</h2>
+                                    </div>
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, null, new { @class = "alert alert-danger"})
+                                    <div class="container">
+                                        <label for="username"><b>Username</b></label>
+                                        @*<input type="text" placeholder="Enter Username" name="username" id="username" required>*@
+                                        @Html.TextBoxFor(m => m.UserName, new { placeholder = "Enter Username" })
+
+                                        <label for="password"><b>Password</b></label>
+                                        @*<input type="password" placeholder="Enter Password" name="password" id="password" required>*@
+                                        @Html.PasswordFor(m => m.Password, new { placeholder = "Enter Password" })
+
+                                        <label>
+                                            <input type="checkbox" checked="checked" name="remember"> Remember me
+                                        </label>
+                                        @*<button type="button" onclick="login()">Login</button>*@
+                                        <button type="submit">Login</button>
+
+                                    </div>
+
+                                    <div class="container-footer" style="background-color:#f1f1f1">
+                                        <p class="password">Not a member? <a id="a-password" href="#">Register</a></p>
+                                        <p class="password">Forgot <a id="a-password" href="#">Password</a>?</p>
+                                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                                    </div>
+                                }
+                                    
+                                @*</form>*@
+                            </div>
+                        </li>
                         <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -204,12 +262,12 @@
                                 <h4>Gallery On Flickr</h4>
                             </div>
                             <ul>
-                                <li><a href="#"><img src="/Assets/Main/img/gallery/f-w-gallery/f-w-gallery-1.jpg" alt=""><i class="fa fa-search"></i></a></li>
-                                <li><a href="#"><img src="/Assets/Main/img/gallery/f-w-gallery/f-w-gallery-2.jpg" alt=""><i class="fa fa-search"></i></a></li>
-                                <li><a href="#"><img src="/Assets/Main/img/gallery/f-w-gallery/f-w-gallery-3.jpg" alt=""><i class="fa fa-search"></i></a></li>
-                                <li><a href="#"><img src="/Assets/Main/img/gallery/f-w-gallery/f-w-gallery-4.jpg" alt=""><i class="fa fa-search"></i></a></li>
-                                <li><a href="#"><img src="/Assets/Main/img/gallery/f-w-gallery/f-w-gallery-5.jpg" alt=""><i class="fa fa-search"></i></a></li>
-                                <li><a href="#"><img src="/Assets/Main/img/gallery/f-w-gallery/f-w-gallery-6.jpg" alt=""><i class="fa fa-search"></i></a></li>
+                                <li><a href="#"><img src="~/Assets/resource/img/gallery/f-w-gallery/f-w-gallery-1.jpg" alt=""><i class="fa fa-search"></i></a></li>
+                                <li><a href="#"><img src="~/Assets/resource/img/gallery/f-w-gallery/f-w-gallery-2.jpg" alt=""><i class="fa fa-search"></i></a></li>
+                                <li><a href="#"><img src="~/Assets/resource/img/gallery/f-w-gallery/f-w-gallery-3.jpg" alt=""><i class="fa fa-search"></i></a></li>
+                                <li><a href="#"><img src="~/Assets/resource/img/gallery/f-w-gallery/f-w-gallery-4.jpg" alt=""><i class="fa fa-search"></i></a></li>
+                                <li><a href="#"><img src="~/Assets/resource/img/gallery/f-w-gallery/f-w-gallery-5.jpg" alt=""><i class="fa fa-search"></i></a></li>
+                                <li><a href="#"><img src="~/Assets/resource/img/gallery/f-w-gallery/f-w-gallery-6.jpg" alt=""><i class="fa fa-search"></i></a></li>
                             </ul>
                         </aside>
                     </div>
@@ -223,7 +281,7 @@
                         <p>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                             Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <script>document.write(new date().getfullyear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </h5>

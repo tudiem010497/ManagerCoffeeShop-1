@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ManagerCoffeeShopASPNet.Areas.Main.Models;
 
 namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
 {
@@ -15,6 +16,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
 
         private InformationIndex infomationIndex = new InformationIndex();
         // GET: Main/Home
+        [HttpGet]
         public ActionResult Index()
         {
             IEnumerable<Menu> menus = infomationIndex.GetMenu();
@@ -28,6 +30,20 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
             ViewData["fds"] = fds;
             //ViewData["blogs"] = blogs;
             return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(LoginModel model)
+        {
+            var result = new AccountModel().Login(model.UserName, model.Password);
+            if (result && ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Home", new { Areas = "Main" });
+                //alert("Ban da dang nhap thanh cong");
+            }
+            else ModelState.AddModelError("", "Username or Password is incorrect");
+
+            return View(model);
         }
     }
 }

@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "ServiceEmployee";
+    Layout = "~/Areas/Admin/Views/Shared/ServiceEmployee.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-8">
+        @{
+            IEnumerable<FoodAndDrink> fds = (IEnumerable<FoodAndDrink>)ViewData["fds"];
+            int n = fds.Count();
+            int i = 0;
+            while (i < n)
+            {
+                <div class="row">
+                    @{
+                        int k = 0;
+                        while (k < 3 && i < n)
+                        {
+                            string strId = "fdrink01010100" + fds.ElementAt(i).FDID;
+                            <div class="col-sm-4 fooddrinkgr" id="@strId">
+                                <img class="image-fooddrink" src="@fds.ElementAt(i).ImagePath" />
+                                <h3>@fds.ElementAt(i).Name</h3>
+                            </div>
+                            i++;
+                            k++;
+                        }
+                    }
+                </div>
+                        }
+        }
+    </div>
+    <div class="col-sm-4">
+        <div class="row">
+            <div class="form-group col-sm-5">
+                <select class="form-control" id="chooseService">
+                    <option>Phục vụ tại bàn</option>
+                    <option>Mang về</option>
+                    <option>Giao tận nhà</option>
+                </select>
+            </div>
+            <div class="col-sm-7">
+                <select class="form-control" id="choosePos">
+                    @{
+                        IEnumerable<Position> positions = (IEnumerable<Position>)ViewData["positions"];
+                        foreach (Position pos in positions)
+                        {
+                            <option>@pos.PosID</option>
+                        }
+                    }
+                </select>
+
+            </div>
+        </div>
+        <div class="menu">
+            <div class="group-form">
+                <button type="submit" class="btn-lg btn-primary" id="btnSendToBatender"
+                        @*onclick="location.href='@Url.Action("/admin/service/SendOrderToBatender")'*@ ">
+                    Gửi quầy pha chế
+                </button>
+                <button type="reset" class="btn-lg btn-danger">Xóa</button>
+                <button type="submit" class="btn-lg btn-primary">Danh sách Order</button>
+            </div>
+            <table class="table" id="order">
+                <thead>
+                    <tr>
+                        <th>Tên món</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody class="order"></tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>

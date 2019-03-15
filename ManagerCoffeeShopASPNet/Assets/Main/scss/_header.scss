@@ -103,11 +103,10 @@
                         font-family: $can;
                         font-size: 14px;
                         letter-spacing: .42px;
-                        color: #fff;
+                        /*color: #fff;*/
                         text-transform: uppercase;
                         padding: 0px;
-                        line-height: 100px;
-                        display: block;
+
                         @include transition;
                         i{
                             padding-left: 3px;
