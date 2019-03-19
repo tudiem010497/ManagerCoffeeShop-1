@@ -28,10 +28,10 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return _foodAndDrinkDAO.GetFoodAndDrinkByID(id);
         }
-        public void InsertOrder(int PosID, DateTime OrderDateTime,
-            float TotalAmount, string Currency, string Desc, string Status)
+        public bool InsertOrder(int PosID, DateTime OrderDateTime, DateTime PaidDateTime,
+            double TotalAmount, string Currency, string Desc, string Status)
         {
-            _orderDAO.InsertOrder(PosID, OrderDateTime,
+            return _orderDAO.InsertOrder(PosID, OrderDateTime, PaidDateTime,
            TotalAmount, Currency, Desc, Status);
         }
         public void InsertOrderItem(int OrderID, int FDID, int Quantity, string Desc, string Status)

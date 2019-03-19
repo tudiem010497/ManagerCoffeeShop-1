@@ -1,13 +1,18 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
 namespace ManagerCoffeeShopASPNet.Areas.Admin.Models
 {
+    [JsonObject(Id = "OrderModel")]
     public class OrderModel
     {
-        private int PosID { get; set; }
-        private List<OrderItem> orderItems { get; set; }
+        [JsonProperty(PropertyName ="Desc")]
+        public string Desc { get; set; }
+        [JsonProperty(PropertyName = "PosID")]
+        public int PosID { get; set; }
+        [JsonProperty(PropertyName = "OrderItemModel")]
+        public List<OrderItemModel> OrderItemModel { get; set; }
     }
 }

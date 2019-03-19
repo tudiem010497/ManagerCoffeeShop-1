@@ -22,7 +22,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                       ).FirstOrDefault();
             return id;
         }
-        public void InsertOrderItem(int OrderID, int FDID,int Quantity, string Desc, string Status)
+        public void InsertOrderItem(int OrderID, int FDID, int Quantity, string Desc, string Status)
         {
             try
             {
@@ -38,11 +38,19 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 context.OrderItems.InsertOnSubmit(orderitem);
                 context.SubmitChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Error Inser To OrderItem" + ex.Message);
             }
-            
+
+        }
+        public IEnumerable<OrderItem> GetAllOrderItemByOrderID(int id)
+        {
+            IEnumerable<OrderItem> orderitems = from orderitem in context.OrderItems
+                                                where
+           orderitem.OrderID == id
+                                                select orderitem;
+            return orderitems;
         }
     }
 }

@@ -8,8 +8,8 @@ namespace ManagerCoffeeShopASPNet.DAO
 {
     interface OrderDAO
     {
-        int GetLastID();
-        void InsertOrder(int PosID, DateTime OrderDateTime,
-            float TotalAmount, string Currency, string Desc, string Status);
+        bool InsertOrder(int PosID, DateTime OrderDateTime, DateTime PaidDateTime,
+            double TotalAmount, string Currency, string Desc, string Status);
+        IEnumerable<Order> GetAllOrderByStatus(string Status);
     }
 }

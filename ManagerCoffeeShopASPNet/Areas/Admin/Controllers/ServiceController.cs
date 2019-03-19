@@ -17,20 +17,33 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
     {
         private InformationService info = new InformationService();
         // GET: Admin/Service
+        [Route("Index")]
         public ActionResult Index()
         {
             return View();
         }
-        [Route("serviceOrder")]
-        public ActionResult ServiceEmployee()
-        {
+        //[Route("ServiceEmployee")]
+        //[HttpGet]
+        //public ActionResult ServiceEmployee()
+        //{
+        //    IEnumerable<FoodAndDrink> fds = info.GetFoodAndDrink();
+        //    IEnumerable<Position> positions = info.GetAllPosition();
+        //    ViewData["positions"] = positions;
+        //    ViewData["fds"] = fds;
+        //    return View();
+        //}
 
+        [Route("ServiceEmployee")]
+        [HttpGet]
+        public ActionResult ServiceEmployee(string message)
+        {
             IEnumerable<FoodAndDrink> fds = info.GetFoodAndDrink();
             IEnumerable<Position> positions = info.GetAllPosition();
             ViewData["positions"] = positions;
             ViewData["fds"] = fds;
             return View();
         }
+
         [Route("ListFoodAndDrink")]
         public ActionResult ListFoodAndDrink()
         {
@@ -41,14 +54,44 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult GetFoodAndDrinkByID(int id)
         {
             FoodAndDrink fd = info.GetFoodAndDrinkByID(id);
+            var a = fd.GetType().ToString();
             return Json(new { FDID = fd.FDID, Name = fd.Name, UnitPrice = fd.UnitPrice }, JsonRequestBehavior.AllowGet);
         }
-        //[Route("SendOrderToBatender")]
-        //public ActionResult SendOrderToBatender()
-        //{
 
+        //public ActionResult SendOrderToBatender(string json)
+        //{
+        //    string message = "Gửi quầy pha chế thành công";
+        //    OrderModel test = JsonConvert.DeserializeObject<OrderModel>(json);
+        //    string Desc = test.Desc;
+        //    int PosID = test.PosID;
+        //    double TotalAmount = 0;
+        //    List<OrderItemModel> OrderItemModel = test.OrderItemModel;
+        //    foreach (var item in OrderItemModel)
+        //    {
+        //        TotalAmount = TotalAmount + info.GetFoodAndDrinkByID(item.FoodAndDrinkID).UnitPrice * item.Quantity;
+        //    }
+        //    info.InsertOrder(PosID, DateTime.Now, DateTime.Now, TotalAmount, "VND", Desc, "Chưa thực hiện");
+        //    return RedirectToAction("Index", "Service");
         //}
 
+        [HttpPost]
+        [Route("SendOrderToBatender")]
+        public ActionResult SendOrderToBatender(string json)
+        {
+            //string message = "Gửi quầy pha chế thành công";
+            //OrderModel test = JsonConvert.DeserializeObject<OrderModel>(json);
+            //string Desc = test.Desc;
+            //int PosID = test.PosID;
+            //double TotalAmount = 0;
+            //List<OrderItemModel> OrderItemModel = test.OrderItemModel;
+            //foreach (var item in OrderItemModel)
+            //{
+            //    TotalAmount = TotalAmount + info.GetFoodAndDrinkByID(item.FoodAndDrinkID).UnitPrice * item.Quantity;
+            //}
+            //info.InsertOrder(PosID, DateTime.Now, DateTime.Now, TotalAmount, "VND", Desc, "Pending");
+            bool result = info.InsertOrder(1, DateTime.Now, DateTime.Now, 12.2, "VND", "ABC", "Pending");
+            return RedirectToAction("ServiceEmployee", "Service");
+        }
 
     }
 }

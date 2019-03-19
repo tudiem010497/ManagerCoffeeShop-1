@@ -19,7 +19,7 @@
                 error: function (err) {
                     alert("Error : " + err.responseText);
                 }
-            })
+            });
         }
         else {
             element_quantity = "." + strID + " > td.Quantity";
@@ -54,31 +54,43 @@
         $("table#order > .order").append(row);
     }
     $("#btnSendToBatender").click(function () {
-        var chooseService = $("#chooseService option:selected").val();
-        var choosePos = $("#choosePos option:selected").val();
-        $("table#order tbody.order tr").each(function ()
-        {
-            var strID = $(this).attr("class");
-            var ID = parseInt(strID.substr(14));
-            var Name = $("table#order > tbody.order > tr." + strID + " > td.Name").text();
-            var Quantity = $("table#order tbody.order tr." + strID + " td.Quantity").text()
-            var Price = $("table#order tbody.order tr." + strID + " td.Price").text();
-            $.ajax({
-                url: '/admin/service/SendOrderToBatender',
-                type: "POST",
-                contenType: "application/json; charset=utf-8",
-                data: '{"ID" :' + ID + ', "Name" : "' + Name + '", "Quantity" ' + Quantity + "}",
-                dataType: "json",
-                success: function (data) {
-                    alert(data.text());
-                },
-                error: function (err) {
-                    alert("Error : " + err.responseText);
-                }
-            })
-        })
-        
-    })
+       // var temp = 0;
+       
+       // var chooseService = $("#chooseService option:selected").val();
+       // var choosePos = $("#choosePos option:selected").val();
+       //var data =  '{"Desc" : "' + chooseService + '",' +
+       //             '"PosID" : ' + choosePos +
+       //             ',"OrderItemModel" : [';
+       // $("table#order tbody.order tr").each(function () {
+       //     if (temp != 0)
+       //         data = data + ',';
+       //     var strID = $(this).attr("class");
+       //     var ID = parseInt(strID.substr(14));
+       //     var Name = $("table#order tbody.order tr." + strID + " td.Name").text();
+       //     var Quantity = $("table#order tbody.order tr." + strID + " td.Quantity").text();
+       //     var Price = $("table#order tbody.order tr." + strID + " td.Price").text();
+       //     data = data + '{"FoodAndDrinkID" :' + ID + ',';
+       //     data = data + '"Name" : "' + Name + '",';
+       //     data = data + '"Quantity" :' + Quantity;
+       //     data = data + '}';
+       //     temp++;
+       // });
+        //  data = data + ']' + '}';
+        var data = '{"Desc" : "Phục vụ tại quán","PosID" : 1,"OrderItemModel" : [{"FoodAndDrinkID" :3,"Name" : "Tra sua tran chau","Quantity" :1}]}';
+        $.ajax({
+            url: '/admin/service/SendOrderToBatender?json=' + data,
+            type: "POST",
+            contenType: "application/json; charset=utf-8",
+            data: data,
+            dataType: "json",
+            success: function (data) {
+            },
+            error: function (err) {
+                alert("Error : " + err.responseText);
+            }
+        });
+
+    });
     
 });
 
