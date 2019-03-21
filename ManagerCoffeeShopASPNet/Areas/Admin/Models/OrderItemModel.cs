@@ -11,10 +11,15 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Models
     {
         [JsonProperty(PropertyName = "FoodAndDrinkID")]
         public int FoodAndDrinkID { get; set; }
+
         [JsonProperty(PropertyName = "Name")]
         public string Name { get; set; }
+
         [JsonProperty(PropertyName = "Quantity")]
         public int Quantity { get; set; }
+
+        [JsonProperty(PropertyName = "Desc")]
+        public string Desc { get; set; }
     }
 
 

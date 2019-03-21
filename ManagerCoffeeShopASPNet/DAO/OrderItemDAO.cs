@@ -8,7 +8,11 @@ namespace ManagerCoffeeShopASPNet.DAO
 {
     interface OrderItemDAO
     {
+        int GetLastID();
         void InsertOrderItem(int OrderID, int FDID, int Quantity, string Desc, string Status);
         IEnumerable<OrderItem> GetAllOrderItemByOrderID(int id);
+        OrderItem GetOrderItemByID(int ID);
+        bool UpdateOrderItemStatus(int orderItemID, string status);
+        IEnumerable<OrderItem> GetAllOrderItemByOrderIDAndStatus(int OrderID, string Status);
     }
 }

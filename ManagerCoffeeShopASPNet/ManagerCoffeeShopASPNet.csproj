@@ -250,6 +250,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Information\InformationBatender.cs" />
     <Compile Include="Information\InformationService.cs" />
     <Compile Include="Information\InformationIndex.cs" />
     <Compile Include="Models\Account.cs" />
@@ -284,7 +285,9 @@
   <ItemGroup>
     <Content Include="Assets\Admin\css\bootstrap.min.css" />
     <Content Include="Assets\Admin\css\font-awesome.min.css" />
-    <Content Include="Assets\Admin\css\style.css" />
+    <Content Include="Assets\Admin\css\styleBatender.css" />
+    <Content Include="Assets\Admin\css\styleService.css" />
+    <Content Include="Assets\Admin\js\batender.js" />
     <Content Include="Assets\Admin\js\bootstrap.min.js" />
     <Content Include="Assets\Admin\js\jquery.min.js" />
     <Content Include="Assets\Admin\js\service.js" />
@@ -317,8 +320,12 @@
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutService.cshtml" />
     <Content Include="Assets\Admin\fonts\Roboto-Medium.ttf" />
-    <Content Include="Areas\Admin\Views\Batender\_LayoutBatender.cshtml" />
     <Content Include="Areas\Admin\Views\Service\ServiceEmployee.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutBatender.cshtml" />
+    <Content Include="Areas\Admin\Views\Batender\GetListOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\Batender\DetailOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\SendOrderToBatender.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

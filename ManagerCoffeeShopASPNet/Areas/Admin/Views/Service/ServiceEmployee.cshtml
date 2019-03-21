@@ -5,7 +5,7 @@
 }
 
 <div class="row">
-    <div class="col-sm-8">
+    <div class="col-sm-6">
         @{
             IEnumerable<FoodAndDrink>
                 fds = (IEnumerable<FoodAndDrink>
@@ -22,7 +22,10 @@
                             string strId = "fdrink01010100" + fds.ElementAt(i).FDID;
                             <div class="col-sm-4 fooddrinkgr" id="@strId">
                                 <img class="image-fooddrink" src="@fds.ElementAt(i).ImagePath" />
+                                <button class='btn btnPlus'><i class='fas fa-plus'></i></button>
+                                <button class='btn btnMinus'><i class='fas fa-minus'></i></button>
                                 <h3>@fds.ElementAt(i).Name</h3>
+                                
                             </div>
                             i++;
                             k++;
@@ -32,7 +35,7 @@
                         }
         }
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-6">
         <div class="row">
             <div class="group-btn">
                 <button type="submit" class="btn-lg btn-primary" onclick="" id="btnSendToBatender">Gửi quầy pha chế</button>
@@ -64,9 +67,12 @@
                         <th>Tên món</th>
                         <th>Số lượng</th>
                         <th>Thành tiền</th>
+                        <th>Yêu cầu thêm</th>
                     </tr>
                 </thead>
-                <tbody class="order"></tbody>
+                <tbody class="order">
+
+                </tbody>
             </table>
         </div>
     </div>

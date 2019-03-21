@@ -48,8 +48,25 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         }
         public IEnumerable<Order> GetAllOrderByStatus(string Status)
         {
-            IEnumerable<Order> orders = from order in context.Orders where order.Status == Status select order;
+            IEnumerable<Order> orders = from order in context.Orders
+                                        where order.Status == Status
+                                        orderby order.OrderDateTime descending
+                                        select order;
             return orders;
+        }
+        public bool UpdateOrderStatus(int OrderID, string Status)
+        {
+            try
+            {
+                Order order = this.context.Orders.Single(o => o.OrderID == OrderID);
+                order.Status = Status;
+                context.SubmitChanges();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error UpdateOrderStatus : " + ex.Message);
+            }
         }
     }
 }

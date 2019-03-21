@@ -47,10 +47,38 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         public IEnumerable<OrderItem> GetAllOrderItemByOrderID(int id)
         {
             IEnumerable<OrderItem> orderitems = from orderitem in context.OrderItems
-                                                where
-           orderitem.OrderID == id
+                                                where orderitem.OrderID == id
                                                 select orderitem;
             return orderitems;
+        }
+        public OrderItem GetOrderItemByID(int ID)
+        {
+            OrderItem orderItem = context.OrderItems.Single(o => o.OrderItemID == ID);
+            return orderItem;
+        }
+        public bool UpdateOrderItemStatus(int orderItemID, string status)
+        {
+            try
+            {
+                OrderItem orderItem = context.OrderItems.Single(o => o.OrderItemID == orderItemID);
+                orderItem.Status = status;
+                context.SubmitChanges();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error OrderItemDAOImpl : " + ex.Message);
+                return false;
+            }
+        }
+        public IEnumerable<OrderItem> GetAllOrderItemByOrderIDAndStatus(int OrderID, string Status)
+        {
+            IEnumerable<OrderItem> orderItems = from orderItem in context.OrderItems
+                                                where (orderItem.OrderID == OrderID
+                                                && orderItem.Status == Status)
+                                                select orderItem;
+            return orderItems;
+
         }
     }
 }

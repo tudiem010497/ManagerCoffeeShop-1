@@ -12,7 +12,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
     [RoutePrefix("manager")]
     public class HomeController : Controller
     {
-        
+        InformationBatender info = new InformationBatender();
         // GET: Admin/Home
         public ActionResult Index()
         {

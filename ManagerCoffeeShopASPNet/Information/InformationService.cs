@@ -42,5 +42,9 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return _positionDAO.GetAllPosition();
         }
+        public int GetLastOrderIDID()
+        {
+            return _orderDAO.GetLastID();
+        }
     }
 }

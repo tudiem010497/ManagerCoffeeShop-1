@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ManagerCoffeeShopASPNet.OrderItem>
+
+@{
+    ViewBag.Title = "DetailOrder";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutBatender.cshtml";
+}
+
+<h2>DetailOrder</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.OrderID)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.FDID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.OrderID)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.FDID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Xong", "UpdateReady", "Batender", new { OrderItemID = item.OrderItemID, OrderID =item.OrderID, NumOfOrderItem = Model.Count() }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Hủy", "UpdateClosed", "Batender", new { OrderItemID = item.OrderItemID, OrderID = item.OrderID, NumOfOrderItem = Model.Count()}, new { @class = "btn btn-danger btnClosed" })
+        </td>
+    </tr>
+}
+</table>
