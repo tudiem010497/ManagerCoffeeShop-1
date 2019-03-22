@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "GetListOrder";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutBatender.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h2>GetListOrder</h2>
@@ -10,7 +10,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <table class="table table-striped">
                 <tr>
@@ -64,7 +64,7 @@
                         </td>
                         <td>
                             @*@Html.DisplayFor(modelItem => item.Data.OrderDateTime)*@
-                            @Html.DisplayFor(modelItem => (DateTime.Now - item.Data.OrderDateTime).Minutes)
+                            @Html.DisplayFor(modelItem => (DateTime.Now.Subtract(item.Data.OrderDateTime).TotalMinutes))
                         </td>
                         @*<td>
                             @Html.DisplayFor(modelItem => item.PaidDateTime)

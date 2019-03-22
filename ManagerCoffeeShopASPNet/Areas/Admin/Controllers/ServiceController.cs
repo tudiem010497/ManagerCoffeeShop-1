@@ -25,6 +25,10 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Nhân viên phục vụ giúp khách đặt món
+        /// </summary>
+        /// <returns></returns>
         [Route("ServiceEmployee")]
         [HttpGet]
         public ActionResult ServiceEmployee()
@@ -42,6 +46,12 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             IEnumerable<FoodAndDrink> fds = info.GetFoodAndDrink();
             return Json(fds, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// Lấy thông tin đồ uống theo ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("GetFoodAndDrinkByID")]
         public ActionResult GetFoodAndDrinkByID(int id)
         {
@@ -50,6 +60,11 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             return Json(new { FDID = fd.FDID, Name = fd.Name, UnitPrice = fd.UnitPrice }, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// Gửi thông tin đồ uống lưu trữ xuống database
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("SendOrderToBatender")]
         public ActionResult SendOrderToBatender(string json)
@@ -73,7 +88,25 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             return Json(new { PosID = PosID }, JsonRequestBehavior.AllowGet);
         }
 
-        
-
+        /// <summary>
+        /// Xem đồ uống đã hoàn thành để phục vụ khách
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetListOrderService")]
+        public ActionResult GetListOrderService()
+        {
+            string status = "Ready";
+            IEnumerable<Order> orders = info.GetAllOrderByStatus(status);
+            ViewData["orders"] = orders;
+            foreach(Order order in orders)
+            {
+                ViewData[order.OrderID.ToString()] = info.GetAllOrderItemByOrderID(order.OrderID);
+            }
+            return View();
+        }
+        public ActionResult GetOrderItemByOrderID(int OrderID)
+        {
+            return View(info.GetAllOrderItemByOrderID(OrderID));
+        }
     }
 }

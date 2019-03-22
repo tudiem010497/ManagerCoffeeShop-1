@@ -285,11 +285,16 @@
   <ItemGroup>
     <Content Include="Assets\Admin\css\bootstrap.min.css" />
     <Content Include="Assets\Admin\css\font-awesome.min.css" />
+    <Content Include="Assets\Admin\css\sb-admin.css" />
+    <Content Include="Assets\Admin\css\sb-admin.min.css" />
+    <Content Include="Assets\Admin\css\style.css" />
     <Content Include="Assets\Admin\css\styleBatender.css" />
     <Content Include="Assets\Admin\css\styleService.css" />
     <Content Include="Assets\Admin\js\batender.js" />
     <Content Include="Assets\Admin\js\bootstrap.min.js" />
     <Content Include="Assets\Admin\js\jquery.min.js" />
+    <Content Include="Assets\Admin\js\sb-admin.js" />
+    <Content Include="Assets\Admin\js\sb-admin.min.js" />
     <Content Include="Assets\Admin\js\service.js" />
     <Content Include="Assets\Main\css\styleLogin.css" />
     <Content Include="Assets\resource\img\recype-1.jpg" />
@@ -318,7 +323,7 @@
     </Content>
     <Content Include="Areas\Main\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_LayoutService.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Assets\Admin\fonts\Roboto-Medium.ttf" />
     <Content Include="Areas\Admin\Views\Service\ServiceEmployee.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutBatender.cshtml" />
@@ -326,6 +331,8 @@
     <Content Include="Areas\Admin\Views\Batender\DetailOrder.cshtml" />
     <Content Include="Areas\Admin\Views\Service\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Service\SendOrderToBatender.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\GetListOrderService.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\GetOrderItemByOrderID.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -378,6 +385,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\ServiceEmployee\" />
+    <Folder Include="Assets\Admin\js\demo\" />
+    <Folder Include="Assets\Admin\scss\" />
+    <Folder Include="Assets\Admin\vendor\" />
     <Folder Include="Assets\Main\api\" />
     <Folder Include="Assets\Main\fonts\" />
     <Folder Include="Assets\Main\img\" />

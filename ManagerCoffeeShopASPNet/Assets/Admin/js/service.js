@@ -123,6 +123,9 @@
             }
         });
     });
+    $("btnDetailOrder").click(function () {
+      var id = $(this).attr("")
+    })
 });
 
 

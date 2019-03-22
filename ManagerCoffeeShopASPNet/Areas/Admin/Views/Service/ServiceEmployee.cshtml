@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "ServiceEmployee";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutService.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <div class="row">
@@ -17,11 +17,11 @@
                 <div class="row">
                     @{
                         int k = 0;
-                        while (k < 3 && i < n)
+                        while (k < 2 && i < n)
                         {
                             string strId = "fdrink01010100" + fds.ElementAt(i).FDID;
-                            <div class="col-sm-4 fooddrinkgr" id="@strId">
-                                <img class="image-fooddrink" src="@fds.ElementAt(i).ImagePath" />
+                            <div class="col-sm-6 fooddrinkgr" id="@strId">
+                                <img class="image-fooddrink img-responsive" src="@fds.ElementAt(i).ImagePath" /><br />
                                 <button class='btn btnPlus'><i class='fas fa-plus'></i></button>
                                 <button class='btn btnMinus'><i class='fas fa-minus'></i></button>
                                 <h3>@fds.ElementAt(i).Name</h3>

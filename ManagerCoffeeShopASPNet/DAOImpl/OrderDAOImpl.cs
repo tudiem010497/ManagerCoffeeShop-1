@@ -50,7 +50,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         {
             IEnumerable<Order> orders = from order in context.Orders
                                         where order.Status == Status
-                                        orderby order.OrderDateTime descending
+                                        orderby order.OrderDateTime ascending
                                         select order;
             return orders;
         }

@@ -19,6 +19,10 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Lấy danh sách đồ uống cần pha chế
+        /// </summary>
+        /// <returns></returns>
         [Route("GetListOrder")]
         public ActionResult GetListOrder()
         {
@@ -27,6 +31,11 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             return View(orders);
         }
 
+        /// <summary>
+        /// Xem chi tiết pha chế
+        /// </summary>
+        /// <param name="OrderID"></param>
+        /// <returns></returns>
         [Route("Detail")]
         public ActionResult DetailOrder(int OrderID)
         {
@@ -35,6 +44,13 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             return View(orderitems);
         }
 
+        /// <summary>
+        /// Cập nhật thông tin pha chế là đã hoàn thành
+        /// </summary>
+        /// <param name="OrderItemID"></param>
+        /// <param name="OrderID"></param>
+        /// <param name="NumOfOrderItem"></param>
+        /// <returns></returns>
         [Route("UpdateReady")]
         public ActionResult UpdateReady(int OrderItemID,int OrderID, int NumOfOrderItem)
         {
@@ -51,20 +67,29 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             }
         }
 
+        /// <summary>
+        /// Cập nhật thông tin pha chế là hủy
+        /// </summary>
+        /// <param name="OrderItemID"></param>
+        /// <param name="OrderID"></param>
+        /// <param name="NumOfOrderItem"></param>
+        /// <param name="confirm"></param>
+        /// <returns></returns>
         [Route("UpdateClosed")]
         public ActionResult UpdateClosed(int OrderItemID, int OrderID, int NumOfOrderItem, string confirm)
         {
             if(confirm == "true")
             {
-                string status = "Closed";
-                bool result = info.UpdateStatus(OrderItemID, status);
+                string statusOrderItem = "Cancel";
+                string statusOrder = "Ready";
+                bool result = info.UpdateStatus(OrderItemID, statusOrderItem);
                 if (NumOfOrderItem > 1)
                 {
                     return RedirectToAction("DetailOrder", "Batender", new { OrderID = OrderID });
                 }
                 else
                 {
-                    bool resultUpdateStatusOrder = info.UpdateOrderStatus(OrderID, status);
+                    bool resultUpdateStatusOrder = info.UpdateOrderStatus(OrderID, statusOrder);
                     return RedirectToAction("GetListOrder", "Batender");
                 }
             }

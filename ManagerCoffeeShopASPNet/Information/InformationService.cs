@@ -46,5 +46,14 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return _orderDAO.GetLastID();
         }
+
+        public IEnumerable<Order> GetAllOrderByStatus(string status)
+        {
+            return this._orderDAO.GetAllOrderByStatus(status);
+        }
+        public IEnumerable<OrderItem> GetAllOrderItemByOrderID(int OrderID)
+        {
+            return this._orderItemDAO.GetAllOrderItemByOrderID(OrderID);
+        }
     }
 }

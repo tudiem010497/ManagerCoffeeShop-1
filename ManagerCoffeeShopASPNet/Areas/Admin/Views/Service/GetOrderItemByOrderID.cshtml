@@ -1,0 +1,58 @@
+﻿@orderItem IEnumerable<ManagerCoffeeShopASPNet.OrderItem>
+
+@{
+    ViewBag.Title = "GetOrderItemByOrderID";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>GetOrderItemByOrderID</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(orderItem => orderItem.OrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(orderItem => orderItem.FDID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(orderItem => orderItem.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(orderItem => orderItem.Desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(orderItem => orderItem.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var orderItem in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(orderItemItem => orderItem.OrderID)
+        </td>
+        <td>
+            @Html.DisplayFor(orderItemItem => orderItem.FDID)
+        </td>
+        <td>
+            @Html.DisplayFor(orderItemItem => orderItem.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(orderItemItem => orderItem.Desc)
+        </td>
+        <td>
+            @Html.DisplayFor(orderItemItem => orderItem.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=orderItem.OrderItemID }) |
+            @Html.ActionLink("Details", "Details", new { id=orderItem.OrderItemID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=orderItem.OrderItemID })
+        </td>
+    </tr>
+}
+
+</table>
