@@ -68,5 +68,15 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 throw new Exception("Error UpdateOrderStatus : " + ex.Message);
             }
         }
+        public IEnumerable<Order> GetAllOrderPendingOrReady()
+        {
+            IEnumerable<Order> orders = from order in this.context.Orders
+                                        where order.Status == "Pending"
+                                        || (order.Status == "Ready")
+                                        orderby order.OrderDateTime ascending
+                                        select order;
+            return orders;
+        }
+        
     }
 }

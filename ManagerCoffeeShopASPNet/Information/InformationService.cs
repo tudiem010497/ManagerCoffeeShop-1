@@ -55,5 +55,33 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._orderItemDAO.GetAllOrderItemByOrderID(OrderID);
         }
+        public IEnumerable<OrderItem> GetAllOrderItemByOrderIDAndStatus(int OrderID, string status)
+        {
+            return this._orderItemDAO.GetAllOrderItemByOrderIDAndStatus(OrderID, status);
+        }
+        public bool UpdateOrderItemStatus(int OrderItemID,string status)
+        {
+            return this._orderItemDAO.UpdateOrderItemStatus(OrderItemID, status);
+        }
+        public bool UpdateOrderStatus(int OrderID, string status)
+        {
+            return this._orderDAO.UpdateOrderStatus(OrderID, status);
+        }
+        public IEnumerable<OrderItem> GetAllOrderItemByOrderIDAndNeedService(int OrderID)
+        {
+            return this._orderItemDAO.GetAllOrderItemByOrderIDAndNeedService(OrderID);
+        }
+        public OrderItem GetOrderItemByOrderItemID(int OrderItemID)
+        {
+            return this._orderItemDAO.GetOrderItemByID(OrderItemID);
+        }
+        public IEnumerable<Order> GetAllOrderPendingOrReady()
+        {
+            return this._orderDAO.GetAllOrderPendingOrReady();
+        }
+        public IEnumerable<OrderItem> GetAllOrderItemNeedService()
+        {
+            return this._orderItemDAO.GetAllOrderItemNeedService();
+        }
     }
 }

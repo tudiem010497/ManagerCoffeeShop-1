@@ -80,5 +80,24 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             return orderItems;
 
         }
+        public IEnumerable<OrderItem> GetAllOrderItemByOrderIDAndNeedService(int OrderID)
+        {
+            IEnumerable<OrderItem> orderItems = from orderItem in context.OrderItems
+                                                where (orderItem.OrderID == OrderID)
+                                                &&( (orderItem.Status == "Ready")
+                                                || (orderItem.Status == "Pending")
+                                                || (orderItem.Status == "Cancel"))
+                                                select orderItem;
+            return orderItems;
+        }
+        public IEnumerable<OrderItem> GetAllOrderItemNeedService()
+        {
+            IEnumerable<OrderItem> orderItems = from orderItem in context.OrderItems
+                                                where orderItem.Status == "Ready"
+                                                || orderItem.Status == "Cancel"
+                                                select orderItem;
+            return orderItems;
+        }
     }
+    
 }

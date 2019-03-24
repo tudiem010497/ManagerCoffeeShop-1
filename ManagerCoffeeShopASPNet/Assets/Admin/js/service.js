@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    // Xử lý đặt đồ uống
     var arrayID = [];
     $(".fooddrinkgr .btnPlus").click(function () {
         var strID = $(this).parent(".fooddrinkgr").attr("id");
@@ -83,6 +84,8 @@
         row += "</tr>";
         $("table#order > .order").append(row);
     }
+
+    // Xử lý button Gửi đến quầy pha chế
     $("#btnSendToBatender").click(function () {
         var temp = 0;
        
@@ -123,9 +126,18 @@
             }
         });
     });
-    $("btnDetailOrder").click(function () {
-      var id = $(this).attr("")
-    })
+    
+    // Xử lý nhân viên phục vụ cập nhật thông tin phục vụ
+    $(".btnUpdatedOrderClosed").click(function () {
+        if (confirm("Bạn muốn cập nhật thông tin của toàn bộ đơn hàng ???")) {
+            var data = $(".btnUpdatedOrderClosed").attr("href") + "&confirm=true";
+            $(this).attr("href", data);
+        }
+        else {
+            var data = $(".btnUpdatedOrderClosed").attr("href") + "&confirm=false";
+            $(this).attr("href", data);
+        }
+    });
 });
 
 

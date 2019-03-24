@@ -79,6 +79,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mvc.Grid.Core, Version=6.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NonFactors.Grid.Core.Mvc5.6.1.0\lib\net45\Mvc.Grid.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -212,6 +216,7 @@
     <Compile Include="Areas\Admin\Controllers\BatenderController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ServiceController.cs" />
+    <Compile Include="Areas\Admin\Models\OrderItemGroupByFoodAndDrink.cs" />
     <Compile Include="Areas\Admin\Models\OrderItemModel.cs" />
     <Compile Include="Areas\Admin\Models\OrderModel.cs" />
     <Compile Include="Areas\Admin\Models\OrderObject.cs" />
@@ -250,6 +255,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Information\InformationAccountant.cs" />
     <Compile Include="Information\InformationBatender.cs" />
     <Compile Include="Information\InformationService.cs" />
     <Compile Include="Information\InformationIndex.cs" />
@@ -301,6 +307,7 @@
     <Content Include="Assets\resource\img\recype\recype-1.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\MvcGrid\mvc-grid.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -330,9 +337,10 @@
     <Content Include="Areas\Admin\Views\Batender\GetListOrder.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\DetailOrder.cshtml" />
     <Content Include="Areas\Admin\Views\Service\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Service\SendOrderToBatender.cshtml" />
-    <Content Include="Areas\Admin\Views\Service\GetListOrderService.cshtml" />
-    <Content Include="Areas\Admin\Views\Service\GetOrderItemByOrderID.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\GetListOrderServiceGroupByOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\DetailOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\GetListOrderItemNeedServiceGroupByFoodAnDrink.cshtml" />
+    <Content Include="Content\MvcGrid\Fonts\GridGlyphs.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -342,6 +350,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\MvcGrid\mvc-grid.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -381,6 +390,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\MvcGrid\_Pager.cshtml" />
+    <Content Include="Views\Shared\MvcGrid\_Grid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

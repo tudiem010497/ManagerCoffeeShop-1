@@ -1,0 +1,81 @@
+﻿@model IEnumerable<ManagerCoffeeShopASPNet.Order>
+
+@{
+    ViewBag.Title = "GetListOrderServiceGroupByOrder";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>GetListOrderService</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PosID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDateTime)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.PaidDateTime)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.DiscountMoney)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Currency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PosID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDateTime)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.PaidDateTime)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.DiscountMoney)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Currency)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Xem Chi tiết", "DetailOrder", "Service", new { OrderID = item.OrderID }, new { @class = "btn btn-primary btnDetailOrder" })
+            @Html.ActionLink("Đã phục vụ", "UpdatedOrderClosed", "Service", new { OrderID = item.OrderID}, new { @class = "btn btn-primary btnUpdatedOrderClosed" })
+        </td>
+    </tr>
+}
+
+</table>

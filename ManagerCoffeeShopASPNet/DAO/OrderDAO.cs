@@ -13,5 +13,6 @@ namespace ManagerCoffeeShopASPNet.DAO
             double TotalAmount, string Currency, string Desc, string Status);
         IEnumerable<Order> GetAllOrderByStatus(string Status);
         bool UpdateOrderStatus(int OrderID, string Status);
+        IEnumerable<Order> GetAllOrderPendingOrReady();
     }
 }

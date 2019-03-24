@@ -76,7 +76,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         /// <param name="confirm"></param>
         /// <returns></returns>
         [Route("UpdateClosed")]
-        public ActionResult UpdateClosed(int OrderItemID, int OrderID, int NumOfOrderItem, string confirm)
+        public ActionResult UpdateCancel(int OrderItemID, int OrderID, int NumOfOrderItem, string confirm)
         {
             if(confirm == "true")
             {

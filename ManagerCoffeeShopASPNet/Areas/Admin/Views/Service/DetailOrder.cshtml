@@ -1,20 +1,20 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.OrderItem>
 
 @{
-    ViewBag.Title = "DetailOrder";
+    ViewBag.Title = "GetDetailOrder";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>DetailOrder</h2>
+<h2>GetDetailOrder</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table table-striped">
+<table class="table">
     <tr>
-        @*<th>
+        <th>
             @Html.DisplayNameFor(model => model.OrderID)
-        </th>*@
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.FDID)
         </th>
@@ -32,9 +32,9 @@
 
 @foreach (var item in Model) {
     <tr>
-        @*<td>
+        <td>
             @Html.DisplayFor(modelItem => item.OrderID)
-        </td>*@
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.FDID)
         </td>
@@ -48,9 +48,9 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @Html.ActionLink("Xong", "UpdateReady", "Batender", new { OrderItemID = item.OrderItemID, OrderID =item.OrderID, NumOfOrderItem = Model.Count() }, new { @class = "btn btn-success" })
-            @Html.ActionLink("Hủy", "UpdateCancel", "Batender", new { OrderItemID = item.OrderItemID, OrderID = item.OrderID, NumOfOrderItem = Model.Count()}, new { @class = "btn btn-danger btnClosed" })
+            @Html.ActionLink("Đã phục vụ", "UpdateOrderItemClosed", "Service", new { OrderItemID = item.OrderItemID, OrderID = item.OrderID }, new { @class = "btn btn-primary btnDetailOrder" })
         </td>
     </tr>
 }
+
 </table>
