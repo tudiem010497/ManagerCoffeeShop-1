@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css"
           integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
     <script type="text/javascript" src="~/Assets/Admin/js/service.js"></script>
+    <script src="~/MVCGridHandler.axd/script.js"></script>
 
     <!-- Template -->
     @*<meta charset="utf-8">
@@ -126,10 +127,15 @@
             <li class="nav-item">
                 <a class="nav-link" href=@Url.Action("GetListOrder", "Batender")>
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Danh sách pha chế</span>
+                    <span>Danh sách pha chế theo hóa đơn</span>
                 </a>
             </li>
-            
+            <li class="nav-item">
+                <a class="nav-link" href=@Url.Action("GetListOrderItemGroupByFoodAndDrink", "Batender")>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Danh sách pha chế theo loại đồ uống</span>
+                </a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-fw fa-folder"></i>

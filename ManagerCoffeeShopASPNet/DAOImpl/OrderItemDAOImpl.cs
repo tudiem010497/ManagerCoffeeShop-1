@@ -98,6 +98,13 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                                                 select orderItem;
             return orderItems;
         }
+        public IEnumerable<OrderItem> GetAllOrderItemByStatus(string status)
+        {
+            IEnumerable<OrderItem> orderItems = from orderItem in context.OrderItems
+                                                where orderItem.Status == status
+                                                select orderItem;
+            return orderItems;
+        }
     }
     
 }

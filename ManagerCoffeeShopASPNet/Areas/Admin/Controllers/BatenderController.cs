@@ -1,4 +1,5 @@
-﻿using ManagerCoffeeShopASPNet.Information;
+﻿using ManagerCoffeeShopASPNet.Areas.Admin.Models;
+using ManagerCoffeeShopASPNet.Information;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         }
 
         /// <summary>
-        /// Lấy danh sách đồ uống cần pha chế
+        /// Lấy danh sách đồ uống cần pha chế theo hóa đơn
         /// </summary>
         /// <returns></returns>
         [Route("GetListOrder")]
@@ -29,6 +30,34 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             string status = "Pending";
             IEnumerable<Order> orders = info.GetAllOrderByStatus(status);
             return View(orders);
+        }
+
+        [Route("GetListOrderItemGroupByFoodAndDrink")]
+        public ActionResult GetListOrderItemGroupByFoodAndDrink()
+        {
+            string status = "Pending";
+            ListOrderItemGroupByFoodAndDrink listGroup = new ListOrderItemGroupByFoodAndDrink();
+            IEnumerable<OrderItem> orderItems = info.GetAllOrderItemByStatus(status);
+            int index;
+            foreach(OrderItem item in orderItems)
+            {
+                index = listGroup.FindIndexFoodAndDrinkInListGroup(item.FDID);
+                if(index == -1)
+                {
+                    OrderItemGroupByFoodAndDrink orderItemGroupByFoodAndDrink = new OrderItemGroupByFoodAndDrink();
+                    orderItemGroupByFoodAndDrink.FoodAndDrink = item.FoodAndDrink;
+                    orderItemGroupByFoodAndDrink.Quantity = item.Quantity;
+                    listGroup.list.Add(orderItemGroupByFoodAndDrink);
+                    int temp = listGroup.FindIndexFoodAndDrinkInListGroup(item.FDID);
+                    listGroup.list[temp].OrderItems.Add(item);
+                }
+                else
+                {
+                    listGroup.list[index].Quantity = listGroup.list[index].Quantity + item.Quantity;
+                    listGroup.list[index].OrderItems.Add(item);
+                }
+            }
+            return View(listGroup.list);
         }
 
         /// <summary>

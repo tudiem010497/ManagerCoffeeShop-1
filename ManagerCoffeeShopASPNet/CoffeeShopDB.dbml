@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CoffeeShopDB" Class="CoffeeShopDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-UE1A1CU\SQLEXPRESS;Initial Catalog=CoffeeShopDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CoffeeShopDBConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-HA2TCUF;Initial Catalog=CoffeeShopDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CoffeeShopDBConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.BasicSalary" Member="BasicSalaries">
     <Type Name="BasicSalary">
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -345,18 +345,6 @@
       <Association Name="FoodAndDrink_Recipe" Member="FoodAndDrink" ThisKey="FDID" OtherKey="FDID" Type="FoodAndDrink" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.RecipeDetail" Member="RecipeDetails">
-    <Type Name="RecipeDetail">
-      <Column Name="RecID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Step" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="IngreID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Amount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="Unit" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="Ingredient_RecipeDetail" Member="Ingredient" ThisKey="IngreID" OtherKey="IngreID" Type="Ingredient" IsForeignKey="true" />
-      <Association Name="Recipe_RecipeDetail" Member="Recipe" ThisKey="RecID" OtherKey="RecID" Type="Recipe" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Reservation" Member="Reservations">
     <Type Name="Reservation">
       <Column Name="ResvID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -568,6 +556,19 @@
       <Column Name="Status" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
       <Association Name="FoodAndDrink_OrderItem" Member="FoodAndDrink" ThisKey="FDID" OtherKey="FDID" Type="FoodAndDrink" IsForeignKey="true" />
       <Association Name="Order_OrderItem" Member="Order" ThisKey="OrderID" OtherKey="OrderID" Type="Order" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RecipeDetail" Member="RecipeDetails">
+    <Type Name="RecipeDetail">
+      <Column Name="RecipeDetailID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RecID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Step" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IngreID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Unit" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Ingredient_RecipeDetail" Member="Ingredient" ThisKey="IngreID" OtherKey="IngreID" Type="Ingredient" IsForeignKey="true" />
+      <Association Name="Recipe_RecipeDetail" Member="Recipe" ThisKey="RecID" OtherKey="RecID" Type="Recipe" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.sp_Account_Login_Check" Method="sp_Account_Login_Check">

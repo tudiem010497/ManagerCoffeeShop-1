@@ -1,0 +1,34 @@
+﻿@model List<ManagerCoffeeShopASPNet.Areas.Admin.Models.OrderItemGroupByFoodAndDrink>
+
+@{
+    ViewBag.Title = "GetListOrderItemGroupByFoodAndDrink";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<table class="table table-striped">
+    <tr>
+        <th>Tên đồ uống</th>
+        <th>Số lượng</th>
+        <th>Chi tiết</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.FoodAndDrink.FDID && @item.FoodAndDrink.Name</td>
+            <td>@item.Quantity</td>
+            <td>
+                @foreach (var orderItem in item.OrderItems)
+                {
+                    <table class="table">
+                        <tr>
+                            <td>Vị trí :@orderItem.OrderItemID</td>
+                            <td>Desc : @orderItem.Desc</td>
+                            <td>Thời gian chờ : @DateTime.Now.Subtract(orderItem.Order.OrderDateTime).TotalMinutes</td>
+                            <td>Số lượng : @orderItem.Quantity</td>
+                        </tr>
+                    </table>
+                }
+            </td>
+        </tr>
+    }
+</table>
+

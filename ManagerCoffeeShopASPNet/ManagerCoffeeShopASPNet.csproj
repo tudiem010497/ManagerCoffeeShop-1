@@ -216,6 +216,7 @@
     <Compile Include="Areas\Admin\Controllers\BatenderController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ServiceController.cs" />
+    <Compile Include="Areas\Admin\Models\ListOrderItemGroupByFoodAndDrink.cs" />
     <Compile Include="Areas\Admin\Models\OrderItemGroupByFoodAndDrink.cs" />
     <Compile Include="Areas\Admin\Models\OrderItemModel.cs" />
     <Compile Include="Areas\Admin\Models\OrderModel.cs" />
@@ -242,6 +243,8 @@
     <Compile Include="DAOImpl\OrderDAOImpl.cs" />
     <Compile Include="DAOImpl\OrderItemDAOImpl.cs" />
     <Compile Include="DAOImpl\PositionDAOImpl.cs" />
+    <Compile Include="DAOImpl\RecipeDAOImpl.cs" />
+    <Compile Include="DAOImpl\RecipeDetailDAOImpl.cs" />
     <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DAO\BannerImageDAO.cs" />
     <Compile Include="DAO\BlogDAO.cs" />
@@ -251,6 +254,8 @@
     <Compile Include="DAO\OrderDAO.cs" />
     <Compile Include="DAO\OrderItemDAO.cs" />
     <Compile Include="DAO\PositionDAO.cs" />
+    <Compile Include="DAO\RecipeDAO.cs" />
+    <Compile Include="DAO\RecipeDetailDAO.cs" />
     <Compile Include="DatabaseConnection\DataSQLConnection.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -341,6 +346,7 @@
     <Content Include="Areas\Admin\Views\Service\DetailOrder.cshtml" />
     <Content Include="Areas\Admin\Views\Service\GetListOrderItemNeedServiceGroupByFoodAnDrink.cshtml" />
     <Content Include="Content\MvcGrid\Fonts\GridGlyphs.woff" />
+    <Content Include="Areas\Admin\Views\Batender\GetListOrderItemGroupByFoodAndDrink.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

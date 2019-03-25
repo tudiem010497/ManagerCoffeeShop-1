@@ -122,11 +122,12 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         /// <param name="OrderID"></param>
         /// <returns></returns>
         [Route("UpdatedOrderItemClosed")]
-        public ActionResult UpdateOrderItemClosed(int OrderItemID, int OrderID)
+        public ActionResult UpdateOrderItemClosed(int OrderItemID, int OrderID, string View)
         {
             string status1 = "CancelClosed";
             string status2 = "Closed";
             OrderItem orderItem = info.GetOrderItemByOrderItemID(OrderItemID);
+            // Nếu status là cancel cập nhật status của orderitem là status1 ngược lại là status 2
             if(orderItem.Status == "Cancel")
             {
                 bool result = info.UpdateOrderItemStatus(OrderItemID, status1);
@@ -136,15 +137,26 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 info.UpdateOrderItemStatus(OrderItemID, status2);
             }
             
-            if(info.GetAllOrderItemByOrderIDAndNeedService(OrderID).Count() != 0)
+            // Nếu đang ở view Chi tiết hóa đơn 
+            if(View == "DetailOrder")
             {
-                return RedirectToAction("DetailOrder", "Service", new { OrderID = OrderID });
+                // Nếu chi tiết hóa đơn != 0 thì redirect về DetailOrder ngược lại thì redirect về GetListOrderService
+                if (info.GetAllOrderItemByOrderIDAndNeedService(OrderID).Count() != 0)
+                {
+                    return RedirectToAction("DetailOrder", "Service", new { OrderID = OrderID });
+                }
+                else
+                {
+                    info.UpdateOrderStatus(OrderID, status1);
+                    return RedirectToAction("GetListOrderService", "Service");
+                }
             }
+            // nếu đang ở view xem thông tin pha chế nhóm theo từng loại món
             else
             {
-                info.UpdateOrderStatus(OrderID, status1);
-                return RedirectToAction("GetListOrderService", "Service");
+                return RedirectToAction("GetListOrderItemNeedServiceGroupByFoodAnDrink", "Service");
             }
+            
         }
 
         /// <summary>
@@ -176,28 +188,27 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("GetListOrderItemNeedServiceGroupByFoodAnDrink")]
         public ActionResult GetListOrderItemNeedServiceGroupByFoodAnDrink()
         {
-            List<OrderItemGroupByFoodAndDrink> list = new List<OrderItemGroupByFoodAndDrink>();
+            ListOrderItemGroupByFoodAndDrink listGroup = new ListOrderItemGroupByFoodAndDrink();
             IEnumerable<OrderItem> orderItems = info.GetAllOrderItemNeedService();
+            int index;
             foreach(OrderItem item in orderItems)
             {
-                foreach(OrderItemGroupByFoodAndDrink group in list)
+                index = listGroup.FindIndexFoodAndDrinkInListGroup(item.FDID);
+                if (index != -1)
                 {
-                    if (item.FDID == group.FoodAndDrink.FDID)
-                    {
-                        group.Quantity = item.Quantity + group.Quantity;
-                        group.OrderItems.Add(item);
-                    }
-                    else
-                    {
-                        OrderItemGroupByFoodAndDrink orderItemGroupByFoodAndDrink = new OrderItemGroupByFoodAndDrink();
-                        orderItemGroupByFoodAndDrink.FoodAndDrink = item.FoodAndDrink;
-                        orderItemGroupByFoodAndDrink.OrderItems.Add(item);
-                        orderItemGroupByFoodAndDrink.Quantity = item.Quantity;
-                        list.Add(orderItemGroupByFoodAndDrink);
-                    }
+                    listGroup.list[index].Quantity = listGroup.list[index].Quantity + item.Quantity;
+                    listGroup.list[index].OrderItems.Add(item);
+                }
+                else
+                {
+                    OrderItemGroupByFoodAndDrink orderItemGroupByFoodAndDrink = new OrderItemGroupByFoodAndDrink();
+                    orderItemGroupByFoodAndDrink.FoodAndDrink = item.FoodAndDrink;
+                    orderItemGroupByFoodAndDrink.OrderItems.Add(item);
+                    orderItemGroupByFoodAndDrink.Quantity = item.Quantity;
+                    listGroup.list.Add(orderItemGroupByFoodAndDrink);
                 }
             }
-            return View(list);
+            return View(listGroup.list);
         }
     }
 }

@@ -48,7 +48,7 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @Html.ActionLink("Đã phục vụ", "UpdateOrderItemClosed", "Service", new { OrderItemID = item.OrderItemID, OrderID = item.OrderID }, new { @class = "btn btn-primary btnDetailOrder" })
+            @Html.ActionLink("Đã phục vụ", "UpdateOrderItemClosed", "Service", new { OrderItemID = item.OrderItemID, OrderID = item.OrderID, View = "DetailOrder" }, new { @class = "btn btn-primary btnDetailOrder" })
         </td>
     </tr>
 }

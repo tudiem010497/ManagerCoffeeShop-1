@@ -10,5 +10,9 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Models
         public FoodAndDrink FoodAndDrink;
         public int Quantity;
         public List<OrderItem> OrderItems;
+        public OrderItemGroupByFoodAndDrink()
+        {
+            this.OrderItems = new List<OrderItem>();
+        }
     }
 }

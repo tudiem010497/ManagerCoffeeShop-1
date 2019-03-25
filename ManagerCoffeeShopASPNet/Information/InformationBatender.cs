@@ -36,5 +36,9 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._orderDAO.UpdateOrderStatus(OrderID, Status);
         }
+        public IEnumerable<OrderItem> GetAllOrderItemByStatus(string status)
+        {
+            return this._orderItemDAO.GetAllOrderItemByStatus(status);
+        }
     }
 }
