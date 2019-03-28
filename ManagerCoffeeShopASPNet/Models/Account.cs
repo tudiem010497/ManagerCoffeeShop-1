@@ -8,7 +8,7 @@ using System.Web;
 namespace ManagerCoffeeShopASPNet.Models
 {
     [Table("Account")]
-    public class Account
+    public class Account // test 28/03/2019
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
