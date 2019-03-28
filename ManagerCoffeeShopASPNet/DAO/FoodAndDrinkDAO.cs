@@ -8,7 +8,10 @@ namespace ManagerCoffeeShopASPNet.DAO
 {
     interface FoodAndDrinkDAO
     {
+        int GetLastID();
         IEnumerable<FoodAndDrink> GetAllFoodAndDrink();
         FoodAndDrink GetFoodAndDrinkByID(int id);
+        bool InsertFoodAndDrink(string Name, string Desc,
+            string ImagePath, string Size, string Type, double UnitPrice, string Currency);
     }
 }

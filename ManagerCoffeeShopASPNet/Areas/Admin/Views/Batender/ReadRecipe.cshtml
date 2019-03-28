@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "ReadRecipe";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Bước</td>
+            <td>Mô tả</td>
+            <td>Lưu ý</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (RecipeDetail item in (IEnumerable<RecipeDetail>)ViewData["recipeDetails"])
+        {
+            <tr>
+                <td> Bước @item.Step </td> 
+                <td>
+                    @item.Amount @item.Ingredient.Name @item.Unit<br />
+                </td>
+                <td>Lưu ý : @item.Desc</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

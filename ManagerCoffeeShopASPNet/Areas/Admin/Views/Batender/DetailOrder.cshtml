@@ -48,8 +48,9 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @Html.ActionLink("Xong", "UpdateReady", "Batender", new { OrderItemID = item.OrderItemID, OrderID =item.OrderID, NumOfOrderItem = Model.Count() }, new { @class = "btn btn-success" })
-            @Html.ActionLink("Hủy", "UpdateCancel", "Batender", new { OrderItemID = item.OrderItemID, OrderID = item.OrderID, NumOfOrderItem = Model.Count()}, new { @class = "btn btn-danger btnClosed" })
+            @Html.ActionLink("Xong", "UpdateReady", "Batender", new { OrderItemID = item.OrderItemID, OrderID =item.OrderID, NumOfOrderItem = Model.Count(),view = "DetailOrder" }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Xem công thức pha chế", "ReadRecipe", "Batender", new { FDID = item.FDID }, new { @class= "btn btn-info btnReadRecipe" })
+            @Html.ActionLink("Hủy", "UpdateCancel", "Batender", new { OrderItemID = item.OrderItemID, OrderID = item.OrderID, NumOfOrderItem = Model.Count(), view = "DetailOrder"}, new { @class = "btn btn-danger btnCancel" })
         </td>
     </tr>
 }

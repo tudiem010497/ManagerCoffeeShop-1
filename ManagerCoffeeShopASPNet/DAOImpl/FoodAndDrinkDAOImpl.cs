@@ -13,6 +13,13 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         {
             this.context = new CoffeeShopDBDataContext();
         }
+        public int GetLastID()
+        {
+            int id = (from fd in context.FoodAndDrinks
+                      orderby fd.FDID descending
+                      select fd.FDID).FirstOrDefault();
+            return id;
+        }
         public IEnumerable<FoodAndDrink> GetAllFoodAndDrink()
         {
             return context.FoodAndDrinks.ToList();
@@ -21,6 +28,30 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         {
             var fd = from foodAndDrink in context.FoodAndDrinks where foodAndDrink.FDID == id select foodAndDrink;
             return fd.ToArray().ElementAt(0);
+        }
+        public bool InsertFoodAndDrink(string Name, string Desc,
+            string ImagePath, string Size, string Type, double UnitPrice, string Currency)
+        {
+            int FDID = GetLastID() + 1;
+            try
+            {
+                FoodAndDrink fd = new FoodAndDrink();
+                fd.Name = Name;
+                fd.Desc = Desc;
+                fd.ImagePath = ImagePath;
+                fd.Size = Size;
+                fd.Type = Type;
+                fd.UnitPrice = UnitPrice;
+                fd.Currency = Currency;
+                context.FoodAndDrinks.InsertOnSubmit(fd);
+                context.SubmitChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error Insert FoodAndDrink " + ex.Message);
+                return false;
+            }
         }
     }
 }

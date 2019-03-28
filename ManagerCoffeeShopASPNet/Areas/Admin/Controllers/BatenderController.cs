@@ -2,6 +2,7 @@
 using ManagerCoffeeShopASPNet.Information;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -81,18 +82,25 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         /// <param name="NumOfOrderItem"></param>
         /// <returns></returns>
         [Route("UpdateReady")]
-        public ActionResult UpdateReady(int OrderItemID,int OrderID, int NumOfOrderItem)
+        public ActionResult UpdateReady(int OrderItemID,int OrderID, int NumOfOrderItem, string view)
         {
             string status = "Ready";
             bool result = info.UpdateStatus(OrderItemID, status);
-            if(NumOfOrderItem > 1)
+            if(view == "GetListOrderItemGroupByFoodAndDrink")
             {
-                return RedirectToAction("DetailOrder", "Batender", new { OrderID = OrderID });
+                return RedirectToAction("GetListOrderItemGroupByFoodAndDrink", "Batender");
             }
             else
             {
-                bool resultUpdateStatusOrder = info.UpdateOrderStatus(OrderID, status);
-                return RedirectToAction("GetListOrder", "Batender");
+                if (NumOfOrderItem > 1)
+                {
+                    return RedirectToAction("DetailOrder", "Batender", new { OrderID = OrderID });
+                }
+                else
+                {
+                    bool resultUpdateStatusOrder = info.UpdateOrderStatus(OrderID, status);
+                    return RedirectToAction("GetListOrder", "Batender");
+                }
             }
         }
 
@@ -104,25 +112,102 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         /// <param name="NumOfOrderItem"></param>
         /// <param name="confirm"></param>
         /// <returns></returns>
-        [Route("UpdateClosed")]
-        public ActionResult UpdateCancel(int OrderItemID, int OrderID, int NumOfOrderItem, string confirm)
+        [Route("UpdateCancel")]
+        public ActionResult UpdateCancel(int OrderItemID, int OrderID, int NumOfOrderItem, string confirm, string view)
         {
             if(confirm == "true")
             {
                 string statusOrderItem = "Cancel";
                 string statusOrder = "Ready";
                 bool result = info.UpdateStatus(OrderItemID, statusOrderItem);
-                if (NumOfOrderItem > 1)
+                if(view == "GetListOrderItemGroupByFoodAndDrink")
                 {
-                    return RedirectToAction("DetailOrder", "Batender", new { OrderID = OrderID });
+                    return RedirectToAction("GetListOrderItemGroupByFoodAndDrink", "Batender");
                 }
                 else
                 {
-                    bool resultUpdateStatusOrder = info.UpdateOrderStatus(OrderID, statusOrder);
-                    return RedirectToAction("GetListOrder", "Batender");
+                    if (NumOfOrderItem > 1)
+                    {
+                        return RedirectToAction("DetailOrder", "Batender", new { OrderID = OrderID });
+                    }
+                    else
+                    {
+                        bool resultUpdateStatusOrder = info.UpdateOrderStatus(OrderID, statusOrder);
+                        return RedirectToAction("GetListOrder", "Batender");
+                    }
                 }
             }
-            return RedirectToAction("DetailOrder", "Batender", new { OrderID = OrderID });
+            else
+            {
+                if(view == "GetListOrderItemGroupByFoodAndDrink")
+                    return RedirectToAction("GetListOrderItemGroupByFoodAndDrink", "Batender");
+                else
+                    return RedirectToAction("DetailOrder", "Batender", new { OrderID = OrderID });
+            }
+        }
+        /// <summary>
+        /// Xem công thức pha chế
+        /// </summary>
+        /// <param name="FDID"></param>
+        /// <returns></returns>
+        [Route("ReadRecipe")]
+        public ActionResult ReadRecipe(int FDID)
+        {
+            Recipe recipe = info.GetRecipeByFDID(FDID);
+            IEnumerable<RecipeDetail> recipeDetails = info.GetAllRecipeDetailByRecipeID(recipe.RecID);
+            ViewData["recipe"] = recipe;
+            ViewData["recipeDetails"] = recipeDetails;
+            return View();
+        }
+
+        [Route("GetAllFoodAndDrink")]
+        public ActionResult GetAllFoodAndDrink()
+        {
+            IEnumerable<FoodAndDrink> fds = info.GetAllFoodAndDrink();
+            return View(fds);
+        }
+
+        [Route("GetFormAddNewFoodAndDrink")]
+        public ActionResult GetFormAddNewFoodAndDrink()
+        {
+            return View();
+        }
+
+        [Route("CreateFoodAndDrink")]
+        [HttpPost]
+        public ActionResult CreateFoodAndDrink(string Name, string Desc,
+            HttpPostedFileBase ImagePath,string Size, string Type, double UnitPrice, string Currency )
+        {
+            var Image = ImagePath;
+            string fileName = ImagePath.FileName;
+            var path = Path.Combine(Server.MapPath("~/Assets/resource/img/recype"), fileName);
+            string fileNameNoExtension = Path.GetFileNameWithoutExtension(fileName);
+            string extension = Path.GetExtension(fileName);
+            int temp = 1;
+            while (System.IO.File.Exists(path))
+            {
+                fileName = fileNameNoExtension + "Copy(" + temp + ")"  + extension;
+                path = Path.Combine(Server.MapPath("~/Assets/resource/img/recype"), fileName);
+                temp++;
+            }
+            ImagePath.SaveAs(path);
+            string imagePath = "~/Assets/resource/img/recype/" + fileName;
+            bool result = info.InsertFoodAndDrink(Name, Desc, imagePath, Size, Type, UnitPrice, Currency);
+            return RedirectToAction("GetFormAddNewFoodAndDrink", "Batender");
+        }
+
+        [Route("EditFoodAndDrink")]
+        public ActionResult EditFoodAndDrink(int FDID)
+        {
+            FoodAndDrink fd = info.GetFoodAndDrinkByFDID(FDID);
+            return View(fd);
+        }
+
+        [Route("DeleteFoodAndDrink")]
+        public ActionResult DeleteFoodAndDrink(int FDID)
+        {
+            FoodAndDrink fd = info.GetFoodAndDrinkByFDID(FDID);
+            return View(fd);
         }
     }
 }

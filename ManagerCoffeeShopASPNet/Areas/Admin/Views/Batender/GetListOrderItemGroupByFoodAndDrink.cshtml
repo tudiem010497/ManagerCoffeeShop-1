@@ -24,9 +24,16 @@
                             <td>Desc : @orderItem.Desc</td>
                             <td>Thời gian chờ : @DateTime.Now.Subtract(orderItem.Order.OrderDateTime).TotalMinutes</td>
                             <td>Số lượng : @orderItem.Quantity</td>
+                            <td>
+                                @Html.ActionLink("Xong", "UpdateReady", "Batender", new { OrderItemID = orderItem.OrderItemID, OrderID = orderItem.OrderID, view = "GetListOrderItemGroupByFoodAndDrink" , NumOfOrderItem = 0 }, new { @class = "btn btn-success" })
+                                @Html.ActionLink("Hủy", "UpdateCancel", "Batender", new { OrderItemID = orderItem.OrderItemID, OrderID = orderItem.OrderID, view = "GetListOrderItemGroupByFoodAndDrink" , NumOfOrderItem = 0 }, new { @class = "btn btn-danger btnCancel" })
+                            </td>
                         </tr>
                     </table>
                 }
+            </td>
+            <td>
+            @Html.ActionLink("Xem công thức pha chế", "ReadRecipe", "Batender", new { FDID = item.FoodAndDrink.FDID }, new { @class= "btn btn-info btnReadRecipe" })
             </td>
         </tr>
     }

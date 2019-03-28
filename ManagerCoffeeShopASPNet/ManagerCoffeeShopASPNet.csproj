@@ -257,6 +257,7 @@
     <Compile Include="DAO\RecipeDAO.cs" />
     <Compile Include="DAO\RecipeDetailDAO.cs" />
     <Compile Include="DatabaseConnection\DataSQLConnection.cs" />
+    <Compile Include="Enum\EnumFoodAndDrink.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -347,6 +348,11 @@
     <Content Include="Areas\Admin\Views\Service\GetListOrderItemNeedServiceGroupByFoodAnDrink.cshtml" />
     <Content Include="Content\MvcGrid\Fonts\GridGlyphs.woff" />
     <Content Include="Areas\Admin\Views\Batender\GetListOrderItemGroupByFoodAndDrink.cshtml" />
+    <Content Include="Areas\Admin\Views\Batender\ReadRecipe.cshtml" />
+    <Content Include="Areas\Admin\Views\Batender\GetFormAddNewFoodAndDrink.cshtml" />
+    <Content Include="Areas\Admin\Views\Batender\GetAllFoodAndDrink.cshtml" />
+    <Content Include="Areas\Admin\Views\Batender\EditFoodAndDrink.cshtml" />
+    <Content Include="Areas\Admin\Views\Batender\DeleteFoodAndDrink.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -410,7 +416,6 @@
     <Folder Include="Assets\Main\img\" />
     <Folder Include="Assets\Main\scss\" />
     <Folder Include="Assets\Main\vendors\" />
-    <Folder Include="Enum\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

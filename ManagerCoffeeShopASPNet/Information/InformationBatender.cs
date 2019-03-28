@@ -11,10 +11,17 @@ namespace ManagerCoffeeShopASPNet.Information
     {
         private OrderDAO _orderDAO;
         private OrderItemDAO _orderItemDAO;
+        private RecipeDAO _recipeDAO;
+        private RecipeDetailDAO _recipeDetailDAO;
+        private FoodAndDrinkDAO _foodAndDrinkDAO;
         public InformationBatender()
         {
             this._orderDAO = (OrderDAO)new OrderDAOImpl();
             this._orderItemDAO = (OrderItemDAO)new OrderItemDAOImpl();
+            this._recipeDAO = (RecipeDAO)new RecipeDAOImpl();
+            this._recipeDetailDAO = (RecipeDetailDAO)new RecipeDetailDAOImpl();
+            this._foodAndDrinkDAO = (FoodAndDrinkDAO)new FoodAndDrinkDAOImpl();
+
         }
         public IEnumerable<Order> GetAllOrderByStatus(string status)
         {
@@ -39,6 +46,27 @@ namespace ManagerCoffeeShopASPNet.Information
         public IEnumerable<OrderItem> GetAllOrderItemByStatus(string status)
         {
             return this._orderItemDAO.GetAllOrderItemByStatus(status);
+        }
+        public Recipe GetRecipeByFDID(int FDID)
+        {
+            return this._recipeDAO.GetRecipeByFoodDrinkID(FDID);
+        }
+        public IEnumerable<RecipeDetail> GetAllRecipeDetailByRecipeID(int RecipeID)
+        {
+            return this._recipeDetailDAO.GetAllRecipeDetailByRecipeID(RecipeID);
+        }
+        public IEnumerable<FoodAndDrink> GetAllFoodAndDrink()
+        {
+            return this._foodAndDrinkDAO.GetAllFoodAndDrink();
+        }
+        public bool InsertFoodAndDrink(string Name, string Desc,
+            string ImagePath, string Size, string Type, double UnitPrice, string Currency)
+        {
+            return this._foodAndDrinkDAO.InsertFoodAndDrink(Name, Desc, ImagePath, Size, Type, UnitPrice, Currency);
+        }
+        public FoodAndDrink GetFoodAndDrinkByFDID(int FDID)
+        {
+            return this._foodAndDrinkDAO.GetFoodAndDrinkByID(FDID);
         }
     }
 }

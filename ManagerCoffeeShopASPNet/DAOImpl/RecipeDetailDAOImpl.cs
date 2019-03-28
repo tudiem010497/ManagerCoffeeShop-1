@@ -13,7 +13,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         {
             this.context = new CoffeeShopDBDataContext();
         }
-        public IEnumerable<RecipeDetail> GetRecipeDetailByRecipeID(int RecipeID)
+        public IEnumerable<RecipeDetail> GetAllRecipeDetailByRecipeID(int RecipeID)
         {
             IEnumerable<RecipeDetail> recipeDetails = from recipedetail in this.context.RecipeDetails
                                                       where recipedetail.RecID == RecipeID
