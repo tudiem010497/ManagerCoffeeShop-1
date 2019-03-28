@@ -1,12 +1,12 @@
 ﻿@{
     Layout = "~/Areas/Main/Views/Shared/_Layout.cshtml";
 }
-
+@*<script src="~/Assets/Main/js/scriptLogin.js"></script>*@
 <section class="slider_area">
     <div class=slider_inner>
         <div class="rev_slider fullwidthabanner" data-version="5.3.0.2" id="home-slider">
             <ul>
-                
+
                 @foreach (BannerImage item in (IEnumerable<BannerImage>)ViewData["bannerImgs"])
                 {
                     <li data-slotamount="7" data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="600" data-rotate="0" data-saveperformance="off">
@@ -53,10 +53,10 @@
                                  data-splitout="none"
                                  data-responsive_offset="on"
                                  data-elementdelay="0.05">
-                                 @foreach(InfoIndex info in (IEnumerable<InfoIndex>)ViewData["infoIndex"])
-                                 {
-                                     <div>@info.BannerInfo</div>
-                                 }
+                                @foreach (InfoIndex info in (IEnumerable<InfoIndex>)ViewData["infoIndex"])
+                                {
+                                    <div>@info.BannerInfo</div>
+                                }
                             </div>
 
                         </div>
@@ -71,7 +71,7 @@
 <section class="booking_table_area">
     <div class="container">
         <div class="s_white_title">
-            @foreach(InfoIndex info in (IEnumerable<InfoIndex>)ViewData["infoIndex"])
+            @foreach (InfoIndex info in (IEnumerable<InfoIndex>)ViewData["infoIndex"])
             {
                 <h3>@info.BookTile</h3>
                 <p>@info.BookInfo</p>
@@ -107,7 +107,6 @@
 </section>
 <!--================End Booking Table Area =================-->
 <!--================Our feature Area =================-->
-
 <!--================End Our feature Area =================-->
 <!--================End Our feature Area =================-->
 <section class="most_popular_item_area">
@@ -126,8 +125,7 @@
         </div>
         <div class="p_recype_item_main">
             <div class="row p_recype_item_active">
-                
-               
+
                 @foreach (FoodAndDrink item in (IEnumerable<FoodAndDrink>)ViewData["fds"])
                 {
                     <div class="col-md-6 @item.Type">
@@ -135,11 +133,13 @@
                             <div class="media-left">
                                 <img src="@item.ImagePath" alt="">
                             </div>
-                            <div class="media-body">
-                                <a href="#"><h3>@item.Name</h3></a>
-                                <h4>$32</h4>
+                            <div class="media-body " id="@item.FDID">
+                                @*<a href="#"><h3>@item.Name</h3></a>*@
+                                <input type="hidden" id="fdID" value="@item.FDID" />
+                                <h3 id="foodname">@item.Name</h3>
+                                <h4 id="price">@item.UnitPrice</h4>
                                 <p>@item.Desc </p>
-                                <a class="read_mor_btn" href="#">Add To Cart</a>
+                                <button type="submit" class="btn btn-default preAddToCart" style="width:150px">Add To Cart</button>
                                 <ul>
                                     <li><a href="#"><i class="fa fa-star"></i></a></li>
                                     <li><a href="#"><i class="fa fa-star"></i></a></li>
@@ -147,17 +147,29 @@
                                     <li><a href="#"><i class="fa fa-star"></i></a></li>
                                     <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
                                 </ul>
+
                             </div>
                         </div>
+
                     </div>
+
                 }
+                <div id="id04" style="width: 300px; margin:auto; background-color:white; height:300px; padding:20px" class="modal">
+                    <span onclick="document.getElementById('id04').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    <input type="hidden" id="fdId" value="" />
+                    <h4>FoodName: <span id="foodname"></span></h4>
+                    <br />
+                    <label for="quantity">Quantity: <input type="text" name="quantity" id="Quantity" class="quantity" /></label>
+                    <br />
+                    <h4>Price: <span id="price"></span></h4><br />
+                    <button type="submit" class="btn btn-info addToCard">Add</button>
+                </div>
             </div>
         </div>
     </div>
 </section>
 <!--================End Our feature Area =================-->
 <!--================End Our Chefs Area =================-->
-
 <!--================End Our Chefs Area =================-->
 <!--================Recent Blog Area =================-->
 <section class="recent_bloger_area">
@@ -217,15 +229,15 @@
             </div>
         </div>
         @*@{
-            int i = 0;
-        }
-        @foreach (Blog item in (IEnumerable<Blog>)ViewData["blogs"])
-        {
-            if (i % 3 == 0)
-            {
-                
+                int i = 0;
             }
-        }*@
-        
+            @foreach (Blog item in (IEnumerable<Blog>)ViewData["blogs"])
+            {
+                if (i % 3 == 0)
+                {
+
+                }
+            }*@
+
     </div>
 </section>

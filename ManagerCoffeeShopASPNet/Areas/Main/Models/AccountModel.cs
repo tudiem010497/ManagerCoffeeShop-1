@@ -20,5 +20,15 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Models
             context.sp_Account_Login_Check(UserName, Password, ref res);
             return (res ?? false);
         }
+        public int InsertCustomer(string Name, string Email, string Password)
+        {
+            if (Name == null || Email == null || Password == null)
+                return 0;
+            else
+            {
+                context.sp_INSERT_ACCOUNT_CUSTOMER(Name, Email, Password, "Customer");
+                return 1;
+            }
+        }
     }
 }

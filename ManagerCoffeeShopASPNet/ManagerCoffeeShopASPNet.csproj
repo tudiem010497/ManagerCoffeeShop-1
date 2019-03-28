@@ -221,9 +221,11 @@
     <Compile Include="Areas\Admin\Models\OrderItemModel.cs" />
     <Compile Include="Areas\Admin\Models\OrderModel.cs" />
     <Compile Include="Areas\Admin\Models\OrderObject.cs" />
+    <Compile Include="Areas\Main\Controllers\CartController.cs" />
     <Compile Include="Areas\Main\Controllers\HomeController.cs" />
     <Compile Include="Areas\Main\MainAreaRegistration.cs" />
     <Compile Include="Areas\Main\Models\AccountModel.cs" />
+    <Compile Include="Areas\Main\Models\Cart.cs" />
     <Compile Include="Areas\Main\Models\LoginModel.cs" />
     <Compile Include="CoffeeShopDB.designer.cs">
       <AutoGen>True</AutoGen>
@@ -309,6 +311,7 @@
     <Content Include="Assets\Admin\js\sb-admin.min.js" />
     <Content Include="Assets\Admin\js\service.js" />
     <Content Include="Assets\Main\css\styleLogin.css" />
+    <Content Include="Assets\Main\css\styleSignUp.css" />
     <Content Include="Assets\resource\img\recype-1.jpg" />
     <Content Include="Assets\resource\img\recype\recype-1.jpg" />
     <Content Include="Content\bootstrap.css" />
@@ -353,6 +356,7 @@
     <Content Include="Areas\Admin\Views\Batender\GetAllFoodAndDrink.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\EditFoodAndDrink.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\DeleteFoodAndDrink.cshtml" />
+    <Content Include="Areas\Main\Views\Cart\Cart.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

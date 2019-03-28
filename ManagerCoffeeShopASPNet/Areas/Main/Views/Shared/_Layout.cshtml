@@ -37,16 +37,20 @@
         <link href="vendors/owl-carousel/assets/owl.carousel.css" rel="stylesheet">*@
     <link href="~/Assets/Main/vendors/bootstrap-selector/bootstrap-select.css" rel="stylesheet">
     <link href="~/Assets/Main/vendors/bootatrap-date-time/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <link href="~/Assets/Main/vendors/owl-carousel/assets/owl.carousel.css" rel="stylesheet">*
+    <link href="~/Assets/Main/vendors/owl-carousel/assets/owl.carousel.css" rel="stylesheet">
+
+    <script src="~/Assets/Main/js/jquery-2.1.4.min.js"></script>
+    <script src="~/Assets/Main/js/bootstrap.min.js"></script>
 
     @*<link href="css/style.css" rel="stylesheet">
         <link href="css/responsive.css" rel="stylesheet">*@
     <link href="~/Assets/Main/css/style.css" rel="stylesheet">
     <link href="~/Assets/Main/css/responsive.css" rel="stylesheet">
-    <link href="~/Assets/Main/css/styleLogin.css" rel="stylesheet"/>
+    <link href="~/Assets/Main/css/styleLogin.css" rel="stylesheet" />
+    <link href="~/Assets/Main/css/styleSignUp.css" rel="stylesheet" />
 
     <script src="~/Assets/Main/js/scriptLogin.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -108,7 +112,9 @@
                     <a class="navbar-brand" href="#"><img src="~/Assets/resource/img/logo-1.png" alt=""></a>
                 </div>
 
+
                 <!-- Collect the nav links, forms, and other content for toggling -->
+
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         @*<li class="active"><a href="index.html">Home</a></li>
@@ -146,61 +152,143 @@
                         {
                             <li><a href="@item.MenuHref">@item.MenuName</a></li>
                         }
+
+                        @*Login*@
                         <li>
-                            @*<script>
-                               function prelogin() {
-                                    console.log('test')
-                                    document.getElementById('id01').style.display='block'
-                               }
-                               function login() {
-                                   let username = $('#username').val()
-                                   let password = $('#password').val()
-                                   console.log(username)
-                                   console.log(password)
-
-                               }
-                            </script>*@
-                            <a  onclick="prelogin()">Login</a>
-
-                            <div id="id01" class="modal">
+                            <a onclick="prelogin()">Login</a>
+                            <div id="id01" class="modal" style="width: 750px; margin: auto;">
 
                                 @*<form class="modal-content animate">*@
                                 @using (Html.BeginForm())
                                 {
                                     <div class="imgcontainer">
-                                        <h2>LOGIN</h2>
+                                        <h2 style="color:gold; font-size:50px">LOGIN</h2>
                                     </div>
                                     @Html.AntiForgeryToken()
-                                    @Html.ValidationSummary(true, null, new { @class = "alert alert-danger"})
-                                    <div class="container">
-                                        <label for="username"><b>Username</b></label>
+                                    <div class="container" style="width:auto">
+                                        <label for="username" style="color:white"><b>Username</b></label>
                                         @*<input type="text" placeholder="Enter Username" name="username" id="username" required>*@
-                                        @Html.TextBoxFor(m => m.UserName, new { placeholder = "Enter Username" })
+                                        @Html.TextBoxFor(m => m.UserName, new { placeholder = "Enter Username", id = "username", required = "required" })
+                                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
 
-                                        <label for="password"><b>Password</b></label>
+                                        <label for="password" style="color:white"><b>Password</b></label>
                                         @*<input type="password" placeholder="Enter Password" name="password" id="password" required>*@
-                                        @Html.PasswordFor(m => m.Password, new { placeholder = "Enter Password" })
+                                        @Html.PasswordFor(m => m.Password, new { placeholder = "Enter Password", id = "password", required = "required" })
+                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
 
-                                        <label>
+                                        <label style="color:white">
                                             <input type="checkbox" checked="checked" name="remember"> Remember me
                                         </label>
+
                                         @*<button type="button" onclick="login()">Login</button>*@
-                                        <button type="submit">Login</button>
+                                        <button type="submit" onclick="login()">Login</button>
 
                                     </div>
 
                                     <div class="container-footer" style="background-color:#f1f1f1">
-                                        <p class="password">Not a member? <a id="a-password" href="#">Register</a></p>
-                                        <p class="password">Forgot <a id="a-password" href="#">Password</a>?</p>
+
+                                        <span class="password" style="float:right">Forgot <a id="a-password" href="#">Password</a>?</span>
                                         <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
                                     </div>
                                 }
-                                    
+
                                 @*</form>*@
                             </div>
                         </li>
-                        <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+
+                        @*SignIn*@
+                        <li>
+                            @*<a onclick="preRegister()">Register</a>*@
+                            <a onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign Up</a>
+
+                            <div id="id02" class="modal" style="width: 750px; margin: auto;">
+                                <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+                                @*<form class="modal-content">*@
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="container" style="width: 750px; margin: auto;">
+                                        <h1 style="color: gold;font-size: 36px;margin: 0px;text-align:center">Sign Up</h1>
+                                        <p style="color:white">Please fill in this form to create an account.</p>
+                                        <hr>
+                                        <label for="name" style="color:white"><b>Name</b></label>
+                                        @*<input type="text" placeholder="Enter Your Name" name="name" required>*@
+                                        @Html.TextBoxFor(m => m.Name, new { placeholder = "Enter Your Name", required = "required" })
+                                        @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
+
+                                        <label for="email" style="color:white"><b>Email</b></label>
+                                        @*<input type="text" placeholder="Enter Your Email" name="email" required>*@
+                                        @Html.TextBoxFor(m => m.Email, new { placeholder = "Enter Your Email", required = "required" })
+                                        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+
+                                        <label for="psw" style="color:white"><b>Password</b></label>
+                                        @*<input type="password" placeholder="Enter Your Password" name="psw" required>*@
+                                        @Html.PasswordFor(m => m.Password, new { placeholder = "Enter Your Password", required = "required", id = "psw" })
+                                        @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
+
+                                        <label style="color:white">
+                                            <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+                                        </label>
+                                        <br />
+                                        <span id="rule" style="color:white">By creating an account you agree to our <a id="a-rule" href="#" style="color:dodgerblue; text-decoration:none">Terms & Privacy</a>.</span>
+                                        <br />
+                                        <div class="clearfix" style="padding: 10px;">
+                                            <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn-signup">Cancel</button>
+                                            <button type="submit" class="signupbtn" onclick="signUp()">Sign Up</button>
+                                        </div>
+                                    </div>
+                                }
+                                @*</form>*@
+                            </div>
+
+                        </li>
+                        @*<li><a href="#" style="float:right; text-decoration:none">Logout</a></li>*@
+
+                        @*Cart*@
+                        <li>
+                            <a href="@Url.Action("Cart", "Cart")" id="ahihi"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                            @*<div id="id03" class="modal" style="width: 500px; margin-left: auto; margin-right:30px; margin-top:20px; background-color:white; height:300px">
+                                    <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>
+                                    @if (Model == null)
+                                    {
+                                        <p>
+                                            Giỏ hàng của bạn rỗng!!!
+                                            Hãy bắt đầu đi mua sắm  ^-^
+                                        </p>
+                                    }
+                                    else
+                                    {
+
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Food Name</th>
+                                                    <th>Quantity</th>
+                                                    <th>Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                    //lấy thông tin đặt hàng lưu vào bảng cart
+                                                    //sau đó lấy thông tin từ bảng cart hiển thị ra giỏ hàng
+
+                                            </tbody>
+                                        </table>
+                                    }
+                                </div>*@
+                        </li>
+                        <div id="resultLogin">
+                            @*<div>*@
+                            @*<span id="demo" style="float:right">@ViewData["warning"]</span>*@
+                            <span style="float:right;">@ViewData["error"]</span>
+                            <span style="float:right">@ViewData["SignUpOK"]</span>
+                            <span style="float:right">@ViewData["success"] </span>
+                            @*</div>*@
+
+                        </div>
+
                     </ul>
+
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
