@@ -9,5 +9,6 @@ namespace ManagerCoffeeShopASPNet.DAO
     interface RecipeDAO
     {
         Recipe GetRecipeByFoodDrinkID(int FoodAndDrinkID);
+        bool InsertRecipe(int FDID);
     }
 }

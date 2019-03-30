@@ -210,5 +210,13 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             }
             return View(listGroup.list);
         }
+
+        [Route("GetAllOrderItem")]
+        public ActionResult GetAllOrderItem()
+        {
+            IEnumerable<OrderItem> orderItems = info.GetAllOrderItem();
+            List<OrderItem> list = orderItems.ToList();
+            return View(orderItems);
+        }
     }
 }

@@ -9,7 +9,7 @@
     <script type="text/javascript" src="~/Assets/Admin/js/jquery.min.js"></script>
     <script type="text/javascript" src="~/Assets/Admin/js/bootstrap.min.js"></script>
 
-
+    <link href="~/Content/MvcGrid/mvc-grid.css" rel="stylesheet"/>
     <link href="~/Assets/Admin/css/style.css" rel="stylesheet" />
     <link href="~/Assets/Admin/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/Assets/Admin/css/styleService.css" rel="stylesheet">
@@ -125,6 +125,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href=@Url.Action("GetAllOrderItem", "Service")>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Xem tất cả đơn hàng</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href=@Url.Action("GetListOrder", "Batender")>
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Danh sách pha chế theo hóa đơn</span>
@@ -199,7 +205,13 @@
             </div>
         </div>
     </div>
-
+    <script src="~/Scripts/MvcGrid/mvc-grid.js"></script>
+    <script>
+        [].forEach.call(document.getElementsByClassName('mvc-grid'), function (element) {
+            new MvcGrid(element);
+        });
+    </script>
+    
     <!-- Bootstrap core JavaScript-->
     <script src="/Assets/Admin/vendor/jquery/jquery.min.js"></script>
     <script src="/Assets/Admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -50,7 +50,41 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             catch (Exception ex)
             {
                 throw new Exception("Error Insert FoodAndDrink " + ex.Message);
-                return false;
+            }
+        }
+        public bool DeleteFoodAndDrinkByFDID(int FDID)
+        {
+            try
+            {
+                FoodAndDrink fd = GetFoodAndDrinkByID(FDID);
+                context.FoodAndDrinks.DeleteOnSubmit(fd);
+                context.SubmitChanges();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error DeleteFoodAndDrinkByFDID" + ex.Message);
+            }
+        }
+        public bool EditFoodAndDrink(FoodAndDrink foodAndDrink)
+        {
+            try
+            {
+                FoodAndDrink fd = context.FoodAndDrinks.FirstOrDefault(f => f.FDID == foodAndDrink.FDID);
+                fd.Name = foodAndDrink.Name;
+                fd.Desc = foodAndDrink.Desc;
+                fd.ImagePath = foodAndDrink.ImagePath;
+                fd.Size = foodAndDrink.Size;
+                fd.Type = foodAndDrink.Type;
+                fd.UnitPrice = foodAndDrink.UnitPrice;
+                fd.Currency = foodAndDrink.Currency;
+                context.SubmitChanges();
+               
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error EditFoodAndDrink" + ex.Message);
             }
         }
     }

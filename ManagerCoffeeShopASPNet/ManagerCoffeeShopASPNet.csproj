@@ -357,6 +357,9 @@
     <Content Include="Areas\Admin\Views\Batender\EditFoodAndDrink.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\DeleteFoodAndDrink.cshtml" />
     <Content Include="Areas\Main\Views\Cart\Cart.cshtml" />
+    <Content Include="Areas\Admin\Views\Batender\CreateRecipeDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Batender\ShowAllRecipeDetailByRecipeID.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\GetAllOrderItem.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -408,6 +411,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\MvcGrid\_Pager.cshtml" />
     <Content Include="Views\Shared\MvcGrid\_Grid.cshtml" />
+    <Content Include="Views\Shared\_Grid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

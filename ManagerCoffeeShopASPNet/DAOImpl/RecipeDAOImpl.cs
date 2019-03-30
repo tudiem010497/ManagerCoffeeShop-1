@@ -13,10 +13,36 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         {
             this.context = new CoffeeShopDBDataContext();
         }
+        public int GetLastRecipeID()
+        {
+            int id = (from recipe in context.Recipes
+                      orderby recipe.RecID descending
+                      select recipe).FirstOrDefault().RecID;
+            return id;
+        }
         public Recipe GetRecipeByFoodDrinkID(int FoodAndDrinkID)
         {
             Recipe rec = this.context.Recipes.FirstOrDefault(o => o.FDID == FoodAndDrinkID);
             return rec;
         }
+        public bool InsertRecipe(int FDID)
+        {
+            try
+            {
+                int RecipeID = GetLastRecipeID() + 1;
+                Recipe recipe = new Recipe();
+                recipe.RecID = RecipeID;
+                recipe.FDID = FDID;
+                context.Recipes.InsertOnSubmit(recipe);
+                context.SubmitChanges();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error InsertRecipe" + ex.Message);
+            }
+            
+        }
+       
     }
 }

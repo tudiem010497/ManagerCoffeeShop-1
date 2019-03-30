@@ -74,8 +74,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            @Html.ActionLink("Xóa", "DeleteFoodAndDrink","Batender", new { FDID = Model.FDID})
-            @Html.ActionLink("Trở về", "GetAllFoodAndDrink", "Batender", new { @class ="btn btnprimary" })
+            @Html.ActionLink("Xóa", "DoDeleteFoodAndDrink","Batender", new { FDID = Model.FDID}, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Trở về", "GetAllFoodAndDrink", "Batender", new { @class ="btn btn-primary" })
         </div>
     }
 </div>

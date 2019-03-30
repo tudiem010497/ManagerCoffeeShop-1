@@ -17,5 +17,6 @@ namespace ManagerCoffeeShopASPNet.DAO
         IEnumerable<OrderItem> GetAllOrderItemByOrderIDAndNeedService(int OrderID);
         IEnumerable<OrderItem> GetAllOrderItemNeedService();
         IEnumerable<OrderItem> GetAllOrderItemByStatus(string status);
+        IEnumerable<OrderItem> GetAllOrderItem();
     }
 }

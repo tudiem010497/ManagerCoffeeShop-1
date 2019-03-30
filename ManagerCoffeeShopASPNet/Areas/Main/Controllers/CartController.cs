@@ -73,15 +73,6 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
             carts.Clear();
             return RedirectToAction("Cart");
         }
-        //public ActionResult Paid()
-        //{
-        //    List<Cart> carts = Session["cart"] as List<Cart>;
-        //    for (var i = 0; i< carts.Count; i++)
-        //    {
-        //        Cart total = carts.FirstOrDefault();
-        //    }
-
-        //    return RedirectToAction("Cart");
-        //}
+        
     }
 }

@@ -83,5 +83,9 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._orderItemDAO.GetAllOrderItemNeedService();
         }
+        public IEnumerable<OrderItem> GetAllOrderItem()
+        {
+            return this._orderItemDAO.GetAllOrderItem();
+        }
     }
 }

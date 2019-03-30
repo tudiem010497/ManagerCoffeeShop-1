@@ -12,16 +12,27 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (RecipeDetail item in (IEnumerable<RecipeDetail>)ViewData["recipeDetails"])
-        {
-            <tr>
-                <td> Bước @item.Step </td> 
-                <td>
-                    @item.Amount @item.Ingredient.Name @item.Unit<br />
-                </td>
-                <td>Lưu ý : @item.Desc</td>
-            </tr>
+        <tr>@ViewData["message"]</tr>
+        @{
+            if (ViewData["recipe"] != null && ((IEnumerable<RecipeDetail>) ViewData["recipeDetails"]).Count<RecipeDetail>() !=0)
+            {
+                foreach (RecipeDetail item in (IEnumerable<RecipeDetail>)ViewData["recipeDetails"])
+                {
+                    <tr>
+                        <td> Bước @item.Step </td>
+                        <td>
+                            @item.Amount @item.Ingredient.Name @item.Unit<br />
+                        </td>
+                        <td>Lưu ý : @item.Desc</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                @Html.ActionLink("Thêm công thức","CreateRecipe", "Batender", new { FDID = ViewData["FDID"] }, new { @class="btn btn-primary" });
+            }
         }
+        
     </tbody>
 </table>
 

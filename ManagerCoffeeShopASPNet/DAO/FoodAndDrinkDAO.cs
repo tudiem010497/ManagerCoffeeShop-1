@@ -13,5 +13,7 @@ namespace ManagerCoffeeShopASPNet.DAO
         FoodAndDrink GetFoodAndDrinkByID(int id);
         bool InsertFoodAndDrink(string Name, string Desc,
             string ImagePath, string Size, string Type, double UnitPrice, string Currency);
+        bool DeleteFoodAndDrinkByFDID(int FDID);
+        bool EditFoodAndDrink(FoodAndDrink foodAndDrink);
     }
 }

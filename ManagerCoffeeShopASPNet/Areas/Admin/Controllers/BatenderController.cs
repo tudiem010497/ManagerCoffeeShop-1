@@ -154,9 +154,27 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult ReadRecipe(int FDID)
         {
             Recipe recipe = info.GetRecipeByFDID(FDID);
-            IEnumerable<RecipeDetail> recipeDetails = info.GetAllRecipeDetailByRecipeID(recipe.RecID);
-            ViewData["recipe"] = recipe;
-            ViewData["recipeDetails"] = recipeDetails;
+            if (recipe != null)
+            {
+                try
+                {
+                    IEnumerable<RecipeDetail> recipeDetails = info.GetAllRecipeDetailByRecipeID(recipe.RecID);
+                    int count = recipeDetails.Count<RecipeDetail>();
+                    ViewData["recipe"] = recipe;
+                    ViewData["recipeDetails"] = recipeDetails;
+                }
+                catch(Exception ex)
+                {
+                    ViewData["message"] = "Chưa có công thức pha chế cho loại đồ uống này";
+                    ViewData["FDID"] = FDID;
+                }
+                
+            }
+            else
+            {
+                ViewData["message"] = "Chưa có công thức pha chế cho loại đồ uống này";
+                ViewData["FDID"] = FDID;
+            }
             return View();
         }
 
@@ -202,12 +220,90 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             FoodAndDrink fd = info.GetFoodAndDrinkByFDID(FDID);
             return View(fd);
         }
-
+        
         [Route("DeleteFoodAndDrink")]
         public ActionResult DeleteFoodAndDrink(int FDID)
         {
             FoodAndDrink fd = info.GetFoodAndDrinkByFDID(FDID);
             return View(fd);
+        }
+        
+        
+        [Route("DoDeleteFoodAndDrink")]
+        public ActionResult DoDeleteFoodAndDrink(int FDID)
+        {
+            info.DeleteFoodAndDrinkByFDID(FDID);
+            return RedirectToAction("GetAllFoodAndDrink", "Batender");
+        }
+
+        
+        [Route("DoEditFoodAndDrink")]
+        public ActionResult DoEditFoodAndDrink(int FDID,string Name, string Desc,
+            HttpPostedFileBase ImagePath, string Size, string Type, double UnitPrice, string Currency)
+        {
+            var Image = ImagePath;
+            string fileName = ImagePath.FileName;
+            var path = Path.Combine(Server.MapPath("~/Assets/resource/img/recype"), fileName);
+            string fileNameNoExtension = Path.GetFileNameWithoutExtension(fileName);
+            string extension = Path.GetExtension(fileName);
+            int temp = 1;
+            while (System.IO.File.Exists(path))
+            {
+                fileName = fileNameNoExtension + "Copy(" + temp + ")" + extension;
+                path = Path.Combine(Server.MapPath("~/Assets/resource/img/recype"), fileName);
+                temp++;
+            }
+            ImagePath.SaveAs(path);
+            string imagePath = "~/Assets/resource/img/recype/" + fileName;
+            FoodAndDrink fd = new FoodAndDrink();
+            fd.FDID = FDID;
+            fd.Name = Name;
+            fd.Desc = Desc;
+            fd.ImagePath = imagePath;
+            fd.Size = Size;
+            fd.Type = Type;
+            fd.UnitPrice = UnitPrice;
+            fd.Currency = Currency;
+            bool result = info.EditFoodAndDrink(fd);
+            return RedirectToAction("GetAllFoodAndDrink", "Batender");
+        }
+
+        [Route("CreateRecipe")]
+        public ActionResult CreateRecipe(int FDID)
+        {
+            bool result = info.InsertRecipe(FDID);
+            Recipe recipe = info.GetRecipeByFDID(FDID);
+            return RedirectToAction("ShowAllRecipeDetailByRecipeID", "Batender", new { RecipeID = recipe.RecID});
+        }
+
+        [Route("ShowAllRecipeDetailByRecipeID")] // show sau khi thêm
+        public ActionResult ShowAllRecipeDetailByRecipeID(int RecipeID)
+        {
+            try
+            {
+                IEnumerable<RecipeDetail> recipeDetails = info.GetAllRecipeDetailByRecipeID(RecipeID);
+                int count = recipeDetails.Count<RecipeDetail>();
+                return View(recipeDetails);
+            }
+            catch(Exception ex)
+            {
+                ViewData["RecipeID"] = RecipeID;
+                return View();
+            }
+        }
+
+        [Route("CreateRecipeDetail")]
+        public ActionResult CreateRecipeDetail(int RecipeID)
+        {
+            ViewData["RecipeID"] = RecipeID;
+            return View();
+        }
+
+        [Route("DoCreateRecipeDetail")]
+        public ActionResult DoCreateRecipeDetail()
+        {
+            
+            return RedirectToAction("ShowAllRecipeDetailByRecipeID", "Batender");
         }
     }
 }

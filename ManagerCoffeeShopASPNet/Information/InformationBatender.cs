@@ -68,5 +68,17 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._foodAndDrinkDAO.GetFoodAndDrinkByID(FDID);
         }
+        public bool DeleteFoodAndDrinkByFDID(int FDID)
+        {
+            return this._foodAndDrinkDAO.DeleteFoodAndDrinkByFDID(FDID);
+        }
+        public bool EditFoodAndDrink(FoodAndDrink foodAndDrink)
+        {
+            return this._foodAndDrinkDAO.EditFoodAndDrink(foodAndDrink);
+        }
+        public bool InsertRecipe(int FDID)
+        {
+            return this._recipeDAO.InsertRecipe(FDID);
+        }
     }
 }
