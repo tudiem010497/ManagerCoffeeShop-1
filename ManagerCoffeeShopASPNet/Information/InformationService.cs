@@ -87,5 +87,9 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._orderItemDAO.GetAllOrderItem();
         }
+        public IEnumerable<Order> GetAllOrder()
+        {
+            return this._orderDAO.GetAllOrder();
+        }
     }
 }

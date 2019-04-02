@@ -1,13 +1,14 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.OrderItem>
+@using NonFactors.Mvc.Grid;
 
 @{
     ViewBag.Title = "GetDetailOrder";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>GetDetailOrder</h2>
+<h2>DetailOrder</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
@@ -53,4 +54,24 @@
     </tr>
 }
 
-</table>
+</table>*@
+@(Html
+        .Grid(Model).Build(columns =>
+        {
+            columns.Add(o => o.OrderID).Titled("OrderID").Sortable(false);
+            columns.Add(o => o.Order.Customer.Name).Titled("Tên khách hàng").Sortable(false);
+            columns.Add(o => o.Order.PosID).Titled("Vị trí").Sortable(false);
+            columns.Add(o => o.Order.OrderDateTime).Titled("Thời gian vào");
+            columns.Add(o => o.FoodAndDrink.Name).Titled("Name").Sortable(false);
+            columns.Add(o => o.Quantity).Titled("Quantity").Sortable(false);
+            columns.Add(o => o.Desc).Titled("Desc").Sortable(false);
+            columns.Add(o => o.Status).Titled("Status").Sortable(false);
+            columns.Add(o => o.OrderItemID).Encoded(false).RenderedAs(o => (
+                Html.ActionLink("Đã phục vụ", "UpdateOrderItemClosed", "Service", new { OrderItemID = o.OrderItemID, OrderID = o.OrderID, View = "DetailOrder" }, new { @class = "btn btn-primary btnDetailOrder" })
+            )).Filterable(false);
+        })
+        .WithFilterMode(GridFilterMode.FilterRow)
+        .Empty("Data is empty")
+        .Filterable()
+        .Sortable()
+)

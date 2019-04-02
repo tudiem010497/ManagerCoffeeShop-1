@@ -77,6 +77,12 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                                         select order;
             return orders;
         }
+        public IEnumerable<Order> GetAllOrder()
+        {
+            IEnumerable<Order> orders = from order in context.Orders
+                                        select order;
+            return orders;
+        }
         
     }
 }

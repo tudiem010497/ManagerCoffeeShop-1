@@ -544,6 +544,14 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
+		public System.Data.Linq.Table<Order1> Order1s
+		{
+			get
+			{
+				return this.GetTable<Order1>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Account_Login_Check")]
 		public int sp_Account_Login_Check([global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserName", DbType="VarChar(30)")] string userName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Password", DbType="VarChar(20)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] ref System.Nullable<bool> res)
 		{
@@ -8902,6 +8910,87 @@ namespace ManagerCoffeeShopASPNet
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Order1")]
+	public partial class Order1
+	{
+		
+		private System.Nullable<int> _PosID;
+		
+		private System.DateTime _OrderDateTime;
+		
+		private double _TotalAmount;
+		
+		private System.Nullable<double> _DiscountMoney;
+		
+		public Order1()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PosID", DbType="Int")]
+		public System.Nullable<int> PosID
+		{
+			get
+			{
+				return this._PosID;
+			}
+			set
+			{
+				if ((this._PosID != value))
+				{
+					this._PosID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderDateTime", DbType="DateTime NOT NULL")]
+		public System.DateTime OrderDateTime
+		{
+			get
+			{
+				return this._OrderDateTime;
+			}
+			set
+			{
+				if ((this._OrderDateTime != value))
+				{
+					this._OrderDateTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalAmount", DbType="Float NOT NULL")]
+		public double TotalAmount
+		{
+			get
+			{
+				return this._TotalAmount;
+			}
+			set
+			{
+				if ((this._TotalAmount != value))
+				{
+					this._TotalAmount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DiscountMoney", DbType="Float")]
+		public System.Nullable<double> DiscountMoney
+		{
+			get
+			{
+				return this._DiscountMoney;
+			}
+			set
+			{
+				if ((this._DiscountMoney != value))
+				{
+					this._DiscountMoney = value;
+				}
 			}
 		}
 	}

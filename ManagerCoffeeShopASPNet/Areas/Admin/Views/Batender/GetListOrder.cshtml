@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.Order>
+@using NonFactors.Mvc.Grid;
 
 @{
     ViewBag.Title = "GetListOrder";
@@ -7,90 +8,25 @@
 
 <h2>GetListOrder</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <div class="container">
-    <div class="row">
-        <table class="table table-striped">
-                <tr>
-                    <th>
-                        @Html.DisplayName("STT")
-                    </th>
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.CustomerID)
-                    </th>*@
-                    <th>
-                        @Html.DisplayNameFor(model => model.PosID)
-                    </th>
-                    <th>
-                        @*@Html.DisplayNameFor(model => model.OrderDateTime)*@
-                        @Html.DisplayName("Thời gian chờ (ph)")
-                    </th>
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.PaidDateTime)
-                    </th>*@
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.DiscountMoney)
-                    </th>*@
-                    <th>
-                        @Html.DisplayNameFor(model => model.TotalAmount)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Currency)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Desc)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Status)
-                    </th>
-                    <th>
-                        @Html.DisplayName("Thao tác")
-                    </th>
-                </tr>
-                
-                @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i }))
-                {
-                    <tr>
-                        <td>
-                            @item.Index
-                        </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.CustomerID)
-                        </td>*@
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Data.PosID)
-                        </td>
-                        <td>
-                            @*@Html.DisplayFor(modelItem => item.Data.OrderDateTime)*@
-                            @Html.DisplayFor(modelItem => (DateTime.Now.Subtract(item.Data.OrderDateTime).TotalMinutes))
-                        </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.PaidDateTime)
-                        </td>*@
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.Data.DiscountMoney)
-                        </td>*@
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Data.TotalAmount)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Data.Currency)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Data.Desc)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Data.Status)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Xem Chi tiết", "DetailOrder", "Batender", new { OrderID = item.Data.OrderID }, new{ @class = "btn btn-primary btnDetailOrder"})
-                        </td>
-                    </tr>
-                }
+    @(Html
+        .Grid(Model).Build(columns =>
+        {
+            columns.Add(o => o.PosID).Titled("Vị trí");
+            columns.Add(o => o.Customer.Name).Titled("Tên khách hàng");
+            columns.Add(o => o.OrderDateTime).Titled("Thời gian vào");
+            columns.Add(o => o.Desc).Titled("Desc");
+            columns.Add(o => o.Status).Titled("Status").Sortable(false);
+            columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o => (
+            Html.ActionLink("Xem Chi tiết", "DetailOrder", "Batender", new { OrderID = o.OrderID }, new { @class = "btn btn-primary btnDetailOrder" })
+            )).Filterable(false);
+        })
+        .WithFilterMode(GridFilterMode.FilterRow)
+        .Empty("Data is empty")
+        .Filterable()
+        .Sortable()
+    )
 
-            </table>
-    </div>
+
 </div>
 

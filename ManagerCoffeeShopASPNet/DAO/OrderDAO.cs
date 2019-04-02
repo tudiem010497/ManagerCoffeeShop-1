@@ -14,5 +14,6 @@ namespace ManagerCoffeeShopASPNet.DAO
         IEnumerable<Order> GetAllOrderByStatus(string Status);
         bool UpdateOrderStatus(int OrderID, string Status);
         IEnumerable<Order> GetAllOrderPendingOrReady();
+        IEnumerable<Order> GetAllOrder();
     }
 }

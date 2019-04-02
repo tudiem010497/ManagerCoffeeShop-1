@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.OrderItem>
+@using NonFactors.Mvc.Grid;
 
 @{
     ViewBag.Title = "DetailOrder";
@@ -7,14 +8,14 @@
 
 <h2>DetailOrder</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table table-striped">
     <tr>
-        @*<th>
+        <th>
             @Html.DisplayNameFor(model => model.OrderID)
-        </th>*@
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.FDID)
         </th>
@@ -32,9 +33,9 @@
 
 @foreach (var item in Model) {
     <tr>
-        @*<td>
+        <td>
             @Html.DisplayFor(modelItem => item.OrderID)
-        </td>*@
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.FDID)
         </td>
@@ -54,4 +55,26 @@
         </td>
     </tr>
 }
-</table>
+</table>*@
+@(Html
+        .Grid(Model).Build(columns =>
+        {
+            columns.Add(o => o.OrderID).Titled("OrderID").Sortable(false);
+            columns.Add(o => o.Order.Customer.Name).Titled("Tên khách hàng").Sortable(false);
+            columns.Add(o => o.Order.PosID).Titled("Vị trí").Sortable(false);
+            columns.Add(o => o.Order.OrderDateTime).Titled("Thời gian vào");
+            columns.Add(o => o.FoodAndDrink.Name).Titled("Name").Sortable(false);
+            columns.Add(o => o.Quantity).Titled("Quantity").Sortable(false);
+            columns.Add(o => o.Desc).Titled("Desc").Sortable(false);
+            columns.Add(o => o.Status).Titled("Status").Sortable(false);
+            columns.Add(o => o.OrderItemID).Encoded(false).RenderedAs(o => (
+                Html.ActionLink("Xong", "UpdateReady", "Batender", new { OrderItemID = o.OrderItemID, OrderID = o.OrderID, NumOfOrderItem = Model.Count(), view = "DetailOrder" }, new { @class = "btn btn-success" }).ToHtmlString()
+                + Html.ActionLink("Xem công thức pha chế", "ReadRecipe", "Batender", new { FDID = o.FDID }, new { @class = "btn btn-info btnReadRecipe" }).ToHtmlString()
+                + Html.ActionLink("Hủy", "UpdateCancel", "Batender", new { OrderItemID = o.OrderItemID, OrderID = o.OrderID, NumOfOrderItem = Model.Count(), view = "DetailOrder" }, new { @class = "btn btn-danger btnCancel" })
+            )).Filterable(false);
+        })
+        .WithFilterMode(GridFilterMode.FilterRow)
+        .Empty("Data is empty")
+        .Filterable()
+        .Sortable()
+)

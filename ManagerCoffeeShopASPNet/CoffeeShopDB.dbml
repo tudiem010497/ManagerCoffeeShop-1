@@ -572,6 +572,14 @@
       <Association Name="Account_RoleMap" Member="RoleMaps" ThisKey="UserID" OtherKey="UserID" Type="RoleMap" />
     </Type>
   </Table>
+  <Table Name="dbo.Order1" Member="Order1s">
+    <Type Name="Order1">
+      <Column Name="PosID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OrderDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TotalAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="DiscountMoney" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.sp_Account_Login_Check" Method="sp_Account_Login_Check">
     <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="VarChar(30)" />
     <Parameter Name="Password" Parameter="password" Type="System.String" DbType="VarChar(20)" />
