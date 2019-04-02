@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ManagerCoffeeShopASPNet.RecipeDetail>
+
+@{
+    ViewBag.Title = "ShowAllRecipeDetailByRecipeID";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>ShowAllRecipeDetailByRecipeID</h2>
+
+<p>
+    @Html.ActionLink("Thêm bước", "CreateRecipeDetail", "Batender", new { RecipeID = ViewData["RecipeID"] }, new { @class="btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RecID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Step)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IngreID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Desc)
+        </th>
+        <th></th>
+    </tr>
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Step)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IngreID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Desc)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RecipeDetailID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RecipeDetailID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RecipeDetailID })
+            </td>
+        </tr>
+    }
+}
+
+
+</table>
