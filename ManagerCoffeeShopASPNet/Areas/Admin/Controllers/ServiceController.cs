@@ -1,3 +1,22 @@
+﻿using CrystalDecisions.CrystalReports.Engine;
+using ManagerCoffeeShopASPNet.Areas.Admin.Models;
+using ManagerCoffeeShopASPNet.Information;
+using ManagerCoffeeShopASPNet.Reporting;
+using ManagerCoffeeShopASPNet.Reporting.OrderItemGroupByOrderDataSetTableAdapters;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Data;
+using System.Data.Entity.Infrastructure;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using ManagerCoffeeShopASPNet.Areas.Admin.Models;
+using ManagerCoffeeShopASPNet.Information;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Data.Entity.Infrastructure;
 ﻿//using CrystalDecisions.CrystalReports.Engine;
 using ManagerCoffeeShopASPNet.Areas.Admin.Models;
 using ManagerCoffeeShopASPNet.Information;
@@ -6,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -34,9 +54,22 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         /// <returns></returns>
         [Route("ServiceEmployee")]
         [HttpGet]
-        public ActionResult ServiceEmployee()
+        public ActionResult ServiceEmployee(string SearchString)
         {
             IEnumerable<FoodAndDrink> fds = info.GetFoodAndDrink();
+            List<FoodAndDrink> list = fds.ToList();
+            List<FoodAndDrink> temp = new List<FoodAndDrink>();
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                for(int i = 0; i< list.Count; i++)
+                {
+                    if (list[i].Name.ToLower().Contains(SearchString.ToLower()))
+                    {
+                        temp.Add(list[i]);
+                    }
+                }
+                fds = (IEnumerable<FoodAndDrink>)temp;
+            }
             IEnumerable<Position> positions = info.GetAllPosition();
             ViewData["positions"] = positions;
             ViewData["fds"] = fds;
@@ -221,30 +254,59 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             return View(orderItems);
         }
         
-        //[Route("PrintReport")]
-        //public ActionResult PrintReport()
-        //{
-        //    //IEnumerable<Order> orders = info.GetAllOrder();
-        //    //List<Order> list = orders.ToList();
-        //    //foreach(Order o in list)
-        //    //{
-        //    //    o.CustomerID = o.CustomerID ?? 0;
-        //    //    o.PosID = o.PosID ?? 0;
-        //    //}
-        //    //IEnumerable<OrderItem> orderItems = info.GetAllOrderItem();
-        //    CrystalReport1 rp = new CrystalReport1();
-        //    //rp.SetDataSource(list);
-        //    //rp.SetDataSource(orderItems);
-            
-
-        //    Response.Buffer = false;
-        //    Response.ClearContent();
-        //    Response.ClearHeaders();
+        [Route("PrintReport")]
+        public ActionResult PrintReport()
+        {
+            //    //IEnumerable<Order> orders = info.GetAllOrder();
+            //    //List<Order> list = orders.ToList();
+            //    //foreach(Order o in list)
+            //    //{
+            //    //    o.CustomerID = o.CustomerID ?? 0;
+            //    //    o.PosID = o.PosID ?? 0;
+            //    //}
+            //    //IEnumerable<OrderItem> orderItems = info.GetAllOrderItem();
+            //    CrystalReport1 rp = new CrystalReport1();
+            //    //rp.SetDataSource(list);
+            //    //rp.SetDataSource(orderItems);
 
 
-        //    Stream stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-        //    stream.Seek(0, SeekOrigin.Begin);
-        //    return File(stream, "application/pdf", "CustomerList.pdf");
-        //}
+            //SqlConnection con = new SqlConnection("Data Source=DESKF:\Cafe\Project\ManagerCoffeeShop-4\trunk\ManagerCoffeeShopASPNet\Areas\Admin\Controllers\ServiceController.csTOP-HA2TCUF;Initial Catalog=CoffeeShopDB;Integrated Security=True");
+            //SqlCommand cmd = new SqlCommand();
+            //cmd.CommandText = "SELECT * FROM [Order] AS  O INNER JOIN OrderItem AS OI ON O.OrderID=OI.OrderID ";
+            //cmd.Connection = con;
+            //cmd.Connection.Open();
+
+
+            //DataSet dataset = new DataSet();
+            //SqlDataAdapter sqlAdapter = new SqlDataAdapter(cmd);
+            //sqlAdapter.Fill(dataset);
+
+            //CrystalReport1 rp = new CrystalReport1();
+            //rp.SetDataSource(dataset);
+            //cmd.Connection.Close();
+
+            CrystalReport1 rp = new CrystalReport1();
+            OrderItemGroupByOrderDataSet dataset = new OrderItemGroupByOrderDataSet();
+            OrderItemGroupByOrderDataSet.DataTable1DataTable table = dataset.DataTable1;
+             DataTable1TableAdapter adapter = new DataTable1TableAdapter();
+            adapter.Fill(table);
+
+            //Response.Buffer = false;
+            //Response.ClearContent();
+            //Response.ClearHeaders();
+
+            //Response.Buffer = false;
+            //Response.ClearContent();
+            //Response.ClearHeaders();
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            Stream stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "CustomerList.pdf");
     }
+}
 }

@@ -7,7 +7,7 @@
 <div class="row">
     @using (Html.BeginForm("Service", "ServiceEmployee", FormMethod.Get))
     {
-        <p>Search : @Html.TextBox("SearchString", new { @class = "" })</p>
+        <p>Search : @Html.TextBox("SearchString")</p>
         <input type="submit" class="btn btn-primary"/>
     }
 </div>
