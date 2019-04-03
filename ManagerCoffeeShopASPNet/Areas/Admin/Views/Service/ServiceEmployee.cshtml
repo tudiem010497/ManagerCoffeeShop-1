@@ -5,6 +5,13 @@
 }
 
 <div class="row">
+    @using (Html.BeginForm("Service", "ServiceEmployee", FormMethod.Get))
+    {
+        <p>Search : @Html.TextBox("SearchString", new { @class = "" })</p>
+        <input type="submit" class="btn btn-primary"/>
+    }
+</div>
+<div class="row">
     <div class="col-sm-6">
         @{
             IEnumerable<FoodAndDrink>
