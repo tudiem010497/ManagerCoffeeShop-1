@@ -19,6 +19,9 @@
     <link href="~/Assets/Main/css/font-awesome.min.css" rel="stylesheet">
     <link href="~/Assets/Main/vendors/linears-icon/style.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,900,900i" rel="stylesheet">
+
     <!-- Bootstrap -->
     @*<link href="css/bootstrap.min.css" rel="stylesheet">*@
     <link href="~/Assets/Main/css/bootstrap.min.css" rel="stylesheet">
@@ -59,6 +62,9 @@
     <![endif]-->
 </head>
 <body>
+    <!-- Back to top button -->
+    <a id="button" ></a>
+    @*===========================*@
     <div id="preloader">
         <div class="loader absolute-center">
             <div class="loader__box"><b class="top"></b></div>
@@ -150,12 +156,12 @@
                             <li><a href="contact.html">Contact US</a></li>*@
                         @foreach (Menu item in (IEnumerable<Menu>)ViewData["menus"])
                         {
-                            <li><a href="@item.MenuHref">@item.MenuName</a></li>
+                            <li><a href="@item.MenuHref #">@item.MenuName</a></li>
                         }
 
                         @*Login*@
                         <li>
-                            <a onclick="prelogin()">Login</a>
+                            <a href="#" onclick="prelogin()">Login</a>
                             <div id="id01" class="modal" style="width: 750px; margin: auto;">
 
                                 @*<form class="modal-content animate">*@
@@ -199,7 +205,7 @@
                         @*SignIn*@
                         <li>
                             @*<a onclick="preRegister()">Register</a>*@
-                            <a onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign Up</a>
+                            <a href="#" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign Up</a>
 
                             <div id="id02" class="modal" style="width: 750px; margin: auto;">
                                 <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
@@ -296,7 +302,9 @@
     <!--================End Main-menu Area =================-->
 
     @RenderBody();
-
+    @*<div id="main-toolbox" class="toolbox">
+        <div class="toolbox-item"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
+    </div>*@
     <!--================ Footer Area =================-->
     <footer class="footer_area">
         <div class="footer_widget_area">
@@ -368,8 +376,7 @@
                     <h5>
                         <p>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;
-                            <script>document.write(new date().getfullyear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            Copyright &copy; @DateTime.Now.Year All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </h5>

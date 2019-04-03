@@ -21,6 +21,12 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             return View();
         }
 
+        //public ActionResult IndexGrid(string search)
+        //{
+
+        //    return View("GetAllFoodAndDrink");
+        //}
+
         /// <summary>
         /// Lấy danh sách đồ uống cần pha chế theo hóa đơn
         /// </summary>
@@ -33,32 +39,37 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             return View(orders);
         }
 
-        [Route("GetListOrderItemGroupByFoodAndDrink")]
-        public ActionResult GetListOrderItemGroupByFoodAndDrink()
+        /// <summary>
+        /// lấy tất cả các orderitem cần pha chế
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetListOrderItemNeedPreparetion")]
+        public ActionResult GetListOrderItemNeedPreparetion()
         {
             string status = "Pending";
             ListOrderItemGroupByFoodAndDrink listGroup = new ListOrderItemGroupByFoodAndDrink();
             IEnumerable<OrderItem> orderItems = info.GetAllOrderItemByStatus(status);
-            int index;
-            foreach(OrderItem item in orderItems)
-            {
-                index = listGroup.FindIndexFoodAndDrinkInListGroup(item.FDID);
-                if(index == -1)
-                {
-                    OrderItemGroupByFoodAndDrink orderItemGroupByFoodAndDrink = new OrderItemGroupByFoodAndDrink();
-                    orderItemGroupByFoodAndDrink.FoodAndDrink = item.FoodAndDrink;
-                    orderItemGroupByFoodAndDrink.Quantity = item.Quantity;
-                    listGroup.list.Add(orderItemGroupByFoodAndDrink);
-                    int temp = listGroup.FindIndexFoodAndDrinkInListGroup(item.FDID);
-                    listGroup.list[temp].OrderItems.Add(item);
-                }
-                else
-                {
-                    listGroup.list[index].Quantity = listGroup.list[index].Quantity + item.Quantity;
-                    listGroup.list[index].OrderItems.Add(item);
-                }
-            }
-            return View(listGroup.list);
+            //int index;
+            //foreach(OrderItem item in orderItems)
+            //{
+            //    index = listGroup.FindIndexFoodAndDrinkInListGroup(item.FDID);
+            //    if(index == -1)
+            //    {
+            //        OrderItemGroupByFoodAndDrink orderItemGroupByFoodAndDrink = new OrderItemGroupByFoodAndDrink();
+            //        orderItemGroupByFoodAndDrink.FoodAndDrink = item.FoodAndDrink;
+            //        orderItemGroupByFoodAndDrink.Quantity = item.Quantity;
+            //        listGroup.list.Add(orderItemGroupByFoodAndDrink);
+            //        int temp = listGroup.FindIndexFoodAndDrinkInListGroup(item.FDID);
+            //        listGroup.list[temp].OrderItems.Add(item);
+            //    }
+            //    else
+            //    {
+            //        listGroup.list[index].Quantity = listGroup.list[index].Quantity + item.Quantity;
+            //        listGroup.list[index].OrderItems.Add(item);
+            //    }
+            //}
+            //return View(listGroup.list);
+            return View(orderItems);
         }
 
         /// <summary>
@@ -86,9 +97,9 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             string status = "Ready";
             bool result = info.UpdateStatus(OrderItemID, status);
-            if(view == "GetListOrderItemGroupByFoodAndDrink")
+            if(view == "GetListOrderItemNeedPreparetion")
             {
-                return RedirectToAction("GetListOrderItemGroupByFoodAndDrink", "Batender");
+                return RedirectToAction("GetListOrderItemNeedPreparetion", "Batender");
             }
             else
             {
@@ -120,9 +131,9 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 string statusOrderItem = "Cancel";
                 string statusOrder = "Ready";
                 bool result = info.UpdateStatus(OrderItemID, statusOrderItem);
-                if(view == "GetListOrderItemGroupByFoodAndDrink")
+                if(view == "GetListOrderItemNeedPreparetion")
                 {
-                    return RedirectToAction("GetListOrderItemGroupByFoodAndDrink", "Batender");
+                    return RedirectToAction("GetListOrderItemNeedPreparetion", "Batender");
                 }
                 else
                 {
@@ -139,8 +150,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             }
             else
             {
-                if(view == "GetListOrderItemGroupByFoodAndDrink")
-                    return RedirectToAction("GetListOrderItemGroupByFoodAndDrink", "Batender");
+                if(view == "GetListOrderItemNeedPreparetion")
+                    return RedirectToAction("GetListOrderItemNeedPreparetion", "Batender");
                 else
                     return RedirectToAction("DetailOrder", "Batender", new { OrderID = OrderID });
             }

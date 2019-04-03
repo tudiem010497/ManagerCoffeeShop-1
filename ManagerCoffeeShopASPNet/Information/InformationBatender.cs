@@ -68,6 +68,10 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._foodAndDrinkDAO.GetFoodAndDrinkByID(FDID);
         }
+        //public FoodAndDrink GetFoodAndDrink(string search)
+        //{
+        //    return this._foodAndDrinkDAO.GetFoodAndDrink(search);
+        //}
         public bool DeleteFoodAndDrinkByFDID(int FDID)
         {
             return this._foodAndDrinkDAO.DeleteFoodAndDrinkByFDID(FDID);

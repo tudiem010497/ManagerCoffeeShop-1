@@ -1,14 +1,25 @@
-﻿
-function prelogin() {
-    console.log('test')
+﻿function prelogin() {
     document.getElementById('id01').style.display = 'block'
 }
 function preRegister() {
-    console.log('test')
     document.getElementById('id02').style.display = 'block'
 }
 
 $(document).ready(function () {
+    //xử lý button scoll on top 
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 300) {
+            $('#button').addClass('show');
+        } else {
+            $('#button').removeClass('show');
+        }
+    });
+
+    $('#button').on('click', function () {
+        $('html, body').animate({ scrollTop: 0 }, '300');
+    });
+
+    //xử lý button AddToCart lấy thông tin foodanddrink điền vào form
     $("button.preAddToCart").click(function () {
         document.getElementById('id04').style.display = 'block'
         let fdId = $(this).closest('div').attr('id')
@@ -20,17 +31,13 @@ $(document).ready(function () {
         $('span#foodname').text(fdname)
         $('span#price').text(fdprice)
     })
+    //xử lý button Add cập nhật đồ uống lên giỏ hàng 
     $('button.addToCard').click(function () {
         let fdId = $(this).closest('div').find('input:eq(0)').val()
         let fdName = $(this).closest('div').find('span:eq(1)').text()
         let fdQuantity = $(this).closest('div').find('input:eq(1)').val()
         let fdPrice = $(this).closest('div').find('span:eq(2)').text()
-        //console.log(fdId)
-        //console.log(fdName)
-        //console.log(fdQuantity)
-        //console.log(fdPrice)
         let price = fdQuantity * fdPrice;
-        console.log(price)
         $('span#price').text(price)
         var data = '{"FDID" : ' + fdId + ', '
         data = data + '"Name" :  "' + fdName + '",'
@@ -46,31 +53,25 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 document.getElementById('id04').style.display = 'none'
-                alert("Đặt thành công!! Bạn hãy vào giỏ hàng để xem đồ uống mình đã đặt.");
+                alert("Thêm vào giỏ hàng thành công!! Bạn hãy vào giỏ hàng để xem chi tiết.");
             },
             error: function (err) {
-                alert("Error 2 : " + err.responseText);
+                alert("Error : " + err.responseText);
             }
-        });
+        })
     })
-    //$('button.cancel').click(function () {
-    //    alert('cancel')
-    //    //$('.table-responsive').remove();
-    //})
-    //$("giohang").click(function () {
-    //    $.ajax() --- gọi đến 1 controller
-    //})
-});
+    //xử lý khi nhấn button pay lấy thông tin đặt hàng và thông tin người đặt
+    $('a#pay').click(function () {
+        
+    })
+})
 
 function preAdd() {
     document.getElementById('id04').style.display = 'block'
-    //var fdId = $(this).attr("id")
     var fdId = $('input').closest('div#test').find('input').val()
     console.log(fdId)
     var fdname = $('#foodname').text()
-    //console.log(fdname)
     var fdprice = $('#price').text()
-    //console.log(fdprice)
     $('span#foodname').text(fdname)
     $('span#price').text(fdprice)
 }
@@ -78,43 +79,4 @@ function preAdd() {
 function addCart() {
     var foodName = $('#foodname').text()
     console.log(foodName)
-    //console.log('test')
-}
-
-//function signUp() {
-//    console.log('test')
-//    let password = $('#psw').val()
-//    let repeat = $('#psw-repeat').val()
-//    console.log(password)
-//    console.log(repeat)
-//    if (password != repeat) {
-//        let warning = 'Password does not match. Please fill out.'
-//        document.getElementById('demo').innerHTML = warning
-//    }
-//}
-//$('.signupbtn').on('click', function () {
-
-//})
-//function login() {
-//let username = $('#username').val()
-//let password = $('#password').val()
-//console.log(username)
-//console.log(password)
-//let error = $('div #error').text()
-//console.log(error)
-//if (error != null || error != '') {
-//    document.getElementById('id01').style.display = 'block'
-//}
-//else {
-//    dodocument.getElementById('error').innerHtml = 'hahaha'
-//}
-////document.getElementById('resultLogin').innerHTML = 'Wellcome'
-//document.getElementById('id01').style.display = 'none'
-//}
-
-function login() {
-    //    let err = $("#error").text().trim()
-    //    console.log(err)
-    //    if (err === "Username or Password is incorrect")
-    //        document.getElementById('id01').style.display = 'block'
 }

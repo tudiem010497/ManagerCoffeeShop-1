@@ -1,4 +1,6 @@
-﻿@model IEnumerable<ManagerCoffeeShopASPNet.FoodAndDrink>
+﻿@using NonFactors.Mvc.Grid;
+
+@model IEnumerable<FoodAndDrink>
 
 @{
     ViewBag.Title = "GetAllFoodAndDrink";
@@ -10,6 +12,7 @@
 <p>
     @Html.ActionLink("Thêm đồ uống", "GetFormAddNewFoodAndDrink", "Batender", new { @class = "btn btn-primary" })
 </p>
+@*<input type="text" id="GridSearch" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">*@
 <table class="table">
     <tr>
         <th>
@@ -68,3 +71,33 @@
 }
 
 </table>
+  
+@*@Html.AjaxGrid(Url.Action("IndexGrid"))
+
+<script>
+        document.getElementById('GridSearch').addEventListener('input', function() {
+            var grid = new MvcGrid(document.querySelector('.mvc-grid'));
+            grid.query.set('search', this.value);
+
+            grid.reload();
+        });
+</script>
+
+@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(m => m.FDID).Titled("FDID");
+        columns.Add(m => m.Name).Titled("Name");
+        columns.Add(m => m.Desc).Titled("Desc");
+        columns.Add(m => m.Size).Titled("Size");
+        columns.Add(m => m.Type).Titled("Type");
+        columns.Add(m => m.UnitPrice).Titled("UnitPrice");
+        columns.Add(m => m.Currency).Titled("Currency");
+        columns.Add(m => m.FDID).Encoded(false).RenderedAs(m => (
+              @Html.ActionLink("Sửa", "EditFoodAndDrink", "Batender", new { FDID = m.FDID }, new { @class = "btn btn-primary" }).ToHtmlString()
+              + @Html.ActionLink("Xóa", "DeleteFoodAndDrink", "Batender", new { FDID = m.FDID }, new { @class = "btn btn-danger" }).ToHtmlString()
+              + @Html.ActionLink("Xem công thức pha chế", "ReadRecipe", "Batender", new { FDID = m.FDID }, new { @class = "btn btn-info" }).ToHtmlString()
+        ));
+    })
+)*@

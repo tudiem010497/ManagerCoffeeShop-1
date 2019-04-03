@@ -239,10 +239,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="CrystalReport1.cs">
+    <Compile Include="CrystalReport2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CrystalReport1.rpt</DependentUpon>
+      <DependentUpon>CrystalReport2.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DAOImpl\AccountDAOImpl.cs" />
@@ -359,7 +359,7 @@
     <Content Include="Areas\Admin\Views\Service\DetailOrder.cshtml" />
     <Content Include="Areas\Admin\Views\Service\GetListOrderItemNeedServiceGroupByFoodAnDrink.cshtml" />
     <Content Include="Content\MvcGrid\Fonts\GridGlyphs.woff" />
-    <Content Include="Areas\Admin\Views\Batender\GetListOrderItemGroupByFoodAndDrink.cshtml" />
+    <Content Include="Areas\Admin\Views\Batender\GetListOrderItemNeedPreparetion.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\ReadRecipe.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\GetFormAddNewFoodAndDrink.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\GetAllFoodAndDrink.cshtml" />
@@ -468,9 +468,9 @@
     <Content Include="Assets\Main\js\scriptLogin.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CrystalReport1.rpt">
+    <EmbeddedResource Include="CrystalReport2.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
+      <LastGenOutput>CrystalReport2.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

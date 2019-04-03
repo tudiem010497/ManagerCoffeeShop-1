@@ -1,4 +1,4 @@
-﻿using CrystalDecisions.CrystalReports.Engine;
+﻿//using CrystalDecisions.CrystalReports.Engine;
 using ManagerCoffeeShopASPNet.Areas.Admin.Models;
 using ManagerCoffeeShopASPNet.Information;
 using Newtonsoft.Json;
@@ -221,30 +221,30 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             return View(orderItems);
         }
         
-        [Route("PrintReport")]
-        public ActionResult PrintReport()
-        {
-            //IEnumerable<Order> orders = info.GetAllOrder();
-            //List<Order> list = orders.ToList();
-            //foreach(Order o in list)
-            //{
-            //    o.CustomerID = o.CustomerID ?? 0;
-            //    o.PosID = o.PosID ?? 0;
-            //}
-            //IEnumerable<OrderItem> orderItems = info.GetAllOrderItem();
-            CrystalReport1 rp = new CrystalReport1();
-            //rp.SetDataSource(list);
-            //rp.SetDataSource(orderItems);
+        //[Route("PrintReport")]
+        //public ActionResult PrintReport()
+        //{
+        //    //IEnumerable<Order> orders = info.GetAllOrder();
+        //    //List<Order> list = orders.ToList();
+        //    //foreach(Order o in list)
+        //    //{
+        //    //    o.CustomerID = o.CustomerID ?? 0;
+        //    //    o.PosID = o.PosID ?? 0;
+        //    //}
+        //    //IEnumerable<OrderItem> orderItems = info.GetAllOrderItem();
+        //    CrystalReport1 rp = new CrystalReport1();
+        //    //rp.SetDataSource(list);
+        //    //rp.SetDataSource(orderItems);
             
 
-            Response.Buffer = false;
-            Response.ClearContent();
-            Response.ClearHeaders();
+        //    Response.Buffer = false;
+        //    Response.ClearContent();
+        //    Response.ClearHeaders();
 
 
-            Stream stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-            stream.Seek(0, SeekOrigin.Begin);
-            return File(stream, "application/pdf", "CustomerList.pdf");
-        }
+        //    Stream stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+        //    stream.Seek(0, SeekOrigin.Begin);
+        //    return File(stream, "application/pdf", "CustomerList.pdf");
+        //}
     }
 }

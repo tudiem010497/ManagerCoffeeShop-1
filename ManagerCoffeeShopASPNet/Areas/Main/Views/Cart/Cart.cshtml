@@ -1,7 +1,6 @@
 ﻿@using ManagerCoffeeShopASPNet.Areas.Main.Models;
 
 @{
-    ViewBag.Title = "GioHang";
     Layout = null;
 }
 
@@ -12,9 +11,9 @@
 <script src="~/Assets/Main/js/scriptLogin.js"></script>
 
 
-<h2>@ViewBag.Title</h2>
 @if (ViewData["carts"] == null)
 {
+    <h2><i class="fa fa-shopping-basket"></i>Thông tin giỏ hàng</h2>
     <p class="text-info text-center">
         Giỏ hàng của bạn rỗng!
     </p>
@@ -22,55 +21,75 @@
 }
 else
 {
-    <div class="row">
-        <div class="col-sm-12">
-
+    <div class="row" style="margin-left: auto;margin-right: auto;">
+        <div class="col-sm-8">
+            <h2><i class="fa fa-shopping-basket"></i>Thông tin giỏ hàng</h2>
             <div class="table-responsive">
-                <table class="table table-bordered">
-                    <tr>
-                        <th>FoodName</th>
-                        <th>Quantity</th>
-                        <th>UnitPrice</th>
-                        <th>Price</th>
-                        <th>Action</th>
-                    </tr>
-                    @{
-                        int sum = 0;
-                        int sumQuantity = 0;
-                    }
-                    @foreach (Cart item in (List<Cart>)ViewData["carts"])
-                    {
+                <table class="table table-bordered" style="width:auto">
+                    <thead>
                         <tr>
-                            <td>@item.Name</td>
-                            <td>
-                                <form action="@Url.Action("EditQuantity")" method="get">
-                                    <input type="hidden" name="FDID" value="@item.FDID" />
-                                    <input type="number" min="1" step="1" name="soluongmoi" value="@item.Quantity" />
-                                    <button type="submit" class="btn btn-success btn-sm"> Update </button>
-                                </form>
-                            </td>
-                            <td> @item.Price</td>
-                            <td> @item.Total</td>
-
-                            <td> <a href="@Url.Action("DeleteFD", new { FDID = item.FDID })" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Delete</a> </td>
+                            <th>FoodName</th>
+                            <th>Quantity</th>
+                            <th>Description</th>
+                            <th>UnitPrice</th>
+                            <th>Price</th>
+                            <th>Action</th>
                         </tr>
-                        sum = item.Total + sum;
-                        sumQuantity = item.Quantity + sumQuantity;
-                    }
-                    <tr>
-                        <td colspan="2" class="text-right">Total Quantity: @sumQuantity</td>
-                        <td colspan="2" class="text-right">Total Amount: @sum VNĐ</td>
-                        <td></td>
-                    </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int sumTotal = 0;
+                            int sumQuantity = 0;
+                        }
+                        @foreach (Cart item in (List<Cart>)ViewData["carts"])
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>
+                                    <form action="@Url.Action("EditQuantity")" method="get">
+                                        <input type="hidden" name="FDID" value="@item.FDID" />
+                                        <input type="number" min="1" step="1" name="soluongmoi" value="@item.Quantity" />
+                                        <button type="submit" class="btn btn-success btn-sm"> Update </button>
+                                    </form>
+                                </td>
+                                <td><input type="text" name="desc"/></td>
+                                <td> @item.Price</td>
+                                <td> @item.Total</td>
+                                <td> <a href="@Url.Action("DeleteFD", new { FDID = item.FDID })" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Delete</a> </td>
+                            </tr>
+                            sumTotal = item.Total + sumTotal;
+                            sumQuantity = item.Quantity + sumQuantity;
+                        }
+                        <tr>
+                            <td colspan="2" class="text-right">Total Quantity: @sumQuantity</td>
+                            <td colspan="3" class="text-right">Total Amount: @sumTotal VNĐ</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
                 </table>
-                <div style="margin-left:auto; margin-right:auto; width:200px">
-                    @*<a class="btn btn-default paid" href="@Url.Action("Paid")">Paid</a>*@
-                    <a class="btn btn-info" href="@Url.Action("Index", "Home")">Going Shopping</a>
-                </div>
-
             </div>
         </div>
-
+        <div class="col-sm-4">
+            <h2><i class="fa fa-truck"></i> Thông tin giao hàng</h2>
+            <form class="needs-validation" novalidate>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="tel">Telephone:</label>
+                    <input type="tel" class="form-control" id="tel" placeholder="Enter your phone" name="tel" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <input type="text" class="form-control" id="address" placeholder="Enter your address" name="address" required>
+                </div>
+            </form>
+        </div>
+        <div style="margin-left:auto; margin-right:auto; width:200px">
+            <a class="btn btn-default" id="pay" href="@Url.Action("Pay")">Pay</a>
+            <a class="btn btn-info" href="@Url.Action("Index", "Home")">Going Shopping</a>
+        </div>
     </div>
-                        }
+}
 
