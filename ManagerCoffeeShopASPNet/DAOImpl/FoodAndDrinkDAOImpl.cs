@@ -15,10 +15,18 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         }
         public int GetLastID()
         {
-            int id = (from fd in context.FoodAndDrinks
-                      orderby fd.FDID descending
-                      select fd.FDID).FirstOrDefault();
-            return id;
+            try
+            {
+                int id = (from fd in context.FoodAndDrinks
+                          orderby fd.FDID descending
+                          select fd.FDID).FirstOrDefault();
+                return id;
+            }
+            catch(Exception ex)
+            {
+                return 0;
+            }
+            
         }
         public IEnumerable<FoodAndDrink> GetAllFoodAndDrink()
         {

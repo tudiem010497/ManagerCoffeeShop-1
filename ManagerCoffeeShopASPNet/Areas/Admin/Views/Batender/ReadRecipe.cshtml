@@ -3,6 +3,9 @@
     ViewBag.Title = "ReadRecipe";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+<p>
+    @Html.ActionLink("Thêm bước", "CreateRecipeDetail", "Batender", new { RecipeID = ViewData["RecipeID"] }, new { @class = "btn btn-primary" })
+</p>
 <table class="table table-striped">
     <thead>
         <tr>

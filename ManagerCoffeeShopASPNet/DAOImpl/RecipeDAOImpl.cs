@@ -15,10 +15,18 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         }
         public int GetLastRecipeID()
         {
-            int id = (from recipe in context.Recipes
-                      orderby recipe.RecID descending
-                      select recipe).FirstOrDefault().RecID;
-            return id;
+            try
+            {
+                int id = (from recipe in context.Recipes
+                          orderby recipe.RecID descending
+                          select recipe).FirstOrDefault().RecID;
+                return id;
+            }
+            catch(Exception ex)
+            {
+                return 0;
+            }
+            
         }
         public Recipe GetRecipeByFoodDrinkID(int FoodAndDrinkID)
         {

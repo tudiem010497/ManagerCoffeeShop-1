@@ -10,5 +10,4 @@
             $(".btnCancel").attr("href", href);
         }
     });
-    
 });

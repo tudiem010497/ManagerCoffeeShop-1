@@ -14,6 +14,8 @@ namespace ManagerCoffeeShopASPNet.Information
         private RecipeDAO _recipeDAO;
         private RecipeDetailDAO _recipeDetailDAO;
         private FoodAndDrinkDAO _foodAndDrinkDAO;
+        private IngredientDAO _ingredientDAO;
+        private IngredientMessageDAO _ingredientMessageDAO;
         public InformationBatender()
         {
             this._orderDAO = (OrderDAO)new OrderDAOImpl();
@@ -21,7 +23,8 @@ namespace ManagerCoffeeShopASPNet.Information
             this._recipeDAO = (RecipeDAO)new RecipeDAOImpl();
             this._recipeDetailDAO = (RecipeDetailDAO)new RecipeDetailDAOImpl();
             this._foodAndDrinkDAO = (FoodAndDrinkDAO)new FoodAndDrinkDAOImpl();
-
+            this._ingredientDAO = (IngredientDAO)new IngredientDAOImpl();
+            this._ingredientMessageDAO = (IngredientMessageDAO)new IngredientMessageDAOImpl();
         }
         public IEnumerable<Order> GetAllOrderByStatus(string status)
         {
@@ -53,6 +56,7 @@ namespace ManagerCoffeeShopASPNet.Information
         }
         public IEnumerable<RecipeDetail> GetAllRecipeDetailByRecipeID(int RecipeID)
         {
+            int num = this._recipeDetailDAO.GetAllRecipeDetailByRecipeID(RecipeID).Count();
             return this._recipeDetailDAO.GetAllRecipeDetailByRecipeID(RecipeID);
         }
         public IEnumerable<FoodAndDrink> GetAllFoodAndDrink()
@@ -83,6 +87,22 @@ namespace ManagerCoffeeShopASPNet.Information
         public bool InsertRecipe(int FDID)
         {
             return this._recipeDAO.InsertRecipe(FDID);
+        }
+        public bool InsertRecipeDetail(int RecID, int Step, int IngreID, double Amount, string Unit, string Desc)
+        {
+            return this._recipeDetailDAO.InsertRecipeDetail(RecID, Step, IngreID, Amount, Unit, Desc);
+        }
+        public IEnumerable<Ingredient> GetAllIngredient()
+        {
+            return this._ingredientDAO.GetAllIngredient();
+        }
+        public int CountRecipeDetailByRecipeID(int RecipeID)
+        {
+            return this._recipeDetailDAO.CountRecipeDetailByRecipeID(RecipeID);
+        }
+        public bool InsertIngredientMessage(int IngreID, double Amount, string Unit, string SendMessage)
+        {
+            return this._ingredientMessageDAO.InsertIngredientMessage(IngreID, Amount, Unit, SendMessage);
         }
     }
 }

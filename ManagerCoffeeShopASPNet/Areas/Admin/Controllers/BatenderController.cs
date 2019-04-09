@@ -167,26 +167,26 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             Recipe recipe = info.GetRecipeByFDID(FDID);
             if (recipe != null)
             {
-                try
+                IEnumerable<RecipeDetail> recipeDetails = info.GetAllRecipeDetailByRecipeID(recipe.RecID);
+                int count = recipeDetails.Count<RecipeDetail>();
+                if(count == 0)
                 {
-                    IEnumerable<RecipeDetail> recipeDetails = info.GetAllRecipeDetailByRecipeID(recipe.RecID);
-                    int count = recipeDetails.Count<RecipeDetail>();
+                    return RedirectToAction("ShowAllRecipeDetailByRecipeID", "Batender", new { RecipeID = recipe.RecID });
+                }
+                else
+                {
+                    ViewData["RecipeID"] = recipe.RecID;
                     ViewData["recipe"] = recipe;
                     ViewData["recipeDetails"] = recipeDetails;
+                    return View();
                 }
-                catch(Exception ex)
-                {
-                    ViewData["message"] = "Chưa có công thức pha chế cho loại đồ uống này";
-                    ViewData["FDID"] = FDID;
-                }
-                
             }
             else
             {
                 ViewData["message"] = "Chưa có công thức pha chế cho loại đồ uống này";
                 ViewData["FDID"] = FDID;
+                return View();
             }
-            return View();
         }
 
         [Route("GetAllFoodAndDrink")]
@@ -287,13 +287,14 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             return RedirectToAction("ShowAllRecipeDetailByRecipeID", "Batender", new { RecipeID = recipe.RecID});
         }
 
-        [Route("ShowAllRecipeDetailByRecipeID")] // show sau khi thêm
+        [Route("ShowAllRecipeDetailByRecipeID")] // show bước làm
         public ActionResult ShowAllRecipeDetailByRecipeID(int RecipeID)
         {
             try
             {
                 IEnumerable<RecipeDetail> recipeDetails = info.GetAllRecipeDetailByRecipeID(RecipeID);
-                int count = recipeDetails.Count<RecipeDetail>();
+                int count = recipeDetails.Count();
+                ViewData["RecipeID"] = RecipeID;
                 return View(recipeDetails);
             }
             catch(Exception ex)
@@ -303,18 +304,63 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             }
         }
 
+        /// <summary>
+        /// Thêm bước làm
+        /// </summary>
+        /// <param name="RecipeID"></param>
+        /// <returns></returns>
         [Route("CreateRecipeDetail")]
         public ActionResult CreateRecipeDetail(int RecipeID)
         {
             ViewData["RecipeID"] = RecipeID;
+            // Load tất cả nguyên vật liệu vào dropdown
+            IEnumerable<Ingredient> ingredients = info.GetAllIngredient();
+            List<SelectListItem> listIngedients = new List<SelectListItem>();
+            foreach(Ingredient ingre in ingredients)
+            {
+                SelectListItem item = new SelectListItem { Text = ingre.Name, Value = ingre.IngreID.ToString() };
+                listIngedients.Add(item);
+            }
+            ViewData["listIngedients"] = listIngedients;
+
+            // Hiển thị mặc định bước tiếp theo
+            int Step = info.CountRecipeDetailByRecipeID(RecipeID) + 1;
+            ViewData["Step"] = Step;
             return View();
         }
 
+        [HttpPost]
         [Route("DoCreateRecipeDetail")]
-        public ActionResult DoCreateRecipeDetail()
+        public ActionResult DoCreateRecipeDetail(int RecipeID, int Step, int IngreID, double Amount,
+            string Unit, string Desc)
         {
-            
-            return RedirectToAction("ShowAllRecipeDetailByRecipeID", "Batender");
+            bool result = info.InsertRecipeDetail(RecipeID, Step, IngreID, Amount, Unit, Desc);
+            return RedirectToAction("ShowAllRecipeDetailByRecipeID", "Batender", new { RecipeID = RecipeID});
+        }
+
+        [Route("SendMessageIngredientWithOut")]
+        public ActionResult SendMessageIngredientWithOut()
+        {
+            List<Ingredient> ingres = info.GetAllIngredient().ToList();
+            List<SelectListItem> listIngre = new List<SelectListItem>();
+            foreach(Ingredient item in ingres)
+            {
+                SelectListItem select = new SelectListItem();
+                select.Value = item.IngreID.ToString();
+                select.Text = item.Name;
+                listIngre.Add(select);
+            }
+            ViewData["listIngre"] = listIngre;
+            return View();
+        }
+
+        [HttpPost]
+        [Route("DoSendMessageIngredientWithOut")]
+        public ActionResult DoSendMessageIngredientWithOut(int IngreID, double Amount, string Unit, string SendMessage)
+        {
+            TempData["message"] = "Gửi thành công";
+            bool result = info.InsertIngredientMessage(IngreID, Amount, Unit, SendMessage);
+            return RedirectToAction("SendMessageIngredientWithOut", "Batender");
         }
     }
 }

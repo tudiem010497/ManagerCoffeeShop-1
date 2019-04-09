@@ -2,7 +2,6 @@
 using ManagerCoffeeShopASPNet.Areas.Admin.Models;
 using ManagerCoffeeShopASPNet.Information;
 using ManagerCoffeeShopASPNet.Reporting;
-using ManagerCoffeeShopASPNet.Reporting.OrderItemGroupByOrderDataSetTableAdapters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -257,53 +256,12 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("PrintReport")]
         public ActionResult PrintReport()
         {
-            //    //IEnumerable<Order> orders = info.GetAllOrder();
-            //    //List<Order> list = orders.ToList();
-            //    //foreach(Order o in list)
-            //    //{
-            //    //    o.CustomerID = o.CustomerID ?? 0;
-            //    //    o.PosID = o.PosID ?? 0;
-            //    //}
-            //    //IEnumerable<OrderItem> orderItems = info.GetAllOrderItem();
-            //    CrystalReport1 rp = new CrystalReport1();
-            //    //rp.SetDataSource(list);
-            //    //rp.SetDataSource(orderItems);
-
-
-            //SqlConnection con = new SqlConnection("Data Source=DESKF:\Cafe\Project\ManagerCoffeeShop-4\trunk\ManagerCoffeeShopASPNet\Areas\Admin\Controllers\ServiceController.csTOP-HA2TCUF;Initial Catalog=CoffeeShopDB;Integrated Security=True");
-            //SqlCommand cmd = new SqlCommand();
-            //cmd.CommandText = "SELECT * FROM [Order] AS  O INNER JOIN OrderItem AS OI ON O.OrderID=OI.OrderID ";
-            //cmd.Connection = con;
-            //cmd.Connection.Open();
-
-
-            //DataSet dataset = new DataSet();
-            //SqlDataAdapter sqlAdapter = new SqlDataAdapter(cmd);
-            //sqlAdapter.Fill(dataset);
-
-            //CrystalReport1 rp = new CrystalReport1();
-            //rp.SetDataSource(dataset);
-            //cmd.Connection.Close();
-
             CrystalReport1 rp = new CrystalReport1();
-            OrderItemGroupByOrderDataSet dataset = new OrderItemGroupByOrderDataSet();
-            OrderItemGroupByOrderDataSet.DataTable1DataTable table = dataset.DataTable1;
-             DataTable1TableAdapter adapter = new DataTable1TableAdapter();
-            adapter.Fill(table);
 
             //Response.Buffer = false;
             //Response.ClearContent();
             //Response.ClearHeaders();
-
-            //Response.Buffer = false;
-            //Response.ClearContent();
-            //Response.ClearHeaders();
-
-            Response.Buffer = false;
-            Response.ClearContent();
-            Response.ClearHeaders();
-
-
+            //rp.SetDatabaseLogon("Diem", "", "DESKTOP-HA2TCUF", "CoffeeShopDB", false);
             Stream stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
             return File(stream, "application/pdf", "CustomerList.pdf");

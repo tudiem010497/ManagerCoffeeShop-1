@@ -15,10 +15,18 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         }
         public int GetLastRecipeDetailID()
         {
-            int id = (from recipeDetail in context.RecipeDetails
-                      orderby recipeDetail.RecipeDetailID descending
-                      select recipeDetail).FirstOrDefault().RecipeDetailID;
-            return id;
+            try
+            {
+                int id = (from recipeDetail in context.RecipeDetails
+                          orderby recipeDetail.RecipeDetailID descending
+                          select recipeDetail.RecipeDetailID).FirstOrDefault();
+                return id;
+            }
+            catch(Exception ex)
+            {
+                return 0;
+            }
+            
         }
         public IEnumerable<RecipeDetail> GetAllRecipeDetailByRecipeID(int RecipeID)
         {
@@ -26,6 +34,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                                                           where recipedetail.RecID == RecipeID
                                                           orderby recipedetail.Step ascending
                                                           select recipedetail;
+            int num = recipeDetails.ToList<RecipeDetail>().Count;
             return recipeDetails;
         }
         public bool InsertRecipeDetail(int RecID, int Step, int IngreID, double Amount, string Unit, string Desc)
@@ -34,6 +43,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             {
                 int RecipeDetailID = GetLastRecipeDetailID() + 1;
                 RecipeDetail recipeDetail = new RecipeDetail();
+                recipeDetail.RecID = RecID;
                 recipeDetail.RecipeDetailID = RecipeDetailID;
                 recipeDetail.Step = Step;
                 recipeDetail.IngreID = IngreID;
@@ -48,6 +58,13 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             {
                 throw new Exception("Error InsertRecipeDetail : " + ex.Message);
             }
+        }
+        public int CountRecipeDetailByRecipeID(int RecipeID)
+        {
+            int result = (from recipeDetail in context.RecipeDetails
+                          where recipeDetail.RecID == RecipeID
+                          select recipeDetail).Count();
+            return result;
         }
     }
 }

@@ -15,12 +15,19 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         }
         public int GetLastID()
         {
-            int id = (from orderItem
+            try
+            {
+                int id = (from orderItem
                       in context.OrderItems
-                      orderby orderItem.OrderItemID descending
-                      select orderItem.OrderItemID
+                          orderby orderItem.OrderItemID descending
+                          select orderItem.OrderItemID
                       ).FirstOrDefault();
-            return id;
+                return id;
+            }
+            catch(Exception ex)
+            {
+                return 0;
+            }
         }
         public void InsertOrderItem(int OrderID, int FDID, int Quantity, string Desc, string Status)
         {

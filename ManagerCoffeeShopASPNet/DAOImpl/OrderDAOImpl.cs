@@ -15,11 +15,18 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         }
         public int GetLastID()
         {
-            int id = (from order
+            try
+            {
+                int id = (from order
                      in context.Orders
-                      orderby order.OrderID descending
-                      select order.OrderID).FirstOrDefault();
-            return id;
+                          orderby order.OrderID descending
+                          select order.OrderID).FirstOrDefault();
+                return id;
+            }
+            catch(Exception ex)
+            {
+                return 0;
+            }
         }
         public bool InsertOrder(int PosID, DateTime OrderDateTime, DateTime PaidDateTime,
             double TotalAmount, string Currency, string Desc, string Status)

@@ -10,5 +10,6 @@ namespace ManagerCoffeeShopASPNet.DAO
     {
         IEnumerable<RecipeDetail> GetAllRecipeDetailByRecipeID(int RecipeID);
         bool InsertRecipeDetail(int RecID, int Step, int IngreID, double Amount, string Unit, string Desc);
+        int CountRecipeDetailByRecipeID(int RecipeID);
     }
 }
