@@ -46,9 +46,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine">
+      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource">
+      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared">
+      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -217,6 +223,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BatenderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DichVuController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ServiceController.cs" />
     <Compile Include="Areas\Admin\Models\IngredientMessage.cs" />
@@ -240,16 +247,27 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+<<<<<<< .mine
+||||||| .r30
+    <Compile Include="CrystalReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+=======
     <Compile Include="CrystalReport3.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CrystalReport3.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+>>>>>>> .r31
     <Compile Include="DAOImpl\AccountDAOImpl.cs" />
     <Compile Include="DAOImpl\BannerImageDAOImpl.cs" />
     <Compile Include="DAOImpl\BlogDAOImpl.cs" />
     <Compile Include="DAOImpl\FoodAndDrinkDAOImpl.cs" />
+    <Compile Include="DAOImpl\GiftDAOImpl.cs" />
     <Compile Include="DAOImpl\InfoIndexDAOImpl.cs" />
     <Compile Include="DAOImpl\IngredientDAOImpl.cs" />
     <Compile Include="DAOImpl\MenuDAOImpl.cs" />
@@ -257,12 +275,14 @@
     <Compile Include="DAOImpl\OrderDAOImpl.cs" />
     <Compile Include="DAOImpl\OrderItemDAOImpl.cs" />
     <Compile Include="DAOImpl\PositionDAOImpl.cs" />
+    <Compile Include="DAOImpl\PromotionDAOImpl.cs" />
     <Compile Include="DAOImpl\RecipeDAOImpl.cs" />
     <Compile Include="DAOImpl\RecipeDetailDAOImpl.cs" />
     <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DAO\BannerImageDAO.cs" />
     <Compile Include="DAO\BlogDAO.cs" />
     <Compile Include="DAO\FoodAndDrinkDAO.cs" />
+    <Compile Include="DAO\GiftDAO.cs" />
     <Compile Include="DAO\InfoIndexDAO.cs" />
     <Compile Include="DAO\IngredientDAO.cs" />
     <Compile Include="DAO\MenuDAO.cs" />
@@ -270,6 +290,7 @@
     <Compile Include="DAO\OrderDAO.cs" />
     <Compile Include="DAO\OrderItemDAO.cs" />
     <Compile Include="DAO\PositionDAO.cs" />
+    <Compile Include="DAO\PromotionDAO.cs" />
     <Compile Include="DAO\RecipeDAO.cs" />
     <Compile Include="DAO\RecipeDetailDAO.cs" />
     <Compile Include="DatabaseConnection\DataSQLConnection.cs" />
@@ -279,6 +300,7 @@
     </Compile>
     <Compile Include="Information\InformationAccountant.cs" />
     <Compile Include="Information\InformationBatender.cs" />
+    <Compile Include="Information\InformationDichVu.cs" />
     <Compile Include="Information\InformationService.cs" />
     <Compile Include="Information\InformationIndex.cs" />
     <Compile Include="Models\Account.cs" />
@@ -307,12 +329,21 @@
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Promotion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< .mine
+||||||| .r30
+    <Compile Include="Reporting\OrderItemGroupByOrderDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderItemGroupByOrderDataSet.xsd</DependentUpon>
+    </Compile>
+=======
     <Compile Include="Reporting\CrystalReport1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CrystalReport1.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+>>>>>>> .r31
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\Language.cs" />
   </ItemGroup>
@@ -370,7 +401,6 @@
     <Content Include="Areas\Admin\Views\Service\DetailOrder.cshtml" />
     <Content Include="Areas\Admin\Views\Service\GetListOrderItemNeedServiceGroupByFoodAnDrink.cshtml" />
     <Content Include="Content\MvcGrid\Fonts\GridGlyphs.woff" />
-    <Content Include="Areas\Admin\Views\Batender\GetListOrderItemNeedPreparetion.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\ReadRecipe.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\GetFormAddNewFoodAndDrink.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\GetAllFoodAndDrink.cshtml" />
@@ -380,9 +410,32 @@
     <Content Include="Areas\Admin\Views\Batender\CreateRecipeDetail.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\ShowAllRecipeDetailByRecipeID.cshtml" />
     <Content Include="Areas\Admin\Views\Service\GetAllOrderItem.cshtml" />
+<<<<<<< .mine
+    <Content Include="Areas\Admin\Views\DichVu\GetAllPromotion.cshtml" />
+    <Content Include="Areas\Admin\Views\Batender\GetListOrderItemNeedPreparetion.cshtml" />
+    <Content Include="Areas\Admin\Views\DichVu\GetFormAddNewPromotion.cshtml" />
+    <Content Include="Areas\Admin\Views\DichVu\EditPromotion.cshtml" />
+    <Content Include="Areas\Admin\Views\DichVu\GetAllGift.cshtml" />
+    <Content Include="Areas\Admin\Views\DichVu\GetFormAddNewGift.cshtml" />
+    <Content Include="Areas\Admin\Views\DichVu\EditGift.cshtml" />
+    <Content Include="Areas\Admin\Views\DichVu\DeleteGift.cshtml" />
+||||||| .r30
+    <Content Include="Reporting\OrderItemGroupByOrderDataSet.xsc">
+      <DependentUpon>OrderItemGroupByOrderDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Reporting\OrderItemGroupByOrderDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OrderItemGroupByOrderDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reporting\OrderItemGroupByOrderDataSet.xss">
+      <DependentUpon>OrderItemGroupByOrderDataSet.xsd</DependentUpon>
+    </Content>
+=======
     <Content Include="Areas\Admin\Views\Service\PrintReport.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\ShowAllIngredient.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\SendMessageIngredientWithOut.cshtml" />
+>>>>>>> .r31
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -481,6 +534,15 @@
   <ItemGroup>
     <Content Include="Assets\Main\js\scriptLogin.js" />
   </ItemGroup>
+<<<<<<< .mine
+||||||| .r30
+  <ItemGroup>
+    <EmbeddedResource Include="CrystalReport1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+=======
   <ItemGroup>
     <EmbeddedResource Include="CrystalReport3.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -491,6 +553,7 @@
       <LastGenOutput>CrystalReport1.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+>>>>>>> .r31
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
