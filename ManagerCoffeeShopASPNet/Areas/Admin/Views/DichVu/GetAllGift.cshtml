@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ManagerCoffeeShopASPNet.Gift>
+
+@{
+    ViewBag.Title = "GetAllGift";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>GetAllGift</h2>
+
+<p>
+    @Html.ActionLink("Add Gift", "GetFormAddNewGift", "DichVu", new { @class="btn btn-default"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SupplierID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Currency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Desc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SupplierID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Currency)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Desc)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditGift", "DichVu", new { GiftID = item.GiftID }, new { @class = "btn btn-default"})
+            @Html.ActionLink("Delete", "DeleteGift", "DichVu", new { GiftID = item.GiftID }, new { @class = "btn btn-default" })
+        </td>
+    </tr>
+}
+
+</table>
