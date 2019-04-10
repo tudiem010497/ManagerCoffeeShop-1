@@ -9,9 +9,17 @@
 
 <h2>GetAllFoodAndDrink</h2>
 
-<p>
-    @Html.ActionLink("Thêm đồ uống", "GetFormAddNewFoodAndDrink", "Batender", new { @class = "btn btn-primary" })
-</p>
+
+<div class="row">
+    <div class="col-sm-6">@Html.ActionLink("Thêm đồ uống", "GetFormAddNewFoodAndDrink", "Batender", new { @class = "btn btn-primary" })</div>
+    <div class="col-sm-6">
+        @using(Html.BeginForm("Batender", "GetAllFoodAndDrink", FormMethod.Get))
+        {
+            @Html.TextBox("Search")
+            <button type="submit">Search</button>
+        }
+    </div>
+</div>
 @*<input type="text" id="GridSearch" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">*@
 <table class="table">
     <tr>

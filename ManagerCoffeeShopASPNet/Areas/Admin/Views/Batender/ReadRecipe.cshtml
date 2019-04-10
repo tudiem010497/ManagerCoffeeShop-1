@@ -32,6 +32,7 @@
             }
             else
             {
+                //new { FDID = ViewData["FDID"] }
                 @Html.ActionLink("Thêm công thức","CreateRecipe", "Batender", new { FDID = ViewData["FDID"] }, new { @class="btn btn-primary" });
             }
         }

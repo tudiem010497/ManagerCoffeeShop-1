@@ -17,5 +17,12 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         {
             return context.Accounts.ToList();
         }
+        public Account GetAccountByEmail(string Email)
+        {
+            var acc = from account in context.Accounts
+                           where account.Email == Email
+                           select account;
+            return acc.ToArray().ElementAt(0);
+        }
     }
 }

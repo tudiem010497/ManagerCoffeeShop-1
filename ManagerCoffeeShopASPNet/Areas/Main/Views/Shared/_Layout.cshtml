@@ -165,17 +165,17 @@
                             <div id="id01" class="modal" style="width: 750px; margin: auto;">
 
                                 @*<form class="modal-content animate">*@
-                                @using (Html.BeginForm())
+                                @using (Html.BeginForm("Login", "Home", FormMethod.Post))
                                 {
                                     <div class="imgcontainer">
                                         <h2 style="color:gold; font-size:50px">LOGIN</h2>
                                     </div>
                                     @Html.AntiForgeryToken()
                                     <div class="container" style="width:auto">
-                                        <label for="username" style="color:white"><b>Username</b></label>
+                                        <label for="email" style="color:white"><b>Email</b></label>
                                         @*<input type="text" placeholder="Enter Username" name="username" id="username" required>*@
-                                        @Html.TextBoxFor(m => m.UserName, new { placeholder = "Enter Username", id = "username", required = "required" })
-                                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                                        @Html.TextBoxFor(m => m.Email, new { placeholder = "Enter your email", id = "email", required = "required" })
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
 
                                         <label for="password" style="color:white"><b>Password</b></label>
                                         @*<input type="password" placeholder="Enter Password" name="password" id="password" required>*@
@@ -210,7 +210,7 @@
                             <div id="id02" class="modal" style="width: 750px; margin: auto;">
                                 <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
                                 @*<form class="modal-content">*@
-                                @using (Html.BeginForm())
+                                @using (Html.BeginForm("SignUp", "Home", FormMethod.Post))
                                 {
                                     @Html.AntiForgeryToken()
                                     <div class="container" style="width: 750px; margin: auto;">
@@ -253,39 +253,10 @@
                         @*Cart*@
                         <li>
                             <a href="@Url.Action("Cart", "Cart")" id="ahihi"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
-                            @*<div id="id03" class="modal" style="width: 500px; margin-left: auto; margin-right:30px; margin-top:20px; background-color:white; height:300px">
-                                    <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>
-                                    @if (Model == null)
-                                    {
-                                        <p>
-                                            Giỏ hàng của bạn rỗng!!!
-                                            Hãy bắt đầu đi mua sắm  ^-^
-                                        </p>
-                                    }
-                                    else
-                                    {
-
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Food Name</th>
-                                                    <th>Quantity</th>
-                                                    <th>Price</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                    //lấy thông tin đặt hàng lưu vào bảng cart
-                                                    //sau đó lấy thông tin từ bảng cart hiển thị ra giỏ hàng
-
-                                            </tbody>
-                                        </table>
-                                    }
-                                </div>*@
                         </li>
                         <div id="resultLogin">
                             @*<div>*@
-                            @*<span id="demo" style="float:right">@ViewData["warning"]</span>*@
+                            <span id="demo" style="float:right">@ViewData["warning"]</span>
                             <span style="float:right;">@ViewData["error"]</span>
                             <span style="float:right">@ViewData["SignUpOK"]</span>
                             <span style="float:right">@ViewData["success"] </span>

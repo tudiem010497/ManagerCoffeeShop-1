@@ -24,14 +24,13 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
             IEnumerable<BannerImage> bannerImgs = infomationIndex.GetBannerImage();
             IEnumerable<InfoIndex> infoIndex = infomationIndex.GetInfoIndex();
             IEnumerable<FoodAndDrink> fds = infomationIndex.GetFoodAndDrink();
-            //IEnumerable<Cart> cart = infomationIndex.GetCart();
             //IEnumerable<Blog> blogs = infomationIndex.GetBlog();
             ViewData["infoIndex"] = infoIndex;
             ViewData["menus"] = menus;
             ViewData["bannerImgs"] = bannerImgs;
             ViewData["fds"] = fds;
             //ViewData["cart"] = cart;
-            //ViewData["warning"] = TempData["warning"];
+            ViewData["warning"] = TempData["warning"];
             ViewData["error"] = TempData["error"];
             ViewData["success"] = TempData["success"];
             ViewData["SignUpOK"] = TempData["SignUpOK"];
@@ -40,9 +39,27 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(LoginModel model)
+        [Route("Login")]
+        public ActionResult Login(LoginModel model)
         {
-            var result = new AccountModel().Login(model.UserName, model.Password);
+            var result = new AccountModel().Login(model.Email, model.Password);
+            if (result)
+            {
+                Account acc = infomationIndex.GetAccountByEmail(model.Email);
+                TempData["success"] = "Wellcome " + acc.UserName;
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["error"] = "Username or Password is incorrect. Please login again!";
+                return RedirectToAction("Index");
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("SignUp")]
+        public ActionResult SignUp(LoginModel model)
+        {
             var info = new AccountModel().InsertCustomer(model.Name, model.Email, model.Password);
             if (info == 1)
             {
@@ -51,16 +68,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
             }
             else
             {
-                if (result && ModelState.IsValid)
-                {
-                    TempData["success"] = "Wellcome " + model.UserName;
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    TempData["error"] = "Username or Password is incorrect. Please login again!";
-                    return RedirectToAction("Index");
-                }
+                TempData["warning"] = "Email already exists. Please enter another email.";
+                return RedirectToAction("Index");
             }
         }
     }

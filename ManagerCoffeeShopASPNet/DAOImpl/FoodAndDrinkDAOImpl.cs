@@ -32,11 +32,6 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         {
             return context.FoodAndDrinks.ToList();
         }
-        //public FoodAndDrink GetFoodAndDrink(string search)
-        //{
-        //    var fd = from foodAndDrink in context.FoodAndDrinks where foodAndDrink.Name == search select foodAndDrink;
-        //    return fd.ToArray().ElementAt(0);
-        //}
         public FoodAndDrink GetFoodAndDrinkByID(int id)
         {
             var fd = from foodAndDrink in context.FoodAndDrinks where foodAndDrink.FDID == id select foodAndDrink;

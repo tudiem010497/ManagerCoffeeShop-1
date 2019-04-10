@@ -21,12 +21,6 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             return View();
         }
 
-        //public ActionResult IndexGrid(string search)
-        //{
-
-        //    return View("GetAllFoodAndDrink");
-        //}
-
         /// <summary>
         /// Lấy danh sách đồ uống cần pha chế theo hóa đơn
         /// </summary>
@@ -190,9 +184,22 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         }
 
         [Route("GetAllFoodAndDrink")]
-        public ActionResult GetAllFoodAndDrink()
+        public ActionResult GetAllFoodAndDrink(string Search)
         {
             IEnumerable<FoodAndDrink> fds = info.GetAllFoodAndDrink();
+            List<FoodAndDrink> list = fds.ToList();
+            List<FoodAndDrink> temp = new List<FoodAndDrink>();
+            if (!String.IsNullOrEmpty(Search))
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (list[i].Name.ToLower().Contains(Search.ToLower()))
+                    {
+                        temp.Add(list[i]);
+                    }
+                }
+                fds = (IEnumerable<FoodAndDrink>)temp;
+            }
             return View(fds);
         }
 
@@ -209,20 +216,20 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             var Image = ImagePath;
             string fileName = ImagePath.FileName;
-            var path = Path.Combine(Server.MapPath("~/Assets/resource/img/recype"), fileName);
+            var path = Path.Combine(Server.MapPath("/Assets/resource/img/recype"), fileName);
             string fileNameNoExtension = Path.GetFileNameWithoutExtension(fileName);
             string extension = Path.GetExtension(fileName);
             int temp = 1;
             while (System.IO.File.Exists(path))
             {
                 fileName = fileNameNoExtension + "Copy(" + temp + ")"  + extension;
-                path = Path.Combine(Server.MapPath("~/Assets/resource/img/recype"), fileName);
+                path = Path.Combine(Server.MapPath("/Assets/resource/img/recype"), fileName);
                 temp++;
             }
             ImagePath.SaveAs(path);
-            string imagePath = "~/Assets/resource/img/recype/" + fileName;
+            string imagePath = "/Assets/resource/img/recype/" + fileName;
             bool result = info.InsertFoodAndDrink(Name, Desc, imagePath, Size, Type, UnitPrice, Currency);
-            return RedirectToAction("GetFormAddNewFoodAndDrink", "Batender");
+            return RedirectToAction("GetAllFoodAndDrink", "Batender");
         }
 
         [Route("EditFoodAndDrink")]
@@ -254,18 +261,18 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             var Image = ImagePath;
             string fileName = ImagePath.FileName;
-            var path = Path.Combine(Server.MapPath("~/Assets/resource/img/recype"), fileName);
+            var path = Path.Combine(Server.MapPath("/Assets/resource/img/recype"), fileName);
             string fileNameNoExtension = Path.GetFileNameWithoutExtension(fileName);
             string extension = Path.GetExtension(fileName);
             int temp = 1;
             while (System.IO.File.Exists(path))
             {
                 fileName = fileNameNoExtension + "Copy(" + temp + ")" + extension;
-                path = Path.Combine(Server.MapPath("~/Assets/resource/img/recype"), fileName);
+                path = Path.Combine(Server.MapPath("/Assets/resource/img/recype"), fileName);
                 temp++;
             }
             ImagePath.SaveAs(path);
-            string imagePath = "~/Assets/resource/img/recype/" + fileName;
+            string imagePath = "/Assets/resource/img/recype/" + fileName;
             FoodAndDrink fd = new FoodAndDrink();
             fd.FDID = FDID;
             fd.Name = Name;

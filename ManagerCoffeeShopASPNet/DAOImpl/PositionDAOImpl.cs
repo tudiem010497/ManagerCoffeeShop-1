@@ -17,5 +17,6 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         {
             return this.context.Positions.ToList();
         }
+        
     }
 }

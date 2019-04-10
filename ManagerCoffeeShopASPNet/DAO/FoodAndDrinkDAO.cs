@@ -11,7 +11,6 @@ namespace ManagerCoffeeShopASPNet.DAO
         int GetLastID();
         IEnumerable<FoodAndDrink> GetAllFoodAndDrink();
         FoodAndDrink GetFoodAndDrinkByID(int id);
-        //FoodAndDrink GetFoodAndDrink(string search);
         bool InsertFoodAndDrink(string Name, string Desc,
             string ImagePath, string Size, string Type, double UnitPrice, string Currency);
         bool DeleteFoodAndDrinkByFDID(int FDID);
