@@ -47,6 +47,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
             {
                 Account acc = infomationIndex.GetAccountByEmail(model.Email);
                 TempData["success"] = "Wellcome " + acc.UserName;
+                Session["email"] = model.Email;
                 return RedirectToAction("Index");
             }
             else

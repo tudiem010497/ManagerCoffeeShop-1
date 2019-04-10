@@ -1,5 +1,6 @@
 ﻿using ManagerCoffeeShopASPNet.Areas.Admin.Models;
 using ManagerCoffeeShopASPNet.Information;
+using ManagerCoffeeShopASPNet.ManagerSession;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -365,8 +366,21 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("DoSendMessageIngredientWithOut")]
         public ActionResult DoSendMessageIngredientWithOut(int IngreID, double Amount, string Unit, string SendMessage)
         {
-            TempData["message"] = "Gửi thành công";
-            bool result = info.InsertIngredientMessage(IngreID, Amount, Unit, SendMessage);
+            
+            ManagerSessionLogin session = new ManagerSessionLogin();
+            bool result = false;
+            if (session.GetCurrentUser()!= null)
+            {
+                result = info.InsertIngredientMessage(IngreID, Amount, Unit, SendMessage);
+                if (result == true)
+                    TempData["message"] = "Gửi thành công";
+                else TempData["error"] = "Gửi thất bại";
+            }
+            else
+            {
+                TempData["error"] = "Vui lòng đăng nhập";
+                return RedirectToAction("Index", "Home", new { area = "Main"});
+            }
             return RedirectToAction("SendMessageIngredientWithOut", "Batender");
         }
     }

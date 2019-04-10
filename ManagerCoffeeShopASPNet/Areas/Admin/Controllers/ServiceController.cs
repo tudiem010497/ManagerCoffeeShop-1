@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
 using System.Data.Entity.Infrastructure;
-﻿using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.CrystalReports.Engine;
 using ManagerCoffeeShopASPNet.Areas.Admin.Models;
 using ManagerCoffeeShopASPNet.Information;
 using Newtonsoft.Json;
@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data.Entity.Infrastructure;
-﻿//using CrystalDecisions.CrystalReports.Engine;
+//using CrystalDecisions.CrystalReports.Engine;
 using ManagerCoffeeShopASPNet.Areas.Admin.Models;
 using ManagerCoffeeShopASPNet.Information;
 using Newtonsoft.Json;
@@ -30,6 +30,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using ManagerCoffeeShopASPNet.ManagerSession;
 
 namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
 {

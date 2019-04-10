@@ -37,8 +37,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Models
                     context.sp_INSERT_ACCOUNT_CUSTOMER(Name, Email, Password, "Customer");
                     return 1;
                 }
-                
             }
         }
+        
     }
 }

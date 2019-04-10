@@ -19,10 +19,10 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         }
         public Account GetAccountByEmail(string Email)
         {
-            var acc = from account in context.Accounts
-                           where account.Email == Email
-                           select account;
-            return acc.ToArray().ElementAt(0);
+            Account acc = (from account in context.Accounts
+                       where account.Email == Email
+                       select account).SingleOrDefault();
+            return acc;
         }
     }
 }
