@@ -265,6 +265,6 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             Stream stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
             return File(stream, "application/pdf", "CustomerList.pdf");
+         }
     }
-}
 }
