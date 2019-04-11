@@ -853,66 +853,24 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
-<<<<<<< .mine
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_INSERT_ACCOUNT_CUSTOMER")]
-		public int sp_INSERT_ACCOUNT_CUSTOMER([global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserName", DbType="VarChar(30)")] string userName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(30)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Password", DbType="VarChar(20)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AccType", DbType="VarChar(10)")] string accType)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userName, email, password, accType);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Account_Login_Check")]
-		public int sp_Account_Login_Check([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(30)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Password", DbType="VarChar(20)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] ref System.Nullable<bool> res)
-||||||| .r30
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Account_Login_Check")]
-		public int sp_Account_Login_Check([global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserName", DbType="VarChar(30)")] string userName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Password", DbType="VarChar(20)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] ref System.Nullable<bool> res)
-=======
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
 		
 		protected virtual void SendPropertyChanging()
->>>>>>> .r31
 		{
-<<<<<<< .mine
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, password, res);
-			res = ((System.Nullable<bool>)(result.GetParameterValue(2)));
-			return ((int)(result.ReturnValue));
-||||||| .r30
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userName, password, res);
-			res = ((System.Nullable<bool>)(result.GetParameterValue(2)));
-			return ((int)(result.ReturnValue));
-=======
 			if ((this.PropertyChanging != null))
 			{
 				this.PropertyChanging(this, emptyChangingEventArgs);
 			}
->>>>>>> .r31
 		}
 		
-<<<<<<< .mine
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Account_Email_Check")]
-		public int sp_Account_Email_Check([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(30)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] ref System.Nullable<bool> res)
-||||||| .r30
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_INSERT_ACCOUNT_CUSTOMER")]
-		public int sp_INSERT_ACCOUNT_CUSTOMER([global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserName", DbType="VarChar(30)")] string userName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(30)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Password", DbType="VarChar(20)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AccType", DbType="VarChar(10)")] string accType)
-=======
 		protected virtual void SendPropertyChanged(String propertyName)
->>>>>>> .r31
 		{
-<<<<<<< .mine
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, res);
-			res = ((System.Nullable<bool>)(result.GetParameterValue(1)));
-			return ((int)(result.ReturnValue));
-||||||| .r30
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userName, email, password, accType);
-			return ((int)(result.ReturnValue));
-=======
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
->>>>>>> .r31
 		}
 	}
 	

@@ -226,7 +226,6 @@
     <Compile Include="Areas\Admin\Controllers\DichVuController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ServiceController.cs" />
-    <Compile Include="Areas\Admin\Models\IngredientMessage.cs" />
     <Compile Include="Areas\Admin\Models\ListOrderItemGroupByFoodAndDrink.cs" />
     <Compile Include="Areas\Admin\Models\OrderItemGroupByFoodAndDrink.cs" />
     <Compile Include="Areas\Admin\Models\OrderItemModel.cs" />
@@ -247,7 +246,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
->>>>>>> .r31
     <Compile Include="DAOImpl\AccountDAOImpl.cs" />
     <Compile Include="DAOImpl\BannerImageDAOImpl.cs" />
     <Compile Include="DAOImpl\BlogDAOImpl.cs" />
@@ -315,21 +313,12 @@
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Promotion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-<<<<<<< .mine
-||||||| .r30
-    <Compile Include="Reporting\OrderItemGroupByOrderDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OrderItemGroupByOrderDataSet.xsd</DependentUpon>
-    </Compile>
-=======
     <Compile Include="Reporting\CrystalReport1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CrystalReport1.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
->>>>>>> .r31
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\Language.cs" />
   </ItemGroup>
@@ -396,7 +385,6 @@
     <Content Include="Areas\Admin\Views\Batender\CreateRecipeDetail.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\ShowAllRecipeDetailByRecipeID.cshtml" />
     <Content Include="Areas\Admin\Views\Service\GetAllOrderItem.cshtml" />
-<<<<<<< .mine
     <Content Include="Areas\Admin\Views\DichVu\GetAllPromotion.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\GetListOrderItemNeedPreparetion.cshtml" />
     <Content Include="Areas\Admin\Views\DichVu\GetFormAddNewPromotion.cshtml" />
@@ -405,23 +393,9 @@
     <Content Include="Areas\Admin\Views\DichVu\GetFormAddNewGift.cshtml" />
     <Content Include="Areas\Admin\Views\DichVu\EditGift.cshtml" />
     <Content Include="Areas\Admin\Views\DichVu\DeleteGift.cshtml" />
-||||||| .r30
-    <Content Include="Reporting\OrderItemGroupByOrderDataSet.xsc">
-      <DependentUpon>OrderItemGroupByOrderDataSet.xsd</DependentUpon>
-    </Content>
-    <None Include="Reporting\OrderItemGroupByOrderDataSet.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>OrderItemGroupByOrderDataSet.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="Reporting\OrderItemGroupByOrderDataSet.xss">
-      <DependentUpon>OrderItemGroupByOrderDataSet.xsd</DependentUpon>
-    </Content>
-=======
     <Content Include="Areas\Admin\Views\Service\PrintReport.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\ShowAllIngredient.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\SendMessageIngredientWithOut.cshtml" />
->>>>>>> .r31
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -520,15 +494,12 @@
   <ItemGroup>
     <Content Include="Assets\Main\js\scriptLogin.js" />
   </ItemGroup>
-<<<<<<< .mine
-||||||| .r30
   <ItemGroup>
     <EmbeddedResource Include="Reporting\CrystalReport1.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport1.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
->>>>>>> .r31
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
