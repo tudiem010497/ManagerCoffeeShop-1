@@ -100,9 +100,9 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._recipeDetailDAO.CountRecipeDetailByRecipeID(RecipeID);
         }
-        public bool InsertIngredientMessage(int IngreID, double Amount, string Unit, string SendMessage)
+        public bool InsertIngredientMessage(int IngreID, int EmployeeID, double Amount, string Unit, string SendMessage)
         {
-            return this._ingredientMessageDAO.InsertIngredientMessage(IngreID, Amount, Unit, SendMessage);
+            return this._ingredientMessageDAO.InsertIngredientMessage(IngreID, EmployeeID, Amount, Unit, SendMessage);
         }
     }
 }
