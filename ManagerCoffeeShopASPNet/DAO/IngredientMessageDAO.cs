@@ -8,7 +8,7 @@ namespace ManagerCoffeeShopASPNet.DAO
 {
     interface IngredientMessageDAO
     {
-        bool InsertIngredientMessage(int IngreID, double Amount, string Unit, string SendMessage);
+        bool InsertIngredientMessage(int IngreID, int EmployeeID, double Amount, string Unit, string SendMessage);
         int GetLastIngreMessageID();
     }
 }
