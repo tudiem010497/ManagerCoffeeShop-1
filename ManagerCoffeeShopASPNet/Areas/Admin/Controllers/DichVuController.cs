@@ -38,6 +38,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             }
             return View(promotion);
         }
+
         [Route("GetFormAddNewPromotion")]
         public ActionResult GetFormAddNewPromotion()
         {
@@ -67,10 +68,24 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             bool result = info.EditPromotion(p);
             return RedirectToAction("GetAllPromotion", "DichVu");
         }
+
         [Route("GetAllGift")]
-        public ActionResult GetAllGift()
+        public ActionResult GetAllGift(string search)
         {
             IEnumerable<Gift> gift = info.GetAllGift();
+            List<Gift> list = gift.ToList();
+            List<Gift> temp = new List<Gift>();
+            if (!String.IsNullOrEmpty(search))
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (list[i].Name.ToLower().Contains(search.ToLower()))
+                    {
+                        temp.Add(list[i]);
+                    }
+                }
+                gift = (IEnumerable<Gift>)temp;
+            }
             return View(gift);
         }
 

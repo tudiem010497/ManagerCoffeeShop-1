@@ -6,10 +6,18 @@
 }
 
 <h2>GetAllGift</h2>
-
-<p>
-    @Html.ActionLink("Add Gift", "GetFormAddNewGift", "DichVu", new { @class="btn btn-default"})
-</p>
+<div class="row">
+    <div class="col-sm-6">
+        @Html.ActionLink("Add Gift", "GetFormAddNewGift", "DichVu", new { @class = "btn btn-default" })
+    </div>
+    <div class="col-sm-6">
+        @using (Html.BeginForm("DichVu", "GetAllPromotion", FormMethod.Get))
+        {
+            @Html.TextBox("Search")
+            <button type="submit">Search</button>
+        }
+    </div>
+</div>
 <table class="table">
     <tr>
         <th>
