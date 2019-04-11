@@ -1,0 +1,22 @@
+﻿@model List<ManagerCoffeeShopASPNet.Areas.Admin.Models.IngredientMessage>
+@using NonFactors.Mvc.Grid
+@{
+    ViewBag.Title = "ShowAllIngredient";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <div class="col-sm-6 ingredientSendMessage">
+        @(Html
+        .Grid(Model)
+        .Build(columns =>
+        {
+            columns.Add(model => Html.CheckBox("Check_" + model.IngreID, false)).Titled(Html.CheckBox("CheckAll"));
+            columns.Add(model => model.Name);
+        })
+        )
+        @Html.ActionLink("Tạo danh sách", "CreateIngredientSendMessage","Batender", new { @class ="btn btn-success"})
+    </div>
+
+</div>
+
+
