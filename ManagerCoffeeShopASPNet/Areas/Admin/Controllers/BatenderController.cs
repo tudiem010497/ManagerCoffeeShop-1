@@ -369,16 +369,18 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             
             ManagerSessionLogin session = new ManagerSessionLogin();
             bool result = false;
-            if (session.GetCurrentUser()!= null)
+            if (session.GetCurrentEmployee() != null)
             {
-                result = info.InsertIngredientMessage(IngreID, Amount, Unit, SendMessage);
+                Employee em = session.GetCurrentEmployee();
+                int EmployeeID = em.EmployeeID;
+                result = info.InsertIngredientMessage(IngreID, EmployeeID, Amount, Unit, SendMessage);
                 if (result == true)
                     TempData["message"] = "Gửi thành công";
                 else TempData["error"] = "Gửi thất bại";
             }
             else
             {
-                TempData["error"] = "Vui lòng đăng nhập";
+                TempData["error"] = "Vui lòng đăng nhập với tài khoản admin";
                 return RedirectToAction("Index", "Home", new { area = "Main"});
             }
             return RedirectToAction("SendMessageIngredientWithOut", "Batender");
