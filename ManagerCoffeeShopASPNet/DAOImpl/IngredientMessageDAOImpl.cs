@@ -1,4 +1,5 @@
 ﻿using ManagerCoffeeShopASPNet.DAO;
+using ManagerCoffeeShopASPNet.ManagerSession;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,12 +27,13 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             }
             
         }
-        public bool InsertIngredientMessage(int IngreID, double Amount, string Unit, string SendMessage)
+        public bool InsertIngredientMessage(int IngreID, int EmployeeID, double Amount, string Unit, string SendMessage)
         {
             try
             {
                 int ingreMessageID = GetLastIngreMessageID() + 1;
                 IngredientMessage ingreMess = new IngredientMessage();
+                ingreMess.EmployeeID = EmployeeID;
                 ingreMess.IngreMessageID = ingreMessageID;
                 ingreMess.IngreID = IngreID;
                 ingreMess.Amount = Amount;

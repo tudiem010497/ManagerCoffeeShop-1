@@ -8,7 +8,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
 {
     public class AccountDAOImpl:AccountDAO
     {
-        CoffeeShopDBDataContext context;
+        private CoffeeShopDBDataContext context;
         public AccountDAOImpl()
         {
             this.context = new CoffeeShopDBDataContext(); 
