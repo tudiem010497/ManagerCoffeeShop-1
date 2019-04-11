@@ -249,6 +249,8 @@
     <Compile Include="DAOImpl\AccountDAOImpl.cs" />
     <Compile Include="DAOImpl\BannerImageDAOImpl.cs" />
     <Compile Include="DAOImpl\BlogDAOImpl.cs" />
+    <Compile Include="DAOImpl\CustomerDAOImpl.cs" />
+    <Compile Include="DAOImpl\EmployeeDAOImpl.cs" />
     <Compile Include="DAOImpl\FoodAndDrinkDAOImpl.cs" />
     <Compile Include="DAOImpl\GiftDAOImpl.cs" />
     <Compile Include="DAOImpl\InfoIndexDAOImpl.cs" />
@@ -264,6 +266,8 @@
     <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DAO\BannerImageDAO.cs" />
     <Compile Include="DAO\BlogDAO.cs" />
+    <Compile Include="DAO\CustomerDAO.cs" />
+    <Compile Include="DAO\EmployeeDAO.cs" />
     <Compile Include="DAO\FoodAndDrinkDAO.cs" />
     <Compile Include="DAO\GiftDAO.cs" />
     <Compile Include="DAO\InfoIndexDAO.cs" />
