@@ -1,11 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CoffeeShopDB" Class="CoffeeShopDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-HA2TCUF;Initial Catalog=CoffeeShopDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CoffeeShopDBConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.BannerImage" Member="BannerImages">
-    <Type Name="BannerImage">
-      <Column Name="BannerImageID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="BannerImagePath" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.Account" Member="Accounts">
     <Type Name="Account">
       <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -15,7 +9,15 @@
       <Column Name="AccType" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Position" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
       <Column Name="Avatar" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="Account_Customer" Member="Customers" ThisKey="UserID" OtherKey="UserID" Type="Customer" />
+      <Association Name="Account_Employee" Member="Employees" ThisKey="UserID" OtherKey="UserID" Type="Employee" />
       <Association Name="Account_RoleMap" Member="RoleMaps" ThisKey="UserID" OtherKey="UserID" Type="RoleMap" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BannerImage" Member="BannerImages">
+    <Type Name="BannerImage">
+      <Column Name="BannerImageID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BannerImagePath" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.BasicSalary" Member="BasicSalaries">
@@ -88,6 +90,7 @@
   <Table Name="dbo.Customer" Member="Customers">
     <Type Name="Customer">
       <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="DOB" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="Address" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
@@ -97,22 +100,29 @@
       <Association Name="Customer_Order" Member="Orders" ThisKey="CustomerID" OtherKey="CustomerID" Type="Order" />
       <Association Name="Customer_Reservation" Member="Reservations" ThisKey="CustomerID" OtherKey="CustomerID" Type="Reservation" />
       <Association Name="Customer_Server" Member="Servers" ThisKey="CustomerID" OtherKey="CustomerID" Type="Server" />
+      <Association Name="Account_Customer" Member="Account" ThisKey="UserID" OtherKey="UserID" Type="Account" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Employee" Member="Employees">
     <Type Name="Employee">
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CSID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Address" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Phone" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DOB" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="IndentityNum" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Association Name="Employee_BasicSalary" Member="BasicSalaries" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="BasicSalary" />
       <Association Name="Employee_CoffeeBrewing" Member="CoffeeBrewings" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="CoffeeBrewing" />
+      <Association Name="Employee_IngredientMessage" Member="IngredientMessages" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="IngredientMessage" />
       <Association Name="Employee_Server" Member="Servers" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Server" />
       <Association Name="Employee_Ship" Member="Ships" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Ship" />
       <Association Name="Employee_TimeSheet" Member="TimeSheets" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="TimeSheet" />
-      <Association Name="Employee_IngredientMessage" Member="IngredientMessages" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="IngredientMessage" />
       <Association Name="CoffeeShop_Employee" Member="CoffeeShop" ThisKey="CSID" OtherKey="CSID" Type="CoffeeShop" IsForeignKey="true" />
+      <Association Name="Account_Employee" Member="Account" ThisKey="UserID" OtherKey="UserID" Type="Account" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ESTIngredient" Member="ESTIngredients">
@@ -250,6 +260,22 @@
       <Column Name="BookInfo" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.IngredientMessage" Member="IngredientMessages">
+    <Type Name="IngredientMessage">
+      <Column Name="IngreMessageID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IngreID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Unit" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ConfirmDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SendMessage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ReceiveMessage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="Employee_IngredientMessage" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
+      <Association Name="Ingredient_IngredientMessage" Member="Ingredient" ThisKey="IngreID" OtherKey="IngreID" Type="Ingredient" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Ingredients" Member="Ingredients">
     <Type Name="Ingredient">
       <Column Name="IngreID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -258,11 +284,11 @@
       <Column Name="Amount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="Unit" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
       <Association Name="Ingredient_ESTIngredient" Member="ESTIngredients" ThisKey="IngreID" OtherKey="IngreID" Type="ESTIngredient" />
+      <Association Name="Ingredient_IngredientMessage" Member="IngredientMessages" ThisKey="IngreID" OtherKey="IngreID" Type="IngredientMessage" />
       <Association Name="Ingredient_IngredientsMapSupplier" Member="IngredientsMapSuppliers" ThisKey="IngreID" OtherKey="IngreID" Type="IngredientsMapSupplier" />
       <Association Name="Ingredient_IngreExchange" Member="IngreExchanges" ThisKey="IngreID" OtherKey="IngreID" Type="IngreExchange" />
       <Association Name="Ingredient_ReceiptDetail" Member="ReceiptDetails" ThisKey="IngreID" OtherKey="IngreID" Type="ReceiptDetail" />
       <Association Name="Ingredient_RecipeDetail" Member="RecipeDetails" ThisKey="IngreID" OtherKey="IngreID" Type="RecipeDetail" />
-      <Association Name="Ingredient_IngredientMessage" Member="IngredientMessages" ThisKey="IngreID" OtherKey="IngreID" Type="IngredientMessage" />
       <Association Name="Supplier_Ingredient" Member="Supplier" ThisKey="SupplierID" OtherKey="SupplierID" Type="Supplier" IsForeignKey="true" />
     </Type>
   </Table>
@@ -479,6 +505,7 @@
   </Table>
   <Table Name="dbo.RoleMap" Member="RoleMaps">
     <Type Name="RoleMap">
+      <Column Name="RoleMapID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="AccType" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
@@ -571,22 +598,6 @@
       <Column Name="Currency" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="TimeSheet_TimeSheetDetail" Member="TimeSheet" ThisKey="TimeSheetID" OtherKey="TimeSheetID" Type="TimeSheet" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.IngredientMessage" Member="IngredientMessages">
-    <Type Name="IngredientMessage">
-      <Column Name="IngreMessageID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="IngreID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Amount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="Unit" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="MessageDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="ConfirmDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="SendMessage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="ReceiveMessage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Status" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Association Name="Employee_IngredientMessage" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
-      <Association Name="Ingredient_IngredientMessage" Member="Ingredient" ThisKey="IngreID" OtherKey="IngreID" Type="Ingredient" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.sp_INSERT_ACCOUNT_CUSTOMER" Method="sp_INSERT_ACCOUNT_CUSTOMER">
