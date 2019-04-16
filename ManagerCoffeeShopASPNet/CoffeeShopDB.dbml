@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CoffeeShopDB" Class="CoffeeShopDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-HA2TCUF;Initial Catalog=CoffeeShopDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CoffeeShopDBConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-UE1A1CU\SQLEXPRESS;Initial Catalog=CoffeeShopDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CoffeeShopDBConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Account" Member="Accounts">
     <Type Name="Account">
       <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -8,10 +8,25 @@
       <Column Name="Email" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="AccType" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Position" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="Avatar" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Avatar" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Association Name="Account_Customer" Member="Customers" ThisKey="UserID" OtherKey="UserID" Type="Customer" />
       <Association Name="Account_Employee" Member="Employees" ThisKey="UserID" OtherKey="UserID" Type="Employee" />
       <Association Name="Account_RoleMap" Member="RoleMaps" ThisKey="UserID" OtherKey="UserID" Type="RoleMap" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TimeSheetDetail" Member="TimeSheetDetails">
+    <Type Name="TimeSheetDetail">
+      <Column Name="TimeSheetID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Day" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="RegisterTimeIn" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="RegisterTimeOut" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="TimeIn" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="TimeOut" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="Bonus" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="TimeSheet_TimeSheetDetail" Member="TimeSheet" ThisKey="TimeSheetID" OtherKey="TimeSheetID" Type="TimeSheet" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.BannerImage" Member="BannerImages">
@@ -109,6 +124,7 @@
       <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CSID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Address" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Phone" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="DOB" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
@@ -283,6 +299,8 @@
       <Column Name="Name" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
       <Column Name="Amount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="Unit" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="UnitPrice" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
       <Association Name="Ingredient_ESTIngredient" Member="ESTIngredients" ThisKey="IngreID" OtherKey="IngreID" Type="ESTIngredient" />
       <Association Name="Ingredient_IngredientMessage" Member="IngredientMessages" ThisKey="IngreID" OtherKey="IngreID" Type="IngredientMessage" />
       <Association Name="Ingredient_IngredientsMapSupplier" Member="IngredientsMapSuppliers" ThisKey="IngreID" OtherKey="IngreID" Type="IngredientsMapSupplier" />
@@ -583,21 +601,6 @@
       <Column Name="Currency" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
       <Association Name="TimeSheet_TimeSheetDetail" Member="TimeSheetDetails" ThisKey="TimeSheetID" OtherKey="TimeSheetID" Type="TimeSheetDetail" />
       <Association Name="Employee_TimeSheet" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.TimeSheetDetail" Member="TimeSheetDetails">
-    <Type Name="TimeSheetDetail">
-      <Column Name="TimeSheetID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Day" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="RegisterTimeIn" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="RegisterTimeOut" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="TimeIn" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="TimeOut" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="Bonus" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Currency" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="TimeSheet_TimeSheetDetail" Member="TimeSheet" ThisKey="TimeSheetID" OtherKey="TimeSheetID" Type="TimeSheet" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.sp_INSERT_ACCOUNT_CUSTOMER" Method="sp_INSERT_ACCOUNT_CUSTOMER">

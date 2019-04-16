@@ -169,6 +169,14 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
+		public System.Data.Linq.Table<TimeSheetDetail> TimeSheetDetails
+		{
+			get
+			{
+				return this.GetTable<TimeSheetDetail>();
+			}
+		}
+		
 		public System.Data.Linq.Table<BannerImage> BannerImages
 		{
 			get
@@ -553,14 +561,6 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
-		public System.Data.Linq.Table<TimeSheetDetail> TimeSheetDetails
-		{
-			get
-			{
-				return this.GetTable<TimeSheetDetail>();
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_INSERT_ACCOUNT_CUSTOMER")]
 		public int sp_INSERT_ACCOUNT_CUSTOMER([global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserName", DbType="VarChar(30)")] string userName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(30)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Password", DbType="VarChar(20)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AccType", DbType="VarChar(10)")] string accType)
 		{
@@ -759,7 +759,7 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Avatar", DbType="VarChar(30)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Avatar", DbType="VarChar(MAX)")]
 		public string Avatar
 		{
 			get
@@ -872,6 +872,195 @@ namespace ManagerCoffeeShopASPNet
 		{
 			this.SendPropertyChanging();
 			entity.Account = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TimeSheetDetail")]
+	public partial class TimeSheetDetail
+	{
+		
+		private int _TimeSheetID;
+		
+		private string _Day;
+		
+		private System.DateTime _Date;
+		
+		private System.TimeSpan _RegisterTimeIn;
+		
+		private System.TimeSpan _RegisterTimeOut;
+		
+		private System.TimeSpan _TimeIn;
+		
+		private System.TimeSpan _TimeOut;
+		
+		private System.Nullable<double> _Bonus;
+		
+		private string _Currency;
+		
+		private string _Desc;
+		
+		public TimeSheetDetail()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeSheetID", DbType="Int NOT NULL")]
+		public int TimeSheetID
+		{
+			get
+			{
+				return this._TimeSheetID;
+			}
+			set
+			{
+				if ((this._TimeSheetID != value))
+				{
+					this._TimeSheetID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Day", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Day
+		{
+			get
+			{
+				return this._Day;
+			}
+			set
+			{
+				if ((this._Day != value))
+				{
+					this._Day = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="Date NOT NULL")]
+		public System.DateTime Date
+		{
+			get
+			{
+				return this._Date;
+			}
+			set
+			{
+				if ((this._Date != value))
+				{
+					this._Date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisterTimeIn", DbType="Time NOT NULL")]
+		public System.TimeSpan RegisterTimeIn
+		{
+			get
+			{
+				return this._RegisterTimeIn;
+			}
+			set
+			{
+				if ((this._RegisterTimeIn != value))
+				{
+					this._RegisterTimeIn = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisterTimeOut", DbType="Time NOT NULL")]
+		public System.TimeSpan RegisterTimeOut
+		{
+			get
+			{
+				return this._RegisterTimeOut;
+			}
+			set
+			{
+				if ((this._RegisterTimeOut != value))
+				{
+					this._RegisterTimeOut = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeIn", DbType="Time NOT NULL")]
+		public System.TimeSpan TimeIn
+		{
+			get
+			{
+				return this._TimeIn;
+			}
+			set
+			{
+				if ((this._TimeIn != value))
+				{
+					this._TimeIn = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeOut", DbType="Time NOT NULL")]
+		public System.TimeSpan TimeOut
+		{
+			get
+			{
+				return this._TimeOut;
+			}
+			set
+			{
+				if ((this._TimeOut != value))
+				{
+					this._TimeOut = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bonus", DbType="Float")]
+		public System.Nullable<double> Bonus
+		{
+			get
+			{
+				return this._Bonus;
+			}
+			set
+			{
+				if ((this._Bonus != value))
+				{
+					this._Bonus = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Currency", DbType="VarChar(10)")]
+		public string Currency
+		{
+			get
+			{
+				return this._Currency;
+			}
+			set
+			{
+				if ((this._Currency != value))
+				{
+					this._Currency = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Desc]", Storage="_Desc", DbType="NVarChar(50)")]
+		public string Desc
+		{
+			get
+			{
+				return this._Desc;
+			}
+			set
+			{
+				if ((this._Desc != value))
+				{
+					this._Desc = value;
+				}
+			}
 		}
 	}
 	
@@ -2441,6 +2630,8 @@ namespace ManagerCoffeeShopASPNet
 		
 		private string _Name;
 		
+		private string _Email;
+		
 		private string _Address;
 		
 		private string _Phone;
@@ -2475,6 +2666,8 @@ namespace ManagerCoffeeShopASPNet
     partial void OnCSIDChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
     partial void OnAddressChanging(string value);
     partial void OnAddressChanged();
     partial void OnPhoneChanging(string value);
@@ -2583,6 +2776,26 @@ namespace ManagerCoffeeShopASPNet
 					this._Name = value;
 					this.SendPropertyChanged("Name");
 					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
 				}
 			}
 		}
@@ -5093,6 +5306,10 @@ namespace ManagerCoffeeShopASPNet
 		
 		private string _Unit;
 		
+		private double _UnitPrice;
+		
+		private string _Currency;
+		
 		private EntitySet<IngredientMessage> _IngredientMessages;
 		
 		private EntitySet<IngredientsMapSupplier> _IngredientsMapSuppliers;
@@ -5115,6 +5332,10 @@ namespace ManagerCoffeeShopASPNet
     partial void OnAmountChanged();
     partial void OnUnitChanging(string value);
     partial void OnUnitChanged();
+    partial void OnUnitPriceChanging(double value);
+    partial void OnUnitPriceChanged();
+    partial void OnCurrencyChanging(string value);
+    partial void OnCurrencyChanged();
     #endregion
 		
 		public Ingredient()
@@ -5226,6 +5447,46 @@ namespace ManagerCoffeeShopASPNet
 					this._Unit = value;
 					this.SendPropertyChanged("Unit");
 					this.OnUnitChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitPrice", DbType="Float NOT NULL")]
+		public double UnitPrice
+		{
+			get
+			{
+				return this._UnitPrice;
+			}
+			set
+			{
+				if ((this._UnitPrice != value))
+				{
+					this.OnUnitPriceChanging(value);
+					this.SendPropertyChanging();
+					this._UnitPrice = value;
+					this.SendPropertyChanged("UnitPrice");
+					this.OnUnitPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Currency", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Currency
+		{
+			get
+			{
+				return this._Currency;
+			}
+			set
+			{
+				if ((this._Currency != value))
+				{
+					this.OnCurrencyChanging(value);
+					this.SendPropertyChanging();
+					this._Currency = value;
+					this.SendPropertyChanged("Currency");
+					this.OnCurrencyChanged();
 				}
 			}
 		}
@@ -9896,195 +10157,6 @@ namespace ManagerCoffeeShopASPNet
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TimeSheetDetail")]
-	public partial class TimeSheetDetail
-	{
-		
-		private int _TimeSheetID;
-		
-		private string _Day;
-		
-		private System.DateTime _Date;
-		
-		private System.TimeSpan _RegisterTimeIn;
-		
-		private System.TimeSpan _RegisterTimeOut;
-		
-		private System.TimeSpan _TimeIn;
-		
-		private System.TimeSpan _TimeOut;
-		
-		private System.Nullable<double> _Bonus;
-		
-		private string _Currency;
-		
-		private string _Desc;
-		
-		public TimeSheetDetail()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeSheetID", DbType="Int NOT NULL")]
-		public int TimeSheetID
-		{
-			get
-			{
-				return this._TimeSheetID;
-			}
-			set
-			{
-				if ((this._TimeSheetID != value))
-				{
-					this._TimeSheetID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Day", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string Day
-		{
-			get
-			{
-				return this._Day;
-			}
-			set
-			{
-				if ((this._Day != value))
-				{
-					this._Day = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="Date NOT NULL")]
-		public System.DateTime Date
-		{
-			get
-			{
-				return this._Date;
-			}
-			set
-			{
-				if ((this._Date != value))
-				{
-					this._Date = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisterTimeIn", DbType="Time NOT NULL")]
-		public System.TimeSpan RegisterTimeIn
-		{
-			get
-			{
-				return this._RegisterTimeIn;
-			}
-			set
-			{
-				if ((this._RegisterTimeIn != value))
-				{
-					this._RegisterTimeIn = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisterTimeOut", DbType="Time NOT NULL")]
-		public System.TimeSpan RegisterTimeOut
-		{
-			get
-			{
-				return this._RegisterTimeOut;
-			}
-			set
-			{
-				if ((this._RegisterTimeOut != value))
-				{
-					this._RegisterTimeOut = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeIn", DbType="Time NOT NULL")]
-		public System.TimeSpan TimeIn
-		{
-			get
-			{
-				return this._TimeIn;
-			}
-			set
-			{
-				if ((this._TimeIn != value))
-				{
-					this._TimeIn = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeOut", DbType="Time NOT NULL")]
-		public System.TimeSpan TimeOut
-		{
-			get
-			{
-				return this._TimeOut;
-			}
-			set
-			{
-				if ((this._TimeOut != value))
-				{
-					this._TimeOut = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bonus", DbType="Float")]
-		public System.Nullable<double> Bonus
-		{
-			get
-			{
-				return this._Bonus;
-			}
-			set
-			{
-				if ((this._Bonus != value))
-				{
-					this._Bonus = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Currency", DbType="VarChar(10)")]
-		public string Currency
-		{
-			get
-			{
-				return this._Currency;
-			}
-			set
-			{
-				if ((this._Currency != value))
-				{
-					this._Currency = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Desc]", Storage="_Desc", DbType="NVarChar(50)")]
-		public string Desc
-		{
-			get
-			{
-				return this._Desc;
-			}
-			set
-			{
-				if ((this._Desc != value))
-				{
-					this._Desc = value;
-				}
 			}
 		}
 	}
