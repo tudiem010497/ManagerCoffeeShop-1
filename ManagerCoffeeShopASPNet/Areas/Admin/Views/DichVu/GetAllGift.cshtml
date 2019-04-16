@@ -11,7 +11,7 @@
         @Html.ActionLink("Add Gift", "GetFormAddNewGift", "DichVu", new { @class = "btn btn-default" })
     </div>
     <div class="col-sm-6">
-        @using (Html.BeginForm("DichVu", "GetAllPromotion", FormMethod.Get))
+        @using (Html.BeginForm("DichVu", "GetAllGift", FormMethod.Get))
         {
             @Html.TextBox("Search")
             <button type="submit">Search</button>
