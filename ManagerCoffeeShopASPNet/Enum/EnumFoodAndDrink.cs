@@ -9,7 +9,5 @@ namespace ManagerCoffeeShopASPNet.Enum
     {
         public enum Size { Small, Medium, Large }
         public enum Type { coffee, snacks}
-        public enum Currency { VND, USD}
     }
-   
 }
