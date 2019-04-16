@@ -44,6 +44,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
                 //cart.Price = cart.Price * test;
             }
             Session["cart"] = list;
+            
             return Json(new { FDID = temp.FDID, Name = temp.Name, Quantity = temp.Quantity, UnitPrice = temp.Total, Price = temp.Price }, JsonRequestBehavior.AllowGet);
         }
         /// controller này 
