@@ -9,5 +9,10 @@ namespace ManagerCoffeeShopASPNet.DAO
     interface IngredientDAO
     {
         IEnumerable<Ingredient> GetAllIngredient();
+        Ingredient GetIngredientByIngreID(int IngreID);
+        bool EditIngredient(int IngreID, int SupplierID, string Name,
+            double Amount, string Unit, double UnitPrice, string Currency);
+        bool InsertIngredient(int SupplierID, string Name,
+            double Amount, string Unit, double UnitPrice, string Currency);
     }
 }
