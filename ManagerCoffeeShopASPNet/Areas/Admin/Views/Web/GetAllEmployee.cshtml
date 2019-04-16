@@ -1,0 +1,117 @@
+﻿@model IEnumerable<ManagerCoffeeShopASPNet.Employee>
+
+@{
+    ViewBag.Title = "GetAllEmployee";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>GetAllEmployee</h2>
+<div class="row">
+    <div class="col-sm-6">
+        @Html.ActionLink("Add Employee", "GetFormAddNewEmployee", "Web", new { @class = "btn btn-outline-primary" })
+    </div>
+    <div class="col-sm-6">
+        @using (Html.BeginForm("Web", "GetAllEmployee", FormMethod.Get))
+        {
+            @Html.TextBox("Search")
+            <button type="submit">Search</button>
+        }
+    </div>
+</div>
+@if (TempData["messageSuccess"] != null)
+{
+    <div class="alert alert-success">@TempData["messageSuccess"]</div>
+}
+@if (TempData["messageFail"] != null)
+{
+    <div class="alert alert-danger">@TempData["messageFail"]</div>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CSID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IndentityNum)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @if (item.UserID != null)
+            {
+                @Html.DisplayFor(modelItem => item.UserID)
+                
+            }
+            else
+            {
+                @Html.ActionLink("Create Account", "GetFormAddNewAccountForEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-outline-light text-dark btn-sm" })
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CSID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DOB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IndentityNum)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-outline-primary" })
+            @Html.ActionLink("Details", "DetailEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-outline-info " })
+            @if (item.Status == "Lay_off")
+            {
+                @Html.ActionLink("Delete", "DeleteEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-outline-danger active" })
+            }
+            else
+            {
+                @Html.ActionLink("Delete", "DeleteEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-outline-danger disabled" })
+            }
+            @if (item.UserID != null)
+            {
+                @Html.ActionLink("View Account", "ViewAccountInformation", "Web", new { UserID = item.UserID }, new { @class = "btn btn-outline-success " })
+            }
+        </td>
+    </tr>
+}
+
+</table>
