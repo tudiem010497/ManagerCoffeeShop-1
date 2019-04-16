@@ -13,10 +13,17 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         {
             this.context = new CoffeeShopDBDataContext();
         }
-        public int GetGiftID()
+        public int GetLastGiftID()
         {
-            int id = (from gift in context.Gifts orderby gift.GiftID descending select gift.GiftID).FirstOrDefault();
-            return id;
+            try
+            {
+                int id = (from gift in context.Gifts orderby gift.GiftID descending select gift.GiftID).FirstOrDefault();
+                return id;
+            }
+            catch(Exception e)
+            {
+                return 0;
+            }
         }
         public IEnumerable<Gift> GetAllGift()
         {
@@ -24,16 +31,16 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         }
         public Gift GetGiftByID(int GiftID)
         {
-            var g = from gift in context.Gifts
-                    where gift.GiftID == GiftID
-                    select gift;
-            return g.ToArray().ElementAt(0);
+            var g = (from gift in context.Gifts
+                     where gift.GiftID == GiftID
+                     select gift).SingleOrDefault();
+            return g;
         }
         public bool InsertGift(int SupplierID, string Name, float UnitPrice, string Currency, string Desc)
         {
             try
             {
-                int GiftID = GetGiftID() + 1;
+                int GiftID = GetLastGiftID() + 1;
                 Gift g = new Gift();
                 g.SupplierID = SupplierID;
                 g.Name = Name;

@@ -17,23 +17,30 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         {
             return context.Promotions.ToList();
         }
-        public int GetPromotionID()
+        public int GetLastPromotionID()
         {
-            int id = (from p in context.Promotions orderby p.PromotionID descending select p.PromotionID).FirstOrDefault();
-            return id;
+            try
+            {
+                int id = (from p in context.Promotions orderby p.PromotionID descending select p.PromotionID).FirstOrDefault();
+                return id;
+            }
+            catch(Exception e)
+            {
+                return 0;
+            }
         }
         public Promotion GetPromotionByID(int PromotionID)
         {
-            var p = from promotion in context.Promotions
-                    where promotion.PromotionID == PromotionID
-                    select promotion;
-            return p.ToArray().ElementAt(0);
+            var p = (from promotion in context.Promotions
+                     where promotion.PromotionID == PromotionID
+                     select promotion).SingleOrDefault();
+            return p;
         }
         public bool InsertPromotion (string Name, string Desc, DateTime StartDate, DateTime EndDate)
         {
             try
             {
-                int PromotionID = GetPromotionID() + 1;
+                int PromotionID = GetLastPromotionID() + 1;
                 Promotion p = new Promotion();
                 p.Name = Name;
                 p.Desc = Desc;
