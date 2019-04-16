@@ -9,6 +9,10 @@ namespace ManagerCoffeeShopASPNet.DAO
     interface AccountDAO
     {
         IEnumerable<Account> GetAllAccount();
+        int GetLastUserID();
         Account GetAccountByEmail(string Email);
+        Account GetAccountByUserID(int UserID);
+        bool InsertAccount(string UserName, string Password, string Email, string AccType, string Position, string Avatar);
+        bool DeleteAccount(int UserID);
     }
 }

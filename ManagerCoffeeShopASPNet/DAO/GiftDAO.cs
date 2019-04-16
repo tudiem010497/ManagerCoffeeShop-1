@@ -9,7 +9,7 @@ namespace ManagerCoffeeShopASPNet.DAO
     interface GiftDAO
     {
         IEnumerable<Gift> GetAllGift();
-        int GetGiftID();
+        int GetLastGiftID();
         Gift GetGiftByID(int GiftID);
         bool InsertGift(int SupplierID, string Name, float UnitPrice, string Currency, string Desc);
         bool EditGift(Gift gift);
