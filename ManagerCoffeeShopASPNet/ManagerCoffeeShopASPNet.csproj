@@ -46,15 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine">
-      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
-    </Reference>
-    <Reference Include="CrystalDecisions.ReportSource">
-      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
-    </Reference>
-    <Reference Include="CrystalDecisions.Shared">
-      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
-    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -226,6 +220,8 @@
     <Compile Include="Areas\Admin\Controllers\DichVuController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ServiceController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WebController.cs" />
+    <Compile Include="Areas\Admin\Models\AccountModel.cs" />
     <Compile Include="Areas\Admin\Models\ListOrderItemGroupByFoodAndDrink.cs" />
     <Compile Include="Areas\Admin\Models\OrderItemGroupByFoodAndDrink.cs" />
     <Compile Include="Areas\Admin\Models\OrderItemModel.cs" />
@@ -281,6 +277,8 @@
     <Compile Include="DAO\RecipeDAO.cs" />
     <Compile Include="DAO\RecipeDetailDAO.cs" />
     <Compile Include="DatabaseConnection\DataSQLConnection.cs" />
+    <Compile Include="Enum\EnumAccount.cs" />
+    <Compile Include="Enum\EnumEmployee.cs" />
     <Compile Include="Enum\EnumFoodAndDrink.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -290,6 +288,7 @@
     <Compile Include="Information\InformationDichVu.cs" />
     <Compile Include="Information\InformationService.cs" />
     <Compile Include="Information\InformationIndex.cs" />
+    <Compile Include="Information\InformationWeb.cs" />
     <Compile Include="ManagerSession\ManagerSessionLogin.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -340,6 +339,7 @@
     <Content Include="Assets\Admin\js\sb-admin.js" />
     <Content Include="Assets\Admin\js\sb-admin.min.js" />
     <Content Include="Assets\Admin\js\service.js" />
+    <Content Include="Assets\Admin\js\web.js" />
     <Content Include="Assets\Main\css\styleLogin.css" />
     <Content Include="Assets\Main\css\styleSignUp.css" />
     <Content Include="Assets\resource\img\recype-1.jpg" />
@@ -400,6 +400,15 @@
     <Content Include="Areas\Admin\Views\Service\PrintReport.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\ShowAllIngredient.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\SendMessageIngredientWithOut.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Web\GetAllEmployee.cshtml" />
+    <Content Include="Areas\Admin\Views\Web\GetFormAddNewEmployee.cshtml" />
+    <Content Include="Areas\Admin\Views\Web\DetailEmployee.cshtml" />
+    <Content Include="Areas\Admin\Views\Web\EditEmployee.cshtml" />
+    <Content Include="Areas\Admin\Views\Web\GetFormAddNewAccountForEmployee.cshtml" />
+    <Content Include="Areas\Admin\Views\Web\DeleteEmployee.cshtml" />
+    <Content Include="Areas\Admin\Views\Web\ViewAccountInformation.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
