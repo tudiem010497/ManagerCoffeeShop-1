@@ -1,0 +1,22 @@
+﻿@using NonFactors.Mvc.Grid
+@model IEnumerable<ReceiptDetail>
+@{
+    ViewBag.Title = "DetailReceipt";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>DetailReceipt</h2>
+@(Html
+            .Grid(Model)
+            .Build(columns =>
+            {
+                columns.Add(model => model.ReceiptID).Titled("Mã phiếu nhập");
+                columns.Add(model => model.Ingredient.Name).Titled("Tên NVL");
+                columns.Add(model => model.Gift.Name).Titled("Tên quà tặng");
+                columns.Add(model => model.Facility.Name).Titled("Mã cơ sở vật chất");
+                columns.Add(model => model.Supplier.Name).Titled("Tên nhà cung cấp");
+                columns.Add(model => model.Unit).Titled("Đơn vị tính");
+                columns.Add(model => model.UnitPrice).Titled("Đơn giá");
+                columns.Add(model => model.Currency).Titled("Đơn vị tiền").Filterable(false);
+            }).Filterable()
+)

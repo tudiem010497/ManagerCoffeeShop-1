@@ -1,0 +1,25 @@
+﻿@using NonFactors.Mvc.Grid
+@model IEnumerable<Receipt>
+
+@{
+    ViewBag.Title = "GetAllReceipt";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>GetAllReceipt</h2>
+<div class="row">
+    @(Html
+            .Grid(Model)
+            .Build(columns =>
+            {
+                columns.Add(model => model.Date).Titled("Tên nhà cung cấp");
+                columns.Add(model => model.TotalAmount).Titled("Địa chỉ nhà cung cấp");
+                columns.Add(model => model.Currency).Titled("Số điện thoại");
+                columns.Add(model => model.ReceiptID).Encoded(false).
+                        RenderedAs(model => (
+                         Html.ActionLink("Xem chi tiết", "DetailReceipt", "WareHouse", new { ReceiptID = model.ReceiptID }, new { @class = "btn btn-success" }).ToHtmlString()
+                        )).Filterable(false);
+            }).Filterable()
+    )
+</div>
+
