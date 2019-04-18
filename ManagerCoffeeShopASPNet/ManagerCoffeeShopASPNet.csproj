@@ -220,6 +220,7 @@
     <Compile Include="Areas\Admin\Controllers\DichVuController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ServiceController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WarehouseController.cs" />
     <Compile Include="Areas\Admin\Controllers\WebController.cs" />
     <Compile Include="Areas\Admin\Models\AccountModel.cs" />
     <Compile Include="Areas\Admin\Models\ListOrderItemGroupByFoodAndDrink.cs" />
@@ -257,8 +258,11 @@
     <Compile Include="DAOImpl\OrderItemDAOImpl.cs" />
     <Compile Include="DAOImpl\PositionDAOImpl.cs" />
     <Compile Include="DAOImpl\PromotionDAOImpl.cs" />
+    <Compile Include="DAOImpl\ReceiptDAOImpl.cs" />
+    <Compile Include="DAOImpl\ReceiptDetailDAOImpl.cs" />
     <Compile Include="DAOImpl\RecipeDAOImpl.cs" />
     <Compile Include="DAOImpl\RecipeDetailDAOImpl.cs" />
+    <Compile Include="DAOImpl\SupplierDAOImpl.cs" />
     <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DAO\BannerImageDAO.cs" />
     <Compile Include="DAO\BlogDAO.cs" />
@@ -274,12 +278,16 @@
     <Compile Include="DAO\OrderItemDAO.cs" />
     <Compile Include="DAO\PositionDAO.cs" />
     <Compile Include="DAO\PromotionDAO.cs" />
+    <Compile Include="DAO\ReceiptDAO.cs" />
+    <Compile Include="DAO\ReceiptDetailDAO.cs" />
     <Compile Include="DAO\RecipeDAO.cs" />
     <Compile Include="DAO\RecipeDetailDAO.cs" />
+    <Compile Include="DAO\SupplierDAO.cs" />
     <Compile Include="DatabaseConnection\DataSQLConnection.cs" />
     <Compile Include="Enum\EnumAccount.cs" />
     <Compile Include="Enum\EnumEmployee.cs" />
     <Compile Include="Enum\EnumFoodAndDrink.cs" />
+    <Compile Include="Enum\EnumUtilities.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -288,6 +296,7 @@
     <Compile Include="Information\InformationDichVu.cs" />
     <Compile Include="Information\InformationService.cs" />
     <Compile Include="Information\InformationIndex.cs" />
+    <Compile Include="Information\InformationWareHouse.cs" />
     <Compile Include="Information\InformationWeb.cs" />
     <Compile Include="ManagerSession\ManagerSessionLogin.cs" />
     <Compile Include="Models\Account.cs" />
@@ -333,12 +342,14 @@
     <Content Include="Assets\Admin\css\style.css" />
     <Content Include="Assets\Admin\css\styleBatender.css" />
     <Content Include="Assets\Admin\css\styleService.css" />
+    <Content Include="Assets\Admin\css\styleWarehouse.css" />
     <Content Include="Assets\Admin\js\batender.js" />
     <Content Include="Assets\Admin\js\bootstrap.min.js" />
     <Content Include="Assets\Admin\js\jquery.min.js" />
     <Content Include="Assets\Admin\js\sb-admin.js" />
     <Content Include="Assets\Admin\js\sb-admin.min.js" />
     <Content Include="Assets\Admin\js\service.js" />
+    <Content Include="Assets\Admin\js\warehouse.js" />
     <Content Include="Assets\Admin\js\web.js" />
     <Content Include="Assets\Main\css\styleLogin.css" />
     <Content Include="Assets\Main\css\styleSignUp.css" />
@@ -362,11 +373,6 @@
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Main\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Main\Views\Shared\_Layout.cshtml" />
-    <Content Include="CoffeeShopDB.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>CoffeeShopDB.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Areas\Main\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
@@ -398,8 +404,15 @@
     <Content Include="Areas\Admin\Views\DichVu\EditGift.cshtml" />
     <Content Include="Areas\Admin\Views\DichVu\DeleteGift.cshtml" />
     <Content Include="Areas\Admin\Views\Service\PrintReport.cshtml" />
-    <Content Include="Areas\Admin\Views\Batender\ShowAllIngredient.cshtml" />
     <Content Include="Areas\Admin\Views\Batender\SendMessageIngredientWithOut.cshtml" />
+    <Content Include="Areas\Admin\Views\Warehouse\GetAllIngredient.cshtml" />
+    <Content Include="Areas\Admin\Views\Warehouse\EditIngredient.cshtml" />
+    <Content Include="Areas\Admin\Views\Warehouse\CreateIngredient.cshtml" />
+    <Content Include="Areas\Admin\Views\Warehouse\GetAllSupplier.cshtml" />
+    <Content Include="Areas\Admin\Views\Warehouse\EditSupplier.cshtml" />
+    <Content Include="Areas\Admin\Views\Warehouse\CreateSupplier.cshtml" />
+    <Content Include="Areas\Admin\Views\Warehouse\GetAllReceipt.cshtml" />
+    <Content Include="Areas\Admin\Views\Warehouse\DetailReceipt.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Web\GetAllEmployee.cshtml" />
@@ -409,6 +422,12 @@
     <Content Include="Areas\Admin\Views\Web\GetFormAddNewAccountForEmployee.cshtml" />
     <Content Include="Areas\Admin\Views\Web\DeleteEmployee.cshtml" />
     <Content Include="Areas\Admin\Views\Web\ViewAccountInformation.cshtml" />
+    <Content Include="CoffeeShopDB.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>CoffeeShopDB.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Admin\Views\Warehouse\CreateReceipt.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -488,11 +507,6 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="CoffeeShopDB.dbml.layout">
-      <DependentUpon>CoffeeShopDB.dbml</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="App_GlobalResources\Resource.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
@@ -508,6 +522,9 @@
     <Content Include="Assets\Main\js\scriptLogin.js" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CoffeeShopDB.dbml.layout">
+      <DependentUpon>CoffeeShopDB.dbml</DependentUpon>
+    </None>
     <EmbeddedResource Include="Reporting\CrystalReport1.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport1.cs</LastGenOutput>
