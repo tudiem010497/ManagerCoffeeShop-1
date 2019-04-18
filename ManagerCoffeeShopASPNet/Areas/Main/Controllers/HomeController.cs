@@ -30,9 +30,10 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
             ViewData["bannerImgs"] = bannerImgs;
             ViewData["fds"] = fds;
             //ViewData["cart"] = cart;
+            ViewData["successUserID"] = Session["successUserID"];
             ViewData["warning"] = TempData["warning"];
             ViewData["error"] = TempData["error"];
-            ViewData["success"] = TempData["success"];
+            ViewData["success"] = Session["success"];
             ViewData["SignUpOK"] = TempData["SignUpOK"];
             //ViewData["blogs"] = blogs;
             return View();
@@ -46,7 +47,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
             if (result)
             {
                 Account acc = infomationIndex.GetAccountByEmail(model.Email);
-                TempData["success"] = "Wellcome " + acc.UserName;
+                Session["success"] = "Wellcome " + acc.UserName;
+                Session["successUserID"] = acc.UserID.ToString();
                 Session["email"] = model.Email;
                 return RedirectToAction("Index");
             }
@@ -56,6 +58,13 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
                 return RedirectToAction("Index");
             }
         }
+        [Route("Logout")]
+        public ActionResult Logout(int UserID)
+        {
+            Session.Remove("success");
+            Session.RemoveAll();
+            return RedirectToAction("Index");
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("SignUp")]
@@ -64,6 +73,9 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
             var info = new AccountModel().InsertCustomer(model.Name, model.Email, model.Password);
             if (info == 1)
             {
+                Account acc = infomationIndex.GetAccountByEmail(model.Email);
+                int UserID = acc.UserID;
+                bool result = infomationIndex.InsertCustomer(UserID, model.Name, model.DOB, model.Address, model.IdentityNum, model.Phone);
                 TempData["SignUpOK"] = "Congratulations on your successful registration. You can log in to your account.";
                 return RedirectToAction("Index");
             }
@@ -72,6 +84,12 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
                 TempData["warning"] = "Email already exists. Please enter another email.";
                 return RedirectToAction("Index");
             }
+        }
+        [Route("ViewCustomerAccount")]
+        public ActionResult ViewCustomerAccount(int UserID)
+        {
+            Account acc = infomationIndex.GetAccountByUserID(UserID);
+            return View(acc);
         }
     }
 }
