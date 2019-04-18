@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.Employee>
-
 @{
     ViewBag.Title = "GetAllEmployee";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -37,21 +36,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DOB)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Gender)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IndentityNum)
-        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Status)
         </th>
@@ -77,21 +61,6 @@
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DOB)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IndentityNum)
-        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Status)
         </td>
@@ -101,10 +70,6 @@
             @if (item.Status == "Lay_off")
             {
                 @Html.ActionLink("Delete", "DeleteEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-outline-danger active" })
-            }
-            else
-            {
-                @Html.ActionLink("Delete", "DeleteEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-outline-danger disabled" })
             }
             @if (item.UserID != null)
             {

@@ -1,5 +1,5 @@
 ﻿@model ManagerCoffeeShopASPNet.Employee
-
+@using NonFactors.Mvc.Grid
 @{
     ViewBag.Title = "DetailEmployee";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -93,6 +93,7 @@
 
     </dl>
 </div>
+
 <p>
     @Html.ActionLink("Edit", "EditEmployee", "Web", new { EmployeeID = Model.EmployeeID }, new { @class="btn btn-primary"})
     @Html.ActionLink("Back to List", "GetAllEmployee")
