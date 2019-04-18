@@ -42,6 +42,15 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("GetFormAddNewEmployee")]
         public ActionResult GetFormAddNewEmployee()
         {
+            IEnumerable<CoffeeShop> coffeeShop = info.GetAllCoffeeShop();
+            List<SelectListItem> listCoffeeShop = new List<SelectListItem>();
+            foreach(var item in coffeeShop)
+            {
+                SelectListItem select = new SelectListItem();
+                select.Text = item.CSID.ToString();
+                listCoffeeShop.Add(select);
+            }
+            ViewData["listCoffeeShop"] = listCoffeeShop;
             return View();
         }
         [Route("CreateEmployee")]
@@ -67,33 +76,59 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             Employee em = info.GetEmployeeByEmployeeID(EmployeeID);
             Account acc = info.GetAccountByEmail(em.Email);
-            //Account acc = info.GetAccountByUserID(em.UserID);
-            bool result = info.DeleteEmployee(EmployeeID);
-            bool resultAcc = info.DeleteAccount(acc.UserID);
-           
-            if (result == true && resultAcc == true)
+            if (em.UserID != null)
             {
-                TempData["messageSuccess"] = "Xóa thành công";
-                return RedirectToAction("GetAllEmployee", "Web");
+                bool result = info.DeleteEmployee(EmployeeID);
+                bool resultAcc = info.DeleteAccount(acc.UserID);
+
+                if (result == true && resultAcc == true)
+                {
+                    TempData["messageSuccess"] = "Xóa thành công";
+                    return RedirectToAction("GetAllEmployee", "Web");
+                }
+                else
+                {
+                    TempData["messageFail"] = "Không thể xóa";
+                    return RedirectToAction("GetAllEmployee", "Web");
+                }
             }
             else
             {
-                TempData["messageFail"] = "Không thể xóa";
-                return RedirectToAction("GetAllEmployee", "Web");
+                bool result = info.DeleteEmployee(EmployeeID);
+                if (result == true)
+                {
+                    TempData["messageSuccess"] = "Xóa thành công";
+                    return RedirectToAction("GetAllEmployee", "Web");
+                }
+                else
+                {
+                    TempData["messageFail"] = "Không thể xóa";
+                    return RedirectToAction("GetAllEmployee", "Web");
+                }
             }
         }
         [Route("EditEmployee")]
         public ActionResult EditEmployee(int EmployeeID)
         {
             Employee em = info.GetEmployeeByEmployeeID(EmployeeID);
+            IEnumerable<CoffeeShop> coffeeShop = info.GetAllCoffeeShop();
+            List<SelectListItem> listCoffeeShop = new List<SelectListItem>();
+            foreach (var item in coffeeShop)
+            {
+                SelectListItem select = new SelectListItem();
+                select.Text = item.CSID.ToString();
+                listCoffeeShop.Add(select);
+            }
+            ViewData["listCoffeeShop"] = listCoffeeShop;
             return View(em);
         }
         [Route("DoEditEmployee")]
-        public ActionResult DoEditEmployee(int EmployeeID, int UserID, int CSID, string Name, string Email, string Address, string Phone, DateTime DOB, string Gender, string IndentityNum, string Status)
+        //int UserID,
+        public ActionResult DoEditEmployee(int EmployeeID, int CSID, string Name, string Email, string Address, string Phone, DateTime DOB, string Gender, string IndentityNum, string Status)
         {
             Employee em = new Employee();
             em.EmployeeID = EmployeeID;
-            em.UserID = UserID;
+            //em.UserID = UserID;
             em.CSID = CSID;
             em.Name = Name;
             em.Email = Email;
