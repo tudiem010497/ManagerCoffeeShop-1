@@ -11,10 +11,12 @@ namespace ManagerCoffeeShopASPNet.Information
     {
         private EmployeeDAO _employeeDAO;
         private AccountDAO _accountDAO;
+        private CoffeeShopDAO _coffeeShopDAO;
         public InformationWeb()
         {
             this._employeeDAO = (EmployeeDAO)new EmployeeDAOImpl();
             this._accountDAO = (AccountDAO)new AccountDAOImpl();
+            this._coffeeShopDAO = (CoffeeShopDAO)new CoffeeShopDAOImpl();
         }
         public IEnumerable<Employee> GetAllEmployee()
         {
@@ -55,6 +57,10 @@ namespace ManagerCoffeeShopASPNet.Information
         public bool DeleteAccount(int UserID)
         {
             return this._accountDAO.DeleteAccount(UserID);
+        }
+        public IEnumerable<CoffeeShop> GetAllCoffeeShop()
+        {
+            return this._coffeeShopDAO.GetAllCoffeeShop();
         }
     }
 }

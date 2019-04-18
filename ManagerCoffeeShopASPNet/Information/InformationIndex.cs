@@ -15,6 +15,7 @@ namespace ManagerCoffeeShopASPNet.Information
         private InfoIndexDAO _infoIndexDAO;
         private BlogDAO _blogDAO;
         private AccountDAO _accountDAO;
+        private CustomerDAO _customerDAO;
 
         public InformationIndex()
         {
@@ -23,6 +24,7 @@ namespace ManagerCoffeeShopASPNet.Information
             this._bannerImageDAO = (BannerImageDAO)new BannerImageDAOImpl();
             this._infoIndexDAO = (InfoIndexDAO)new InfoIndexDAOImpl();
             this._accountDAO = (AccountDAO)new AccountDAOImpl();
+            this._customerDAO = (CustomerDAO)new CustomerDAOImpl();
         }
         public IEnumerable<FoodAndDrink> GetFoodAndDrink()
         {
@@ -50,6 +52,14 @@ namespace ManagerCoffeeShopASPNet.Information
         public Account GetAccountByEmail(string Email)
         {
             return _accountDAO.GetAccountByEmail(Email);
+        }
+        public Account GetAccountByUserID(int UserID)
+        {
+            return _accountDAO.GetAccountByUserID(UserID);
+        }
+        public bool InsertCustomer(int UserID, string Name, DateTime DOB, string Address, string IdentityNum, string Phone)
+        {
+            return _customerDAO.InsertCustomer(UserID, Name, DOB, Address, IdentityNum, Phone);
         }
     }
 }

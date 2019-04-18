@@ -9,5 +9,6 @@ namespace ManagerCoffeeShopASPNet.DAO
     interface CustomerDAO
     {
         Customer GetCustomerByUserID(int UserID);
+        bool InsertCustomer(int UserID, string Name, DateTime DOB, string Address, string IdentityNum, string Phone);
     }
 }

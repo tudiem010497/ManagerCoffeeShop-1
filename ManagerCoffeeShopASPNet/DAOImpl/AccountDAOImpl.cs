@@ -29,6 +29,13 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                        select account).SingleOrDefault();
             return acc;
         }
+        public Account GetAccountByUserName(string UserName)
+        {
+            Account acc = (from account in context.Accounts
+                           where account.UserName == UserName
+                           select account).SingleOrDefault();
+            return acc;
+        }
         public Account GetAccountByUserID(int UserID)
         {
             Account acc = (from account in context.Accounts
