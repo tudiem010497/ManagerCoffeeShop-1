@@ -31,7 +31,7 @@ $(document).ready(function () {
         var UnitPrice = $("#modalOption form div.UnitPrice input[name='UnitPrice']").attr("value");
         var Quantity= $("#modalOption form div.Quantity input[name='Quantity']").attr("value");
         if (!CheckExistIngre(IngreID, arrIngreID)) {
-            var item = [IngreID, Name, UnitPrice, Quantity]
+            var item = [IngreID, Name, Quantity, UnitPrice]
             arrIngreID.push(IngreID);
             arrIngre.push(item)
         }
