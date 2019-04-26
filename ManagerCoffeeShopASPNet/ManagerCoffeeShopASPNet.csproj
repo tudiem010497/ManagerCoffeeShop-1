@@ -234,6 +234,8 @@
     <Compile Include="Areas\Admin\Models\OrderItemModel.cs" />
     <Compile Include="Areas\Admin\Models\OrderModel.cs" />
     <Compile Include="Areas\Admin\Models\OrderObject.cs" />
+    <Compile Include="Areas\Admin\Models\ReceiptDetailModel.cs" />
+    <Compile Include="Areas\Admin\Models\ReceiptModel.cs" />
     <Compile Include="Areas\Main\Controllers\CartController.cs" />
     <Compile Include="Areas\Main\Controllers\HomeController.cs" />
     <Compile Include="Areas\Main\MainAreaRegistration.cs" />

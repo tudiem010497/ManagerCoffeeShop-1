@@ -1,4 +1,6 @@
-﻿using ManagerCoffeeShopASPNet.Information;
+﻿using ManagerCoffeeShopASPNet.Areas.Admin.Models;
+using ManagerCoffeeShopASPNet.Information;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -150,6 +152,45 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             IEnumerable<ReceiptDetail> receiptDetails = info.GetAllReceiptDetailByReceiptID(ReceiptID);
             return View(receiptDetails);
+        }
+
+        [Route("CreateReceipt")]
+        public ActionResult CreateReceipt()
+        {
+            IEnumerable<Ingredient> ingres = info.GetAllIngredient();
+            IEnumerable<Supplier> suppliers = info.GetAllSupplier();
+            List<SelectListItem> sups = new List<SelectListItem>();
+            foreach(Supplier item in suppliers)
+            {
+                SelectListItem select = new SelectListItem();
+                select.Text = item.Name;
+                select.Value = item.SupplierID.ToString();
+                sups.Add(select);
+            }
+            ViewData["sups"] = sups;
+            ViewData["ingres"] = ingres;
+            return View();
+        }
+        
+        [Route("DoCreateReceipt")]
+        public ActionResult DoCreateReceipt(string json)
+        {
+            ReceiptModel receiptModel = JsonConvert.DeserializeObject<ReceiptModel>(json);
+            List<ReceiptDetailModel> details = receiptModel.ReceiptDetailModel;
+            double TotalAmount = 0;
+            foreach(ReceiptDetailModel detail in details)
+            {
+                TotalAmount = TotalAmount + detail.TotalAmount * detail.Quantity;
+            }
+            info.InsertReceipt(DateTime.Now, TotalAmount, "VND", "Waiting");
+            int ReceiptID = info.GetLastReceiptID();
+            foreach(ReceiptDetailModel detail in details)
+            {
+                int IngreID = detail.IngreID;
+                Ingredient ingre = info.GetIngredientByIngreID(IngreID);
+                bool result = info.InsertReceiptDetail(ReceiptID, IngreID, detail.TotalAmount, ingre.Unit, ingre.UnitPrice, ingre.Currency, "Waiting");
+            }
+            return Json(new { SupplierID = receiptModel.SupplierID }, JsonRequestBehavior.AllowGet);
         }
     }
 }

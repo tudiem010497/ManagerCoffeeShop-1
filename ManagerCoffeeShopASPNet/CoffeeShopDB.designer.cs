@@ -33,6 +33,9 @@ namespace ManagerCoffeeShopASPNet
     partial void InsertAccount(Account instance);
     partial void UpdateAccount(Account instance);
     partial void DeleteAccount(Account instance);
+    partial void InsertGift(Gift instance);
+    partial void UpdateGift(Gift instance);
+    partial void DeleteGift(Gift instance);
     partial void InsertBannerImage(BannerImage instance);
     partial void UpdateBannerImage(BannerImage instance);
     partial void DeleteBannerImage(BannerImage instance);
@@ -63,9 +66,6 @@ namespace ManagerCoffeeShopASPNet
     partial void InsertFoodAndDrink(FoodAndDrink instance);
     partial void UpdateFoodAndDrink(FoodAndDrink instance);
     partial void DeleteFoodAndDrink(FoodAndDrink instance);
-    partial void InsertGift(Gift instance);
-    partial void UpdateGift(Gift instance);
-    partial void DeleteGift(Gift instance);
     partial void InsertInfoIndex(InfoIndex instance);
     partial void UpdateInfoIndex(InfoIndex instance);
     partial void DeleteInfoIndex(InfoIndex instance);
@@ -99,6 +99,9 @@ namespace ManagerCoffeeShopASPNet
     partial void InsertReceipt(Receipt instance);
     partial void UpdateReceipt(Receipt instance);
     partial void DeleteReceipt(Receipt instance);
+    partial void InsertReceiptDetail(ReceiptDetail instance);
+    partial void UpdateReceiptDetail(ReceiptDetail instance);
+    partial void DeleteReceiptDetail(ReceiptDetail instance);
     partial void InsertRecipe(Recipe instance);
     partial void UpdateRecipe(Recipe instance);
     partial void DeleteRecipe(Recipe instance);
@@ -169,11 +172,11 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
-		public System.Data.Linq.Table<TimeSheetDetail> TimeSheetDetails
+		public System.Data.Linq.Table<Gift> Gifts
 		{
 			get
 			{
-				return this.GetTable<TimeSheetDetail>();
+				return this.GetTable<Gift>();
 			}
 		}
 		
@@ -289,11 +292,11 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
-		public System.Data.Linq.Table<Gift> Gifts
+		public System.Data.Linq.Table<TimeSheetDetail> TimeSheetDetails
 		{
 			get
 			{
-				return this.GetTable<Gift>();
+				return this.GetTable<TimeSheetDetail>();
 			}
 		}
 		
@@ -561,10 +564,11 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_INSERT_ACCOUNT_CUSTOMER")]
-		public int sp_INSERT_ACCOUNT_CUSTOMER([global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserName", DbType="VarChar(30)")] string userName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(30)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Password", DbType="VarChar(20)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AccType", DbType="VarChar(10)")] string accType)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Account_Email_Check")]
+		public int sp_Account_Email_Check([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(30)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] ref System.Nullable<bool> res)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userName, email, password, accType);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, res);
+			res = ((System.Nullable<bool>)(result.GetParameterValue(1)));
 			return ((int)(result.ReturnValue));
 		}
 		
@@ -576,11 +580,24 @@ namespace ManagerCoffeeShopASPNet
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Account_Email_Check")]
-		public int sp_Account_Email_Check([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(30)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] ref System.Nullable<bool> res)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_Check_UserName_IsExist")]
+		public int sp_Check_UserName_IsExist([global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserName", DbType="VarChar(30)")] string userName, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] ref System.Nullable<bool> result)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, res);
-			res = ((System.Nullable<bool>)(result.GetParameterValue(1)));
+			IExecuteResult result1 = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userName, result);
+			result = ((System.Nullable<bool>)(result1.GetParameterValue(1)));
+			return ((int)(result1.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_INSERT_CART", IsComposable=true)]
+		public object sp_INSERT_CART([global::System.Data.Linq.Mapping.ParameterAttribute(Name="FDID", DbType="Int")] System.Nullable<int> fDID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Name", DbType="VarChar(30)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Quantity", DbType="Int")] System.Nullable<int> quantity, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Price", DbType="Int")] System.Nullable<int> price)
+		{
+			return ((object)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), fDID, name, quantity, price).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_INSERT_ACCOUNT_CUSTOMER")]
+		public int sp_INSERT_ACCOUNT_CUSTOMER([global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserName", DbType="VarChar(30)")] string userName, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(30)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Password", DbType="VarChar(20)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AccType", DbType="VarChar(10)")] string accType)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userName, email, password, accType);
 			return ((int)(result.ReturnValue));
 		}
 	}
@@ -875,163 +892,138 @@ namespace ManagerCoffeeShopASPNet
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TimeSheetDetail")]
-	public partial class TimeSheetDetail
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Gift")]
+	public partial class Gift : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
-		private int _TimeSheetID;
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _Day;
+		private int _GiftID;
 		
-		private System.DateTime _Date;
+		private System.Nullable<int> _SupplierID;
 		
-		private System.TimeSpan _RegisterTimeIn;
+		private string _Name;
 		
-		private System.TimeSpan _RegisterTimeOut;
-		
-		private System.TimeSpan _TimeIn;
-		
-		private System.TimeSpan _TimeOut;
-		
-		private System.Nullable<double> _Bonus;
+		private double _UnitPrice;
 		
 		private string _Currency;
 		
 		private string _Desc;
 		
-		public TimeSheetDetail()
+		private EntitySet<ReceiptDetail> _ReceiptDetails;
+		
+		private EntityRef<Supplier> _Supplier;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnGiftIDChanging(int value);
+    partial void OnGiftIDChanged();
+    partial void OnSupplierIDChanging(System.Nullable<int> value);
+    partial void OnSupplierIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnUnitPriceChanging(double value);
+    partial void OnUnitPriceChanged();
+    partial void OnCurrencyChanging(string value);
+    partial void OnCurrencyChanged();
+    partial void OnDescChanging(string value);
+    partial void OnDescChanged();
+    #endregion
+		
+		public Gift()
 		{
+			this._ReceiptDetails = new EntitySet<ReceiptDetail>(new Action<ReceiptDetail>(this.attach_ReceiptDetails), new Action<ReceiptDetail>(this.detach_ReceiptDetails));
+			this._Supplier = default(EntityRef<Supplier>);
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeSheetID", DbType="Int NOT NULL")]
-		public int TimeSheetID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GiftID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int GiftID
 		{
 			get
 			{
-				return this._TimeSheetID;
+				return this._GiftID;
 			}
 			set
 			{
-				if ((this._TimeSheetID != value))
+				if ((this._GiftID != value))
 				{
-					this._TimeSheetID = value;
+					this.OnGiftIDChanging(value);
+					this.SendPropertyChanging();
+					this._GiftID = value;
+					this.SendPropertyChanged("GiftID");
+					this.OnGiftIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Day", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string Day
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SupplierID", DbType="Int")]
+		public System.Nullable<int> SupplierID
 		{
 			get
 			{
-				return this._Day;
+				return this._SupplierID;
 			}
 			set
 			{
-				if ((this._Day != value))
+				if ((this._SupplierID != value))
 				{
-					this._Day = value;
+					if (this._Supplier.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSupplierIDChanging(value);
+					this.SendPropertyChanging();
+					this._SupplierID = value;
+					this.SendPropertyChanged("SupplierID");
+					this.OnSupplierIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="Date NOT NULL")]
-		public System.DateTime Date
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string Name
 		{
 			get
 			{
-				return this._Date;
+				return this._Name;
 			}
 			set
 			{
-				if ((this._Date != value))
+				if ((this._Name != value))
 				{
-					this._Date = value;
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisterTimeIn", DbType="Time NOT NULL")]
-		public System.TimeSpan RegisterTimeIn
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitPrice", DbType="Float NOT NULL")]
+		public double UnitPrice
 		{
 			get
 			{
-				return this._RegisterTimeIn;
+				return this._UnitPrice;
 			}
 			set
 			{
-				if ((this._RegisterTimeIn != value))
+				if ((this._UnitPrice != value))
 				{
-					this._RegisterTimeIn = value;
+					this.OnUnitPriceChanging(value);
+					this.SendPropertyChanging();
+					this._UnitPrice = value;
+					this.SendPropertyChanged("UnitPrice");
+					this.OnUnitPriceChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisterTimeOut", DbType="Time NOT NULL")]
-		public System.TimeSpan RegisterTimeOut
-		{
-			get
-			{
-				return this._RegisterTimeOut;
-			}
-			set
-			{
-				if ((this._RegisterTimeOut != value))
-				{
-					this._RegisterTimeOut = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeIn", DbType="Time NOT NULL")]
-		public System.TimeSpan TimeIn
-		{
-			get
-			{
-				return this._TimeIn;
-			}
-			set
-			{
-				if ((this._TimeIn != value))
-				{
-					this._TimeIn = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeOut", DbType="Time NOT NULL")]
-		public System.TimeSpan TimeOut
-		{
-			get
-			{
-				return this._TimeOut;
-			}
-			set
-			{
-				if ((this._TimeOut != value))
-				{
-					this._TimeOut = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bonus", DbType="Float")]
-		public System.Nullable<double> Bonus
-		{
-			get
-			{
-				return this._Bonus;
-			}
-			set
-			{
-				if ((this._Bonus != value))
-				{
-					this._Bonus = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Currency", DbType="VarChar(10)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Currency", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
 		public string Currency
 		{
 			get
@@ -1042,7 +1034,11 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._Currency != value))
 				{
+					this.OnCurrencyChanging(value);
+					this.SendPropertyChanging();
 					this._Currency = value;
+					this.SendPropertyChanged("Currency");
+					this.OnCurrencyChanged();
 				}
 			}
 		}
@@ -1058,9 +1054,92 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._Desc != value))
 				{
+					this.OnDescChanging(value);
+					this.SendPropertyChanging();
 					this._Desc = value;
+					this.SendPropertyChanged("Desc");
+					this.OnDescChanged();
 				}
 			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gift_ReceiptDetail", Storage="_ReceiptDetails", ThisKey="GiftID", OtherKey="GiftID")]
+		public EntitySet<ReceiptDetail> ReceiptDetails
+		{
+			get
+			{
+				return this._ReceiptDetails;
+			}
+			set
+			{
+				this._ReceiptDetails.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supplier_Gift", Storage="_Supplier", ThisKey="SupplierID", OtherKey="SupplierID", IsForeignKey=true)]
+		public Supplier Supplier
+		{
+			get
+			{
+				return this._Supplier.Entity;
+			}
+			set
+			{
+				Supplier previousValue = this._Supplier.Entity;
+				if (((previousValue != value) 
+							|| (this._Supplier.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Supplier.Entity = null;
+						previousValue.Gifts.Remove(this);
+					}
+					this._Supplier.Entity = value;
+					if ((value != null))
+					{
+						value.Gifts.Add(this);
+						this._SupplierID = value.SupplierID;
+					}
+					else
+					{
+						this._SupplierID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Supplier");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ReceiptDetails(ReceiptDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gift = this;
+		}
+		
+		private void detach_ReceiptDetails(ReceiptDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Gift = null;
 		}
 	}
 	
@@ -2471,7 +2550,7 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
 		public string Phone
 		{
 			get
@@ -3104,7 +3183,7 @@ namespace ManagerCoffeeShopASPNet
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IngreID", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IngreID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
 		public int IngreID
 		{
 			get
@@ -3622,6 +3701,8 @@ namespace ManagerCoffeeShopASPNet
 		
 		private string _Currency;
 		
+		private EntitySet<ReceiptDetail> _ReceiptDetails;
+		
 		private EntityRef<Supplier> _Supplier;
 		
     #region Extensibility Method Definitions
@@ -3646,6 +3727,7 @@ namespace ManagerCoffeeShopASPNet
 		
 		public Facility()
 		{
+			this._ReceiptDetails = new EntitySet<ReceiptDetail>(new Action<ReceiptDetail>(this.attach_ReceiptDetails), new Action<ReceiptDetail>(this.detach_ReceiptDetails));
 			this._Supplier = default(EntityRef<Supplier>);
 			OnCreated();
 		}
@@ -3794,6 +3876,19 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Facility_ReceiptDetail", Storage="_ReceiptDetails", ThisKey="FacilitiesID", OtherKey="FacilitiesID")]
+		public EntitySet<ReceiptDetail> ReceiptDetails
+		{
+			get
+			{
+				return this._ReceiptDetails;
+			}
+			set
+			{
+				this._ReceiptDetails.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supplier_Facility", Storage="_Supplier", ThisKey="SupplierID", OtherKey="SupplierID", IsForeignKey=true)]
 		public Supplier Supplier
 		{
@@ -3846,6 +3941,18 @@ namespace ManagerCoffeeShopASPNet
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_ReceiptDetails(ReceiptDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Facility = this;
+		}
+		
+		private void detach_ReceiptDetails(ReceiptDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Facility = null;
 		}
 	}
 	
@@ -4159,135 +4266,163 @@ namespace ManagerCoffeeShopASPNet
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Gift")]
-	public partial class Gift : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TimeSheetDetail")]
+	public partial class TimeSheetDetail
 	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		private int _TimeSheetID;
 		
-		private int _GiftID;
+		private string _Day;
 		
-		private System.Nullable<int> _SupplierID;
+		private System.DateTime _Date;
 		
-		private string _Name;
+		private System.TimeSpan _RegisterTimeIn;
 		
-		private double _UnitPrice;
+		private System.TimeSpan _RegisterTimeOut;
+		
+		private System.TimeSpan _TimeIn;
+		
+		private System.TimeSpan _TimeOut;
+		
+		private System.Nullable<double> _Bonus;
 		
 		private string _Currency;
 		
 		private string _Desc;
 		
-		private EntityRef<Supplier> _Supplier;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnGiftIDChanging(int value);
-    partial void OnGiftIDChanged();
-    partial void OnSupplierIDChanging(System.Nullable<int> value);
-    partial void OnSupplierIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnUnitPriceChanging(double value);
-    partial void OnUnitPriceChanged();
-    partial void OnCurrencyChanging(string value);
-    partial void OnCurrencyChanged();
-    partial void OnDescChanging(string value);
-    partial void OnDescChanged();
-    #endregion
-		
-		public Gift()
+		public TimeSheetDetail()
 		{
-			this._Supplier = default(EntityRef<Supplier>);
-			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GiftID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int GiftID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeSheetID", DbType="Int NOT NULL")]
+		public int TimeSheetID
 		{
 			get
 			{
-				return this._GiftID;
+				return this._TimeSheetID;
 			}
 			set
 			{
-				if ((this._GiftID != value))
+				if ((this._TimeSheetID != value))
 				{
-					this.OnGiftIDChanging(value);
-					this.SendPropertyChanging();
-					this._GiftID = value;
-					this.SendPropertyChanged("GiftID");
-					this.OnGiftIDChanged();
+					this._TimeSheetID = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SupplierID", DbType="Int")]
-		public System.Nullable<int> SupplierID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Day", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Day
 		{
 			get
 			{
-				return this._SupplierID;
+				return this._Day;
 			}
 			set
 			{
-				if ((this._SupplierID != value))
+				if ((this._Day != value))
 				{
-					if (this._Supplier.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnSupplierIDChanging(value);
-					this.SendPropertyChanging();
-					this._SupplierID = value;
-					this.SendPropertyChanged("SupplierID");
-					this.OnSupplierIDChanged();
+					this._Day = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
-		public string Name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="Date NOT NULL")]
+		public System.DateTime Date
 		{
 			get
 			{
-				return this._Name;
+				return this._Date;
 			}
 			set
 			{
-				if ((this._Name != value))
+				if ((this._Date != value))
 				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
+					this._Date = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitPrice", DbType="Float NOT NULL")]
-		public double UnitPrice
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisterTimeIn", DbType="Time NOT NULL")]
+		public System.TimeSpan RegisterTimeIn
 		{
 			get
 			{
-				return this._UnitPrice;
+				return this._RegisterTimeIn;
 			}
 			set
 			{
-				if ((this._UnitPrice != value))
+				if ((this._RegisterTimeIn != value))
 				{
-					this.OnUnitPriceChanging(value);
-					this.SendPropertyChanging();
-					this._UnitPrice = value;
-					this.SendPropertyChanged("UnitPrice");
-					this.OnUnitPriceChanged();
+					this._RegisterTimeIn = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Currency", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisterTimeOut", DbType="Time NOT NULL")]
+		public System.TimeSpan RegisterTimeOut
+		{
+			get
+			{
+				return this._RegisterTimeOut;
+			}
+			set
+			{
+				if ((this._RegisterTimeOut != value))
+				{
+					this._RegisterTimeOut = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeIn", DbType="Time NOT NULL")]
+		public System.TimeSpan TimeIn
+		{
+			get
+			{
+				return this._TimeIn;
+			}
+			set
+			{
+				if ((this._TimeIn != value))
+				{
+					this._TimeIn = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeOut", DbType="Time NOT NULL")]
+		public System.TimeSpan TimeOut
+		{
+			get
+			{
+				return this._TimeOut;
+			}
+			set
+			{
+				if ((this._TimeOut != value))
+				{
+					this._TimeOut = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bonus", DbType="Float")]
+		public System.Nullable<double> Bonus
+		{
+			get
+			{
+				return this._Bonus;
+			}
+			set
+			{
+				if ((this._Bonus != value))
+				{
+					this._Bonus = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Currency", DbType="VarChar(10)")]
 		public string Currency
 		{
 			get
@@ -4298,11 +4433,7 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._Currency != value))
 				{
-					this.OnCurrencyChanging(value);
-					this.SendPropertyChanging();
 					this._Currency = value;
-					this.SendPropertyChanged("Currency");
-					this.OnCurrencyChanged();
 				}
 			}
 		}
@@ -4318,66 +4449,8 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._Desc != value))
 				{
-					this.OnDescChanging(value);
-					this.SendPropertyChanging();
 					this._Desc = value;
-					this.SendPropertyChanged("Desc");
-					this.OnDescChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supplier_Gift", Storage="_Supplier", ThisKey="SupplierID", OtherKey="SupplierID", IsForeignKey=true)]
-		public Supplier Supplier
-		{
-			get
-			{
-				return this._Supplier.Entity;
-			}
-			set
-			{
-				Supplier previousValue = this._Supplier.Entity;
-				if (((previousValue != value) 
-							|| (this._Supplier.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Supplier.Entity = null;
-						previousValue.Gifts.Remove(this);
-					}
-					this._Supplier.Entity = value;
-					if ((value != null))
-					{
-						value.Gifts.Add(this);
-						this._SupplierID = value.SupplierID;
-					}
-					else
-					{
-						this._SupplierID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Supplier");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -5314,6 +5387,8 @@ namespace ManagerCoffeeShopASPNet
 		
 		private EntitySet<IngredientsMapSupplier> _IngredientsMapSuppliers;
 		
+		private EntitySet<ReceiptDetail> _ReceiptDetails;
+		
 		private EntitySet<RecipeDetail> _RecipeDetails;
 		
 		private EntityRef<Supplier> _Supplier;
@@ -5342,6 +5417,7 @@ namespace ManagerCoffeeShopASPNet
 		{
 			this._IngredientMessages = new EntitySet<IngredientMessage>(new Action<IngredientMessage>(this.attach_IngredientMessages), new Action<IngredientMessage>(this.detach_IngredientMessages));
 			this._IngredientsMapSuppliers = new EntitySet<IngredientsMapSupplier>(new Action<IngredientsMapSupplier>(this.attach_IngredientsMapSuppliers), new Action<IngredientsMapSupplier>(this.detach_IngredientsMapSuppliers));
+			this._ReceiptDetails = new EntitySet<ReceiptDetail>(new Action<ReceiptDetail>(this.attach_ReceiptDetails), new Action<ReceiptDetail>(this.detach_ReceiptDetails));
 			this._RecipeDetails = new EntitySet<RecipeDetail>(new Action<RecipeDetail>(this.attach_RecipeDetails), new Action<RecipeDetail>(this.detach_RecipeDetails));
 			this._Supplier = default(EntityRef<Supplier>);
 			OnCreated();
@@ -5517,6 +5593,19 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ingredient_ReceiptDetail", Storage="_ReceiptDetails", ThisKey="IngreID", OtherKey="IngreID")]
+		public EntitySet<ReceiptDetail> ReceiptDetails
+		{
+			get
+			{
+				return this._ReceiptDetails;
+			}
+			set
+			{
+				this._ReceiptDetails.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ingredient_RecipeDetail", Storage="_RecipeDetails", ThisKey="IngreID", OtherKey="IngreID")]
 		public EntitySet<RecipeDetail> RecipeDetails
 		{
@@ -5603,6 +5692,18 @@ namespace ManagerCoffeeShopASPNet
 		}
 		
 		private void detach_IngredientsMapSuppliers(IngredientsMapSupplier entity)
+		{
+			this.SendPropertyChanging();
+			entity.Ingredient = null;
+		}
+		
+		private void attach_ReceiptDetails(ReceiptDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Ingredient = this;
+		}
+		
+		private void detach_ReceiptDetails(ReceiptDetail entity)
 		{
 			this.SendPropertyChanging();
 			entity.Ingredient = null;
@@ -5831,7 +5932,7 @@ namespace ManagerCoffeeShopASPNet
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IngreID", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IngreID", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
 		public int IngreID
 		{
 			get
@@ -7568,6 +7669,8 @@ namespace ManagerCoffeeShopASPNet
 		
 		private string _Status;
 		
+		private EntitySet<ReceiptDetail> _ReceiptDetails;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -7586,6 +7689,7 @@ namespace ManagerCoffeeShopASPNet
 		
 		public Receipt()
 		{
+			this._ReceiptDetails = new EntitySet<ReceiptDetail>(new Action<ReceiptDetail>(this.attach_ReceiptDetails), new Action<ReceiptDetail>(this.detach_ReceiptDetails));
 			OnCreated();
 		}
 		
@@ -7689,6 +7793,19 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Receipt_ReceiptDetail", Storage="_ReceiptDetails", ThisKey="ReceiptID", OtherKey="ReceiptID")]
+		public EntitySet<ReceiptDetail> ReceiptDetails
+		{
+			get
+			{
+				return this._ReceiptDetails;
+			}
+			set
+			{
+				this._ReceiptDetails.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -7708,11 +7825,27 @@ namespace ManagerCoffeeShopASPNet
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_ReceiptDetails(ReceiptDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Receipt = this;
+		}
+		
+		private void detach_ReceiptDetails(ReceiptDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Receipt = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReceiptDetail")]
-	public partial class ReceiptDetail
+	public partial class ReceiptDetail : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ReceiptDetailID;
 		
 		private int _ReceiptID;
 		
@@ -7736,8 +7869,74 @@ namespace ManagerCoffeeShopASPNet
 		
 		private string _Status;
 		
+		private EntityRef<Facility> _Facility;
+		
+		private EntityRef<Gift> _Gift;
+		
+		private EntityRef<Ingredient> _Ingredient;
+		
+		private EntityRef<Receipt> _Receipt;
+		
+		private EntityRef<Supplier> _Supplier;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnReceiptDetailIDChanging(int value);
+    partial void OnReceiptDetailIDChanged();
+    partial void OnReceiptIDChanging(int value);
+    partial void OnReceiptIDChanged();
+    partial void OnIngreIDChanging(System.Nullable<int> value);
+    partial void OnIngreIDChanged();
+    partial void OnGiftIDChanging(System.Nullable<int> value);
+    partial void OnGiftIDChanged();
+    partial void OnFacilitiesIDChanging(System.Nullable<int> value);
+    partial void OnFacilitiesIDChanged();
+    partial void OnSupplierIDChanging(System.Nullable<int> value);
+    partial void OnSupplierIDChanged();
+    partial void OnReferenceDescChanging(string value);
+    partial void OnReferenceDescChanged();
+    partial void OnAmountChanging(System.Nullable<double> value);
+    partial void OnAmountChanged();
+    partial void OnUnitChanging(string value);
+    partial void OnUnitChanged();
+    partial void OnUnitPriceChanging(System.Nullable<double> value);
+    partial void OnUnitPriceChanged();
+    partial void OnCurrencyChanging(string value);
+    partial void OnCurrencyChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
+    #endregion
+		
 		public ReceiptDetail()
 		{
+			this._Facility = default(EntityRef<Facility>);
+			this._Gift = default(EntityRef<Gift>);
+			this._Ingredient = default(EntityRef<Ingredient>);
+			this._Receipt = default(EntityRef<Receipt>);
+			this._Supplier = default(EntityRef<Supplier>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceiptDetailID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ReceiptDetailID
+		{
+			get
+			{
+				return this._ReceiptDetailID;
+			}
+			set
+			{
+				if ((this._ReceiptDetailID != value))
+				{
+					this.OnReceiptDetailIDChanging(value);
+					this.SendPropertyChanging();
+					this._ReceiptDetailID = value;
+					this.SendPropertyChanged("ReceiptDetailID");
+					this.OnReceiptDetailIDChanged();
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceiptID", DbType="Int NOT NULL")]
@@ -7751,7 +7950,15 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._ReceiptID != value))
 				{
+					if (this._Receipt.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnReceiptIDChanging(value);
+					this.SendPropertyChanging();
 					this._ReceiptID = value;
+					this.SendPropertyChanged("ReceiptID");
+					this.OnReceiptIDChanged();
 				}
 			}
 		}
@@ -7767,7 +7974,15 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._IngreID != value))
 				{
+					if (this._Ingredient.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIngreIDChanging(value);
+					this.SendPropertyChanging();
 					this._IngreID = value;
+					this.SendPropertyChanged("IngreID");
+					this.OnIngreIDChanged();
 				}
 			}
 		}
@@ -7783,7 +7998,15 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._GiftID != value))
 				{
+					if (this._Gift.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnGiftIDChanging(value);
+					this.SendPropertyChanging();
 					this._GiftID = value;
+					this.SendPropertyChanged("GiftID");
+					this.OnGiftIDChanged();
 				}
 			}
 		}
@@ -7799,7 +8022,15 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._FacilitiesID != value))
 				{
+					if (this._Facility.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFacilitiesIDChanging(value);
+					this.SendPropertyChanging();
 					this._FacilitiesID = value;
+					this.SendPropertyChanged("FacilitiesID");
+					this.OnFacilitiesIDChanged();
 				}
 			}
 		}
@@ -7815,7 +8046,15 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._SupplierID != value))
 				{
+					if (this._Supplier.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSupplierIDChanging(value);
+					this.SendPropertyChanging();
 					this._SupplierID = value;
+					this.SendPropertyChanged("SupplierID");
+					this.OnSupplierIDChanged();
 				}
 			}
 		}
@@ -7831,7 +8070,11 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._ReferenceDesc != value))
 				{
+					this.OnReferenceDescChanging(value);
+					this.SendPropertyChanging();
 					this._ReferenceDesc = value;
+					this.SendPropertyChanged("ReferenceDesc");
+					this.OnReferenceDescChanged();
 				}
 			}
 		}
@@ -7847,7 +8090,11 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._Amount != value))
 				{
+					this.OnAmountChanging(value);
+					this.SendPropertyChanging();
 					this._Amount = value;
+					this.SendPropertyChanged("Amount");
+					this.OnAmountChanged();
 				}
 			}
 		}
@@ -7863,7 +8110,11 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._Unit != value))
 				{
+					this.OnUnitChanging(value);
+					this.SendPropertyChanging();
 					this._Unit = value;
+					this.SendPropertyChanged("Unit");
+					this.OnUnitChanged();
 				}
 			}
 		}
@@ -7879,7 +8130,11 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._UnitPrice != value))
 				{
+					this.OnUnitPriceChanging(value);
+					this.SendPropertyChanging();
 					this._UnitPrice = value;
+					this.SendPropertyChanged("UnitPrice");
+					this.OnUnitPriceChanged();
 				}
 			}
 		}
@@ -7895,7 +8150,11 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._Currency != value))
 				{
+					this.OnCurrencyChanging(value);
+					this.SendPropertyChanging();
 					this._Currency = value;
+					this.SendPropertyChanged("Currency");
+					this.OnCurrencyChanged();
 				}
 			}
 		}
@@ -7911,8 +8170,202 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._Status != value))
 				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
 					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Facility_ReceiptDetail", Storage="_Facility", ThisKey="FacilitiesID", OtherKey="FacilitiesID", IsForeignKey=true)]
+		public Facility Facility
+		{
+			get
+			{
+				return this._Facility.Entity;
+			}
+			set
+			{
+				Facility previousValue = this._Facility.Entity;
+				if (((previousValue != value) 
+							|| (this._Facility.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Facility.Entity = null;
+						previousValue.ReceiptDetails.Remove(this);
+					}
+					this._Facility.Entity = value;
+					if ((value != null))
+					{
+						value.ReceiptDetails.Add(this);
+						this._FacilitiesID = value.FacilitiesID;
+					}
+					else
+					{
+						this._FacilitiesID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Facility");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gift_ReceiptDetail", Storage="_Gift", ThisKey="GiftID", OtherKey="GiftID", IsForeignKey=true)]
+		public Gift Gift
+		{
+			get
+			{
+				return this._Gift.Entity;
+			}
+			set
+			{
+				Gift previousValue = this._Gift.Entity;
+				if (((previousValue != value) 
+							|| (this._Gift.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Gift.Entity = null;
+						previousValue.ReceiptDetails.Remove(this);
+					}
+					this._Gift.Entity = value;
+					if ((value != null))
+					{
+						value.ReceiptDetails.Add(this);
+						this._GiftID = value.GiftID;
+					}
+					else
+					{
+						this._GiftID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Gift");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ingredient_ReceiptDetail", Storage="_Ingredient", ThisKey="IngreID", OtherKey="IngreID", IsForeignKey=true)]
+		public Ingredient Ingredient
+		{
+			get
+			{
+				return this._Ingredient.Entity;
+			}
+			set
+			{
+				Ingredient previousValue = this._Ingredient.Entity;
+				if (((previousValue != value) 
+							|| (this._Ingredient.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Ingredient.Entity = null;
+						previousValue.ReceiptDetails.Remove(this);
+					}
+					this._Ingredient.Entity = value;
+					if ((value != null))
+					{
+						value.ReceiptDetails.Add(this);
+						this._IngreID = value.IngreID;
+					}
+					else
+					{
+						this._IngreID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Ingredient");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Receipt_ReceiptDetail", Storage="_Receipt", ThisKey="ReceiptID", OtherKey="ReceiptID", IsForeignKey=true)]
+		public Receipt Receipt
+		{
+			get
+			{
+				return this._Receipt.Entity;
+			}
+			set
+			{
+				Receipt previousValue = this._Receipt.Entity;
+				if (((previousValue != value) 
+							|| (this._Receipt.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Receipt.Entity = null;
+						previousValue.ReceiptDetails.Remove(this);
+					}
+					this._Receipt.Entity = value;
+					if ((value != null))
+					{
+						value.ReceiptDetails.Add(this);
+						this._ReceiptID = value.ReceiptID;
+					}
+					else
+					{
+						this._ReceiptID = default(int);
+					}
+					this.SendPropertyChanged("Receipt");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supplier_ReceiptDetail", Storage="_Supplier", ThisKey="SupplierID", OtherKey="SupplierID", IsForeignKey=true)]
+		public Supplier Supplier
+		{
+			get
+			{
+				return this._Supplier.Entity;
+			}
+			set
+			{
+				Supplier previousValue = this._Supplier.Entity;
+				if (((previousValue != value) 
+							|| (this._Supplier.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Supplier.Entity = null;
+						previousValue.ReceiptDetails.Remove(this);
+					}
+					this._Supplier.Entity = value;
+					if ((value != null))
+					{
+						value.ReceiptDetails.Add(this);
+						this._SupplierID = value.SupplierID;
+					}
+					else
+					{
+						this._SupplierID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Supplier");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -9730,13 +10183,15 @@ namespace ManagerCoffeeShopASPNet
 		
 		private string _Phone;
 		
-		private EntitySet<Facility> _Facilities;
-		
 		private EntitySet<Gift> _Gifts;
+		
+		private EntitySet<Facility> _Facilities;
 		
 		private EntitySet<Ingredient> _Ingredients;
 		
 		private EntitySet<IngredientsMapSupplier> _IngredientsMapSuppliers;
+		
+		private EntitySet<ReceiptDetail> _ReceiptDetails;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -9754,10 +10209,11 @@ namespace ManagerCoffeeShopASPNet
 		
 		public Supplier()
 		{
-			this._Facilities = new EntitySet<Facility>(new Action<Facility>(this.attach_Facilities), new Action<Facility>(this.detach_Facilities));
 			this._Gifts = new EntitySet<Gift>(new Action<Gift>(this.attach_Gifts), new Action<Gift>(this.detach_Gifts));
+			this._Facilities = new EntitySet<Facility>(new Action<Facility>(this.attach_Facilities), new Action<Facility>(this.detach_Facilities));
 			this._Ingredients = new EntitySet<Ingredient>(new Action<Ingredient>(this.attach_Ingredients), new Action<Ingredient>(this.detach_Ingredients));
 			this._IngredientsMapSuppliers = new EntitySet<IngredientsMapSupplier>(new Action<IngredientsMapSupplier>(this.attach_IngredientsMapSuppliers), new Action<IngredientsMapSupplier>(this.detach_IngredientsMapSuppliers));
+			this._ReceiptDetails = new EntitySet<ReceiptDetail>(new Action<ReceiptDetail>(this.attach_ReceiptDetails), new Action<ReceiptDetail>(this.detach_ReceiptDetails));
 			OnCreated();
 		}
 		
@@ -9841,19 +10297,6 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supplier_Facility", Storage="_Facilities", ThisKey="SupplierID", OtherKey="SupplierID")]
-		public EntitySet<Facility> Facilities
-		{
-			get
-			{
-				return this._Facilities;
-			}
-			set
-			{
-				this._Facilities.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supplier_Gift", Storage="_Gifts", ThisKey="SupplierID", OtherKey="SupplierID")]
 		public EntitySet<Gift> Gifts
 		{
@@ -9864,6 +10307,19 @@ namespace ManagerCoffeeShopASPNet
 			set
 			{
 				this._Gifts.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supplier_Facility", Storage="_Facilities", ThisKey="SupplierID", OtherKey="SupplierID")]
+		public EntitySet<Facility> Facilities
+		{
+			get
+			{
+				return this._Facilities;
+			}
+			set
+			{
+				this._Facilities.Assign(value);
 			}
 		}
 		
@@ -9893,6 +10349,19 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supplier_ReceiptDetail", Storage="_ReceiptDetails", ThisKey="SupplierID", OtherKey="SupplierID")]
+		public EntitySet<ReceiptDetail> ReceiptDetails
+		{
+			get
+			{
+				return this._ReceiptDetails;
+			}
+			set
+			{
+				this._ReceiptDetails.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -9913,18 +10382,6 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
-		private void attach_Facilities(Facility entity)
-		{
-			this.SendPropertyChanging();
-			entity.Supplier = this;
-		}
-		
-		private void detach_Facilities(Facility entity)
-		{
-			this.SendPropertyChanging();
-			entity.Supplier = null;
-		}
-		
 		private void attach_Gifts(Gift entity)
 		{
 			this.SendPropertyChanging();
@@ -9932,6 +10389,18 @@ namespace ManagerCoffeeShopASPNet
 		}
 		
 		private void detach_Gifts(Gift entity)
+		{
+			this.SendPropertyChanging();
+			entity.Supplier = null;
+		}
+		
+		private void attach_Facilities(Facility entity)
+		{
+			this.SendPropertyChanging();
+			entity.Supplier = this;
+		}
+		
+		private void detach_Facilities(Facility entity)
 		{
 			this.SendPropertyChanging();
 			entity.Supplier = null;
@@ -9956,6 +10425,18 @@ namespace ManagerCoffeeShopASPNet
 		}
 		
 		private void detach_IngredientsMapSuppliers(IngredientsMapSupplier entity)
+		{
+			this.SendPropertyChanging();
+			entity.Supplier = null;
+		}
+		
+		private void attach_ReceiptDetails(ReceiptDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Supplier = this;
+		}
+		
+		private void detach_ReceiptDetails(ReceiptDetail entity)
 		{
 			this.SendPropertyChanging();
 			entity.Supplier = null;

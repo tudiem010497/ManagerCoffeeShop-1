@@ -62,5 +62,17 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._receiptDetailDAO.GetReceiptDetailByReceiptID(ReceiptID);
         }
+        public bool InsertReceipt(DateTime Date, double TotalAmount, string Currency, string Status)
+        {
+            return this._receiptDAO.InsertReceipt(Date, TotalAmount, Currency, Status);
+        }
+        public bool InsertReceiptDetail(int ReceiptID, int IngreID, double Amount, string Unit, double UnitPrice, string Currency, string Status)
+        {
+            return this._receiptDetailDAO.InsertReceiptDetail(ReceiptID, IngreID, Amount, Unit, UnitPrice, Currency, Status);
+        }
+        public int GetLastReceiptID()
+        {
+            return this._receiptDAO.GetLastReceiptID();
+        }
     }
 }
