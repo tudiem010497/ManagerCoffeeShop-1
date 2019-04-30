@@ -258,7 +258,6 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult PrintReport()
         {
             CrystalReport1 rp = new CrystalReport1();
-
             //Response.Buffer = false;
             //Response.ClearContent();
             //Response.ClearHeaders();
@@ -267,5 +266,25 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             stream.Seek(0, SeekOrigin.Begin);
             return File(stream, "application/pdf", "CustomerList.pdf");
          }
+
+        [Route("GetAllOrder")]
+        public ActionResult GetAllOrder()
+        {
+            IEnumerable<Order> orders = info.GetAllOrder();
+            return View(orders);
+        }
+        [Route("PrintOrder")]
+        public ActionResult PrintOrder(int OrderID)
+        {
+            ExportOrderCustomer rp = new ExportOrderCustomer();
+            //Response.Buffer = false;
+            //Response.ClearContent();
+            //Response.ClearHeaders();
+            //rp.SetDatabaseLogon("Diem", "", "DESKTOP-HA2TCUF", "CoffeeShopDB", false);
+            rp.SetParameterValue("@OrderID", OrderID);
+            Stream stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "OrderCustomer.pdf");
+        }
     }
 }
