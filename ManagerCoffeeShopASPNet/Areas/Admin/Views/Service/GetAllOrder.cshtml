@@ -1,0 +1,23 @@
+﻿@using NonFactors.Mvc.Grid
+@model IEnumerable<Order>
+@{
+    ViewBag.Title = "GetAllOrder";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>GetAllOrder</h2>
+@(Html
+        .Grid(Model).Build(columns =>
+        {
+            columns.Add(o => o.OrderID).Titled("OrderID").Sortable(false);
+            columns.Add(o => o.Customer.Name).Titled("Tên khách hàng").Sortable(false);
+            columns.Add(o => o.PosID).Titled("Vị trí").Sortable(false);
+            columns.Add(o => o.OrderDateTime).Titled("Thời gian vào");
+            columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o =>
+            Html.ActionLink("Xuất hóa đơn", "PrintOrder", "Service", new { OrderID = o.OrderID }, new { @class = "btn btn-primary" })).Filterable(false);
+        })
+        .WithFilterMode(GridFilterMode.FilterRow)
+        .Empty("Data is empty")
+        .Filterable()
+        .Sortable()
+)
