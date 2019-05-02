@@ -20,7 +20,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Models
         [JsonProperty(PropertyName = "Position")]
         public string Position { get; set; }
         [JsonProperty(PropertyName = "Avatar")]
-        public string Avatar { get; set; }
-        public HttpPostedFileBase AvatarUpload { get; set; }
+        //public string Avatar { get; set; }
+        public HttpPostedFileBase Avatar { get; set; }
     }
 }

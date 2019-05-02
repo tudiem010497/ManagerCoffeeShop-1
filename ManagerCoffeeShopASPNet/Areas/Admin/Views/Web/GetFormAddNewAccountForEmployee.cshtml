@@ -10,8 +10,7 @@
 
 <h2>GetFormAddNewAccountForEmployee</h2>
 
-@*"CreateAccountForEmployee", "Web", FormMethod.Post*@
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("CreateAccountForEmployee", "Web", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -22,7 +21,7 @@
         <div class="form-group">
             @Html.Label("EmployeeID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="text" value="@TempData["EmployeeID"]" id="employeeID" class="form-control" />
+                <input type="text" value="@TempData["EmployeeID"]" name="employeeID" id="employeeID" class="form-control" />
                 @Html.ValidationMessage("EmployeeID", "", new { @class = "text-danger" })
             </div>
         </div>

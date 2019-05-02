@@ -1,4 +1,5 @@
-﻿@model ManagerCoffeeShopASPNet.Employee
+﻿@*@model ManagerCoffeeShopASPNet.Employee*@
+@model IEnumerable<Employee>
 @using NonFactors.Mvc.Grid
 @{
     ViewBag.Title = "DetailEmployee";
@@ -8,7 +9,7 @@
 <h2>DetailEmployee</h2>
 
 <div>
-    <h4>Employee</h4>
+    @*<h4>Employee</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -91,10 +92,26 @@
             @Html.DisplayFor(model => model.Status)
         </dd>
 
-    </dl>
+    </dl>*@
+    @(Html
+        .Grid(Model)
+        .Build(column =>
+        {
+            column.Add(m => m.UserID).Titled("UserID");
+            column.Add(m => m.CSID).Titled("CSID");
+            column.Add(m => m.Name).Titled("Name");
+            column.Add(m => m.Address).Titled("Address");
+            column.Add(m => m.Email).Titled("Email");
+            column.Add(m => m.Phone).Titled("Phone");
+            column.Add(m => m.DOB).Titled("Date of Birth");
+            column.Add(m => m.Gender).Titled("Gender");
+            column.Add(m => m.IndentityNum).Titled("Indentity Number");
+            column.Add(m => m.Status).Titled("Status");
+        })
+    )
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "EditEmployee", "Web", new { EmployeeID = Model.EmployeeID }, new { @class="btn btn-primary"})
+    @*@Html.ActionLink("Edit", "EditEmployee", "Web", new { EmployeeID = Model.EmployeeID }, new { @class="btn btn-primary"})*@
     @Html.ActionLink("Back to List", "GetAllEmployee")
 </p>

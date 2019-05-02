@@ -62,19 +62,19 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("DetailEmployee")]
         public ActionResult DetailEmployee(int EmployeeID)
         {
-            Employee em = info.GetEmployeeByEmployeeID(EmployeeID);
+            IEnumerable<Employee> em = info.GetEmployeeByEmployeeID(EmployeeID);
             return View(em);
         }
         [Route("DeleteEmployee")]
         public ActionResult DeleteEmployee(int EmployeeID)
         {
-            Employee em = info.GetEmployeeByEmployeeID(EmployeeID);
+            Employee em = info.GetEmployeeByID(EmployeeID);
             return View(em);
         }
         [Route("DoDeleteEmployee")]
         public ActionResult DoDeleteEmployee(int EmployeeID)
         {
-            Employee em = info.GetEmployeeByEmployeeID(EmployeeID);
+            Employee em = info.GetEmployeeByID(EmployeeID);
             Account acc = info.GetAccountByEmail(em.Email);
             if (em.UserID != null)
             {
@@ -110,7 +110,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("EditEmployee")]
         public ActionResult EditEmployee(int EmployeeID)
         {
-            Employee em = info.GetEmployeeByEmployeeID(EmployeeID);
+            Employee em = info.GetEmployeeByID(EmployeeID);
             IEnumerable<CoffeeShop> coffeeShop = info.GetAllCoffeeShop();
             List<SelectListItem> listCoffeeShop = new List<SelectListItem>();
             foreach (var item in coffeeShop)
@@ -147,40 +147,141 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             TempData["EmployeeID"] = EmployeeID;
             return View();
         }
+        //[Route("CreateAccountForEmployee")]
+        //public ActionResult CreateAccountForEmployee(string json)
+        //{
+        //    AccountModel test = JsonConvert.DeserializeObject<AccountModel>(json);
+        //    Employee em = info.GetEmployeeByEmployeeID(test.EmployeeID);
+        //    string UserName = test.UserName;
+        //    string Password = test.Password;
+        //    string AccType = test.AccType;
+        //    string Position = test.Position;
+        //    string fileName = test.Avatar;
+        //    //HttpPostedFileBase Avatar = fileName;
+        //    var path = Path.Combine(Server.MapPath("/Assets/resource/img/avatar"), fileName);
+        //    string fileNameNoExtension = Path.GetFileNameWithoutExtension(fileName);
+        //    string extension = Path.GetExtension(fileName);
+        //    int temp = 1;
+        //    while (System.IO.File.Exists(path))
+        //    {
+        //        fileName = fileNameNoExtension + "Copy(" + temp + ")" + extension;
+        //        path = Path.Combine(Server.MapPath("/Assets/resource/img/avatar/"), fileName);
+        //        temp++;
+        //    }
+        //    //fileName.SaveAs(path);
+        //    //Avatar.SaveAs(path);
+        //    string imagePath = "/Assets/resource/img/avatar/" + fileName;
+        //    bool result = info.InsertAccount(UserName, Password, em.Email, AccType, Position, imagePath);
+        //    Account acc = info.GetAccountByEmail(em.Email);
+        //    bool resutlEmployee = info.EditEmployeeMissingUserID(em.Email, acc.UserID);
+        //    return Json(new { UserID = acc.UserID }, JsonRequestBehavior.AllowGet);
+        //}
         [Route("CreateAccountForEmployee")]
-        public ActionResult CreateAccountForEmployee(string json)
+        [HttpPost]
+        public ActionResult CreateAccountForEmployee(int EmployeeID, string UserName, string Password,
+            string AccType, string Position, HttpPostedFileBase Avatar)
         {
-            AccountModel test = JsonConvert.DeserializeObject<AccountModel>(json);
-            Employee em = info.GetEmployeeByEmployeeID(test.EmployeeID);
-            string UserName = test.UserName;
-            string Password = test.Password;
-            string AccType = test.AccType;
-            string Position = test.Position;
-            string fileName = test.Avatar;
-            //HttpPostedFileBase Avatar = fileName;
-            var path = Path.Combine(Server.MapPath("/Assets/resource/img/avatar"), fileName);
+            Employee em = info.GetEmployeeByID(EmployeeID);
+            var Image = Avatar;
+            string fileName = Avatar.FileName;
+            var path = Path.Combine(Server.MapPath("~/Assets/resource/img/avatar"), fileName);
             string fileNameNoExtension = Path.GetFileNameWithoutExtension(fileName);
             string extension = Path.GetExtension(fileName);
             int temp = 1;
             while (System.IO.File.Exists(path))
             {
                 fileName = fileNameNoExtension + "Copy(" + temp + ")" + extension;
-                path = Path.Combine(Server.MapPath("/Assets/resource/img/avatar/"), fileName);
+                path = Path.Combine(Server.MapPath("~/Assets/resource/img/avatar"), fileName);
                 temp++;
             }
-            //fileName.SaveAs(path);
-            //Avatar.SaveAs(path);
-            string imagePath = "/Assets/resource/img/avatar/" + fileName;
+            Avatar.SaveAs(path);
+            string imagePath = "~/Assets/resource/img/avatar/" + fileName;
             bool result = info.InsertAccount(UserName, Password, em.Email, AccType, Position, imagePath);
             Account acc = info.GetAccountByEmail(em.Email);
-            bool resutlEmployee = info.EditEmployeeMissingUserID(em.Email, acc.UserID);
-            return Json(new { UserID = acc.UserID }, JsonRequestBehavior.AllowGet);
+            bool resultEmployee = info.EditEmployeeMissingUserID(em.Email, acc.UserID);
+            return RedirectToAction("GetAllEmployee", "Web");
         }
         [Route("ViewAccountInformation")]
         public ActionResult ViewAccountInformation(int UserID)
         {
-            Account acc = info.GetAccountByUserID(UserID);
+            IEnumerable<Account> acc = info.GetAccountByID(UserID);
             return View(acc);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetAllCoffeeShop")]
+        public ActionResult GetAllCoffeeShop()
+        {
+            IEnumerable<CoffeeShop> coffeeshop = info.GetAllCoffeeShop();
+            return View(coffeeshop);
+        }
+        [Route("GetAddNewCoffeeShop")]
+        public ActionResult GetAddNewCoffeeShop()
+        {
+            return View();
+        }
+        [Route("CreateCoffeeShop")]
+        public ActionResult CreateCoffeeShop(string Name, string Address, string Phone, HttpPostedFileBase LogoImagePath, string TitleAbout, string DescAbout, string TitleContact, string DescContact, string Email)
+        {
+            string fileName = LogoImagePath.FileName;
+            var path = Path.Combine(Server.MapPath("~/Assets/resource/img/"), fileName);
+            string fileNameNoExtension = Path.GetFileNameWithoutExtension(fileName);
+            string extension = Path.GetExtension(fileName);
+            int temp = 1;
+            while (System.IO.File.Exists(path))
+            {
+                fileName = fileNameNoExtension + "Copy(" + temp + ")" + extension;
+                path = Path.Combine(Server.MapPath("~/Assets/resource/img/"), fileName);
+                temp++;
+            }
+            LogoImagePath.SaveAs(path);
+            string imagePath = "~/Assets/resource/img/" + fileName;
+            bool result = info.InsertCoffeeShop(Name, Address, Phone, imagePath, TitleAbout, DescAbout, TitleContact, DescContact, Email);
+            return RedirectToAction("GetAllCoffeeShop", "Web");
+        }
+        [Route("EditCoffeeShop")]
+        public ActionResult EditCoffeeShop(int CSID)
+        {
+            IEnumerable<CoffeeShop> cs = info.GetCoffeeShopByCSID(CSID);
+            return View(cs);
+        }
+        [Route("DoEditCoffeeShop")]
+        public ActionResult DoEditCoffeeShop(int CSID, string Name, string Address, string Phone, HttpPostedFileBase LogoImagePath, string TitleAbout, string DescAbout, string TitleContact, string DescContact, string Email)
+        {
+            string fileName = LogoImagePath.FileName;
+            var path = Path.Combine(Server.MapPath("~/Assets/resource/img/"), fileName);
+            string fileNameNoExtension = Path.GetFileNameWithoutExtension(fileName);
+            string extension = Path.GetExtension(fileName);
+            int temp = 1;
+            while (System.IO.File.Exists(path))
+            {
+                fileName = fileNameNoExtension + "Copy(" + temp + ")" + extension;
+                path = Path.Combine(Server.MapPath("~/Assets/resource/img/"), fileName);
+                temp++;
+            }
+            LogoImagePath.SaveAs(path);
+            string imagePath = "~/Assets/resource/img/" + fileName;
+            CoffeeShop coffeeshop = new CoffeeShop();
+            coffeeshop.CSID = CSID;
+            coffeeshop.Name = Name;
+            coffeeshop.Address = Address;
+            coffeeshop.Phone = Phone;
+            coffeeshop.LogoImagePath = imagePath;
+            coffeeshop.TitleAbout = TitleAbout;
+            coffeeshop.DescAbout = DescAbout;
+            coffeeshop.TitleContact = TitleContact;
+            coffeeshop.DescContact = DescContact;
+            coffeeshop.Email = Email;
+            bool result = info.EditCoffeeShop(coffeeshop);
+            return RedirectToAction("GetAllCoffeeShop", "Web");
+        }
+        [Route("DetailsCoffeeShop")]
+        public ActionResult DetailsCoffeeShop(int CSID)
+        {
+            IEnumerable<CoffeeShop> cs = info.GetCoffeeShopByCSID(CSID);
+            return View(cs);
         }
     }
 }

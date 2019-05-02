@@ -1,5 +1,6 @@
-﻿@model ManagerCoffeeShopASPNet.Account
-
+﻿@*@model ManagerCoffeeShopASPNet.Account*@
+@model IEnumerable<Account>
+@using NonFactors.Mvc.Grid
 @{
     ViewBag.Title = "ViewAccountInformation";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -10,7 +11,7 @@
 <div>
     <h4>Account</h4>
     <hr />
-    <dl class="dl-horizontal">
+    @*<dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.UserName)
         </dt>
@@ -19,13 +20,13 @@
             @Html.DisplayFor(model => model.UserName)
         </dd>
 
-        @*<dt>
+        <dt>
             @Html.DisplayNameFor(model => model.Password)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Password)
-        </dd>*@
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Email)
@@ -59,7 +60,19 @@
             @Html.DisplayFor(model => model.Avatar)
         </dd>
 
-    </dl>
+    </dl>*@
+    @(Html
+        .Grid(Model)
+        .Build(column =>
+        {
+        column.Add(m => m.UserName).Titled("UserName");
+        column.Add(m => m.Email).Titled("Email");
+        column.Add(m => m.AccType).Titled("AccType");
+        column.Add(m => m.Position).Titled("Position");
+        //column.Add(/*m => m.Avatar*/).Encoded(false).Titled("Avatar").RenderedAs(m =>@<div style="width:100px;"><img alt="Image" src='@m.Avatar' )" /></div>);
+        //column.Add().Encoded(false).RenderValue(@<div style="width:100px"><img src="m.Avatar"/></div>);
+        })
+)
 </div>
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |*@
