@@ -38,10 +38,12 @@ $(document).ready(function () {
         let fdQuantity = $(this).closest('div').find('input:eq(1)').val()
         let fdPrice = $(this).closest('div').find('span:eq(2)').text()
         let price = fdQuantity * fdPrice;
+        let fdDesc = $(this).closest('div').find('input:eq(2)').val()
         $('span#price').text(price)
         var data = '{"FDID" : ' + fdId + ', '
         data = data + '"Name" :  "' + fdName + '",'
         data = data + '"Quantity" : ' + fdQuantity + ', '
+        data = data + '"Desc" :  "' + fdDesc + '",'
         data = data + '"Price" : ' + fdPrice + ', '
         data = data + '"Total" : ' + price + '}'
         console.log(data)
@@ -56,13 +58,50 @@ $(document).ready(function () {
                 alert("Thêm vào giỏ hàng thành công!! Bạn hãy vào giỏ hàng để xem chi tiết.");
             },
             error: function (err) {
-                alert("Error : " + err.responseText);
+                alert("Error 2 : " + err.responseText);
             }
         })
     })
     //xử lý khi nhấn button pay lấy thông tin đặt hàng và thông tin người đặt
     $('a#pay').click(function () {
+        console.log('test')
+        let temp =  $(this).closest('div.form-group')
+        var userID =$('input#userID').val()
+        var custname =$('input#name').val()
+        let tel = $('input#tel').val()
+        let email = $('input#email').val()
+        let address = $('input#address').val()
+        if (userID == undefined) {
+            var data = '{"UserID" : ' + 0 + ', '
+            data = data + '"CustName" :  "' + custname + '",'
+            //var data = '{"CustName" :  "' + custname + '",'
+            data = data + '"Tel" : "' + tel + '", '
+            data = data + '"Email" :  "' + email + '",'
+            data = data + '"Address" : "' + address + '"}'
+        }
+        else {
+            var data = '{"UserID" : ' + userID + ', '
+            data = data + '"CustName" :  "' + custname + '",'
+            data = data + '"Tel" : "' + tel + '", '
+            data = data + '"Email" :  "' + email + '",'
+            data = data + '"Address" : "' + address + '"}'
+        }
         
+        console.log(data)
+        $.ajax({
+            url: '/main/cart/Pay?json=' + data,
+            type: "POST",
+            contenType: "application/json; charset=utf-8",
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                alert("Bạn đã đặt hàng thành công. Hãy chờ xác nhận từ nhân viên.");
+                window.location="Cart"
+            },
+            error: function (err) {
+                alert("Error 1 : " + err.responseText);
+            }
+        })
     })
 })
 
