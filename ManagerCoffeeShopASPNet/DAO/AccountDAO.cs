@@ -13,6 +13,7 @@ namespace ManagerCoffeeShopASPNet.DAO
         Account GetAccountByEmail(string Email);
         Account GetAccountByUserName(string UserName);
         Account GetAccountByUserID(int UserID);
+        IEnumerable<Account> GetAccountByID(int UserID);
         bool InsertAccount(string UserName, string Password, string Email, string AccType, string Position, string Avatar);
         bool DeleteAccount(int UserID);
     }

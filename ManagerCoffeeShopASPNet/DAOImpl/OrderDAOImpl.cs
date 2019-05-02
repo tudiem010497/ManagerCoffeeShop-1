@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ManagerCoffeeShopASPNet.DAOImpl
 {
-    public class OrderDAOImpl:OrderDAO
+    public class OrderDAOImpl : OrderDAO
     {
         CoffeeShopDBDataContext context;
         public OrderDAOImpl()
@@ -23,7 +23,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                           select order.OrderID).FirstOrDefault();
                 return id;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return 0;
             }
@@ -53,6 +53,29 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 return false;
             }
         }
+        public bool InsertOrderWithoutPosID(DateTime OrderDateTime, DateTime PaidDateTime,
+           double TotalAmount, string Currency, string Desc, string Status)
+        {
+            try
+            {
+                Order order = new Order();
+                order.OrderID = this.GetLastID() + 1;
+                order.OrderDateTime = OrderDateTime;
+                order.PaidDateTime = PaidDateTime;
+                order.TotalAmount = TotalAmount;
+                order.Currency = Currency;
+                order.Desc = Desc;
+                order.Status = Status;
+                // context.ExecuteCommand("SET IDENTITY_INSERT dbo.Order ON");
+                context.Orders.InsertOnSubmit(order);
+                context.SubmitChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw (new Exception("Error Inser To Order : " + ex.Message));
+            }
+        }
         public IEnumerable<Order> GetAllOrderByStatus(string Status)
         {
             IEnumerable<Order> orders = from order in context.Orders
@@ -70,7 +93,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 context.SubmitChanges();
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Error UpdateOrderStatus : " + ex.Message);
             }
@@ -90,6 +113,6 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                                         select order;
             return orders;
         }
-        
+
     }
 }

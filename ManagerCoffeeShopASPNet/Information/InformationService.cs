@@ -13,12 +13,18 @@ namespace ManagerCoffeeShopASPNet.Information
         private OrderDAO _orderDAO;
         private OrderItemDAO _orderItemDAO;
         private PositionDAO _positionDAO;
+        private AccountDAO _accountDAO;
+        private ShipDAO _shipDAO;
+        private ShipDetailDAO _shipDetailDAO;
         public InformationService()
         {
             this._foodAndDrinkDAO = (FoodAndDrinkDAO)new FoodAndDrinkDAOImpl();
             this._orderDAO = (OrderDAO)new OrderDAOImpl();
             this._orderItemDAO = (OrderItemDAO)new OrderItemDAOImpl();
             this._positionDAO = (PositionDAO)new PositionDAOImpl();
+            this._accountDAO = (AccountDAO)new AccountDAOImpl();
+            this._shipDAO = (ShipDAO)new ShipDAOImpl();
+            this._shipDetailDAO = (ShipDetailDAO)new ShipDetailDAOImpl();
         }
         public IEnumerable<FoodAndDrink> GetFoodAndDrink()
         {
@@ -32,6 +38,12 @@ namespace ManagerCoffeeShopASPNet.Information
             double TotalAmount, string Currency, string Desc, string Status)
         {
             return _orderDAO.InsertOrder(PosID, OrderDateTime, PaidDateTime,
+           TotalAmount, Currency, Desc, Status);
+        }
+        public bool InsertOrderWithoutPosID(DateTime OrderDateTime, DateTime PaidDateTime,
+            double TotalAmount, string Currency, string Desc, string Status)
+        {
+            return _orderDAO.InsertOrderWithoutPosID(OrderDateTime, PaidDateTime,
            TotalAmount, Currency, Desc, Status);
         }
         public void InsertOrderItem(int OrderID, int FDID, int Quantity, string Desc, string Status)
@@ -90,6 +102,26 @@ namespace ManagerCoffeeShopASPNet.Information
         public IEnumerable<Order> GetAllOrder()
         {
             return this._orderDAO.GetAllOrder();
+        }
+        public Account GetAccountByUserID(int UserID)
+        {
+            return _accountDAO.GetAccountByUserID(UserID);
+        }
+        public bool InsertShip(int EmployeeID, string CustName, DateTime ShipDate)
+        {
+            return this._shipDAO.InsertShip(EmployeeID, CustName, ShipDate);
+        }
+        public bool InsertShipWithUserID(int EmpolyeeID, int UserID, string CustName, DateTime ShipDate)
+        {
+            return this._shipDAO.InsertShipWithUserID(EmpolyeeID, UserID, CustName, ShipDate);
+        }
+        public Ship GetShipByCustName(string CustName)
+        {
+            return this._shipDAO.GetShipByCustName(CustName);
+        }
+        public bool InsertShipDetail(int ShipID, int OrderID, string CustName, string Address, string Phone, string Status)
+        {
+            return this._shipDetailDAO.InsertShipDetail(ShipID, OrderID, CustName, Address, Phone, Status);
         }
     }
 }

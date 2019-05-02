@@ -6,14 +6,14 @@ using System.Web;
 
 namespace ManagerCoffeeShopASPNet.DAOImpl
 {
-    public class AccountDAOImpl:AccountDAO
+    public class AccountDAOImpl : AccountDAO
     {
         private CoffeeShopDBDataContext context;
         public AccountDAOImpl()
         {
-            this.context = new CoffeeShopDBDataContext(); 
+            this.context = new CoffeeShopDBDataContext();
         }
-        public IEnumerable<Account>  GetAllAccount()
+        public IEnumerable<Account> GetAllAccount()
         {
             return context.Accounts.ToList();
         }
@@ -25,8 +25,8 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         public Account GetAccountByEmail(string Email)
         {
             Account acc = (from account in context.Accounts
-                       where account.Email == Email
-                       select account).SingleOrDefault();
+                           where account.Email == Email
+                           select account).SingleOrDefault();
             return acc;
         }
         public Account GetAccountByUserName(string UserName)
@@ -41,6 +41,13 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             Account acc = (from account in context.Accounts
                            where account.UserID == UserID
                            select account).SingleOrDefault();
+            return acc;
+        }
+        public IEnumerable<Account> GetAccountByID(int UserID)
+        {
+            IEnumerable<Account> acc = (from account in context.Accounts
+                                        where account.UserID == UserID
+                                        select account);
             return acc;
         }
         public bool InsertAccount(string UserName, string Password, string Email, string AccType, string Position, string Avatar)
@@ -59,7 +66,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 context.SubmitChanges();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception("Error insert account " + e.Message);
             }
@@ -73,7 +80,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 context.SubmitChanges();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception("Error delete account " + e.Message);
             }

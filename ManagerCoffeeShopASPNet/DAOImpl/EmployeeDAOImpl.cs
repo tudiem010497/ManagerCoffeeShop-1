@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ManagerCoffeeShopASPNet.DAOImpl
 {
-    public class EmployeeDAOImpl:EmployeeDAO
+    public class EmployeeDAOImpl : EmployeeDAO
     {
         private CoffeeShopDBDataContext context;
         public EmployeeDAOImpl()
@@ -36,7 +36,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 int id = (from em in context.Accounts orderby em.UserID descending select em.UserID).FirstOrDefault();
                 return id;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return 0;
             }
@@ -60,14 +60,20 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                            select employee).SingleOrDefault();
             return em;
         }
-        public Employee GetEmployeeByEmployeeID(int EmployeeID)
+        public IEnumerable<Employee> GetEmployeeByEmployeeID(int EmployeeID)
         {
-            var em = (from employee in context.Employees
+            IEnumerable<Employee> em = (from employee in context.Employees
+                                        where employee.EmployeeID == EmployeeID
+                                        select employee)/*.SingleOrDefault()*/;
+            return em;
+        }
+        public Employee GetEmployeeByID(int EmployeeID)
+        {
+            Employee em = (from employee in context.Employees
                            where employee.EmployeeID == EmployeeID
                            select employee).SingleOrDefault();
             return em;
         }
-
         public Employee GetEmployeeByEmployeeIDToDelete(int EmployeeID)
         {
             var em = (from employee in context.Employees
@@ -75,7 +81,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                       select employee).SingleOrDefault();
             return em;
         }
-        public bool InsertEmployee( string Name, string Email, string Address, string Phone, DateTime DOB, string Gender, string IndentityNum, string Status)
+        public bool InsertEmployee(string Name, string Email, string Address, string Phone, DateTime DOB, string Gender, string IndentityNum, string Status)
         {
             try
             {
@@ -97,7 +103,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 context.SubmitChanges();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception("Error insert employee " + e.Message);
             }
@@ -106,8 +112,8 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         {
             try
             {
-                Employee em = GetEmployeeByEmployeeID(EmployeeID);
-                if(em.Status == "Lay_off")
+                Employee em = GetEmployeeByID(EmployeeID);
+                if (em.Status == "Lay_off")
                 {
                     context.Employees.DeleteOnSubmit(em);
                     context.SubmitChanges();
@@ -115,7 +121,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 }
                 return false;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception("Error delete employee " + e.Message);
             }
@@ -124,7 +130,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         {
             try
             {
-                Employee em = context.Employees.FirstOrDefault(e=>e.EmployeeID == employee.EmployeeID);
+                Employee em = context.Employees.FirstOrDefault(e => e.EmployeeID == employee.EmployeeID);
                 em.EmployeeID = employee.EmployeeID;
                 //em.UserID = employee.UserID;
                 em.CSID = employee.CSID;
@@ -139,7 +145,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 context.SubmitChanges();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception("Error edit information of employee" + e.Message);
             }
@@ -148,12 +154,12 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         {
             try
             {
-                Employee em = context.Employees.FirstOrDefault(e => e.Email==Email);
+                Employee em = context.Employees.FirstOrDefault(e => e.Email == Email);
                 em.UserID = UserID;
                 context.SubmitChanges();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception("Error edit information of employee" + e.Message);
             }

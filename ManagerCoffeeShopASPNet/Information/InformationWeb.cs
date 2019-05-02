@@ -22,9 +22,13 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._employeeDAO.GetAllEmployee();
         }
-        public Employee GetEmployeeByEmployeeID(int EmployeeID)
+        public IEnumerable<Employee> GetEmployeeByEmployeeID(int EmployeeID)
         {
             return this._employeeDAO.GetEmployeeByEmployeeID(EmployeeID);
+        }
+        public Employee GetEmployeeByID(int EmployeeID)
+        {
+            return this._employeeDAO.GetEmployeeByID(EmployeeID);
         }
         public bool InsertEmployee( string Name, string Email, string Address, string Phone, DateTime DOB, string Gender, string IndentityNum, string Status)
         {
@@ -41,6 +45,10 @@ namespace ManagerCoffeeShopASPNet.Information
         public Account GetAccountByUserID(int UserID)
         {
             return this._accountDAO.GetAccountByUserID(UserID);
+        }
+        public IEnumerable<Account> GetAccountByID(int UserID)
+        {
+            return this._accountDAO.GetAccountByID(UserID);
         }
         public Account GetAccountByEmail(string Email)
         {
@@ -61,6 +69,18 @@ namespace ManagerCoffeeShopASPNet.Information
         public IEnumerable<CoffeeShop> GetAllCoffeeShop()
         {
             return this._coffeeShopDAO.GetAllCoffeeShop();
+        }
+        public IEnumerable<CoffeeShop> GetCoffeeShopByCSID(int CSID)
+        {
+            return this._coffeeShopDAO.GetCoffeeShopByCSID(CSID);
+        }
+        public bool InsertCoffeeShop(string Name, string Address, string Phone, string LogoImagePath, string TitleAbout, string DescAbout, string TitleContact, string DescContact, string Email)
+        {
+            return this._coffeeShopDAO.InsertCoffeeShop(Name, Address, Phone, LogoImagePath, TitleAbout, DescAbout, TitleContact, DescContact, Email);
+        }
+        public bool EditCoffeeShop(CoffeeShop cs)
+        {
+            return this._coffeeShopDAO.EditCoffeeShop(cs);
         }
     }
 }

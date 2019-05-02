@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ManagerCoffeeShopASPNet.DAOImpl
 {
-    public class CoffeeShopDAOImpl:CoffeeShopDAO
+    public class CoffeeShopDAOImpl : CoffeeShopDAO
     {
         private CoffeeShopDBDataContext context;
         public CoffeeShopDAOImpl()
@@ -16,6 +16,13 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         public IEnumerable<CoffeeShop> GetAllCoffeeShop()
         {
             return context.CoffeeShops.ToList();
+        }
+        public IEnumerable<CoffeeShop> GetCoffeeShopByCSID(int CSID)
+        {
+            IEnumerable<CoffeeShop> cs = (from coffeeshop in context.CoffeeShops
+                                          where coffeeshop.CSID == CSID
+                                          select coffeeshop);
+            return cs;
         }
         public bool InsertCoffeeShop(string Name, string Address, string Phone, string LogoImagePath, string TitleAbout, string DescAbout, string TitleContact, string DescContact, string Email)
         {
@@ -35,9 +42,32 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 context.SubmitChanges();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception("Error insert coffee shop " + e.Message);
+            }
+        }
+        public bool EditCoffeeShop(CoffeeShop cs)
+        {
+            try
+            {
+                CoffeeShop coffeeshop = context.CoffeeShops.FirstOrDefault(c => c.CSID == cs.CSID);
+                coffeeshop.CSID = cs.CSID;
+                coffeeshop.Name = cs.Name;
+                coffeeshop.Address = cs.Address;
+                coffeeshop.Phone = cs.Phone;
+                coffeeshop.LogoImagePath = cs.LogoImagePath;
+                coffeeshop.TitleAbout = cs.TitleAbout;
+                coffeeshop.DescAbout = cs.DescAbout;
+                coffeeshop.TitleContact = cs.TitleContact;
+                coffeeshop.DescContact = cs.DescContact;
+                coffeeshop.Email = cs.Email;
+                context.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error edit coffee shop " + e.Message);
             }
         }
     }
