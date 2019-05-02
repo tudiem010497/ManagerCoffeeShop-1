@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ManagerCoffeeShopASPNet.Areas.Main.Models;
+using System.IO;
 
 namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
 {
@@ -33,7 +34,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
             ViewData["successUserID"] = Session["successUserID"];
             ViewData["warning"] = TempData["warning"];
             ViewData["error"] = TempData["error"];
-            ViewData["success"] = Session["success"];
+           
+            ViewData["successCust"] = Session["successCust"];
             ViewData["SignUpOK"] = TempData["SignUpOK"];
             //ViewData["blogs"] = blogs;
             return View();
@@ -47,10 +49,22 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
             if (result)
             {
                 Account acc = infomationIndex.GetAccountByEmail(model.Email);
-                Session["success"] = "Wellcome " + acc.UserName;
-                Session["successUserID"] = acc.UserID.ToString();
-                Session["email"] = model.Email;
-                return RedirectToAction("Index");
+                
+                if(acc.AccType != "Customer")
+                {
+                    Session["successEmployee"] = "Wellcome " + acc.UserName;
+                    Session["successUserID"] = acc.UserID.ToString();
+                    Session["email"] = model.Email;
+                    return RedirectToAction("ServiceEmployee", "Admin/Service"/*, new { Areas = "Admin" }*/);
+                }
+                else
+                {
+                    Session["successCust"] = "Wellcome " + acc.UserName;
+                    Session["successUserID"] = acc.UserID.ToString();
+                    Session["email"] = model.Email;
+                    return RedirectToAction("Index", "Home");
+                }
+                
             }
             else
             {
@@ -70,7 +84,21 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
         [Route("SignUp")]
         public ActionResult SignUp(LoginModel model)
         {
-            var info = new AccountModel().InsertCustomer(model.Name, model.Email, model.Password);
+            string fileName = model.Avatar.FileName;
+            var path = Path.Combine(Server.MapPath("~/Assets/resource/img/avatar"), fileName);
+            string fileNameNoExtension = Path.GetFileNameWithoutExtension(fileName);
+            string extension = Path.GetExtension(fileName);
+            int temp = 1;
+            while (System.IO.File.Exists(path))
+            {
+                fileName = fileNameNoExtension + "Copy(" + temp + ")" + extension;
+                path = Path.Combine(Server.MapPath("~/Assets/resource/img/avatar"), fileName);
+                temp++;
+            }
+            model.Avatar.SaveAs(path);
+            string imagePath = "~/Assets/resource/img/avatar/" + fileName;
+            //HttpPostedFileBase image = Convert.ChangeType( model.Avatar, HttpPostedFileBase);
+            var info = new AccountModel().InsertCustomer(model.Name, model.Email, model.Password, imagePath);
             if (info == 1)
             {
                 Account acc = infomationIndex.GetAccountByEmail(model.Email);

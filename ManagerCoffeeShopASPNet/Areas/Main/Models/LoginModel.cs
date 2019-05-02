@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace ManagerCoffeeShopASPNet.Areas.Main.Models
 {
@@ -17,5 +18,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Models
         public string Address { get; set; }
         public string IdentityNum { get; set; }
         public string Phone { get; set; }
+        public HttpPostedFileBase Avatar { get; set; }
+        //public string Avatar { get; set; }
     }
 }

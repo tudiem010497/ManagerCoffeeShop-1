@@ -1,4 +1,5 @@
 ﻿using ManagerCoffeeShopASPNet.Areas.Main.Models;
+using ManagerCoffeeShopASPNet.Information;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,16 +9,29 @@ using System.Web.Mvc;
 
 namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
 {
-    [RouteArea("main")]
-    [RoutePrefix("cart")]
+    [RouteArea("Main")]
+    [RoutePrefix("Cart")]
     public class CartController : Controller
     {
+        private InformationService info = new InformationService();
+        private InformationWeb infoAccount = new InformationWeb();
         // GET: Main/Cart
         public ActionResult Cart()
         {
             List<Cart> carts = Session["cart"] as List<Cart>;
-            ViewData["carts"] = carts;
-            return View();
+            ViewData["successUserID"] = Session["successUserID"];
+            if (ViewData["successUserID"] != null)
+            {
+                int UserID = Convert.ToInt32(ViewData["successUserID"]);
+                Account acc = infoAccount.GetAccountByUserID(UserID);
+                ViewData["carts"] = carts;
+                return View(acc);
+            }
+            else
+            {
+                ViewData["carts"] = carts;
+                return View();
+            }
         }
 
         [Route("AddToCart")]
@@ -74,6 +88,36 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
             carts.Clear();
             return RedirectToAction("Cart");
         }
-        
+        [Route("Pay")]
+        [HttpPost]
+        public ActionResult Pay(string json)
+        {
+            List<Cart> carts = Session["cart"] as List<Cart>;
+            int PosID = 1;
+            double TotalAmount = 0;
+            foreach(var item in carts)
+            {
+                TotalAmount = TotalAmount + item.Total;
+            }
+            bool resultOrder = info.InsertOrder(PosID, DateTime.Now, DateTime.Now, TotalAmount, "VND", "Delivery", "Waiting for confirmation");
+            int OrderID = info.GetLastOrderIDID();
+            foreach(var item in carts)
+            {
+                info.InsertOrderItem(OrderID, item.FDID, item.Quantity, item.Desc, "Waiting for confirmation");
+            }
+            int EmployeeID = 1;
+            Cart temp = JsonConvert.DeserializeObject<Cart>(json);
+            if (temp.UserID != 0)
+            {
+                info.InsertShipWithUserID(EmployeeID, temp.UserID, temp.CustName, DateTime.Now);
+            }
+            else
+            {
+                info.InsertShip(EmployeeID, temp.CustName, DateTime.Now);
+            }
+            Ship ship = info.GetShipByCustName(temp.CustName);
+            info.InsertShipDetail(ship.ShipID, OrderID, temp.CustName, temp.Address, temp.Tel, "Not yet delivery");
+            return Json(new { UserID = temp.UserID, CustName = temp.CustName, Tel = temp.Tel, Email = temp.Email, Address = temp.Address }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

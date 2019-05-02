@@ -1,6 +1,7 @@
 ﻿@using ManagerCoffeeShopASPNet.Areas.Main.Models;
-
+@model ManagerCoffeeShopASPNet.Account
 @{
+    ViewBag.Title = "RedCaynne Re";
     Layout = null;
 }
 
@@ -9,7 +10,7 @@
 <script src="~/Assets/Main/js/jquery-2.1.4.min.js"></script>
 <script src="~/Assets/Main/js/bootstrap.min.js"></script>
 <script src="~/Assets/Main/js/scriptLogin.js"></script>
-
+<title>@ViewBag.Title</title>
 
 @if (ViewData["carts"] == null)
 {
@@ -52,7 +53,7 @@ else
                                         <button type="submit" class="btn btn-success btn-sm"> Update </button>
                                     </form>
                                 </td>
-                                <td><input type="text" name="desc"/></td>
+                                <td><input type="text" name="desc" value="@item.Desc" /></td>
                                 <td> @item.Price</td>
                                 <td> @item.Total</td>
                                 <td> <a href="@Url.Action("DeleteFD", new { FDID = item.FDID })" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Delete</a> </td>
@@ -72,24 +73,55 @@ else
         <div class="col-sm-4">
             <h2><i class="fa fa-truck"></i> Thông tin giao hàng</h2>
             <form class="needs-validation" novalidate>
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="tel">Telephone:</label>
-                    <input type="tel" class="form-control" id="tel" placeholder="Enter your phone" name="tel" required>
-                </div>
-                <div class="form-group">
-                    <label for="address">Address:</label>
-                    <input type="text" class="form-control" id="address" placeholder="Enter your address" name="address" required>
-                </div>
+                @if (ViewData["successUserID"] != null)
+                {
+                    <div class="form-group">
+                        <input type="hidden" name="UserID" id="userID" value="@ViewData["successUserID"]" />
+                        <label for="name">Name:</label>
+                        @*<input type="text" class="form-control" id="name" placeholder="Enter your name" name="name" required>*@
+                        @Html.TextBoxFor(model=>model.UserName, new { placeholder = "Enter Your Name", required = "required", id = "name", @class ="form-control" })
+                        @Html.ValidationMessageFor(model=>model.UserName, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="tel">Telephone:</label>
+                        <input type="tel" class="form-control" id="tel" placeholder="Enter your phone" name="tel" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        @*<input type="email" class="form-control" id="email" placeholder="Enter your email" name="email" required>*@
+                        @Html.TextBoxFor(model => model.Email, new { placeholder = "Enter Your Email", required = "required", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" class="form-control" id="address" placeholder="Enter your address" name="address" required>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group">
+                        <input type="hidden" name="UserID" value="0" />
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tel">Telephone:</label>
+                        <input type="tel" class="form-control" id="tel" placeholder="Enter your phone" name="tel" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" class="form-control" id="address" placeholder="Enter your address" name="address" required>
+                    </div>
+                }
             </form>
         </div>
         <div style="margin-left:auto; margin-right:auto; width:200px">
-            <a class="btn btn-default" id="pay" href="@Url.Action("Pay")">Pay</a>
+            <a class="btn btn-default" id="pay" href="@Url.Action("Pay", "Cart")">Pay</a>
             <a class="btn btn-info" href="@Url.Action("Index", "Home")">Going Shopping</a>
         </div>
     </div>
 }
-

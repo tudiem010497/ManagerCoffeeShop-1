@@ -214,7 +214,7 @@
                             <a href="#" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign Up</a>
                             <div id="id02" class="modal" style="width: 750px; margin: auto;">
                                 <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-                                @using (Html.BeginForm("SignUp", "Home", FormMethod.Post))
+                                @using (Html.BeginForm("SignUp", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                 {
                                     @Html.AntiForgeryToken()
                                     <div class="container" style="width: 750px; margin: auto;">
@@ -246,16 +246,24 @@
                                             <div class="col-sm-6">
                                                 <label for="DOB" style="color:white"><b>Date of birth</b></label>
                                                 @*<input type="password" placeholder="Enter Your Password" name="psw" required>*@
-                                                @Html.TextBoxFor(m => m.DOB, "{ 0:dd/MM/yyyy }", new { placeholder = "Enter Your Password", required = "required", id = "DOB", @class = "datepicker" })
+                                                @Html.TextBoxFor(m => m.DOB, "{ 0:dd/MM/yyyy }", new { placeholder = "Enter Your Date of Birth", required = "required", id = "DOB", @class = "datepicker" })
                                                 @Html.ValidationMessageFor(m => m.DOB, null, new { @class = "text-danger" })
                                             </div>
                                         </div>
                                         <div class="row" style="padding:15px">
-                                            <label for="address" style="color:white"><b>Address</b></label>
-                                            @*<input type="text" placeholder="Enter Your Email" name="email" required>*@
-                                            @Html.TextBoxFor(m => m.Address, new { placeholder = "Enter Your Address", required = "required" })
-                                            @Html.ValidationMessageFor(m => m.Address, null, new { @class = "text-danger" })
-                                        </div>
+                                            <div class="col-sm-6">
+                                                <label for="address" style="color:white"><b>Address</b></label>
+                                                @*<input type="text" placeholder="Enter Your Email" name="email" required>*@
+                                                @Html.TextBoxFor(m => m.Address, new { placeholder = "Enter Your Address", required = "required" })
+                                                @Html.ValidationMessageFor(m => m.Address, null, new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label for="avatar" style="color:white"><b>Avatar</b></label>
+                                                @*<input type="text" placeholder="Enter Your Email" name="email" required>*@
+                                                @Html.TextBoxFor(m => m.Avatar, new { type="file" })
+                                                @Html.ValidationMessageFor(m => m.Avatar, null, new { @class = "text-danger" })
+                                            </div>    
+                                            </div>
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <label for="identityNum" style="color:white"><b>Identity Number</b></label>
@@ -294,10 +302,10 @@
                             <span id="demo" style="float:right">@ViewData["warning"]</span>
                             <span style="float:right;">@ViewData["error"]</span>
                             <span style="float:right">@ViewData["SignUpOK"]</span>
-                            @if (ViewData["success"] != null)
+                            @if (ViewData["successCust"] != null)
                             {
                                 string temp = (string)ViewData["successUserID"];
-                                <span style="float:right"><input type="hidden" value="@temp"/>@Html.ActionLink((string)ViewData["success"], "ViewCustomerAccount", "Home", new { UserID = temp }, new { @class = "btn btn-outline-success " }) </span>
+                                <span style="float:right"><input type="hidden" value="@temp"/>@Html.ActionLink((string)ViewData["successCust"], "ViewCustomerAccount", "Home", new { UserID = temp }, new { @class = "btn btn-outline-success " }) </span>
                                 <span style="float:right">@Html.ActionLink("Logout", "Logout", "Home", new { UserID = temp }, new { @class = "btn btn-outline-success " }) </span>
                             }
                             @*</div>*@

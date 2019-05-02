@@ -5,10 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using ManagerCoffeeShopASPNet.Information;
+using System.Web;
+using System.IO;
+using System.Web.Mvc;
 
-namespace ManagerCoffeeShopASPNet.Areas.Main.Models
+namespace ManagerCoffeeShopASPNet.Areas.Main
 {
-    public class AccountModel
+    public class AccountModel:Controller
     {
         private CoffeeShopDBDataContext context = null;
         private InformationIndex info = new InformationIndex();
@@ -22,7 +25,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Models
             context.sp_Account_Login_Check(Email, Password, ref res);
             return (res ?? false);
         }
-        public int InsertCustomer(string Name, string Email, string Password)
+        public int InsertCustomer(string Name, string Email, string Password, string Avatar)
         {
             if (Name == null || Email == null || Password == null)
                 return 0;
@@ -34,8 +37,16 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Models
                 if (res == true) return 0;
                 else
                 {
-                    context.sp_INSERT_ACCOUNT_CUSTOMER(Name, Email, Password, "Customer");
-                    return 1;
+                    if (Avatar != null)
+                    {
+                        context.sp_INSERT_ACCOUNT_CUSTOMER(Name, Email, Password, "Customer", Avatar);
+                        return 1;
+                    }
+                    else
+                    {
+                        context.sp_INSERT_ACCOUNT_CUSTOMER(Name, Email, Password, "Customer","");
+                        return 1;
+                    }
                 }
             }
         }
