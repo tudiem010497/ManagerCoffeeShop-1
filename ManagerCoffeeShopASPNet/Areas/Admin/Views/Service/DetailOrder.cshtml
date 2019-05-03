@@ -1,77 +1,59 @@
-﻿@model IEnumerable<ManagerCoffeeShopASPNet.OrderItem>
-@using NonFactors.Mvc.Grid;
+﻿@model ManagerCoffeeShopASPNet.OrderItem
 
 @{
-    ViewBag.Title = "GetDetailOrder";
+    ViewBag.Title = "DetailOrder";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h2>DetailOrder</h2>
 
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
+<div>
+    <h4>OrderItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
             @Html.DisplayNameFor(model => model.OrderID)
-        </th>
-        <th>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderID)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.FDID)
-        </th>
-        <th>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FDID)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Quantity)
-        </th>
-        <th>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Desc)
-        </th>
-        <th>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Desc)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
+        </dt>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FDID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Desc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.ActionLink("Đã phục vụ", "UpdateOrderItemClosed", "Service", new { OrderItemID = item.OrderItemID, OrderID = item.OrderID, View = "DetailOrder" }, new { @class = "btn btn-primary btnDetailOrder" })
-        </td>
-    </tr>
-}
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
 
-</table>*@
-@(Html
-        .Grid(Model).Build(columns =>
-        {
-            columns.Add(o => o.OrderID).Titled("OrderID").Sortable(false);
-            columns.Add(o => o.Order.Customer.Name).Titled("Tên khách hàng").Sortable(false);
-            columns.Add(o => o.Order.PosID).Titled("Vị trí").Sortable(false);
-            columns.Add(o => o.Order.OrderDateTime).Titled("Thời gian vào");
-            columns.Add(o => o.FoodAndDrink.Name).Titled("Name").Sortable(false);
-            columns.Add(o => o.Quantity).Titled("Quantity").Sortable(false);
-            columns.Add(o => o.Desc).Titled("Desc").Sortable(false);
-            columns.Add(o => o.Status).Titled("Status").Sortable(false);
-            columns.Add(o => o.OrderItemID).Encoded(false).RenderedAs(o => (
-                Html.ActionLink("Đã phục vụ", "UpdateOrderItemClosed", "Service", new { OrderItemID = o.OrderItemID, OrderID = o.OrderID, View = "DetailOrder" }, new { @class = "btn btn-primary btnDetailOrder" })
-            )).Filterable(false);
-        })
-        .WithFilterMode(GridFilterMode.FilterRow)
-        .Empty("Data is empty")
-        .Filterable()
-        .Sortable()
-)
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderItemID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

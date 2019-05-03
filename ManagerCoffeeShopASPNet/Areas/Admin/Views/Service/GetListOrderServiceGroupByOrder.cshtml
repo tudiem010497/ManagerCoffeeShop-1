@@ -24,7 +24,7 @@
         columns.Add(o => o.Desc).Titled("Desc").Sortable(false);
         columns.Add(o => o.Status).Titled("Status").Sortable(false);
         columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o => (
-            @Html.ActionLink("Xem Chi tiết", "DetailOrder", "Service", new { OrderID = o.OrderID}, new { @class = "btn btn-primary btnDetailOrder" }).ToHtmlString()
+            @Html.ActionLink("Xem Chi tiết", "DetailOrderNeedSevice", "Service", new { OrderID = o.OrderID}, new { @class = "btn btn-primary btnDetailOrder" }).ToHtmlString()
             + @Html.ActionLink("Đã phục vụ", "UpdatedOrderClosed", "Service", new { OrderID = o.OrderID }, new { @class = "btn btn-primary btnUpdatedOrderClosed" }).ToHtmlString()
         ));
     })
