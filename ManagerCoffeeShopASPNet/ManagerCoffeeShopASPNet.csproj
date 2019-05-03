@@ -271,6 +271,8 @@
     <Compile Include="DAOImpl\ReceiptDetailDAOImpl.cs" />
     <Compile Include="DAOImpl\RecipeDAOImpl.cs" />
     <Compile Include="DAOImpl\RecipeDetailDAOImpl.cs" />
+    <Compile Include="DAOImpl\ShipDAOImpl.cs" />
+    <Compile Include="DAOImpl\ShipDetailDAOImpl.cs" />
     <Compile Include="DAOImpl\SupplierDAOImpl.cs" />
     <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DAO\BannerImageDAO.cs" />
@@ -292,6 +294,8 @@
     <Compile Include="DAO\ReceiptDetailDAO.cs" />
     <Compile Include="DAO\RecipeDAO.cs" />
     <Compile Include="DAO\RecipeDetailDAO.cs" />
+    <Compile Include="DAO\ShipDAO.cs" />
+    <Compile Include="DAO\ShipDetailDAO.cs" />
     <Compile Include="DAO\SupplierDAO.cs" />
     <Compile Include="DatabaseConnection\DataSQLConnection.cs" />
     <Compile Include="Enum\EnumAccount.cs" />
@@ -439,6 +443,12 @@
     </Content>
     <Content Include="Areas\Admin\Views\Warehouse\CreateReceipt.cshtml" />
     <Content Include="Areas\Main\Views\Home\ViewCustomerAccount.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\ViewEmployeeAccount.cshtml" />
+    <Content Include="Areas\Admin\Views\Web\GetAllCoffeeShop.cshtml" />
+    <Content Include="Areas\Admin\Views\Web\GetAddNewCoffeeShop.cshtml" />
+    <Content Include="Areas\Admin\Views\Web\EditCoffeeShop.cshtml" />
+    <Content Include="Areas\Admin\Views\Web\DetailsCoffeeShop.cshtml" />
+    <Content Include="Areas\Admin\Views\Web\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
