@@ -61,7 +61,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             List<FoodAndDrink> temp = new List<FoodAndDrink>();
             if (!String.IsNullOrEmpty(SearchString))
             {
-                for(int i = 0; i< list.Count; i++)
+                for (int i = 0; i < list.Count; i++)
                 {
                     if (list[i].Name.ToLower().Contains(SearchString.ToLower()))
                     {
@@ -73,6 +73,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             IEnumerable<Position> positions = info.GetAllPosition();
             ViewData["positions"] = positions;
             ViewData["fds"] = fds;
+            ViewData["successEmployee"] = Session["successEmployee"];
+            ViewData["successUserID"] = Session["successUserID"];
             return View();
         }
 
@@ -285,6 +287,12 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             Stream stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
             return File(stream, "application/pdf", "OrderCustomer.pdf");
+        }
+        [Route("ViewEmployeeAccount")]
+        public ActionResult ViewEmployeeAccount(int UserID)
+        {
+            Account acc = info.GetAccountByUserID(UserID);
+            return View(acc);
         }
     }
 }

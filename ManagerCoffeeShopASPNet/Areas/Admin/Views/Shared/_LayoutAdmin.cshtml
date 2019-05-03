@@ -101,9 +101,14 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="#">Settings</a>
-                    <a class="dropdown-item" href="#">Activity Log</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+                    @if (ViewData["successEmployee"] != null)
+                    {
+                        string temp = (string)ViewData["successUserID"];
+                        <a class="dropdown-item" href="@Url.Action("ViewEmployeeAccount", "Service", new { UserID = temp })">@ViewData["successEmployee"]</a>
+                        @*<span class="dropdown-item"><input type="hidden" value="@temp" />@Html.ActionLink((string)ViewData["successEmployee"], "ViewEmployeeAccount", "Service", new { UserID = temp }) </span>*@
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="@Url.Action("Logout", "Service", new { UserID = temp })" @*data-toggle="modal" data-target="#logoutModal"*@>@*<span style="float:right">*@ @*@Html.ActionLink("Logout", "Logout", "Home", new { UserID = temp }, new { @class = "btn btn-outline-success " })*@ @*</span>*@Logout</a>
+                    }
                 </div>
             </li>
         </ul>

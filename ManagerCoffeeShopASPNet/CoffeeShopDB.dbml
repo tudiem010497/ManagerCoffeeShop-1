@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CoffeeShopDB" Class="CoffeeShopDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-HA2TCUF;Initial Catalog=CoffeeShopDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CoffeeShopDBConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-UE1A1CU\SQLEXPRESS;Initial Catalog=CoffeeShopDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CoffeeShopDBConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Account" Member="Accounts">
     <Type Name="Account">
       <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -14,14 +14,19 @@
       <Association Name="Account_RoleMap" Member="RoleMaps" ThisKey="UserID" OtherKey="UserID" Type="RoleMap" />
     </Type>
   </Table>
-  <Table Name="dbo.Blog" Member="Blogs">
-    <Type Name="Blog">
-      <Column Name="BlogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="BlogName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="BlogTitle" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="BlogDesc" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="BlogDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="BlogHref" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+  <Table Name="dbo.TimeSheetDetail" Member="TimeSheetDetails">
+    <Type Name="TimeSheetDetail">
+      <Column Name="TimeSheetID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Day" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="RegisterTimeIn" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="RegisterTimeOut" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="TimeIn" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="TimeOut" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="Bonus" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="TimeSheet_TimeSheetDetail" Member="TimeSheet" ThisKey="TimeSheetID" OtherKey="TimeSheetID" Type="TimeSheet" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.BannerImage" Member="BannerImages">
@@ -38,19 +43,14 @@
       <Association Name="Salary_BasicSalary" Member="Salary" ThisKey="SalaryID" OtherKey="SalaryID" Type="Salary" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.TimeSheetDetail" Member="TimeSheetDetails">
-    <Type Name="TimeSheetDetail">
-      <Column Name="TimeSheetID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Day" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="RegisterTimeIn" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="RegisterTimeOut" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="TimeIn" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="TimeOut" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="Bonus" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Currency" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="TimeSheet_TimeSheetDetail" Member="TimeSheet" ThisKey="TimeSheetID" OtherKey="TimeSheetID" Type="TimeSheet" IsForeignKey="true" />
+  <Table Name="dbo.Blog" Member="Blogs">
+    <Type Name="Blog">
+      <Column Name="BlogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BlogName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="BlogTitle" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="BlogDesc" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="BlogDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="BlogHref" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.CoffeeBrewings" Member="CoffeeBrewings">
@@ -357,8 +357,8 @@
       <Column Name="DiscountMoney" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="TotalAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="Currency" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Status" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Association Name="Order_OrderItem" Member="OrderItems" ThisKey="OrderID" OtherKey="OrderID" Type="OrderItem" />
       <Association Name="Order_OrderPromotion" Member="OrderPromotions" ThisKey="OrderID" OtherKey="OrderID" Type="OrderPromotion" />
       <Association Name="Order_ShipDetail" Member="ShipDetails" ThisKey="OrderID" OtherKey="OrderID" Type="ShipDetail" />
@@ -372,8 +372,8 @@
       <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="FDID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Status" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Association Name="FoodAndDrink_OrderItem" Member="FoodAndDrink" ThisKey="FDID" OtherKey="FDID" Type="FoodAndDrink" IsForeignKey="true" />
       <Association Name="Order_OrderItem" Member="Order" ThisKey="OrderID" OtherKey="OrderID" Type="Order" IsForeignKey="true" />
     </Type>
@@ -563,6 +563,8 @@
     <Type Name="Ship">
       <Column Name="ShipID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CustName" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="ShipDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Association Name="Ship_ShipDetail" Member="ShipDetails" ThisKey="ShipID" OtherKey="ShipID" Type="ShipDetail" />
       <Association Name="Employee_Ship" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
@@ -570,12 +572,13 @@
   </Table>
   <Table Name="dbo.ShipDetail" Member="ShipDetails">
     <Type Name="ShipDetail">
+      <Column Name="ShipDetailID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="ShipID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CustName" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="Address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CustName" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="Phone" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="Status" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Association Name="Order_ShipDetail" Member="Order" ThisKey="OrderID" OtherKey="OrderID" Type="Order" IsForeignKey="true" />
       <Association Name="Ship_ShipDetail" Member="Ship" ThisKey="ShipID" OtherKey="ShipID" Type="Ship" IsForeignKey="true" />
     </Type>
@@ -591,6 +594,11 @@
       <Association Name="Supplier_Ingredient" Member="Ingredients" ThisKey="SupplierID" OtherKey="SupplierID" Type="Ingredient" />
       <Association Name="Supplier_IngredientsMapSupplier" Member="IngredientsMapSuppliers" ThisKey="SupplierID" OtherKey="SupplierID" Type="IngredientsMapSupplier" />
       <Association Name="Supplier_ReceiptDetail" Member="ReceiptDetails" ThisKey="SupplierID" OtherKey="SupplierID" Type="ReceiptDetail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Test" Member="Tests">
+    <Type Name="Test">
+      <Column Name="CSID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.TimeSheet" Member="TimeSheets">
@@ -609,28 +617,18 @@
     <Parameter Name="res" Type="System.Boolean" DbType="Bit" Direction="InOut" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.sp_Account_Login_Check" Method="sp_Account_Login_Check">
-    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(30)" />
-    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="VarChar(20)" />
-    <Parameter Name="res" Type="System.Boolean" DbType="Bit" Direction="InOut" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.sp_Check_UserName_IsExist" Method="sp_Check_UserName_IsExist">
-    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="VarChar(30)" />
-    <Parameter Name="result" Type="System.Boolean" DbType="Bit" Direction="InOut" />
-    <Return Type="System.Int32" />
-  </Function>
   <Function Name="dbo.sp_INSERT_ACCOUNT_CUSTOMER" Method="sp_INSERT_ACCOUNT_CUSTOMER">
     <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="VarChar(30)" />
     <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(30)" />
     <Parameter Name="Password" Parameter="password" Type="System.String" DbType="VarChar(20)" />
     <Parameter Name="AccType" Parameter="accType" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Avatar" Parameter="avatar" Type="System.String" DbType="VarChar(MAX)" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.sp_INSERT_CART" Method="sp_INSERT_CART">
-    <Parameter Name="FDID" Parameter="fDID" Type="System.Int32" DbType="Int" />
-    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(30)" />
-    <Parameter Name="Quantity" Parameter="quantity" Type="System.Int32" DbType="Int" />
-    <Parameter Name="Price" Parameter="price" Type="System.Int32" DbType="Int" />
+  <Function Name="dbo.sp_Account_Login_Check" Method="sp_Account_Login_Check">
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="res" Type="System.Boolean" DbType="Bit" Direction="InOut" />
+    <Return Type="System.Int32" />
   </Function>
 </Database>
