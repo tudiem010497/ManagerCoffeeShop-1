@@ -143,8 +143,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         /// </summary>
         /// <param name="OrderID"></param>
         /// <returns></returns>
-        [Route("DetailOrder")]
-        public ActionResult DetailOrder(int OrderID)
+        [Route("DetailOrderNeedSevice")]
+        public ActionResult DetailOrderNeedSevice(int OrderID)
         {
             IEnumerable<OrderItem> orderItems = info.GetAllOrderItemByOrderIDAndNeedService(OrderID);
             return View(orderItems);
@@ -287,6 +287,12 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             Stream stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
             return File(stream, "application/pdf", "OrderCustomer.pdf");
+        }
+        [Route("DetailOrder")]
+        public ActionResult DetailOrder(int OrderID)
+        {
+            IEnumerable<OrderItem> orderitems = info.GetAllOrderItemByOrderID(OrderID);
+            return View(orderitems);
         }
         [Route("ViewEmployeeAccount")]
         public ActionResult ViewEmployeeAccount(int UserID)
