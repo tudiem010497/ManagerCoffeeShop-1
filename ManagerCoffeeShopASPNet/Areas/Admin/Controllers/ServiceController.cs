@@ -126,9 +126,40 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             return Json(new { PosID = PosID }, JsonRequestBehavior.AllowGet);
         }
 
+        //Xem danh sách hóa đơn đồ uống đặt online cần xác nhận (cập nhật trạng thái)
+        [Route("GetAllOrderOnlineNeedConfirm")]
+        public ActionResult GetAllOrderOnlineNeedConfirm()
+        {
+            string status = "WaitToConfirm";
+            IEnumerable<Order> order = info.GetAllOrderByStatus(status);
+            return View(order);
+        }
+        // Danh sách chi tiết đồ uống của hóa đơn online thực hiện việc xác nhận
+        [Route("UpdateStatusOfOrderItemOnline")]
+        public ActionResult UpdateStatusOfOrderItemOnline(int OrderID)
+        {
+            IEnumerable<OrderItem> orderItem = info.GetAllOrderItemByOrderID(OrderID);
+            return View(orderItem);
+        }
+        // nhấn nút xác nhận từng loại đồ uống của đơn online
+        [Route("Confirm")]
+        public ActionResult Confirm(int OrderItemID)
+        {
+            OrderItem orderItem = info.GetOrderItemByOrderItemID(OrderItemID);
+            info.UpdateOrderItemStatus(OrderItemID, "Pending");
+            return RedirectToAction("UpdateStatusOfOrderItemOnline", new {OrderID = orderItem.OrderID});
+        }
+        //nhấn nút hủy từng loại đồ uống của đơn online
+        [Route("Cancel")]
+        public ActionResult Cancel(int OrderItemID)
+        {
+            OrderItem orderItem = info.GetOrderItemByOrderItemID(OrderItemID);
+            info.UpdateOrderItemStatus(OrderItemID, "Cancel");
+            return RedirectToAction("UpdateStatusOfOrderItemOnline", new { OrderID = orderItem.OrderID });
+        }
         /// <summary>
         /// Xem thông tin đồ uống để phục vụ (theo hóa đơn) => hiển thị status = Ready && Pending
-        /// </summary>
+        /// </summary>  
         /// <returns></returns>
         [Route("GetListOrderServiceGroupByOrder")]
         public ActionResult GetListOrderServiceGroupByOrder()

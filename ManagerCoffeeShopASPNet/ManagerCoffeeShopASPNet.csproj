@@ -301,6 +301,7 @@
     <Compile Include="Enum\EnumAccount.cs" />
     <Compile Include="Enum\EnumEmployee.cs" />
     <Compile Include="Enum\EnumFoodAndDrink.cs" />
+    <Compile Include="Enum\EnumStatusOrder.cs" />
     <Compile Include="Enum\EnumUtilities.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -343,6 +344,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CrystalReport1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reporting\ExportOrderCustomer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExportOrderCustomer.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Startup.cs" />
@@ -449,6 +456,8 @@
     <Content Include="Areas\Admin\Views\Web\EditCoffeeShop.cshtml" />
     <Content Include="Areas\Admin\Views\Web\DetailsCoffeeShop.cshtml" />
     <Content Include="Areas\Admin\Views\Web\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\GetAllOrderOnlineNeedConfirm.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\UpdateStatusOfOrderItemOnline.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -543,6 +552,10 @@
     <Content Include="Assets\Main\js\scriptLogin.js" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reporting\ExportOrderCustomer.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ExportOrderCustomer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="CoffeeShopDB.dbml.layout">
       <DependentUpon>CoffeeShopDB.dbml</DependentUpon>
     </None>

@@ -600,6 +600,13 @@ namespace ManagerCoffeeShopASPNet
 			res = ((System.Nullable<bool>)(result.GetParameterValue(2)));
 			return ((int)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.OrderCustomer")]
+		public ISingleResult<OrderCustomerResult> OrderCustomer([global::System.Data.Linq.Mapping.ParameterAttribute(Name="OrderID", DbType="Int")] System.Nullable<int> orderID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), orderID);
+			return ((ISingleResult<OrderCustomerResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Account")]
@@ -10975,6 +10982,212 @@ namespace ManagerCoffeeShopASPNet
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	public partial class OrderCustomerResult
+	{
+		
+		private int _OrderID;
+		
+		private System.Nullable<int> _PosID;
+		
+		private string _CustomerName;
+		
+		private System.DateTime _OrderDateTime;
+		
+		private System.DateTime _PaidDateTime;
+		
+		private double _TotalAmount;
+		
+		private System.Nullable<double> _DiscountMoney;
+		
+		private string _Currency;
+		
+		private string _FoodDrinkName;
+		
+		private System.Nullable<int> _Quantity;
+		
+		private System.Nullable<double> _UnitPrice;
+		
+		public OrderCustomerResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderID", DbType="Int NOT NULL")]
+		public int OrderID
+		{
+			get
+			{
+				return this._OrderID;
+			}
+			set
+			{
+				if ((this._OrderID != value))
+				{
+					this._OrderID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PosID", DbType="Int")]
+		public System.Nullable<int> PosID
+		{
+			get
+			{
+				return this._PosID;
+			}
+			set
+			{
+				if ((this._PosID != value))
+				{
+					this._PosID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CustomerName", DbType="NVarChar(MAX)")]
+		public string CustomerName
+		{
+			get
+			{
+				return this._CustomerName;
+			}
+			set
+			{
+				if ((this._CustomerName != value))
+				{
+					this._CustomerName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderDateTime", DbType="DateTime NOT NULL")]
+		public System.DateTime OrderDateTime
+		{
+			get
+			{
+				return this._OrderDateTime;
+			}
+			set
+			{
+				if ((this._OrderDateTime != value))
+				{
+					this._OrderDateTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaidDateTime", DbType="DateTime NOT NULL")]
+		public System.DateTime PaidDateTime
+		{
+			get
+			{
+				return this._PaidDateTime;
+			}
+			set
+			{
+				if ((this._PaidDateTime != value))
+				{
+					this._PaidDateTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalAmount", DbType="Float NOT NULL")]
+		public double TotalAmount
+		{
+			get
+			{
+				return this._TotalAmount;
+			}
+			set
+			{
+				if ((this._TotalAmount != value))
+				{
+					this._TotalAmount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DiscountMoney", DbType="Float")]
+		public System.Nullable<double> DiscountMoney
+		{
+			get
+			{
+				return this._DiscountMoney;
+			}
+			set
+			{
+				if ((this._DiscountMoney != value))
+				{
+					this._DiscountMoney = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Currency", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Currency
+		{
+			get
+			{
+				return this._Currency;
+			}
+			set
+			{
+				if ((this._Currency != value))
+				{
+					this._Currency = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FoodDrinkName", DbType="NVarChar(30)")]
+		public string FoodDrinkName
+		{
+			get
+			{
+				return this._FoodDrinkName;
+			}
+			set
+			{
+				if ((this._FoodDrinkName != value))
+				{
+					this._FoodDrinkName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int")]
+		public System.Nullable<int> Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this._Quantity = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitPrice", DbType="Float")]
+		public System.Nullable<double> UnitPrice
+		{
+			get
+			{
+				return this._UnitPrice;
+			}
+			set
+			{
+				if ((this._UnitPrice != value))
+				{
+					this._UnitPrice = value;
+				}
 			}
 		}
 	}

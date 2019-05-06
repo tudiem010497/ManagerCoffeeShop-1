@@ -105,9 +105,8 @@
                     {
                         string temp = (string)ViewData["successUserID"];
                         <a class="dropdown-item" href="@Url.Action("ViewEmployeeAccount", "Service", new { UserID = temp })">@ViewData["successEmployee"]</a>
-                        @*<span class="dropdown-item"><input type="hidden" value="@temp" />@Html.ActionLink((string)ViewData["successEmployee"], "ViewEmployeeAccount", "Service", new { UserID = temp }) </span>*@
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="@Url.Action("Logout", "Service", new { UserID = temp })" @*data-toggle="modal" data-target="#logoutModal"*@>@*<span style="float:right">*@ @*@Html.ActionLink("Logout", "Logout", "Home", new { UserID = temp }, new { @class = "btn btn-outline-success " })*@ @*</span>*@Logout</a>
+                        <a class="dropdown-item" href="@Url.Action("Logout", "Service", new { UserID = temp })">Logout</a>
                     }
                 </div>
             </li>

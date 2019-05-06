@@ -99,11 +99,11 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
             {
                 TotalAmount = TotalAmount + item.Total;
             }
-            bool resultOrder = info.InsertOrder(PosID, DateTime.Now, DateTime.Now, TotalAmount, "VND", "Delivery", "Waiting for confirmation");
+            bool resultOrder = info.InsertOrder(PosID, DateTime.Now, DateTime.Now, TotalAmount, "VND", "Delivery", "WaitToConfirm");
             int OrderID = info.GetLastOrderIDID();
             foreach(var item in carts)
             {
-                info.InsertOrderItem(OrderID, item.FDID, item.Quantity, item.Desc, "Waiting for confirmation");
+                info.InsertOrderItem(OrderID, item.FDID, item.Quantity, item.Desc, "WaitToConfirm");
             }
             int EmployeeID = 1;
             Cart temp = JsonConvert.DeserializeObject<Cart>(json);

@@ -631,4 +631,20 @@
     <Parameter Name="res" Type="System.Boolean" DbType="Bit" Direction="InOut" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.OrderCustomer" Method="OrderCustomer">
+    <Parameter Name="OrderID" Parameter="orderID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="OrderCustomerResult">
+      <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PosID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CustomerName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="OrderDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PaidDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TotalAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="DiscountMoney" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="FoodDrinkName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UnitPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>
