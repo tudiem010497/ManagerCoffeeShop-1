@@ -47,7 +47,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             return View();
         }
 
-        
+
         /// <summary>
         /// Nhân viên phục vụ giúp khách đặt món
         /// </summary>
@@ -119,7 +119,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             }
             info.InsertOrder(PosID, DateTime.Now, DateTime.Now, TotalAmount, "VND", Desc, "Pending");
             int OrderID = info.GetLastOrderIDID();
-            foreach(var item in OrderItemModel)
+            foreach (var item in OrderItemModel)
             {
                 info.InsertOrderItem(OrderID, item.FoodAndDrinkID, item.Quantity, item.Desc, "Pending");
             }
@@ -139,6 +139,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult UpdateStatusOfOrderItemOnline(int OrderID)
         {
             IEnumerable<OrderItem> orderItem = info.GetAllOrderItemByOrderID(OrderID);
+            ViewData["OrderID"] = OrderID;
             return View(orderItem);
         }
         // nhấn nút xác nhận từng loại đồ uống của đơn online
@@ -147,7 +148,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             OrderItem orderItem = info.GetOrderItemByOrderItemID(OrderItemID);
             info.UpdateOrderItemStatus(OrderItemID, "Pending");
-            return RedirectToAction("UpdateStatusOfOrderItemOnline", new {OrderID = orderItem.OrderID});
+            return RedirectToAction("UpdateStatusOfOrderItemOnline", new { OrderID = orderItem.OrderID });
         }
         //nhấn nút hủy từng loại đồ uống của đơn online
         [Route("Cancel")]
@@ -156,6 +157,35 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             OrderItem orderItem = info.GetOrderItemByOrderItemID(OrderItemID);
             info.UpdateOrderItemStatus(OrderItemID, "Cancel");
             return RedirectToAction("UpdateStatusOfOrderItemOnline", new { OrderID = orderItem.OrderID });
+        }
+        //nhấn nút xác nhận  toàn bộ đơn hàng
+        [Route("ConfirmAll")]
+        public ActionResult ConfirmAll(int OrderID)
+        {
+            IEnumerable<OrderItem> orderitem = info.GetAllOrderItemByOrderID(OrderID);
+            int temp=0;
+            string status1 = "Cancel";
+            string status2 = "Pending";
+            foreach (var item in orderitem)
+            {
+                
+                if(item.Status != "Cancel")
+                {
+                    temp = 0;
+                    break;
+                }
+                else temp = 1;
+                
+            }
+            if (temp == 1)
+            {
+                info.UpdateOrderStatus(OrderID, status1);
+            }
+            if (temp == 0)
+            {
+                info.UpdateOrderStatus(OrderID, status2);
+            }
+            return RedirectToAction("GetAllOrderOnlineNeedConfirm");
         }
         /// <summary>
         /// Xem thông tin đồ uống để phục vụ (theo hóa đơn) => hiển thị status = Ready && Pending
@@ -196,7 +226,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             string status2 = "Closed";
             OrderItem orderItem = info.GetOrderItemByOrderItemID(OrderItemID);
             // Nếu status là cancel cập nhật status của orderitem là status1 ngược lại là status 2
-            if(orderItem.Status == "Cancel")
+            if (orderItem.Status == "Cancel")
             {
                 bool result = info.UpdateOrderItemStatus(OrderItemID, status1);
             }
@@ -204,9 +234,9 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             {
                 info.UpdateOrderItemStatus(OrderItemID, status2);
             }
-            
+
             // Nếu đang ở view Chi tiết hóa đơn 
-            if(View == "DetailOrder")
+            if (View == "DetailOrder")
             {
                 // Nếu chi tiết hóa đơn != 0 thì redirect về DetailOrder ngược lại thì redirect về GetListOrderService
                 if (info.GetAllOrderItemByOrderIDAndNeedService(OrderID).Count() != 0)
@@ -224,7 +254,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             {
                 return RedirectToAction("GetListOrderItemNeedServiceGroupByFoodAnDrink", "Service");
             }
-            
+
         }
 
         /// <summary>
@@ -237,10 +267,10 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult UpdatedOrderClosed(int OrderID, string confirm)
         {
             string status = "Closed";
-            if(confirm == "true")
+            if (confirm == "true")
             {
                 IEnumerable<OrderItem> orderItems = info.GetAllOrderItemByOrderID(OrderID);
-                foreach(OrderItem orderItem in orderItems)
+                foreach (OrderItem orderItem in orderItems)
                 {
                     info.UpdateOrderItemStatus(orderItem.OrderItemID, status);
                 }
@@ -286,7 +316,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             List<OrderItem> list = orderItems.ToList();
             return View(orderItems);
         }
-        
+
         [Route("PrintReport")]
         public ActionResult PrintReport()
         {
@@ -298,7 +328,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             Stream stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
             return File(stream, "application/pdf", "CustomerList.pdf");
-         }
+        }
 
         [Route("GetAllOrder")]
         public ActionResult GetAllOrder()
