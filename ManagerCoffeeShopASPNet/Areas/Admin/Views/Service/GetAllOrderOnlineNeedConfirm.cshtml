@@ -1,0 +1,83 @@
+﻿@model IEnumerable<ManagerCoffeeShopASPNet.Order>
+
+@{
+    ViewBag.Title = "GetAllOrderOnlineNeedConfirm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>GetAllOrderOnlineNeedConfirm</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PosID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDateTime)
+        </th>
+        @*<th>
+        @Html.DisplayNameFor(model => model.PaidDateTime)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.DiscountMoney)
+    </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Currency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PosID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDateTime)
+        </td>
+        @*<td>
+        @Html.DisplayFor(modelItem => item.PaidDateTime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DiscountMoney)
+    </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Currency)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @*UpdateStatusOfOrderItemOnline*@
+            @Html.ActionLink("Confirm", "UpdateStatusOfOrderItemOnline", new { OrderID = item.OrderID }, new { @class = "btn btn-outline-success" })
+            @*@Html.ActionLink("Details", "Details", new { id=item.OrderID }) |*@
+            @Html.ActionLink("Delete", "Delete", new { OrderID = item.OrderID }, new { @class = "btn btn-outline-danger" })
+        </td>
+    </tr>
+}
+
+</table>
