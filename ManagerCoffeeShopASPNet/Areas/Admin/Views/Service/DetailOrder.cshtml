@@ -1,4 +1,4 @@
-﻿@model ManagerCoffeeShopASPNet.OrderItem
+﻿@model IEnumerable<ManagerCoffeeShopASPNet.OrderItem>
 
 @{
     ViewBag.Title = "DetailOrder";
@@ -7,53 +7,54 @@
 
 <h2>DetailOrder</h2>
 
-<div>
-    <h4>OrderItem</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.OrderID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OrderID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FDID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FDID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Desc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Desc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-    </dl>
-</div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.OrderItemID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Create New", "Create")
 </p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FDID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FDID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.OrderItemID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OrderItemID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.OrderItemID })*@
+            @Html.ActionLink("Đã phục vụ", "UpdatedOrderItemClosed", "Service",
+           new { OrderItemID = item.OrderItemID, OrderID = item.OrderID, View = "DetailOrder" }, new { @class="btn btn-success" })
+        </td>
+    </tr>
+}
+
+</table>

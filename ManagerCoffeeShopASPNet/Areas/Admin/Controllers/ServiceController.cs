@@ -236,17 +236,17 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             }
 
             // Nếu đang ở view Chi tiết hóa đơn 
-            if (View == "DetailOrder")
+            if(View == "DetailOrderNeedSevice")
             {
-                // Nếu chi tiết hóa đơn != 0 thì redirect về DetailOrder ngược lại thì redirect về GetListOrderService
+                // Nếu chi tiết hóa đơn != 0 thì redirect về DetailOrderNeedSevice ngược lại thì redirect về GetListOrderServiceGroupByOrder
                 if (info.GetAllOrderItemByOrderIDAndNeedService(OrderID).Count() != 0)
                 {
-                    return RedirectToAction("DetailOrder", "Service", new { OrderID = OrderID });
+                    return RedirectToAction("DetailOrderNeedSevice", "Service", new { OrderID = OrderID });
                 }
                 else
                 {
                     info.UpdateOrderStatus(OrderID, status1);
-                    return RedirectToAction("GetListOrderService", "Service");
+                    return RedirectToAction("GetListOrderServiceGroupByOrder", "Service");
                 }
             }
             // nếu đang ở view xem thông tin pha chế nhóm theo từng loại món

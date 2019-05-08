@@ -67,7 +67,7 @@
             columns.Add(o => o.Desc).Titled("Desc").Sortable(false);
             columns.Add(o => o.Status).Titled("Status").Sortable(false);
             columns.Add(o => o.OrderItemID).Encoded(false).RenderedAs(o => (
-                Html.ActionLink("Đã phục vụ", "UpdateOrderItemClosed", "Service", new { OrderItemID = o.OrderItemID, OrderID = o.OrderID, View = "DetailOrder" }, new { @class = "btn btn-primary btnDetailOrder" })
+                Html.ActionLink("Đã phục vụ", "UpdateOrderItemClosed", "Service", new { OrderItemID = o.OrderItemID, OrderID = o.OrderID, View = "DetailOrderNeedSevice" }, new { @class = "btn btn-primary btnDetailOrder" })
             )).Filterable(false);
         })
         .WithFilterMode(GridFilterMode.FilterRow)
