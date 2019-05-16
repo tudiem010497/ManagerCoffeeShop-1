@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ManagerCoffeeShopASPNet.Receipt>
+
+@{
+    ViewBag.Title = "GetAllReceiptWaitToConfirm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>GetAllReceiptWaitToConfirm</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Currency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Currency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id=item.ReceiptID }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.ReceiptID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.ReceiptID })*@
+                @Html.ActionLink("Xem chi tiết", "GetReceiptDetailByReceiptID", new { ReceiptID = item.ReceiptID}, new { @class = "btn btn-outline-info" })
+                @Html.ActionLink("Duyệt", "ConfirmAll", new { ReceiptID = item.ReceiptID, View = "GetAllReceiptWaitToConfirm" }, new { @class = "btn btn-outline-success" })
+                @Html.ActionLink("Không duyệt", "CancelAll", new { ReceiptID = item.ReceiptID }, new { @class = "btn btn-outline-danger" })
+            </td>
+        </tr>
+    }
+
+</table>

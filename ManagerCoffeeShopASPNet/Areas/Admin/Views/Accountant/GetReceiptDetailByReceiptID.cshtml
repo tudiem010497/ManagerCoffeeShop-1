@@ -1,0 +1,101 @@
+﻿@model IEnumerable<ManagerCoffeeShopASPNet.ReceiptDetail>
+
+@{
+    ViewBag.Title = "GetReceiptDetailByReceiptID";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>GetReceiptDetailByReceiptID</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceiptID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IngreID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiftID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacilitiesID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SupplierID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReferenceDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Currency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiptID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IngreID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiftID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FacilitiesID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReferenceDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Unit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Currency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id=item.ReceiptDetailID }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.ReceiptDetailID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.ReceiptDetailID })*@
+                @Html.ActionLink("Xác nhận", "Confirm", new { ReceiptDetailID = item.ReceiptDetailID }, new { @class = "btn btn-outline-success" })
+                @Html.ActionLink("Hủy", "Cancel", new { ReceiptDetailID = item.ReceiptDetailID }, new { @class = "btn btn-outline-danger" })
+            </td>
+        </tr>
+    }s
+
+</table>
+<div>
+    @Html.ActionLink("OK", "ConfirmAll", new { ReceiptID = ViewData["ReceiptID"], View = "GetReceiptDetailByReceiptID" }, new { @class = "btn btn-outline-info" })
+    @Html.ActionLink("Back to list", "GetAllReceiptWaitToConfirm", "Accountant")
+</div>
