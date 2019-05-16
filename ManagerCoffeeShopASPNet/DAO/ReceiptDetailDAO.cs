@@ -9,6 +9,8 @@ namespace ManagerCoffeeShopASPNet.DAO
     interface ReceiptDetailDAO
     {
         IEnumerable<ReceiptDetail> GetReceiptDetailByReceiptID(int ReceiptID);
+        ReceiptDetail GetReceiptDetailByReceiptDetailID(int ReceiptDetailID);
         bool InsertReceiptDetail(int ReceiptID, int IngreID, double Amount, string Unit, double UnitPrice, string Currency, string Status);
+        bool UpdateReceiptDetail(int ReceiptDetailID, string Status);
     }
 }

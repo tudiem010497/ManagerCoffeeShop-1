@@ -8,7 +8,12 @@ namespace ManagerCoffeeShopASPNet.DAO
 {
     interface ShipDetailDAO
     {
-
+        IEnumerable<ShipDetail> GetListShipDelivery();
+        //string Status
+        IEnumerable<ShipDetail> GetShipDeliveryByStatus();
+        ShipDetail GetShipDeliveryByShipDetailID(int ShipDetailID);
+        bool UpdateShipDetailStatus(int OrderID, string Status);
+        bool UpdateShipDetailStatusByShipDetailID(int ShipDetailID, string Status);
         bool InsertShipDetail(int ShipID, int OrderID, string CustName, string Address, string Phone, string Status);   
     }
 }

@@ -158,7 +158,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             info.UpdateOrderItemStatus(OrderItemID, "Cancel");
             return RedirectToAction("UpdateStatusOfOrderItemOnline", new { OrderID = orderItem.OrderID });
         }
-        //nhấn nút xác nhận  toàn bộ đơn hàng
+        //nhấn nút xác nhận toàn bộ đơn hàng
         [Route("ConfirmAll")]
         public ActionResult ConfirmAll(int OrderID)
         {
@@ -168,14 +168,12 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             string status2 = "Pending";
             foreach (var item in orderitem)
             {
-                
                 if(item.Status != "Cancel")
                 {
                     temp = 0;
                     break;
                 }
                 else temp = 1;
-                
             }
             if (temp == 1)
             {
@@ -186,6 +184,43 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 info.UpdateOrderStatus(OrderID, status2);
             }
             return RedirectToAction("GetAllOrderOnlineNeedConfirm");
+        }
+        //Danh sách hóa đơn đồ uống đã làm xong cần giao hàng (Desc = "Delivery", Status = "Ready")
+        [Route("GetAllOrderNeedDelivery")]
+        public ActionResult GetAllOrderNeedDelivery()
+        {
+            string Desc = "Delivery", Status = "Ready";
+            IEnumerable<Order> order = info.GetAllOrderByDescAndStatus(Desc, Status);
+            return View(order);
+        }
+        // nhấn nút xác nhận giao hàng 
+        //status order cập nhật thành "Closed", status ShipDetail cập nhật thành "Delivery"(đang giao)
+        [Route("ConfirmDelivery")]
+        public ActionResult ConfirmDelivery(int OrderID)
+        {
+            string Status1 = "Closed", Status2 = "Delivery";
+            IEnumerable<Order> order = info.GetOrderByOrderID(OrderID);
+            info.UpdateOrderStatus(OrderID, Status1);
+            info.UpdateShipDetailStatus(OrderID, Status2);
+            return RedirectToAction("GetAllOrderNeedDelivery");
+        }
+        //Danh sách các đơn hàng online đang giao và sẽ được cập nhật "Close" trong ShipDetail khi giao thành công (NV giao hàng)
+        [Route("GetListShipDelivery")]
+        public ActionResult GetListShipDelivery()
+        {
+            string status = "Delivery";
+            //IEnumerable<ShipDetail> ship = info.GetListShipDelivery();
+            IEnumerable<ShipDetail> ship = info.GetShipDeliveryByStatus();
+            return View(ship);
+        }
+        //nhấn nút xác nhận giao hàng thành công, cập nhật là "Close"
+        [Route("ConfirmDeliveried")]
+        public ActionResult ConfirmDeliveried(int ShipDetailID)
+        {
+            string Status = "Close";
+            ShipDetail ship = info.GetShipDeliveryByShipDetailID(ShipDetailID);
+            info.UpdateShipDetailStatusByShipDetailID(ShipDetailID, Status);
+            return RedirectToAction("GetListShipDelivery", new { ShipDetailID = ship.ShipDetailID});
         }
         /// <summary>
         /// Xem thông tin đồ uống để phục vụ (theo hóa đơn) => hiển thị status = Ready && Pending

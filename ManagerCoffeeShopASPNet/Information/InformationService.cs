@@ -63,6 +63,10 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._orderDAO.GetAllOrderByStatus(status);
         }
+        public IEnumerable<Order> GetAllOrderByDescAndStatus(string Desc, string Status)
+        {
+            return this._orderDAO.GetAllOrderByDescAndStatus(Desc, Status);
+        }
         public IEnumerable<OrderItem> GetAllOrderItemByOrderID(int OrderID)
         {
             return this._orderItemDAO.GetAllOrderItemByOrderID(OrderID);
@@ -103,6 +107,10 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._orderDAO.GetAllOrder();
         }
+        public IEnumerable<Order> GetOrderByOrderID(int OrderID)
+        {
+            return this._orderDAO.GetOrderByOrderID(OrderID);
+        }
         public Account GetAccountByUserID(int UserID)
         {
             return _accountDAO.GetAccountByUserID(UserID);
@@ -119,9 +127,29 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._shipDAO.GetShipByCustName(CustName);
         }
+        public IEnumerable<ShipDetail> GetListShipDelivery()
+        {
+            return this._shipDetailDAO.GetListShipDelivery();
+        }
+        public IEnumerable<ShipDetail> GetShipDeliveryByStatus()
+        {
+            return this._shipDetailDAO.GetShipDeliveryByStatus();
+        }
+        public ShipDetail GetShipDeliveryByShipDetailID(int ShipDetailID)
+        {
+            return this._shipDetailDAO.GetShipDeliveryByShipDetailID(ShipDetailID);
+        }
         public bool InsertShipDetail(int ShipID, int OrderID, string CustName, string Address, string Phone, string Status)
         {
             return this._shipDetailDAO.InsertShipDetail(ShipID, OrderID, CustName, Address, Phone, Status);
+        }
+        public bool UpdateShipDetailStatus(int OrderID, string Status)
+        {
+            return this._shipDetailDAO.UpdateShipDetailStatus(OrderID, Status);
+        }
+        public bool UpdateShipDetailStatusByShipDetailID(int ShipDetailID, string Status)
+        {
+            return this._shipDetailDAO.UpdateShipDetailStatusByShipDetailID(ShipDetailID, Status);
         }
     }
 }

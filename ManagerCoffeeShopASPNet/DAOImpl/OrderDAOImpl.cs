@@ -84,6 +84,14 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                                         select order;
             return orders;
         }
+        public IEnumerable<Order> GetAllOrderByDescAndStatus(string Desc, string Status)
+        {
+            IEnumerable<Order> orders = from order in context.Orders
+                                        where order.Desc == Desc && order.Status == Status
+                                        orderby order.OrderDateTime ascending
+                                        select order;
+            return orders;
+        }
         public bool UpdateOrderStatus(int OrderID, string Status)
         {
             try
@@ -113,6 +121,12 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                                         select order;
             return orders;
         }
-
+        public IEnumerable<Order> GetOrderByOrderID(int OrderID)
+        {
+            IEnumerable<Order> o = from order in context.Orders
+                                   where OrderID == order.OrderID
+                                   select order;
+            return o;
+        }
     }
 }

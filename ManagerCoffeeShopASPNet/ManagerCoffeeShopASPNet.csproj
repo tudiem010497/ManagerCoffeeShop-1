@@ -222,6 +222,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountantController.cs" />
     <Compile Include="Areas\Admin\Controllers\BatenderController.cs" />
     <Compile Include="Areas\Admin\Controllers\DichVuController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
@@ -458,6 +459,10 @@
     <Content Include="Areas\Admin\Views\Web\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Service\GetAllOrderOnlineNeedConfirm.cshtml" />
     <Content Include="Areas\Admin\Views\Service\UpdateStatusOfOrderItemOnline.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\GetAllOrderNeedDelivery.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\GetListShipDelivery.cshtml" />
+    <Content Include="Areas\Admin\Views\Accountant\GetAllReceiptWaitToConfirm.cshtml" />
+    <Content Include="Areas\Admin\Views\Accountant\GetReceiptDetailByReceiptID.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

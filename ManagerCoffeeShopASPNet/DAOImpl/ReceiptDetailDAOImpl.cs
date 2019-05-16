@@ -27,6 +27,20 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 return null;
             }
         }
+        public ReceiptDetail GetReceiptDetailByReceiptDetailID(int ReceiptDetailID)
+        {
+            try
+            {
+                ReceiptDetail list = (from receiptdetail in context.ReceiptDetails
+                                                  where receiptdetail.ReceiptDetailID==ReceiptDetailID
+                                                  select receiptdetail).SingleOrDefault();
+                return list;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public bool InsertReceiptDetail(int ReceiptID, int IngreID, double Amount, string Unit, double UnitPrice, string Currency, string Status)
         {
             try
@@ -46,6 +60,20 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             catch(Exception ex)
             {
                 throw new Exception("Error InsertReceiptDetailByReceiptID" + ex.Message);
+            }
+        }
+        public bool UpdateReceiptDetail(int ReceiptDetailID, string Status)
+        {
+            try
+            {
+                ReceiptDetail receiptDetail = context.ReceiptDetails.FirstOrDefault(m => m.ReceiptDetailID == ReceiptDetailID);
+                receiptDetail.Status = Status;
+                context.SubmitChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                throw new Exception("Error Update ReceiptDetail: " + e.Message);
             }
         }
     }

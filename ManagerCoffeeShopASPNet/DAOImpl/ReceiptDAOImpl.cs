@@ -39,6 +39,35 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 return null;
             }
         }
+        public IEnumerable<Receipt> GetReceiptWaitToConfirm()
+        {
+            try
+            {
+                string status = "Waiting";
+                IEnumerable<Receipt> r = from receipt in context.Receipts
+                                         where receipt.Status == status
+                                         select receipt;
+                return r;
+            }
+            catch(Exception e)
+            {
+                return null;
+            }
+        }
+        public IEnumerable<Receipt> GetReceiptByReceiptID(int ReceiptID)
+        {
+            try
+            {
+                IEnumerable<Receipt> r = from receipt in context.Receipts
+                                         where receipt.ReceiptID==ReceiptID
+                                         select receipt;
+                return r;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
         public bool InsertReceipt(DateTime Date, double TotalAmount, string Currency, string Status)
         {
             try
@@ -55,6 +84,20 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             catch(Exception ex)
             {
                 throw new Exception("Error InsertReceipt" + ex.Message);
+            }
+        }
+        public bool UpdateReceipt(int ReceiptID, string Status)
+        {
+            try
+            {
+                Receipt receipt = context.Receipts.FirstOrDefault(m => m.ReceiptID == ReceiptID);
+                receipt.Status = Status;
+                context.SubmitChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error Update Receipt" + ex.Message);
             }
         }
     }
