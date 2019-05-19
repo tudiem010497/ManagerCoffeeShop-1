@@ -7,9 +7,6 @@
 
 <h2>GetAllReceiptWaitToConfirm</h2>
 
-@*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>*@
 <table class="table">
     <tr>
         <th>
@@ -43,9 +40,6 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @*@Html.ActionLink("Edit", "Edit", new { id=item.ReceiptID }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.ReceiptID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.ReceiptID })*@
                 @Html.ActionLink("Xem chi tiết", "GetReceiptDetailByReceiptID", new { ReceiptID = item.ReceiptID}, new { @class = "btn btn-outline-info" })
                 @Html.ActionLink("Duyệt", "ConfirmAll", new { ReceiptID = item.ReceiptID, View = "GetAllReceiptWaitToConfirm" }, new { @class = "btn btn-outline-success" })
                 @Html.ActionLink("Không duyệt", "CancelAll", new { ReceiptID = item.ReceiptID }, new { @class = "btn btn-outline-danger" })
