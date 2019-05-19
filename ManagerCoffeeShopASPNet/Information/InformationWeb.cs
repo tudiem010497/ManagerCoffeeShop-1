@@ -12,11 +12,15 @@ namespace ManagerCoffeeShopASPNet.Information
         private EmployeeDAO _employeeDAO;
         private AccountDAO _accountDAO;
         private CoffeeShopDAO _coffeeShopDAO;
+        private BasicSalaryDAO _basicSalaryDAO;
+        private SalaryDAO _salaryDAO;
         public InformationWeb()
         {
             this._employeeDAO = (EmployeeDAO)new EmployeeDAOImpl();
             this._accountDAO = (AccountDAO)new AccountDAOImpl();
             this._coffeeShopDAO = (CoffeeShopDAO)new CoffeeShopDAOImpl();
+            this._basicSalaryDAO = (BasicSalaryDAO)new BasicSalaryDAOImpl();
+            this._salaryDAO = (SalaryDAO)new SalaryDAOImpl();
         }
         public IEnumerable<Employee> GetAllEmployee()
         {
@@ -81,6 +85,22 @@ namespace ManagerCoffeeShopASPNet.Information
         public bool EditCoffeeShop(CoffeeShop cs)
         {
             return this._coffeeShopDAO.EditCoffeeShop(cs);
+        }
+        public bool InsertBasicSalary(int EmployeeID, int SalaryID)
+        {
+            return this._basicSalaryDAO.InsertBasicSalary(EmployeeID, SalaryID);
+        }
+        public int GetLastEmployeeID()
+        {
+            return this._employeeDAO.GetLastEmployeeID();
+        }
+        public Salary GetSalaryByDesc(string Desc)
+        {
+            return this._salaryDAO.GetSalaryByDesc(Desc);
+        }
+        public bool UpdateBasicSalary(int EmployeeID, int SalaryID)
+        {
+            return this._basicSalaryDAO.UpdateBasicSalary(EmployeeID, SalaryID);
         }
     }
 }
