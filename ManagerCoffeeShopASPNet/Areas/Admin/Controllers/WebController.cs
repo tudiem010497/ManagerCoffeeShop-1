@@ -53,10 +53,15 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             ViewData["listCoffeeShop"] = listCoffeeShop;
             return View();
         }
+        
         [Route("CreateEmployee")]
-        public ActionResult CreateEmployee( string Name, string Email, string Address, string Phone, DateTime DOB, string Gender, string IndentityNum, string Status)
+        public ActionResult CreateEmployee(string Name, string Email, string Address, string Phone, DateTime DOB, string Gender, string IndentityNum, string Status)
         {
             bool result = info.InsertEmployee( Name, Email, Address, Phone, DOB, Gender, IndentityNum, Status);
+            int EmployeeID = info.GetLastEmployeeID();//lấy ra mã NV vừa tạo
+            Employee em = info.GetEmployeeByID(EmployeeID); //lấy thông tin theo mã NV
+            Salary salary = info.GetSalaryByDesc(em.Status);//lấy thông tin mức lương dựa vào status của nhân viên
+            info.InsertBasicSalary(EmployeeID, salary.SalaryID);//thêm vào bảng BasicSalary 
             return RedirectToAction("GetAllEmployee", "Web");
         }
         [Route("DetailEmployee")]
@@ -139,6 +144,9 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             em.IndentityNum = IndentityNum;
             em.Status = Status;
             info.EditEmployee(em);
+            Employee employee = info.GetEmployeeByID(EmployeeID);
+            Salary salary = info.GetSalaryByDesc(em.Status);//lấy thông tin mức lương dựa vào status của nhân viên
+            info.UpdateBasicSalary(EmployeeID, salary.SalaryID);
             return RedirectToAction("GetAllEmployee", "Web");
         }
         [Route("GetFormAddNewAccountForEmployee")]
