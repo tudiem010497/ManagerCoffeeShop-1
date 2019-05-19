@@ -37,6 +37,7 @@
   </Table>
   <Table Name="dbo.BasicSalary" Member="BasicSalaries">
     <Type Name="BasicSalary">
+      <Column Name="BasicSalaryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="SalaryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Employee_BasicSalary" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />

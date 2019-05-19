@@ -2,716 +2,716 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 15, 53.875" name="CoffeeShopDB">
   <DataContextMoniker Name="/CoffeeShopDBDataContext" />
   <nestedChildShapes>
-    <classShape Id="5d91e0ea-0619-41ca-9f87-c6193db4d472" absoluteBounds="1.5, 24.75, 2, 2.1554996744791666">
+    <classShape Id="879ee22a-95f0-41b3-a6ec-9eeaf569da4b" absoluteBounds="1.5, 24.75, 2, 2.1554996744791666">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Account" />
       <nestedChildShapes>
-        <elementListCompartment Id="9c6a035e-8acd-4083-a3db-738469d817dd" absoluteBounds="1.5150000000000001, 25.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9c49972e-67b8-4606-a072-351440d5367c" absoluteBounds="1.5150000000000001, 25.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="b0322e09-f41c-4833-9e23-5b54931d9c01" absoluteBounds="6.25, 45.375, 2, 2.7324039713541595">
+    <classShape Id="53117aa6-2e86-402d-a2a3-1b614e50a101" absoluteBounds="6.25, 45.625, 2, 2.7324039713541595">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/TimeSheetDetail" />
       <nestedChildShapes>
-        <elementListCompartment Id="4b4764db-ee28-4db1-b847-b59fb2ed5360" absoluteBounds="6.265, 45.835, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="a028cb55-bd30-4934-b09c-3c3fa2bb1568" absoluteBounds="6.265, 46.085, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="9f9bd974-e869-4608-88e6-de7150ddfd28" absoluteBounds="9.75, 3.75, 2, 1.193992513020834">
+    <classShape Id="98d79d6a-465f-423e-8e3e-498c2cbf41dd" absoluteBounds="9.75, 3.75, 2, 1.193992513020834">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/BannerImage" />
       <nestedChildShapes>
-        <elementListCompartment Id="3def90f9-920e-4af7-86c7-42bed2b91722" absoluteBounds="9.765, 4.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="180b262d-66e3-43b1-a034-16f4e7244a07" absoluteBounds="9.765, 4.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="faf16c2d-3bcc-40b7-bf99-4036a2bab39f" absoluteBounds="9.5, 15, 2, 1.1939925130208327">
+    <classShape Id="46f66723-29da-4bc4-949a-c09a7d69843d" absoluteBounds="9.5, 14.875, 2, 1.3862939453125005">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/BasicSalary" />
       <nestedChildShapes>
-        <elementListCompartment Id="6862939c-f69a-4049-84a1-bebe39dd8f73" absoluteBounds="9.515, 15.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="f1db7e90-3888-48c9-a9ea-bf27acb9d651" absoluteBounds="9.515, 15.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="61c856da-c0fa-48a7-9272-ab8131d32608" absoluteBounds="9.75, 5.75, 2, 1.9631982421875005">
+    <classShape Id="dd53c8d6-b2db-4e46-a511-a3f95d3b612b" absoluteBounds="9.75, 5.75, 2, 1.9631982421875005">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Blog" />
       <nestedChildShapes>
-        <elementListCompartment Id="789b6b83-5abb-4547-80b7-320f732974c0" absoluteBounds="9.765, 6.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="4803fa9a-7b7e-48e8-8b57-5b660f016925" absoluteBounds="9.765, 6.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="85a24484-d4c1-40dc-bbbe-9bf2a2df731c" absoluteBounds="3.5, 8.875, 2, 1.3862939453124987">
+    <classShape Id="252319aa-587c-44e9-92c5-e0803f97fbb7" absoluteBounds="3.5, 8.875, 2, 1.3862939453124987">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/CoffeeBrewing" />
       <nestedChildShapes>
-        <elementListCompartment Id="73c10587-f187-43bb-8ecc-bffa52efb8df" absoluteBounds="3.515, 9.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="f13068cc-4882-446c-9345-31af79df72e6" absoluteBounds="3.515, 9.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="48280be2-7e7d-4b25-ae05-ec4d4c02d851" absoluteBounds="4.25, 49.25, 2, 1.5785953776041595">
+    <classShape Id="0010ff50-485f-4189-b96c-4093c1a74b80" absoluteBounds="4.25, 49.25, 2, 1.5785953776041595">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/CoffeeLandScape" />
       <nestedChildShapes>
-        <elementListCompartment Id="a2609212-7b95-4e25-b10c-86efeda79691" absoluteBounds="4.265, 49.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="1910ff5d-11ef-4865-ac3f-8bd1378e10a8" absoluteBounds="4.265, 49.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="916c1988-d5ee-461d-8088-10d1d70897c6" absoluteBounds="7, 49.875, 2, 2.3478011067708309">
+    <classShape Id="e7014d0b-27be-4cfb-8edb-a15500adb38e" absoluteBounds="7, 49.875, 2, 2.3478011067708309">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/CoffeeLandScapeDetail" />
       <nestedChildShapes>
-        <elementListCompartment Id="9babb928-a206-4681-a673-41586ffb3d36" absoluteBounds="7.015, 50.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="0ff6524d-019f-4513-a07e-4bcd144ced87" absoluteBounds="7.015, 50.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="267f3d9f-58e5-48d8-87d2-eef1f96dacc6" absoluteBounds="1.5, 27.625, 2, 2.7324039713541666">
+    <classShape Id="64d3270c-af5b-4b44-bfc5-5aa8016aac3b" absoluteBounds="1.5, 27.625, 2, 2.7324039713541666">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/CoffeeShop" />
       <nestedChildShapes>
-        <elementListCompartment Id="bddf373f-2864-423d-801e-b1c8bb0a0557" absoluteBounds="1.5150000000000001, 28.085, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="3c0cb036-37d9-4708-8df3-2d3410f00e8b" absoluteBounds="1.5150000000000001, 28.085, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="c2879741-8516-4ef4-acc4-28a2576aebce" absoluteBounds="1, 37.5, 2, 2.3478011067708309">
+    <classShape Id="d6c6005d-1161-4e4e-b1e1-81d18194d506" absoluteBounds="1, 37.5, 2, 2.3478011067708309">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Customer" />
       <nestedChildShapes>
-        <elementListCompartment Id="f0adad82-d258-4ca9-b53a-50207685b9e6" absoluteBounds="1.0150000000000001, 37.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="c115bd9d-2dc6-4353-82ed-3021d634c8d2" absoluteBounds="1.0150000000000001, 37.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="0c372aca-59a7-44c1-9cb6-266b1ada8390" absoluteBounds="0.75, 16.125, 2, 2.9247054036458309">
+    <classShape Id="3024dafe-f2d1-47d0-bac1-5cafeedec065" absoluteBounds="0.75, 16.125, 2, 2.9247054036458309">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Employee" />
       <nestedChildShapes>
-        <elementListCompartment Id="a86a43fa-0679-458a-94d6-c692878075b8" absoluteBounds="0.765, 16.585, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="1c583aff-a3d9-47fc-8bed-25d4fbeae96c" absoluteBounds="0.765, 16.585, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="fc2f7c26-f382-4524-a9c9-26bccda2da5b" absoluteBounds="6.5, 33.75, 2, 1.9631982421875023">
+    <classShape Id="32f41ddc-74ce-4ff9-a0b6-0a1c794d50ff" absoluteBounds="6.5, 33.75, 2, 1.9631982421875023">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/ESTIngredient" />
       <nestedChildShapes>
-        <elementListCompartment Id="4bdae662-5ec9-404f-9fb2-96abf96fb784" absoluteBounds="6.515, 34.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="fdb0f3e8-b7de-4a85-9341-dc01b5c321f2" absoluteBounds="6.515, 34.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="629ef1d1-45d7-4709-886b-e41ff875bbb8" absoluteBounds="6.5, 5.25, 2, 2.5401025390625005">
+    <classShape Id="129eccab-e60e-4e8d-8e19-6153b0a24392" absoluteBounds="6.5, 5.25, 2, 2.5401025390625005">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/ExtraDetail" />
       <nestedChildShapes>
-        <elementListCompartment Id="7faad3aa-9629-471e-86cb-936465ed3f1c" absoluteBounds="6.515, 5.71, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="cda90ad9-2ef7-4794-8998-eccbb6759cbc" absoluteBounds="6.515, 5.71, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="7fd2b760-f15b-4277-9672-41a388f05976" absoluteBounds="3.75, 20.875, 2, 2.3478011067708309">
+    <classShape Id="e6cb2770-e35b-4d62-93a9-0e558974ec92" absoluteBounds="3.75, 20.875, 2, 2.3478011067708309">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/ExtraExpense" />
       <nestedChildShapes>
-        <elementListCompartment Id="cc94f04e-34f2-4c9c-bff4-2d8ff95fd3f9" absoluteBounds="3.765, 21.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="5b1fa1fa-7d2d-4f01-94b6-13c76c21473f" absoluteBounds="3.765, 21.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="673bb740-4a17-4b24-b407-a62d78170939" absoluteBounds="3.75, 1.875, 2, 2.1554996744791666">
+    <classShape Id="c9309d46-dce9-427c-8235-9d79e494b0ef" absoluteBounds="3.75, 1.875, 2, 2.1554996744791666">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Facility" />
       <nestedChildShapes>
-        <elementListCompartment Id="b322a8d9-7189-4f32-8035-6c20f8a8e557" absoluteBounds="3.765, 2.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="f4697b1c-c92f-4739-88e0-81f897d1d439" absoluteBounds="3.765, 2.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="10511c9a-bc96-448c-8a39-22da58c27bdc" absoluteBounds="0.75, 11.25, 2, 2.5401025390624987">
+    <classShape Id="c5847b52-76f9-4383-a4dd-1d4626465280" absoluteBounds="0.75, 11.25, 2, 2.5401025390624987">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/FoodAndDrink" />
       <nestedChildShapes>
-        <elementListCompartment Id="cf341bad-df5f-447c-b4e3-52e18a66db3e" absoluteBounds="0.765, 11.71, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="baa4a275-515a-4a41-983c-900699009f3b" absoluteBounds="0.765, 11.71, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="a36d2f95-d60f-4999-b9d1-4265bec5501b" absoluteBounds="0.75, 7.875, 2, 1.9631982421874996">
+    <classShape Id="c18b5738-c5e6-463b-8a1e-2a25f9529a99" absoluteBounds="0.75, 7.875, 2, 1.9631982421874996">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Gift" />
       <nestedChildShapes>
-        <elementListCompartment Id="130a191f-8cce-4217-b2a2-58cef878bb42" absoluteBounds="0.765, 8.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="4853019c-1804-43c1-ba03-89204f74b820" absoluteBounds="0.765, 8.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="77d6f50f-b8e8-4515-bca4-07a928b00ede" absoluteBounds="9.75, 8.75, 2, 1.7708968098958344">
+    <classShape Id="d0c7dc8e-ce54-4609-86d7-5388efc12897" absoluteBounds="9.75, 8.75, 2, 1.7708968098958344">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/HistoryOrder" />
       <nestedChildShapes>
-        <elementListCompartment Id="a4bc8a1c-5c93-4ad7-9f45-6e051a261672" absoluteBounds="9.765, 9.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="001e4421-d226-47a8-b1e9-d6ce4ca72518" absoluteBounds="9.765, 9.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="48ea724b-e54a-4fb0-a214-cc023bbdb58a" absoluteBounds="8.75, 11.75, 2, 1.1939925130208344">
+    <classShape Id="6be5f5ec-67b2-4781-a05c-1ff534bf6615" absoluteBounds="8.75, 11.75, 2, 1.1939925130208344">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/HistoryOrderPromotion" />
       <nestedChildShapes>
-        <elementListCompartment Id="65e25881-3130-4982-9539-ccc227167f1d" absoluteBounds="8.765, 12.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="19e71dcd-e23d-46e1-b039-ef70e5f5c037" absoluteBounds="8.765, 12.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="adc1c7fa-9108-4ee6-917d-b206976fa227" absoluteBounds="11.75, 11.75, 2, 2.1554996744791666">
+    <classShape Id="c633bd04-8dff-4d8d-a427-8f15e6dd161d" absoluteBounds="11.75, 11.75, 2, 2.1554996744791666">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/HistoryReceipt" />
       <nestedChildShapes>
-        <elementListCompartment Id="e7074042-f369-43f5-be4c-e3a352f3281c" absoluteBounds="11.765, 12.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7ca8a828-5dd7-40dc-b78c-2f28b2092bc1" absoluteBounds="11.765, 12.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="471a26be-4556-49ef-b285-d586978eb911" absoluteBounds="12.75, 3.75, 2, 2.1554996744791666">
+    <classShape Id="04d1811c-f143-41b1-95e1-515a84830ca2" absoluteBounds="12.75, 3.75, 2, 2.1554996744791666">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/HistoryTimeSheet" />
       <nestedChildShapes>
-        <elementListCompartment Id="d27abfb5-484c-4481-ab5f-a6b37d078169" absoluteBounds="12.765, 4.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="fa7d1bfa-6173-4718-a9f8-4546c07b3906" absoluteBounds="12.765, 4.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="c4c2be43-5dba-4cba-81bd-37d3f11928a3" absoluteBounds="12.75, 6.75, 2, 1.5785953776041666">
+    <classShape Id="32bdaa74-9821-4afa-8785-04fcceb0af86" absoluteBounds="12.75, 6.75, 2, 1.5785953776041666">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/InfoIndex" />
       <nestedChildShapes>
-        <elementListCompartment Id="3858736d-3d96-49a0-86ad-17999e185eef" absoluteBounds="12.765, 7.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="43df9a46-09b7-4b19-a35d-ea40e3b66379" absoluteBounds="12.765, 7.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="8f993b1f-9921-44ca-843b-fa63f30e2cd5" absoluteBounds="6.5, 23.5, 2, 2.7324039713541666">
+    <classShape Id="dd0e7ef0-ab3b-43b3-8bf5-742c32eaeac9" absoluteBounds="6.5, 23.5, 2, 2.7324039713541666">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/IngredientMessage" />
       <nestedChildShapes>
-        <elementListCompartment Id="1e44211d-0ea1-430d-a54a-a75d37983b54" absoluteBounds="6.515, 23.96, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="50361ce5-eff0-4c86-9f3b-f9c5438c3734" absoluteBounds="6.515, 23.96, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="36acca64-b6dc-4ac4-96b9-4bf60ddc7f61" absoluteBounds="3.75, 31.5, 2, 2.15549967447917">
+    <classShape Id="382e2f46-30d3-4ab5-a43f-927c4ab46d6e" absoluteBounds="3.75, 31.5, 2, 2.15549967447917">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Ingredient" />
       <nestedChildShapes>
-        <elementListCompartment Id="918e0e39-aaf0-4b22-8fb4-76eea9ad0246" absoluteBounds="3.765, 31.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9a747c60-ed5d-40dc-8bf5-4dd5654cd44a" absoluteBounds="3.765, 31.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="a7c1616c-b039-4f29-9f93-bafc15a5c5fb" absoluteBounds="9.5, 17.25, 2, 1.3862939453125023">
+    <classShape Id="536e7dbd-2b55-44f4-bcfe-951eee70a40d" absoluteBounds="9.5, 17.25, 2, 1.3862939453125023">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/IngredientsMapSupplier" />
       <nestedChildShapes>
-        <elementListCompartment Id="e3a88205-f07c-4531-9772-b246df3d7945" absoluteBounds="9.515, 17.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="a0191b9d-7175-4435-8aa3-d7017f6ec75f" absoluteBounds="9.515, 17.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="71c08fca-b936-4817-ac02-ff36e528582a" absoluteBounds="6.5, 8.625, 2, 1.7708968098958344">
+    <classShape Id="9628ff60-97ed-4388-b6e6-7e5926bdb459" absoluteBounds="6.5, 8.625, 2, 1.7708968098958344">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/IngreExchange" />
       <nestedChildShapes>
-        <elementListCompartment Id="7266436c-1e29-4255-9923-d74501e9aae7" absoluteBounds="6.515, 9.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="1922036c-bc2e-4e4d-9248-734c04cc3988" absoluteBounds="6.515, 9.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="a93a134e-591f-40c2-9e24-58d4c85e8351" absoluteBounds="9.75, 1, 2, 1.3862939453125003">
+    <classShape Id="0eeeda6d-278a-4403-83ca-928576d6c664" absoluteBounds="9.75, 1, 2, 1.3862939453125003">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Menu" />
       <nestedChildShapes>
-        <elementListCompartment Id="ddf96ddf-1eb4-4b38-beb1-2018aaca57d0" absoluteBounds="9.765, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="1fab9537-16d9-4473-8983-4309f53e261c" absoluteBounds="9.765, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="fe7536fe-0c97-45cf-ac52-45e523df941b" absoluteBounds="12.5, 0.875, 2, 1.5785953776041666">
+    <classShape Id="05a31314-249f-4832-be07-e5f44c38ceae" absoluteBounds="12.5, 0.875, 2, 1.5785953776041666">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/MenuDetail" />
       <nestedChildShapes>
-        <elementListCompartment Id="80ef8a86-c214-4f8c-8055-58285b3b4f6b" absoluteBounds="12.515, 1.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="8f1a613a-ad15-4a5b-9e3d-1415c14274e9" absoluteBounds="12.515, 1.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="33a90845-c315-412a-aee4-a051ec7976b7" absoluteBounds="3.75, 36.25, 2, 2.7324039713541737">
+    <classShape Id="ed4dff33-276f-4053-8afc-769e6be8e56e" absoluteBounds="3.75, 36.25, 2, 2.7324039713541737">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Order" />
       <nestedChildShapes>
-        <elementListCompartment Id="a2623865-ad5b-4246-9a3d-27834d7d4492" absoluteBounds="3.765, 36.71, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="93af32cd-04a0-4bca-8ca0-9664b5acf168" absoluteBounds="3.765, 36.71, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="d96ef65e-5d58-44b0-87a2-2f0984792929" absoluteBounds="6.5, 14.625, 2, 1.9631982421875005">
+    <classShape Id="5fe966ca-f85d-4520-a178-08df3bb71b63" absoluteBounds="6.5, 14.625, 2, 1.9631982421875005">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/OrderItem" />
       <nestedChildShapes>
-        <elementListCompartment Id="a021a2a3-ad03-4133-99de-71e648542298" absoluteBounds="6.515, 15.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7eb857cd-f696-463a-a24b-da26eb1a97c5" absoluteBounds="6.515, 15.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="021fa879-a1a4-463f-a0db-4b29b3e24568" absoluteBounds="9.5, 21.5, 2, 1.1939925130208309">
+    <classShape Id="b56dea85-55a6-4ddd-87f0-05a83a9f3790" absoluteBounds="9.5, 21.5, 2, 1.1939925130208309">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/OrderPromotion" />
       <nestedChildShapes>
-        <elementListCompartment Id="9169216b-584e-4c67-8f4a-7c1206c88b30" absoluteBounds="9.515, 21.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="f8a61775-7c0e-4a4d-9523-e9a5566ef36e" absoluteBounds="9.515, 21.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="00ebf5dd-0730-4cfa-ad03-60e26ea0a33e" absoluteBounds="1, 35.375, 2, 1.3862939453125023">
+    <classShape Id="5b49d989-6159-4718-8206-c7229d5d9457" absoluteBounds="1, 35.375, 2, 1.3862939453125023">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Position" />
       <nestedChildShapes>
-        <elementListCompartment Id="5cd77eca-4147-4ba4-a91a-f29529ea92e3" absoluteBounds="1.0150000000000001, 35.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="e9b1bc08-1014-4c6a-a985-c55c21347e0b" absoluteBounds="1.0150000000000001, 35.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="e28d3378-7126-413d-938a-7d0e5b9f0ecb" absoluteBounds="0.75, 5.375, 2, 1.7708968098958327">
+    <classShape Id="32c46b10-6b8e-41b3-a83c-c3f3edfa8655" absoluteBounds="0.75, 5.375, 2, 1.7708968098958327">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Promotion" />
       <nestedChildShapes>
-        <elementListCompartment Id="6de51c84-a859-4e64-b65b-1d7441cdac31" absoluteBounds="0.765, 5.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="4b3d66c9-bba0-4816-93ae-e63f56ff12fb" absoluteBounds="0.765, 5.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="99873ba2-59a4-4403-896f-ab3fb84434c6" absoluteBounds="3.5, 5.375, 2, 2.3478011067708344">
+    <classShape Id="78d442d0-d4ca-446b-b887-a56424437b45" absoluteBounds="3.5, 5.375, 2, 2.3478011067708344">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/ProOnDrinkQuantity" />
       <nestedChildShapes>
-        <elementListCompartment Id="41c2b304-98dc-48bd-8468-630d5b9476e9" absoluteBounds="3.515, 5.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="625910bc-02d3-49e6-8507-79ea62fc5e2a" absoluteBounds="3.515, 5.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="a510771e-0bb8-4b18-a60a-06a542f18c01" absoluteBounds="3.5, 17.375, 2, 2.3478011067708309">
+    <classShape Id="c1e8c1b9-0793-45a8-b285-33e86d306231" absoluteBounds="3.5, 17.375, 2, 2.3478011067708309">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/ProOnOrderAmount" />
       <nestedChildShapes>
-        <elementListCompartment Id="7ab14dc1-a15f-45df-ae49-3ceecf3eb465" absoluteBounds="3.515, 17.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="d2b0b7ee-3d2f-4f94-8c66-a0ad73a3d89a" absoluteBounds="3.515, 17.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="d4552aee-a60e-4891-a7d3-db51417a8390" absoluteBounds="3.75, 39.875, 2, 1.7708968098958309">
+    <classShape Id="1b1ecfb6-b9fe-418e-ba43-3c5d4567ac64" absoluteBounds="3.75, 39.875, 2, 1.7708968098958309">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Receipt" />
       <nestedChildShapes>
-        <elementListCompartment Id="7e105bc4-1edf-45af-9850-2ff3be69ecde" absoluteBounds="3.765, 40.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="e787f971-dbe6-470b-ade9-81d2a39bdbed" absoluteBounds="3.765, 40.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="3eba78a1-4c7a-4dd1-8bab-3544451e1611" absoluteBounds="6.5, 18.25, 2, 3.1170068359375023">
+    <classShape Id="3124a438-9774-4584-8601-88a9265d01cf" absoluteBounds="6.5, 18.25, 2, 3.1170068359375023">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/ReceiptDetail" />
       <nestedChildShapes>
-        <elementListCompartment Id="a886c87d-b22f-4cd4-bea1-cecb862a5aa2" absoluteBounds="6.515, 18.71, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ec4ea26d-984b-40cc-a4b3-84483eaeeb74" absoluteBounds="6.515, 18.71, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="ef87f96d-4b64-41b7-8f14-8b25126ce2fa" absoluteBounds="3.5, 12, 2, 1.1939925130208344">
+    <classShape Id="5b3d4f97-2085-4d9e-8cbf-f17b1432d567" absoluteBounds="3.5, 12, 2, 1.1939925130208344">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Recipe" />
       <nestedChildShapes>
-        <elementListCompartment Id="da451e06-45f0-4d57-8fbd-0febcb5e76e3" absoluteBounds="3.515, 12.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="4eb6822b-655d-4583-90fd-bf91ea894f3c" absoluteBounds="3.515, 12.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="c047000e-b56d-4eb4-86e6-c3d74ccc85a9" absoluteBounds="6.25, 11.5, 2, 2.1554996744791666">
+    <classShape Id="2dc079c0-5aaf-449c-97cc-3c7f824e0b51" absoluteBounds="6.25, 11.5, 2, 2.1554996744791666">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/RecipeDetail" />
       <nestedChildShapes>
-        <elementListCompartment Id="52c2d485-7f9e-4402-895b-98dc5e3fa53a" absoluteBounds="6.265, 11.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="eed98737-25af-4586-8a56-fd417cc035bc" absoluteBounds="6.265, 11.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="8b0779f9-36f2-44df-82fd-9cd2d5d24478" absoluteBounds="0.75, 20.375, 2, 2.3478011067708309">
+    <classShape Id="e52f226d-3f7c-4255-96d0-abceabd13a64" absoluteBounds="0.75, 20.375, 2, 2.3478011067708309">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Reservation" />
       <nestedChildShapes>
-        <elementListCompartment Id="5d7b9605-54c7-4ea1-af0c-cb8ec72a2bd4" absoluteBounds="0.765, 20.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="183ea360-be98-4d3a-b0f0-71242853e6d3" absoluteBounds="0.765, 20.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="8444a788-4dd6-4118-8fc8-e7d0260425e0" absoluteBounds="3.5, 14.75, 2, 1.5785953776041666">
+    <classShape Id="6f5dbc8d-ff6f-4c3a-9b37-d87624911aec" absoluteBounds="3.5, 14.75, 2, 1.5785953776041666">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/ReservationDetail" />
       <nestedChildShapes>
-        <elementListCompartment Id="bdc0420c-f267-49d9-a53b-95feb7ef0c66" absoluteBounds="3.515, 15.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="a363b2a8-f250-4f8e-af96-4ccf05d7db4e" absoluteBounds="3.515, 15.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="71d6b31f-25b5-4036-bfa0-8e8ee8a247ca" absoluteBounds="1.5, 49.25, 2, 1.1939925130208309">
+    <classShape Id="a2356af9-18bb-44af-9669-402a1304afaa" absoluteBounds="1.5, 49.25, 2, 1.1939925130208309">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Role" />
       <nestedChildShapes>
-        <elementListCompartment Id="d4f125e9-f035-4a70-ae88-0337c05a4dea" absoluteBounds="1.5150000000000001, 49.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="aa8d971c-e90f-4277-8d5c-7e70fb3fee80" absoluteBounds="1.5150000000000001, 49.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="0707dbac-ee50-47d0-9f82-fdad53f9e462" absoluteBounds="4.25, 27.875, 2, 1.7708968098958309">
+    <classShape Id="978c1712-e479-4a9d-af51-cad4a206818e" absoluteBounds="4.25, 27.875, 2, 1.7708968098958309">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/RoleMap" />
       <nestedChildShapes>
-        <elementListCompartment Id="bb0a4684-0281-4835-af4f-bf570a41a97f" absoluteBounds="4.265, 28.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="aa12076b-4de6-49d8-ad36-e028d1d4a855" absoluteBounds="4.265, 28.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="8be844f1-a758-46b8-9e8a-c585c8e5fe2b" absoluteBounds="6.75, 1.625, 2, 1.9631982421875003">
+    <classShape Id="3ab9e8d1-26e8-4b2a-b9c5-209060d794e2" absoluteBounds="6.75, 1.625, 2, 1.9631982421875003">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Salary" />
       <nestedChildShapes>
-        <elementListCompartment Id="9e0421c3-19e2-49bd-bf71-b96d82f78914" absoluteBounds="6.765, 2.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="c62e45ec-3c8c-4fed-973c-90560f83d405" absoluteBounds="6.765, 2.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="270b587c-803a-467c-9e0b-25fd16650608" absoluteBounds="7.75, 27.375, 2, 1.1939925130208309">
+    <classShape Id="ab79846c-b91d-48db-a947-ea7d1c0f1b27" absoluteBounds="7.75, 27.375, 2, 1.1939925130208309">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Server" />
       <nestedChildShapes>
-        <elementListCompartment Id="8f6faf15-59eb-4a7c-a3ee-54183520c98b" absoluteBounds="7.765, 27.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="8b38c2a4-154f-4feb-9176-4930d9500726" absoluteBounds="7.765, 27.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="0cee31a0-8af2-45bc-a409-b9d1d30b429c" absoluteBounds="4.25, 52.375, 2, 1.1939925130208309">
+    <classShape Id="056f12da-da28-4fc8-bc49-436884c33718" absoluteBounds="4.25, 52.375, 2, 1.1939925130208309">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Shape" />
       <nestedChildShapes>
-        <elementListCompartment Id="71bdca66-ec55-43b9-86ca-6d805aac74af" absoluteBounds="4.265, 52.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="d514ca13-ea20-4381-a8be-c4fa9162b047" absoluteBounds="4.265, 52.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="430a005f-0d66-403f-b4d0-76f2ae665288" absoluteBounds="3.5, 42.875, 2, 1.7708968098958309">
+    <classShape Id="6bbc6ab2-98c4-4e6e-b694-6dbd780bc880" absoluteBounds="3.5, 43.125, 2, 1.7708968098958309">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Ship" />
       <nestedChildShapes>
-        <elementListCompartment Id="7970fe2a-196c-4599-b918-30a379ba6314" absoluteBounds="3.515, 43.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="392832b4-cb18-4711-9ec3-9f9ab7b2cc81" absoluteBounds="3.515, 43.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="e1a97646-e22f-4a12-8b5d-f9b7d6b142d7" absoluteBounds="6.5, 39.375, 2, 2.1554996744791595">
+    <classShape Id="5da71622-7859-484f-8028-112f94ee8587" absoluteBounds="6.5, 39.5, 2, 2.1554996744791595">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/ShipDetail" />
       <nestedChildShapes>
-        <elementListCompartment Id="eeea7ab3-1a01-4ff4-bebc-44a8906ada80" absoluteBounds="6.515, 39.835, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="03b3da72-aec6-41de-b1c3-aa4fade3f519" absoluteBounds="6.515, 39.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="171e158f-74b1-4e4f-a513-ae8941cf28b5" absoluteBounds="1, 2.25, 2, 1.5785953776041666">
+    <classShape Id="b48e2010-884a-433b-b1e3-405a4a37a46a" absoluteBounds="1, 2.25, 2, 1.5785953776041666">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Supplier" />
       <nestedChildShapes>
-        <elementListCompartment Id="0aa50c65-e6a6-4b12-a847-48c9f01c3d71" absoluteBounds="1.0150000000000001, 2.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="d21c903d-94b7-41c2-8ec5-989b2ac051ce" absoluteBounds="1.0150000000000001, 2.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="04735aa0-b592-4074-8b5a-54736686270f" absoluteBounds="12.75, 9.75, 2, 1.0016910807291666">
+    <classShape Id="f822e32d-2b11-476a-95ab-bb52fa7a787d" absoluteBounds="12.75, 9.75, 2, 1.0016910807291666">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/Test" />
       <nestedChildShapes>
-        <elementListCompartment Id="edf96193-87e7-4daf-abc2-3b26e26a1cfa" absoluteBounds="12.765, 10.21, 1.9700000000000002, 0.44169108072916669" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="2ecf51d7-0ea1-401e-8688-eea9d3edf996" absoluteBounds="12.765, 10.21, 1.9700000000000002, 0.44169108072916669" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="ced6a2fa-4ffc-4615-aa92-0e6654475572" absoluteBounds="3.5, 45.875, 2, 1.7708968098958309">
+    <classShape Id="afbe877d-e633-4d83-8997-b20da5396865" absoluteBounds="3.5, 46.125, 2, 1.7708968098958309">
       <DataClassMoniker Name="/CoffeeShopDBDataContext/TimeSheet" />
       <nestedChildShapes>
-        <elementListCompartment Id="f75e09a0-2518-4fa1-a033-31f1364705c7" absoluteBounds="3.515, 46.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="b8dcfeb8-7ce5-4fb4-ae8b-0a27564b6f2d" absoluteBounds="3.515, 46.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(6.25 : 50.3517976888021); (7 : 50.3517976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(6.25 : 50.3517976888021); (7 : 50.3517976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/CoffeeLandScape/CoffeeLandScape_CoffeeLandScapeDetail" />
       <nodes>
-        <classShapeMoniker Id="48280be2-7e7d-4b25-ae05-ec4d4c02d851" />
-        <classShapeMoniker Id="916c1988-d5ee-461d-8088-10d1d70897c6" />
+        <classShapeMoniker Id="0010ff50-485f-4189-b96c-4093c1a74b80" />
+        <classShapeMoniker Id="e7014d0b-27be-4cfb-8edb-a15500adb38e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.5 : 30.3574039713542); (2.5 : 35.125); (3.04166666666667 : 35.125 : JumpStart); (3.20833333333333 : 35.125 : JumpEnd); (3.25 : 35.125); (3.25 : 49); (3.75 : 49); (3.75 : 50.0392976888021); (4.25 : 50.0392976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.5 : 30.3574039713542); (2.5 : 35.125); (3.04166666666667 : 35.125 : JumpStart); (3.20833333333333 : 35.125 : JumpEnd); (3.25 : 35.125); (3.25 : 49); (3.75 : 49); (3.75 : 50.0392976888021); (4.25 : 50.0392976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/CoffeeShop/CoffeeShop_CoffeeLandScape" />
       <nodes>
-        <classShapeMoniker Id="267f3d9f-58e5-48d8-87d2-eef1f96dacc6" />
-        <classShapeMoniker Id="48280be2-7e7d-4b25-ae05-ec4d4c02d851" />
+        <classShapeMoniker Id="64d3270c-af5b-4b44-bfc5-5aa8016aac3b" />
+        <classShapeMoniker Id="0010ff50-485f-4189-b96c-4093c1a74b80" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.5 : 26.9054996744792); (1.27767556509888 : 27.1278241093803 : JumpStart); (1.15982443490112 : 27.2456752395781 : JumpEnd); (1.125 : 27.2804996744792); (0.833333333333333 : 27.2804996744792 : JumpStart); (0.666666666666667 : 27.2804996744792 : JumpEnd); (0.625 : 27.2804996744792); (0.625 : 37.1573076923077); (1 : 37.5323076923077)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(1.5 : 26.9054996744792); (1.27767556509888 : 27.1278241093803 : JumpStart); (1.15982443490112 : 27.245675239578 : JumpEnd); (1.125 : 27.2804996744792); (0.833333333333333 : 27.2804996744792 : JumpStart); (0.666666666666667 : 27.2804996744792 : JumpEnd); (0.625 : 27.2804996744792); (0.625 : 37.1573076923077); (1 : 37.5323076923077)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Account/Account_Customer" />
       <nodes>
-        <classShapeMoniker Id="5d91e0ea-0619-41ca-9f87-c6193db4d472" />
-        <classShapeMoniker Id="c2879741-8516-4ef4-acc4-28a2576aebce" />
+        <classShapeMoniker Id="879ee22a-95f0-41b3-a6ec-9eeaf569da4b" />
+        <classShapeMoniker Id="d6c6005d-1161-4e4e-b1e1-81d18194d506" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 17.5873527018229); (2.85416666666667 : 17.5873527018229 : JumpStart); (3.02083333333333 : 17.5873527018229 : JumpEnd); (3.07291666666667 : 17.5873527018229 : JumpStart); (3.23958333333333 : 17.5873527018229 : JumpEnd); (3.25 : 17.5873527018229); (3.25 : 17); (5.57291666666667 : 17 : JumpStart); (5.73958333333333 : 17 : JumpEnd); (5.79166666666667 : 17 : JumpStart); (6.08333333333333 : 17 : JumpEnd); (6.16666666666667 : 17 : JumpStart); (6.45833333333333 : 17 : JumpEnd); (10.5 : 17); (10.5 : 16.1939925130208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 17.5873527018229); (2.85416666666667 : 17.5873527018229 : JumpStart); (3.05208333333333 : 17.5873527018229 : JumpEnd); (3.07291666666667 : 17.5873527018229 : JumpStart); (3.23958333333333 : 17.5873527018229 : JumpEnd); (3.25 : 17.5873527018229); (3.25 : 17); (3.30729166666667 : 17 : JumpStart); (3.47395833333333 : 17 : JumpEnd); (5.57291666666667 : 17 : JumpStart); (5.73958333333333 : 17 : JumpEnd); (5.79166666666667 : 17 : JumpStart); (6.08333333333333 : 17 : JumpEnd); (6.16666666666667 : 17 : JumpStart); (6.45833333333333 : 17 : JumpEnd); (9.01041666666667 : 17 : JumpStart); (9.17708333333333 : 17 : JumpEnd); (10.5 : 17); (10.5 : 16.2612939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Employee/Employee_BasicSalary" />
       <nodes>
-        <classShapeMoniker Id="0c372aca-59a7-44c1-9cb6-266b1ada8390" />
-        <classShapeMoniker Id="faf16c2d-3bcc-40b7-bf99-4036a2bab39f" />
+        <classShapeMoniker Id="3024dafe-f2d1-47d0-bac1-5cafeedec065" />
+        <classShapeMoniker Id="46f66723-29da-4bc4-949a-c09a7d69843d" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 16.125); (3.125 : 15.75); (3.125 : 9.56814697265625); (3.5 : 9.56814697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 16.125); (2.75357443490112 : 16.1214255650989 : JumpStart); (2.87142556509888 : 16.0035744349011 : JumpEnd); (2.87857443490112 : 15.9964255650989 : JumpStart); (3.05892556509888 : 15.8160744349011 : JumpEnd); (3.125 : 15.75); (3.125 : 9.56814697265625); (3.19791666666667 : 9.56814697265625 : JumpStart); (3.47395833333333 : 9.56814697265625 : JumpEnd); (3.5 : 9.56814697265625)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Employee/Employee_CoffeeBrewing" />
       <nodes>
-        <classShapeMoniker Id="0c372aca-59a7-44c1-9cb6-266b1ada8390" />
-        <classShapeMoniker Id="85a24484-d4c1-40dc-bbbe-9bf2a2df731c" />
+        <classShapeMoniker Id="3024dafe-f2d1-47d0-bac1-5cafeedec065" />
+        <classShapeMoniker Id="252319aa-587c-44e9-92c5-e0803f97fbb7" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(1.5 : 27.625); (1.27767556509888 : 27.4026755650989 : JumpStart); (1.15982443490112 : 27.2848244349011 : JumpEnd); (0.875 : 27); (0.833333333333333 : 27 : JumpStart); (0.666666666666667 : 27 : JumpEnd); (0.375 : 27); (0.375 : 19.4247054036458); (0.75 : 19.0497054036458)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/CoffeeShop/CoffeeShop_Employee" />
       <nodes>
-        <classShapeMoniker Id="267f3d9f-58e5-48d8-87d2-eef1f96dacc6" />
-        <classShapeMoniker Id="0c372aca-59a7-44c1-9cb6-266b1ada8390" />
+        <classShapeMoniker Id="64d3270c-af5b-4b44-bfc5-5aa8016aac3b" />
+        <classShapeMoniker Id="3024dafe-f2d1-47d0-bac1-5cafeedec065" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.0312525 : 24.75); (3.0312525 : 18.3497815527344); (2.75 : 18.3497815527344)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(3.0312525 : 24.75); (3.0312525 : 18.3497815527344); (3.02083333333333 : 18.3497815527344 : JumpStart); (2.85416666666667 : 18.3497815527344 : JumpEnd); (2.75 : 18.3497815527344)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Account/Account_Employee" />
       <nodes>
-        <classShapeMoniker Id="5d91e0ea-0619-41ca-9f87-c6193db4d472" />
-        <classShapeMoniker Id="0c372aca-59a7-44c1-9cb6-266b1ada8390" />
+        <classShapeMoniker Id="879ee22a-95f0-41b3-a6ec-9eeaf569da4b" />
+        <classShapeMoniker Id="3024dafe-f2d1-47d0-bac1-5cafeedec065" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.65625 : 20.875); (5.65625 : 5.28125); (5.79166666666667 : 5.28125 : JumpStart); (5.95833333333333 : 5.28125 : JumpEnd); (6.5 : 5.28125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.65625 : 20.875); (5.65625 : 5.28125); (5.79166666666667 : 5.28125 : JumpStart); (5.95833333333333 : 5.28125 : JumpEnd); (6.5 : 5.28125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/ExtraExpense/ExtraExpense_ExtraDetail" />
       <nodes>
-        <classShapeMoniker Id="7fd2b760-f15b-4277-9672-41a388f05976" />
-        <classShapeMoniker Id="629ef1d1-45d7-4709-886b-e41ff875bbb8" />
+        <classShapeMoniker Id="e6cb2770-e35b-4d62-93a9-0e558974ec92" />
+        <classShapeMoniker Id="129eccab-e60e-4e8d-8e19-6153b0a24392" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.703125 : 4.03049967447917); (5.703125 : 5.265625); (5.79166666666667 : 5.265625 : JumpStart); (5.95833333333333 : 5.265625 : JumpEnd); (6.5 : 5.265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.703125 : 4.03049967447917); (5.703125 : 5.265625); (5.79166666666667 : 5.265625 : JumpStart); (5.95833333333333 : 5.265625 : JumpEnd); (6.5 : 5.265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Facility/Facility_ExtraDetail" />
       <nodes>
-        <classShapeMoniker Id="673bb740-4a17-4b24-b407-a62d78170939" />
-        <classShapeMoniker Id="629ef1d1-45d7-4709-886b-e41ff875bbb8" />
+        <classShapeMoniker Id="c9309d46-dce9-427c-8235-9d79e494b0ef" />
+        <classShapeMoniker Id="129eccab-e60e-4e8d-8e19-6153b0a24392" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 11.2684605384615); (2.87857443490112 : 11.1398861035604 : JumpStart); (2.99642556509888 : 11.0220349733626 : JumpEnd); (3.00357443490112 : 11.0148861035604 : JumpStart); (3.21517556509888 : 10.8032849733626 : JumpEnd); (3.4375 : 10.5809605384615); (3.4375 : 9.94597245898438); (3.5 : 9.94597245898438)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 11.2684605384615); (2.75357443490112 : 11.2648861035604 : JumpStart); (2.87142556509888 : 11.1470349733627 : JumpEnd); (2.87857443490112 : 11.1398861035604 : JumpStart); (3.21517556509888 : 10.8032849733627 : JumpEnd); (3.4375 : 10.5809605384615); (3.4375 : 9.94597245898438); (3.5 : 9.94597245898438)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/FoodAndDrink/FoodAndDrink_CoffeeBrewing" />
       <nodes>
-        <classShapeMoniker Id="10511c9a-bc96-448c-8a39-22da58c27bdc" />
-        <classShapeMoniker Id="85a24484-d4c1-40dc-bbbe-9bf2a2df731c" />
+        <classShapeMoniker Id="c5847b52-76f9-4383-a4dd-1d4626465280" />
+        <classShapeMoniker Id="252319aa-587c-44e9-92c5-e0803f97fbb7" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 11.3069220769231); (2.87857443490112 : 11.178347642022 : JumpStart); (2.99642556509888 : 11.0604965118242 : JumpEnd); (3.00357443490112 : 11.053347642022 : JumpStart); (3.18392556509888 : 10.8729965118242 : JumpEnd); (3.1875 : 10.8694220769231); (3.1875 : 8.1651025390625); (3.26041666666667 : 8.1651025390625 : JumpStart); (3.42708333333333 : 8.1651025390625 : JumpEnd); (5.79166666666667 : 8.1651025390625 : JumpStart); (5.95833333333333 : 8.1651025390625 : JumpEnd); (6.125 : 8.1651025390625); (6.5 : 7.7901025390625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 11.3069220769231); (2.75357443490112 : 11.303347642022 : JumpStart); (2.87142556509888 : 11.1854965118242 : JumpEnd); (2.87857443490112 : 11.178347642022 : JumpStart); (3.18392556509888 : 10.8729965118242 : JumpEnd); (3.1875 : 10.8694220769231); (3.1875 : 8.1651025390625); (3.19791666666667 : 8.1651025390625 : JumpStart); (3.47395833333333 : 8.1651025390625 : JumpEnd); (5.57291666666667 : 8.1651025390625 : JumpStart); (5.73958333333333 : 8.1651025390625 : JumpEnd); (5.79166666666667 : 8.1651025390625 : JumpStart); (5.95833333333333 : 8.1651025390625 : JumpEnd); (6.125 : 8.1651025390625); (6.5 : 7.7901025390625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/FoodAndDrink/FoodAndDrink_ExtraDetail" />
       <nodes>
-        <classShapeMoniker Id="10511c9a-bc96-448c-8a39-22da58c27bdc" />
-        <classShapeMoniker Id="629ef1d1-45d7-4709-886b-e41ff875bbb8" />
+        <classShapeMoniker Id="c5847b52-76f9-4383-a4dd-1d4626465280" />
+        <classShapeMoniker Id="129eccab-e60e-4e8d-8e19-6153b0a24392" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.781252 : 19.0497054036458); (1.781252 : 20.125); (2.875 : 20.125); (2.875 : 24.5); (2.94791916666667 : 24.5 : JumpStart); (3.11458583333333 : 24.5 : JumpEnd); (3.75 : 24.5); (3.75 : 24.8662019856771); (6.16666666666667 : 24.8662019856771 : JumpStart); (6.42708333333333 : 24.8662019856771 : JumpEnd); (6.5 : 24.8662019856771)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(1.781252 : 19.0497054036458); (1.781252 : 20.125); (2.875 : 20.125); (2.875 : 24.5); (2.94791916666667 : 24.5 : JumpStart); (3.11458583333333 : 24.5 : JumpEnd); (3.54166666666667 : 24.5 : JumpStart); (3.70833333333333 : 24.5 : JumpEnd); (3.75 : 24.5); (3.75 : 24.8662019856771); (4.04166666666667 : 24.8662019856771 : JumpStart); (4.20833333333333 : 24.8662019856771 : JumpEnd); (5.79166666666667 : 24.8662019856771 : JumpStart); (6.42708333333333 : 24.8662019856771 : JumpEnd); (6.5 : 24.8662019856771)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Employee/Employee_IngredientMessage" />
       <nodes>
-        <classShapeMoniker Id="0c372aca-59a7-44c1-9cb6-266b1ada8390" />
-        <classShapeMoniker Id="8f993b1f-9921-44ca-843b-fa63f30e2cd5" />
+        <classShapeMoniker Id="3024dafe-f2d1-47d0-bac1-5cafeedec065" />
+        <classShapeMoniker Id="dd0e7ef0-ab3b-43b3-8bf5-742c32eaeac9" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.75 : 32.5777498372396); (5.91666666666667 : 32.5777498372396 : JumpStart); (6.08333333333333 : 32.5777498372396 : JumpEnd); (7.5 : 32.5777498372396); (7.5 : 33.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.75 : 32.5777498372396); (5.91666666666667 : 32.5777498372396 : JumpStart); (6.08333333333333 : 32.5777498372396 : JumpEnd); (6.16666666666667 : 32.5777498372396 : JumpStart); (6.42708333333333 : 32.5777498372396 : JumpEnd); (7.5 : 32.5777498372396); (7.5 : 33.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Ingredient/Ingredient_ESTIngredient" />
       <nodes>
-        <classShapeMoniker Id="36acca64-b6dc-4ac4-96b9-4bf60ddc7f61" />
-        <classShapeMoniker Id="fc2f7c26-f382-4524-a9c9-26bccda2da5b" />
+        <classShapeMoniker Id="382e2f46-30d3-4ab5-a43f-927c4ab46d6e" />
+        <classShapeMoniker Id="32f41ddc-74ce-4ff9-a0b6-0a1c794d50ff" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.96875 : 31.5); (3.96875 : 25.5805554785156); (6.16666666666667 : 25.5805554785156 : JumpStart); (6.33333333333333 : 25.5805554785156 : JumpEnd); (6.5 : 25.5805554785156)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(3.96875 : 31.5); (3.96875 : 25.5805554785156); (4.04166666666667 : 25.5805554785156 : JumpStart); (4.20833333333333 : 25.5805554785156 : JumpEnd); (5.79166666666667 : 25.5805554785156 : JumpStart); (6.42708333333333 : 25.5805554785156 : JumpEnd); (6.5 : 25.5805554785156)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Ingredient/Ingredient_IngredientMessage" />
       <nodes>
-        <classShapeMoniker Id="36acca64-b6dc-4ac4-96b9-4bf60ddc7f61" />
-        <classShapeMoniker Id="8f993b1f-9921-44ca-843b-fa63f30e2cd5" />
+        <classShapeMoniker Id="382e2f46-30d3-4ab5-a43f-927c4ab46d6e" />
+        <classShapeMoniker Id="dd0e7ef0-ab3b-43b3-8bf5-742c32eaeac9" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(4.890627 : 31.5); (4.890627 : 29.8958968098958); (6.26041666666667 : 29.8958968098958 : JumpStart); (6.42708333333333 : 29.8958968098958 : JumpEnd); (6.5 : 29.8958968098958); (6.5 : 26.4824039713542); (8.75 : 26.4824039713542); (8.75 : 17.9431469726563); (9.5 : 17.9431469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(4.890627 : 31.5); (4.890627 : 29.8958968098958); (6.16666666666667 : 29.8958968098958 : JumpStart); (6.42708333333333 : 29.8958968098958 : JumpEnd); (6.5 : 29.8958968098958); (6.5 : 26.4824039713542); (7.41666666666667 : 26.4824039713542 : JumpStart); (7.58333333333333 : 26.4824039713542 : JumpEnd); (8.75 : 26.4824039713542); (8.75 : 17.9431469726563); (9.01041666666667 : 17.9431469726563 : JumpStart); (9.17708333333333 : 17.9431469726563 : JumpEnd); (9.5 : 17.9431469726563)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Ingredient/Ingredient_IngredientsMapSupplier" />
       <nodes>
-        <classShapeMoniker Id="36acca64-b6dc-4ac4-96b9-4bf60ddc7f61" />
-        <classShapeMoniker Id="a7c1616c-b039-4f29-9f93-bafc15a5c5fb" />
+        <classShapeMoniker Id="382e2f46-30d3-4ab5-a43f-927c4ab46d6e" />
+        <classShapeMoniker Id="536e7dbd-2b55-44f4-bcfe-951eee70a40d" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 11.3469220769231); (2.85416666666667 : 11.3469220769231 : JumpStart); (3.23958333333333 : 11.3469220769231 : JumpEnd); (5.57291666666667 : 11.3469220769231 : JumpStart); (5.73958333333333 : 11.3469220769231 : JumpEnd); (5.79166666666667 : 11.3469220769231 : JumpStart); (6.08333333333333 : 11.3469220769231 : JumpEnd); (8.40625 : 11.3469220769231); (8.40625 : 10.3958968098958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 11.3469220769231); (2.85416666666667 : 11.3469220769231 : JumpStart); (3.23958333333333 : 11.3469220769231 : JumpEnd); (3.30729166666667 : 11.3469220769231 : JumpStart); (3.47395833333333 : 11.3469220769231 : JumpEnd); (5.57291666666667 : 11.3469220769231 : JumpStart); (5.73958333333333 : 11.3469220769231 : JumpEnd); (5.79166666666667 : 11.3469220769231 : JumpStart); (6.08333333333333 : 11.3469220769231 : JumpEnd); (8.40625 : 11.3469220769231); (8.40625 : 10.3958968098958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/FoodAndDrink/FoodAndDrink_IngreExchange" />
       <nodes>
-        <classShapeMoniker Id="10511c9a-bc96-448c-8a39-22da58c27bdc" />
-        <classShapeMoniker Id="71c08fca-b936-4817-ac02-ff36e528582a" />
+        <classShapeMoniker Id="c5847b52-76f9-4383-a4dd-1d4626465280" />
+        <classShapeMoniker Id="9628ff60-97ed-4388-b6e6-7e5926bdb459" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.3515655 : 31.5); (5.3515655 : 30.1458968098958); (5.91666666666667 : 30.1458968098958 : JumpStart); (6.08333333333333 : 30.1458968098958 : JumpEnd); (6.26041666666667 : 30.1458968098958 : JumpStart); (6.42708333333333 : 30.1458968098958 : JumpEnd); (6.75 : 30.1458968098958); (6.75 : 26.7324039713542); (6.70833333333333 : 26.7324039713542 : JumpStart); (6.26041666666667 : 26.7324039713542 : JumpEnd); (6 : 26.7324039713542); (6 : 9.51044840494792); (6.5 : 9.51044840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.3515655 : 31.5); (5.3515655 : 30.1458968098958); (5.91666666666667 : 30.1458968098958 : JumpStart); (6.08333333333333 : 30.1458968098958 : JumpEnd); (6.16666666666667 : 30.1458968098958 : JumpStart); (6.42708333333333 : 30.1458968098958 : JumpEnd); (6.75 : 30.1458968098958); (6.75 : 26.7324039713542); (6.70833333333333 : 26.7324039713542 : JumpStart); (6.26041666666667 : 26.7324039713542 : JumpEnd); (6 : 26.7324039713542); (6 : 9.51044840494792); (6.5 : 9.51044840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Ingredient/Ingredient_IngreExchange" />
       <nodes>
-        <classShapeMoniker Id="36acca64-b6dc-4ac4-96b9-4bf60ddc7f61" />
-        <classShapeMoniker Id="71c08fca-b936-4817-ac02-ff36e528582a" />
+        <classShapeMoniker Id="382e2f46-30d3-4ab5-a43f-927c4ab46d6e" />
+        <classShapeMoniker Id="9628ff60-97ed-4388-b6e6-7e5926bdb459" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(11.75 : 1.69314697265625); (12.5 : 1.69314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(11.75 : 1.69314697265625); (12.5 : 1.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Menu/Menu_MenuDetail" />
       <nodes>
-        <classShapeMoniker Id="a93a134e-591f-40c2-9e24-58d4c85e8351" />
-        <classShapeMoniker Id="fe7536fe-0c97-45cf-ac52-45e523df941b" />
+        <classShapeMoniker Id="0eeeda6d-278a-4403-83ca-928576d6c664" />
+        <classShapeMoniker Id="05a31314-249f-4832-be07-e5f44c38ceae" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3 : 38.2412019856771); (3.04166666666667 : 38.2412019856771 : JumpStart); (3.20833333333333 : 38.2412019856771 : JumpEnd); (3.41666666666667 : 38.2412019856771 : JumpStart); (3.58333333333333 : 38.2412019856771 : JumpEnd); (3.75 : 38.2412019856771)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(3 : 38.2412019856771); (3.04166666666667 : 38.2412019856771 : JumpStart); (3.58333333333333 : 38.2412019856771 : JumpEnd); (3.75 : 38.2412019856771)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Customer/Customer_Order" />
       <nodes>
-        <classShapeMoniker Id="c2879741-8516-4ef4-acc4-28a2576aebce" />
-        <classShapeMoniker Id="33a90845-c315-412a-aee4-a051ec7976b7" />
+        <classShapeMoniker Id="d6c6005d-1161-4e4e-b1e1-81d18194d506" />
+        <classShapeMoniker Id="ed4dff33-276f-4053-8afc-769e6be8e56e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 13.7540511067708); (2.85416666666667 : 13.7540511067708 : JumpStart); (3.20833333333333 : 13.7540511067708 : JumpEnd); (5.57291666666667 : 13.7540511067708 : JumpStart); (5.73958333333333 : 13.7540511067708 : JumpEnd); (5.79166666666667 : 13.7540511067708 : JumpStart); (5.95833333333333 : 13.7540511067708 : JumpEnd); (6.26041666666667 : 13.7540511067708 : JumpStart); (6.42708333333333 : 13.7540511067708 : JumpEnd); (8.359375 : 13.7540511067708); (8.359375 : 14.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 13.7540511067708); (2.85416666666667 : 13.7540511067708 : JumpStart); (3.23958333333333 : 13.7540511067708 : JumpEnd); (3.30729166666667 : 13.7540511067708 : JumpStart); (3.47395833333333 : 13.7540511067708 : JumpEnd); (5.57291666666667 : 13.7540511067708 : JumpStart); (5.73958333333333 : 13.7540511067708 : JumpEnd); (5.79166666666667 : 13.7540511067708 : JumpStart); (6.08333333333333 : 13.7540511067708 : JumpEnd); (6.26041666666667 : 13.7540511067708 : JumpStart); (6.42708333333333 : 13.7540511067708 : JumpEnd); (8.359375 : 13.7540511067708); (8.359375 : 14.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/FoodAndDrink/FoodAndDrink_OrderItem" />
       <nodes>
-        <classShapeMoniker Id="10511c9a-bc96-448c-8a39-22da58c27bdc" />
-        <classShapeMoniker Id="d96ef65e-5d58-44b0-87a2-2f0984792929" />
+        <classShapeMoniker Id="c5847b52-76f9-4383-a4dd-1d4626465280" />
+        <classShapeMoniker Id="5fe966ca-f85d-4520-a178-08df3bb71b63" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(4.75 : 36.25); (4.75 : 33.9054996744792); (6 : 33.9054996744792); (6 : 30.0208968098958); (6.625 : 30.0208968098958); (6.625 : 26.6074039713542); (6.25 : 26.6074039713542); (6.25 : 15.6065991210938); (6.5 : 15.6065991210938)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(4.75 : 36.25); (4.75 : 33.9054996744792); (6 : 33.9054996744792); (6 : 30.0208968098958); (6.16666666666667 : 30.0208968098958 : JumpStart); (6.42708333333333 : 30.0208968098958 : JumpEnd); (6.625 : 30.0208968098958); (6.625 : 26.6074039713542); (6.58333333333333 : 26.6074039713542 : JumpStart); (6.26041666666667 : 26.6074039713542 : JumpEnd); (6.25 : 26.6074039713542); (6.25 : 15.6065991210938); (6.26041666666667 : 15.6065991210938 : JumpStart); (6.45833333333333 : 15.6065991210938 : JumpEnd); (6.5 : 15.6065991210938)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Order/Order_OrderItem" />
       <nodes>
-        <classShapeMoniker Id="33a90845-c315-412a-aee4-a051ec7976b7" />
-        <classShapeMoniker Id="d96ef65e-5d58-44b0-87a2-2f0984792929" />
+        <classShapeMoniker Id="ed4dff33-276f-4053-8afc-769e6be8e56e" />
+        <classShapeMoniker Id="5fe966ca-f85d-4520-a178-08df3bb71b63" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.75 : 37.6162019856771); (6.16666666666667 : 37.6162019856771 : JumpStart); (6.33333333333333 : 37.6162019856771 : JumpEnd); (9.07291666666667 : 37.6162019856771 : JumpStart); (9.23958333333333 : 37.6162019856771 : JumpEnd); (10.65625 : 37.6162019856771); (10.65625 : 22.6939925130208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.75 : 37.6162019856771); (6.16666666666667 : 37.6162019856771 : JumpStart); (6.33333333333333 : 37.6162019856771 : JumpEnd); (9.07291666666667 : 37.6162019856771 : JumpStart); (9.23958333333333 : 37.6162019856771 : JumpEnd); (10.65625 : 37.6162019856771); (10.65625 : 22.6939925130208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Order/Order_OrderPromotion" />
       <nodes>
-        <classShapeMoniker Id="33a90845-c315-412a-aee4-a051ec7976b7" />
-        <classShapeMoniker Id="021fa879-a1a4-463f-a0db-4b29b3e24568" />
+        <classShapeMoniker Id="ed4dff33-276f-4053-8afc-769e6be8e56e" />
+        <classShapeMoniker Id="b56dea85-55a6-4ddd-87f0-05a83a9f3790" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3 : 36.5056469726563); (3.75 : 36.5056469726563)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(3 : 36.5056469726563); (3.04166666666667 : 36.5056469726563 : JumpStart); (3.58333333333333 : 36.5056469726563 : JumpEnd); (3.75 : 36.5056469726563)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Position/Position_Order" />
       <nodes>
-        <classShapeMoniker Id="00ebf5dd-0730-4cfa-ad03-60e26ea0a33e" />
-        <classShapeMoniker Id="33a90845-c315-412a-aee4-a051ec7976b7" />
+        <classShapeMoniker Id="5b49d989-6159-4718-8206-c7229d5d9457" />
+        <classShapeMoniker Id="ed4dff33-276f-4053-8afc-769e6be8e56e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.75 : 7.14589680989583); (1.75 : 7.625); (2.9375 : 7.625); (2.9375 : 23.4728011067708); (2.94791916666667 : 23.4728011067708 : JumpStart); (3.11458583333333 : 23.4728011067708 : JumpEnd); (3.16666666666667 : 23.4728011067708 : JumpStart); (3.33333333333333 : 23.4728011067708 : JumpEnd); (6.16666666666667 : 23.4728011067708 : JumpStart); (6.33333333333333 : 23.4728011067708 : JumpEnd); (6.375 : 23.4728011067708); (6.375 : 22.0969962565104); (9.5 : 22.0969962565104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(1.75 : 7.14589680989583); (1.75 : 7.625); (2.72916666666667 : 7.625 : JumpStart); (2.89583333333333 : 7.625 : JumpEnd); (2.9375 : 7.625); (2.9375 : 23.4728011067708); (2.94791916666667 : 23.4728011067708 : JumpStart); (3.11458583333333 : 23.4728011067708 : JumpEnd); (3.16666666666667 : 23.4728011067708 : JumpStart); (3.45833333333333 : 23.4728011067708 : JumpEnd); (5.79166666666667 : 23.4728011067708 : JumpStart); (6.33333333333333 : 23.4728011067708 : JumpEnd); (6.375 : 23.4728011067708); (6.375 : 22.0969962565104); (8.66666666666667 : 22.0969962565104 : JumpStart); (8.83333333333333 : 22.0969962565104 : JumpEnd); (9.01041666666667 : 22.0969962565104 : JumpStart); (9.17708333333333 : 22.0969962565104 : JumpEnd); (9.5 : 22.0969962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Promotion/Promotion_OrderPromotion" />
       <nodes>
-        <classShapeMoniker Id="e28d3378-7126-413d-938a-7d0e5b9f0ecb" />
-        <classShapeMoniker Id="021fa879-a1a4-463f-a0db-4b29b3e24568" />
+        <classShapeMoniker Id="32c46b10-6b8e-41b3-a83c-c3f3edfa8655" />
+        <classShapeMoniker Id="b56dea85-55a6-4ddd-87f0-05a83a9f3790" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.72846153846154 : 11.25); (3.06607443490112 : 10.9123871035604 : JumpStart); (3.18392556509888 : 10.7945359733626 : JumpEnd); (3.34375 : 10.6347115384615); (3.34375 : 6.54890055338542); (3.5 : 6.54890055338542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.72846153846154 : 11.25); (2.75357443490112 : 11.2248871035604 : JumpStart); (2.87142556509888 : 11.1070359733627 : JumpEnd); (2.87857443490112 : 11.0998871035604 : JumpStart); (3.21517556509888 : 10.7632859733627 : JumpEnd); (3.34375 : 10.6347115384615); (3.34375 : 6.54890055338542); (3.5 : 6.54890055338542)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/FoodAndDrink/FoodAndDrink_ProOnDrinkQuantity" />
       <nodes>
-        <classShapeMoniker Id="10511c9a-bc96-448c-8a39-22da58c27bdc" />
-        <classShapeMoniker Id="99873ba2-59a4-4403-896f-ab3fb84434c6" />
+        <classShapeMoniker Id="c5847b52-76f9-4383-a4dd-1d4626465280" />
+        <classShapeMoniker Id="78d442d0-d4ca-446b-b887-a56424437b45" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 7.87650915249399); (3.125 : 7.50150915249399); (3.125 : 8.0993385683093); (3.50153746153846 : 7.72280110677083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 7.87650915249399); (2.75357443490112 : 7.87293471759287 : JumpStart); (2.87142556509888 : 7.75508358739511 : JumpEnd); (2.90982443490112 : 7.71668471759287 : JumpStart); (3.05892556509888 : 7.56758358739511 : JumpEnd); (3.125 : 7.50150915249399); (3.125 : 8.0993385683093); (3.22232443490112 : 8.00201413340817 : JumpStart); (3.40267556509888 : 7.82166300321042 : JumpEnd); (3.50153746153846 : 7.72280110677083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Gift/Gift_ProOnDrinkQuantity" />
       <nodes>
-        <classShapeMoniker Id="a36d2f95-d60f-4999-b9d1-4265bec5501b" />
-        <classShapeMoniker Id="99873ba2-59a4-4403-896f-ab3fb84434c6" />
+        <classShapeMoniker Id="c18b5738-c5e6-463b-8a1e-2a25f9529a99" />
+        <classShapeMoniker Id="78d442d0-d4ca-446b-b887-a56424437b45" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.72076923076923 : 11.25); (2.87857443490112 : 11.0921947958681 : JumpStart); (2.99642556509888 : 10.9743436656703 : JumpEnd); (3.00357443490112 : 10.9671947958681 : JumpStart); (3.24642556509888 : 10.7243436656703 : JumpEnd); (3.28125 : 10.6895192307692); (3.28125 : 6.54890055338542); (3.5 : 6.54890055338542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.72076923076923 : 11.25); (2.75357443490112 : 11.2171947958681 : JumpStart); (2.87142556509888 : 11.0993436656704 : JumpEnd); (2.87857443490112 : 11.0921947958681 : JumpStart); (3.24642556509888 : 10.7243436656704 : JumpEnd); (3.28125 : 10.6895192307692); (3.28125 : 6.54890055338542); (3.5 : 6.54890055338542)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/FoodAndDrink/FoodAndDrink_ProOnDrinkQuantity1" />
       <nodes>
-        <classShapeMoniker Id="10511c9a-bc96-448c-8a39-22da58c27bdc" />
-        <classShapeMoniker Id="99873ba2-59a4-4403-896f-ab3fb84434c6" />
+        <classShapeMoniker Id="c5847b52-76f9-4383-a4dd-1d4626465280" />
+        <classShapeMoniker Id="78d442d0-d4ca-446b-b887-a56424437b45" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 5.89945027669271); (3.5 : 5.89945027669271)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 5.89945027669271); (2.88541666666667 : 5.89945027669271 : JumpStart); (3.08333333333333 : 5.89945027669271 : JumpEnd); (3.5 : 5.89945027669271)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Promotion/Promotion_ProOnDrinkQuantity" />
       <nodes>
-        <classShapeMoniker Id="e28d3378-7126-413d-938a-7d0e5b9f0ecb" />
-        <classShapeMoniker Id="99873ba2-59a4-4403-896f-ab3fb84434c6" />
+        <classShapeMoniker Id="32c46b10-6b8e-41b3-a83c-c3f3edfa8655" />
+        <classShapeMoniker Id="78d442d0-d4ca-446b-b887-a56424437b45" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 9.8064840398137); (2.87857443490112 : 9.93505847471482 : JumpStart); (2.99642556509888 : 10.0529096049126 : JumpEnd); (3.00357443490112 : 10.0600584747148 : JumpStart); (3.12142556509888 : 10.1779096049126 : JumpEnd); (3.15625 : 10.2127340398137); (3.15625 : 18.6550764042969); (3.5 : 18.6550764042969)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 9.8064840398137); (2.75357443490112 : 9.81005847471482 : JumpStart); (2.87142556509888 : 9.92790960491258 : JumpEnd); (2.87857443490112 : 9.93505847471482 : JumpStart); (3.12142556509888 : 10.1779096049126 : JumpEnd); (3.15625 : 10.2127340398137); (3.15625 : 18.6550764042969); (3.30729166666667 : 18.6550764042969 : JumpStart); (3.47395833333333 : 18.6550764042969 : JumpEnd); (3.5 : 18.6550764042969)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Gift/Gift_ProOnOrderAmount" />
       <nodes>
-        <classShapeMoniker Id="a36d2f95-d60f-4999-b9d1-4265bec5501b" />
-        <classShapeMoniker Id="a510771e-0bb8-4b18-a60a-06a542f18c01" />
+        <classShapeMoniker Id="c18b5738-c5e6-463b-8a1e-2a25f9529a99" />
+        <classShapeMoniker Id="c1e8c1b9-0793-45a8-b285-33e86d306231" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.71769230769231 : 13.7901025390625); (3.3125 : 14.3849102313702); (3.3125 : 18.0899620530599); (3.5 : 18.0899620530599)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.71769230769231 : 13.7901025390625); (2.75357443490112 : 13.8259846662713 : JumpStart); (2.87142556509888 : 13.9438357964691 : JumpEnd); (2.87857443490112 : 13.9509846662713 : JumpStart); (3.30892556509888 : 14.3813357964691 : JumpEnd); (3.3125 : 14.3849102313702); (3.3125 : 18.0899620530599); (3.5 : 18.0899620530599)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/FoodAndDrink/FoodAndDrink_ProOnOrderAmount" />
       <nodes>
-        <classShapeMoniker Id="10511c9a-bc96-448c-8a39-22da58c27bdc" />
-        <classShapeMoniker Id="a510771e-0bb8-4b18-a60a-06a542f18c01" />
+        <classShapeMoniker Id="c5847b52-76f9-4383-a4dd-1d4626465280" />
+        <classShapeMoniker Id="c1e8c1b9-0793-45a8-b285-33e86d306231" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 7.13091129842748); (2.75357443490112 : 7.1344857333286 : JumpStart); (2.87142556509888 : 7.25233686352636 : JumpEnd); (2.90982443490112 : 7.2907357333286 : JumpStart); (3.02767556509888 : 7.40858686352636 : JumpEnd); (3.22232443490112 : 7.6032357333286 : JumpStart); (3.34017556509888 : 7.72108686352636 : JumpEnd); (3.390625 : 7.77153629842748); (3.390625 : 19.2201907555338); (3.5 : 19.2201907555338)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 7.13091129842748); (2.75357443490112 : 7.1344857333286 : JumpStart); (2.87142556509888 : 7.25233686352636 : JumpEnd); (2.90982443490112 : 7.2907357333286 : JumpStart); (3.05892556509888 : 7.43983686352636 : JumpEnd); (3.22232443490112 : 7.6032357333286 : JumpStart); (3.34017556509888 : 7.72108686352636 : JumpEnd); (3.390625 : 7.77153629842748); (3.390625 : 19.2201907555338); (3.5 : 19.2201907555338)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Promotion/Promotion_ProOnOrderAmount" />
       <nodes>
-        <classShapeMoniker Id="e28d3378-7126-413d-938a-7d0e5b9f0ecb" />
-        <classShapeMoniker Id="a510771e-0bb8-4b18-a60a-06a542f18c01" />
+        <classShapeMoniker Id="32c46b10-6b8e-41b3-a83c-c3f3edfa8655" />
+        <classShapeMoniker Id="c1e8c1b9-0793-45a8-b285-33e86d306231" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(4.6953105 : 4.03049967447917); (4.6953105 : 4.875); (5.875 : 4.875); (5.875 : 19.5624995); (6.16666666666667 : 19.5624995 : JumpStart); (6.42708333333333 : 19.5624995 : JumpEnd); (6.5 : 19.5624995)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(4.6953105 : 4.03049967447917); (4.6953105 : 4.875); (5.61979166666667 : 4.875 : JumpStart); (5.78645833333333 : 4.875 : JumpEnd); (5.875 : 4.875); (5.875 : 19.5624995); (5.91666666666667 : 19.5624995 : JumpStart); (6.08333333333333 : 19.5624995 : JumpEnd); (6.16666666666667 : 19.5624995 : JumpStart); (6.42708333333333 : 19.5624995 : JumpEnd); (6.5 : 19.5624995)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Facility/Facility_ReceiptDetail" />
       <nodes>
-        <classShapeMoniker Id="673bb740-4a17-4b24-b407-a62d78170939" />
-        <classShapeMoniker Id="3eba78a1-4c7a-4dd1-8bab-3544451e1611" />
+        <classShapeMoniker Id="c9309d46-dce9-427c-8235-9d79e494b0ef" />
+        <classShapeMoniker Id="3124a438-9774-4584-8601-88a9265d01cf" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 8.86662475585937); (3.0625 : 8.86662475585937); (3.0625 : 14.375); (6.375 : 14.375); (6.375 : 17.875); (7.5 : 17.875); (7.5 : 18.25)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 8.86662475585937); (2.85416666666667 : 8.86662475585937 : JumpStart); (3.05208333333333 : 8.86662475585937 : JumpEnd); (3.0625 : 8.86662475585937); (3.0625 : 14.375); (3.07291666666667 : 14.375 : JumpStart); (3.47395833333333 : 14.375 : JumpEnd); (5.57291666666667 : 14.375 : JumpStart); (5.73958333333333 : 14.375 : JumpEnd); (5.79166666666667 : 14.375 : JumpStart); (6.08333333333333 : 14.375 : JumpEnd); (6.375 : 14.375); (6.375 : 17.875); (7.5 : 17.875); (7.5 : 18.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Gift/Gift_ReceiptDetail" />
       <nodes>
-        <classShapeMoniker Id="a36d2f95-d60f-4999-b9d1-4265bec5501b" />
-        <classShapeMoniker Id="3eba78a1-4c7a-4dd1-8bab-3544451e1611" />
+        <classShapeMoniker Id="c18b5738-c5e6-463b-8a1e-2a25f9529a99" />
+        <classShapeMoniker Id="3124a438-9774-4584-8601-88a9265d01cf" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.75 : 32.0076229186198); (5.91666666666667 : 32.0076229186198 : JumpStart); (6.08333333333333 : 32.0076229186198 : JumpEnd); (6.26041666666667 : 32.0076229186198 : JumpStart); (6.42708333333333 : 32.0076229186198 : JumpEnd); (7.5 : 32.0076229186198); (7.5 : 26.3574039713542); (6.42708333333333 : 26.3574039713542 : JumpStart); (6.16666666666667 : 26.3574039713542 : JumpEnd); (6.125 : 26.3574039713542); (6.125 : 21.7420068359375); (6.16666666666667 : 21.7420068359375 : JumpStart); (6.42708333333333 : 21.7420068359375 : JumpEnd); (7.5 : 21.7420068359375); (7.5 : 21.3670068359375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.75 : 32.0076229186198); (5.91666666666667 : 32.0076229186198 : JumpStart); (6.08333333333333 : 32.0076229186198 : JumpEnd); (6.16666666666667 : 32.0076229186198 : JumpStart); (6.42708333333333 : 32.0076229186198 : JumpEnd); (7.5 : 32.0076229186198); (7.5 : 26.3574039713542); (6.42708333333333 : 26.3574039713542 : JumpStart); (6.16666666666667 : 26.3574039713542 : JumpEnd); (6.125 : 26.3574039713542); (6.125 : 21.7420068359375); (6.16666666666667 : 21.7420068359375 : JumpStart); (6.42708333333333 : 21.7420068359375 : JumpEnd); (7.5 : 21.7420068359375); (7.5 : 21.3670068359375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Ingredient/Ingredient_ReceiptDetail" />
       <nodes>
-        <classShapeMoniker Id="36acca64-b6dc-4ac4-96b9-4bf60ddc7f61" />
-        <classShapeMoniker Id="3eba78a1-4c7a-4dd1-8bab-3544451e1611" />
+        <classShapeMoniker Id="382e2f46-30d3-4ab5-a43f-927c4ab46d6e" />
+        <classShapeMoniker Id="3124a438-9774-4584-8601-88a9265d01cf" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.75 : 40.7604484049479); (6.25 : 40.7604484049479); (6.25 : 29.7708968098958); (6.375 : 29.7708968098958); (6.375 : 26.8574039713542); (5.875 : 26.8574039713542); (5.875 : 21.7420068359375); (5.91666666666667 : 21.7420068359375 : JumpStart); (6.08333333333333 : 21.7420068359375 : JumpEnd); (6.16666666666667 : 21.7420068359375 : JumpStart); (6.42708333333333 : 21.7420068359375 : JumpEnd); (6.968748 : 21.7420068359375); (6.968748 : 21.3670068359375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.75 : 40.7604484049479); (6.25 : 40.7604484049479); (6.25 : 29.7708968098958); (6.375 : 29.7708968098958); (6.375 : 26.8574039713542); (5.875 : 26.8574039713542); (5.875 : 21.7420068359375); (5.91666666666667 : 21.7420068359375 : JumpStart); (6.08333333333333 : 21.7420068359375 : JumpEnd); (6.16666666666667 : 21.7420068359375 : JumpStart); (6.42708333333333 : 21.7420068359375 : JumpEnd); (6.968748 : 21.7420068359375); (6.968748 : 21.3670068359375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Receipt/Receipt_ReceiptDetail" />
       <nodes>
-        <classShapeMoniker Id="d4552aee-a60e-4891-a7d3-db51417a8390" />
-        <classShapeMoniker Id="3eba78a1-4c7a-4dd1-8bab-3544451e1611" />
+        <classShapeMoniker Id="1b1ecfb6-b9fe-418e-ba43-3c5d4567ac64" />
+        <classShapeMoniker Id="3124a438-9774-4584-8601-88a9265d01cf" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 12.5969962565104); (3.04166666666667 : 12.5969962565104 : JumpStart); (3.20833333333333 : 12.5969962565104 : JumpEnd); (3.5 : 12.5969962565104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 12.5969962565104); (2.85416666666667 : 12.5969962565104 : JumpStart); (3.23958333333333 : 12.5969962565104 : JumpEnd); (3.30729166666667 : 12.5969962565104 : JumpStart); (3.47395833333333 : 12.5969962565104 : JumpEnd); (3.5 : 12.5969962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/FoodAndDrink/FoodAndDrink_Recipe" />
       <nodes>
-        <classShapeMoniker Id="10511c9a-bc96-448c-8a39-22da58c27bdc" />
-        <classShapeMoniker Id="ef87f96d-4b64-41b7-8f14-8b25126ce2fa" />
+        <classShapeMoniker Id="c5847b52-76f9-4383-a4dd-1d4626465280" />
+        <classShapeMoniker Id="5b3d4f97-2085-4d9e-8cbf-f17b1432d567" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.75 : 33.1478772558594); (5.91666666666667 : 33.1478772558594 : JumpStart); (6.08333333333333 : 33.1478772558594 : JumpEnd); (6.34375 : 33.1478772558594); (6.34375 : 13.6554996744792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.75 : 33.1478772558594); (5.91666666666667 : 33.1478772558594 : JumpStart); (6.08333333333333 : 33.1478772558594 : JumpEnd); (6.16666666666667 : 33.1478772558594 : JumpStart); (6.33333333333333 : 33.1478772558594 : JumpEnd); (6.34375 : 33.1478772558594); (6.34375 : 13.6554996744792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Ingredient/Ingredient_RecipeDetail" />
       <nodes>
-        <classShapeMoniker Id="36acca64-b6dc-4ac4-96b9-4bf60ddc7f61" />
-        <classShapeMoniker Id="c047000e-b56d-4eb4-86e6-c3d74ccc85a9" />
+        <classShapeMoniker Id="382e2f46-30d3-4ab5-a43f-927c4ab46d6e" />
+        <classShapeMoniker Id="2dc079c0-5aaf-449c-97cc-3c7f824e0b51" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 12.5969962565104); (6.25 : 12.5969962565104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.5 : 12.5969962565104); (5.57291666666667 : 12.5969962565104 : JumpStart); (5.73958333333333 : 12.5969962565104 : JumpEnd); (5.79166666666667 : 12.5969962565104 : JumpStart); (6.08333333333333 : 12.5969962565104 : JumpEnd); (6.25 : 12.5969962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Recipe/Recipe_RecipeDetail" />
       <nodes>
-        <classShapeMoniker Id="ef87f96d-4b64-41b7-8f14-8b25126ce2fa" />
-        <classShapeMoniker Id="c047000e-b56d-4eb4-86e6-c3d74ccc85a9" />
+        <classShapeMoniker Id="5b3d4f97-2085-4d9e-8cbf-f17b1432d567" />
+        <classShapeMoniker Id="2dc079c0-5aaf-449c-97cc-3c7f824e0b51" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(1.03384515384615 : 37.5); (0.75 : 37.2161548461538); (0.75 : 22.7228011067708)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Customer/Customer_Reservation" />
       <nodes>
-        <classShapeMoniker Id="c2879741-8516-4ef4-acc4-28a2576aebce" />
-        <classShapeMoniker Id="8b0779f9-36f2-44df-82fd-9cd2d5d24478" />
+        <classShapeMoniker Id="d6c6005d-1161-4e4e-b1e1-81d18194d506" />
+        <classShapeMoniker Id="e52f226d-3f7c-4255-96d0-abceabd13a64" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.21875 : 35.375); (1.21875 : 22.7228011067708)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(1.21875 : 35.375); (1.21875 : 22.7228011067708)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Position/Position_Reservation" />
       <nodes>
-        <classShapeMoniker Id="00ebf5dd-0730-4cfa-ad03-60e26ea0a33e" />
-        <classShapeMoniker Id="8b0779f9-36f2-44df-82fd-9cd2d5d24478" />
+        <classShapeMoniker Id="5b49d989-6159-4718-8206-c7229d5d9457" />
+        <classShapeMoniker Id="e52f226d-3f7c-4255-96d0-abceabd13a64" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 13.6947169236779); (2.87857443490112 : 13.823291358579 : JumpStart); (2.99642556509888 : 13.9411424887768 : JumpEnd); (3.00357443490112 : 13.948291358579 : JumpStart); (3.18392556509888 : 14.1286424887768 : JumpEnd); (3.25 : 14.1947169236779); (3.25 : 15.5392976888021); (3.5 : 15.5392976888021)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 13.6947169236779); (2.75357443490112 : 13.698291358579 : JumpStart); (2.87142556509888 : 13.8161424887768 : JumpEnd); (2.87857443490112 : 13.823291358579 : JumpStart); (3.21517556509888 : 14.1598924887768 : JumpEnd); (3.25 : 14.1947169236779); (3.25 : 15.5392976888021); (3.30729166666667 : 15.5392976888021 : JumpStart); (3.47395833333333 : 15.5392976888021 : JumpEnd); (3.5 : 15.5392976888021)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/FoodAndDrink/FoodAndDrink_ReservationDetail" />
       <nodes>
-        <classShapeMoniker Id="10511c9a-bc96-448c-8a39-22da58c27bdc" />
-        <classShapeMoniker Id="8444a788-4dd6-4118-8fc8-e7d0260425e0" />
+        <classShapeMoniker Id="c5847b52-76f9-4383-a4dd-1d4626465280" />
+        <classShapeMoniker Id="6f5dbc8d-ff6f-4c3a-9b37-d87624911aec" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 20.4365374615385); (2.75357443490112 : 20.4329630266374 : JumpStart); (3.09017806509888 : 20.0963593964396 : JumpEnd); (3.1875 : 19.9990374615385); (3.1875 : 15.9651985332031); (3.22916666666667 : 15.9651985332031 : JumpStart); (3.39583333333333 : 15.9651985332031 : JumpEnd); (3.5 : 15.9651985332031)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 20.4365374615385); (2.75357443490112 : 20.4329630266373 : JumpStart); (3.09017806509888 : 20.0963593964396 : JumpEnd); (3.1875 : 19.9990374615385); (3.1875 : 15.9651985332031); (3.22916666666667 : 15.9651985332031 : JumpStart); (3.47395833333333 : 15.9651985332031 : JumpEnd); (3.5 : 15.9651985332031)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Reservation/Reservation_ReservationDetail" />
       <nodes>
-        <classShapeMoniker Id="8b0779f9-36f2-44df-82fd-9cd2d5d24478" />
-        <classShapeMoniker Id="8444a788-4dd6-4118-8fc8-e7d0260425e0" />
+        <classShapeMoniker Id="e52f226d-3f7c-4255-96d0-abceabd13a64" />
+        <classShapeMoniker Id="6f5dbc8d-ff6f-4c3a-9b37-d87624911aec" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.3750005 : 49.25); (2.3750005 : 40.0978011067708); (3.5 : 40.0978011067708); (3.5 : 30.6074039713542); (3.75 : 30.6074039713542); (3.75 : 28.7604484049479); (3.88541666666667 : 28.7604484049479 : JumpStart); (4.05208333333333 : 28.7604484049479 : JumpEnd); (4.25 : 28.7604484049479)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.3750005 : 49.25); (2.3750005 : 40.0978011067708); (3.04166666666667 : 40.0978011067708 : JumpStart); (3.45833333333333 : 40.0978011067708 : JumpEnd); (3.5 : 40.0978011067708); (3.5 : 30.6074039713542); (3.54166666666667 : 30.6074039713542 : JumpStart); (3.70833333333333 : 30.6074039713542 : JumpEnd); (3.75 : 30.6074039713542); (3.75 : 28.7604484049479); (3.88541666666667 : 28.7604484049479 : JumpStart); (4.20833333333333 : 28.7604484049479 : JumpEnd); (4.25 : 28.7604484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Role/Role_RoleMap" />
       <nodes>
-        <classShapeMoniker Id="71d6b31f-25b5-4036-bfa0-8e8ee8a247ca" />
-        <classShapeMoniker Id="0707dbac-ee50-47d0-9f82-fdad53f9e462" />
+        <classShapeMoniker Id="a2356af9-18bb-44af-9669-402a1304afaa" />
+        <classShapeMoniker Id="978c1712-e479-4a9d-af51-cad4a206818e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.5 : 25.9689797249349); (5.0625 : 25.9689797249349); (5.0625 : 27.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(3.5 : 25.9689797249349); (3.54166666666667 : 25.9689797249349 : JumpStart); (3.70833333333333 : 25.9689797249349 : JumpEnd); (3.72916666666667 : 25.9689797249349 : JumpStart); (4.20833333333333 : 25.9689797249349 : JumpEnd); (5.0625 : 25.9689797249349); (5.0625 : 27.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Account/Account_RoleMap" />
       <nodes>
-        <classShapeMoniker Id="5d91e0ea-0619-41ca-9f87-c6193db4d472" />
-        <classShapeMoniker Id="0707dbac-ee50-47d0-9f82-fdad53f9e462" />
+        <classShapeMoniker Id="879ee22a-95f0-41b3-a6ec-9eeaf569da4b" />
+        <classShapeMoniker Id="978c1712-e479-4a9d-af51-cad4a206818e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(7.75 : 3.5881982421875); (7.75 : 5); (8.75 : 5); (8.75 : 11); (8.625 : 11); (8.625 : 14.375); (8.75 : 14.375); (8.75 : 15.5969962565104); (9.5 : 15.5969962565104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(7.75 : 3.5881982421875); (7.75 : 5); (8.75 : 5); (8.75 : 11); (8.625 : 11); (8.625 : 14.375); (8.75 : 14.375); (8.75 : 15.5681469726563); (9.5 : 15.5681469726563)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Salary/Salary_BasicSalary" />
       <nodes>
-        <classShapeMoniker Id="8be844f1-a758-46b8-9e8a-c585c8e5fe2b" />
-        <classShapeMoniker Id="faf16c2d-3bcc-40b7-bf99-4036a2bab39f" />
+        <classShapeMoniker Id="3ab9e8d1-26e8-4b2a-b9c5-209060d794e2" />
+        <classShapeMoniker Id="46f66723-29da-4bc4-949a-c09a7d69843d" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3 : 39.1787019856771); (3.04166666666667 : 39.1787019856771 : JumpStart); (3.20833333333333 : 39.1787019856771 : JumpEnd); (3.41666666666667 : 39.1787019856771 : JumpStart); (3.58333333333333 : 39.1787019856771 : JumpEnd); (9.15625 : 39.1787019856771); (9.15625 : 28.5689925130208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(3 : 39.2412019856771); (3.04166666666667 : 39.2412019856771 : JumpStart); (3.58333333333333 : 39.2412019856771 : JumpEnd); (6.16666666666667 : 39.2412019856771 : JumpStart); (6.33333333333333 : 39.2412019856771 : JumpEnd); (7.41666666666667 : 39.2412019856771 : JumpStart); (7.58333333333333 : 39.2412019856771 : JumpEnd); (9.15625 : 39.2412019856771); (9.15625 : 28.5689925130208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Customer/Customer_Server" />
       <nodes>
-        <classShapeMoniker Id="c2879741-8516-4ef4-acc4-28a2576aebce" />
-        <classShapeMoniker Id="270b587c-803a-467c-9e0b-25fd16650608" />
+        <classShapeMoniker Id="d6c6005d-1161-4e4e-b1e1-81d18194d506" />
+        <classShapeMoniker Id="ab79846c-b91d-48db-a947-ea7d1c0f1b27" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 16.8253491210938); (2.85416666666667 : 16.8253491210938 : JumpStart); (3.05208333333333 : 16.8253491210938 : JumpEnd); (3.07291666666667 : 16.8253491210938 : JumpStart); (3.39583333333333 : 16.8253491210938 : JumpEnd); (5.57291666666667 : 16.8253491210938 : JumpStart); (5.73958333333333 : 16.8253491210938 : JumpEnd); (5.79166666666667 : 16.8253491210938 : JumpStart); (6.08333333333333 : 16.8253491210938 : JumpEnd); (6.16666666666667 : 16.8253491210938 : JumpStart); (6.45833333333333 : 16.8253491210938 : JumpEnd); (9.09375 : 16.8253491210938); (9.09375 : 27.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 16.8253491210938); (2.85416666666667 : 16.8253491210937 : JumpStart); (3.47395833333333 : 16.8253491210938 : JumpEnd); (5.57291666666667 : 16.8253491210938 : JumpStart); (5.73958333333333 : 16.8253491210938 : JumpEnd); (5.79166666666667 : 16.8253491210938 : JumpStart); (6.08333333333333 : 16.8253491210938 : JumpEnd); (6.16666666666667 : 16.8253491210938 : JumpStart); (6.45833333333333 : 16.8253491210938 : JumpEnd); (9.09375 : 16.8253491210938); (9.09375 : 27.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Employee/Employee_Server" />
       <nodes>
-        <classShapeMoniker Id="0c372aca-59a7-44c1-9cb6-266b1ada8390" />
-        <classShapeMoniker Id="270b587c-803a-467c-9e0b-25fd16650608" />
+        <classShapeMoniker Id="3024dafe-f2d1-47d0-bac1-5cafeedec065" />
+        <classShapeMoniker Id="ab79846c-b91d-48db-a947-ea7d1c0f1b27" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6.25 : 52.9719962565104); (8 : 52.9719962565104); (8 : 52.2228011067708)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(6.25 : 52.9719962565104); (8 : 52.9719962565104); (8 : 52.2228011067708)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Shape/Shape_CoffeeLandScapeDetail" />
       <nodes>
-        <classShapeMoniker Id="0cee31a0-8af2-45bc-a409-b9d1d30b429c" />
-        <classShapeMoniker Id="916c1988-d5ee-461d-8088-10d1d70897c6" />
+        <classShapeMoniker Id="056f12da-da28-4fc8-bc49-436884c33718" />
+        <classShapeMoniker Id="e7014d0b-27be-4cfb-8edb-a15500adb38e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.296878 : 19.0497054036458); (2.296878 : 19.875); (2.72916666666667 : 19.875 : JumpStart); (3.27083333333333 : 19.875 : JumpEnd); (3.375 : 19.875); (3.375 : 24.25); (3.625 : 24.25); (3.625 : 31.25); (3.58333333333333 : 31.25 : JumpStart); (3.41666666666667 : 31.25 : JumpEnd); (3.375 : 31.25); (3.375 : 43.7604484049479); (3.5 : 43.7604484049479)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.296878 : 19.0497054036458); (2.296878 : 19.875); (2.72916666666667 : 19.875 : JumpStart); (3.27083333333333 : 19.875 : JumpEnd); (3.375 : 19.875); (3.375 : 24.25); (3.625 : 24.25); (3.625 : 31.25); (3.58333333333333 : 31.25 : JumpStart); (3.41666666666667 : 31.25 : JumpEnd); (3.375 : 31.25); (3.375 : 44.0104484049479); (3.5 : 44.0104484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Employee/Employee_Ship" />
       <nodes>
-        <classShapeMoniker Id="0c372aca-59a7-44c1-9cb6-266b1ada8390" />
-        <classShapeMoniker Id="430a005f-0d66-403f-b4d0-76f2ae665288" />
+        <classShapeMoniker Id="3024dafe-f2d1-47d0-bac1-5cafeedec065" />
+        <classShapeMoniker Id="6bbc6ab2-98c4-4e6e-b694-6dbd780bc880" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.75 : 38.3305554785156); (6.16666666666667 : 38.3305554785156 : JumpStart); (6.33333333333333 : 38.3305554785156 : JumpEnd); (7.5 : 38.3305554785156); (7.5 : 39.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.75 : 38.3305554785156); (6.16666666666667 : 38.3305554785156 : JumpStart); (6.33333333333333 : 38.3305554785156 : JumpEnd); (7.5 : 38.3305554785156); (7.5 : 39.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Order/Order_ShipDetail" />
       <nodes>
-        <classShapeMoniker Id="33a90845-c315-412a-aee4-a051ec7976b7" />
-        <classShapeMoniker Id="e1a97646-e22f-4a12-8b5d-f9b7d6b142d7" />
+        <classShapeMoniker Id="ed4dff33-276f-4053-8afc-769e6be8e56e" />
+        <classShapeMoniker Id="5da71622-7859-484f-8028-112f94ee8587" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.59375 : 42.875); (3.59375 : 39.59375); (6.5 : 39.59375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(3.59375 : 43.125); (3.59375 : 39.65625); (6.16666666666667 : 39.65625 : JumpStart); (6.33333333333333 : 39.65625 : JumpEnd); (6.5 : 39.65625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Ship/Ship_ShipDetail" />
       <nodes>
-        <classShapeMoniker Id="430a005f-0d66-403f-b4d0-76f2ae665288" />
-        <classShapeMoniker Id="e1a97646-e22f-4a12-8b5d-f9b7d6b142d7" />
+        <classShapeMoniker Id="6bbc6ab2-98c4-4e6e-b694-6dbd780bc880" />
+        <classShapeMoniker Id="5da71622-7859-484f-8028-112f94ee8587" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3 : 3.03929768880208); (3.75 : 3.03929768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(3 : 3.03929768880208); (3.75 : 3.03929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Supplier/Supplier_Facility" />
       <nodes>
-        <classShapeMoniker Id="171e158f-74b1-4e4f-a513-ae8941cf28b5" />
-        <classShapeMoniker Id="673bb740-4a17-4b24-b407-a62d78170939" />
+        <classShapeMoniker Id="b48e2010-884a-433b-b1e3-405a4a37a46a" />
+        <classShapeMoniker Id="c9309d46-dce9-427c-8235-9d79e494b0ef" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(1 : 3.82859537760417); (0.625 : 4.20359537760417); (0.375 : 4.20359537760417); (0.375 : 7.49849084750601); (0.751509152493991 : 7.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Supplier/Supplier_Gift" />
       <nodes>
-        <classShapeMoniker Id="171e158f-74b1-4e4f-a513-ae8941cf28b5" />
-        <classShapeMoniker Id="a36d2f95-d60f-4999-b9d1-4265bec5501b" />
+        <classShapeMoniker Id="b48e2010-884a-433b-b1e3-405a4a37a46a" />
+        <classShapeMoniker Id="c18b5738-c5e6-463b-8a1e-2a25f9529a99" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.031252 : 3.82859537760417); (2.031252 : 5.125); (2.8125 : 5.125); (2.8125 : 24.625); (2.94791916666667 : 24.625 : JumpStart); (3.11458583333333 : 24.625 : JumpEnd); (3.66666666666667 : 24.625 : JumpStart); (3.89583333333333 : 24.625 : JumpEnd); (4.125 : 24.625); (4.125 : 31); (4.05208333333333 : 31 : JumpStart); (3.72916666666667 : 31 : JumpEnd); (3.58333333333333 : 31 : JumpStart); (3.41666666666667 : 31 : JumpEnd); (3.25 : 31); (3.25 : 32.5777498372396); (3.41666666666667 : 32.5777498372396 : JumpStart); (3.58333333333333 : 32.5777498372396 : JumpEnd); (3.75 : 32.5777498372396)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.031252 : 3.82859537760417); (2.031252 : 5.125); (2.8125 : 5.125); (2.8125 : 24.625); (2.94791916666667 : 24.625 : JumpStart); (3.11458583333333 : 24.625 : JumpEnd); (3.54166666666667 : 24.625 : JumpStart); (3.89583333333333 : 24.625 : JumpEnd); (4.125 : 24.625); (4.125 : 31); (4.05208333333333 : 31 : JumpStart); (3.72916666666667 : 31 : JumpEnd); (3.70833333333333 : 31 : JumpStart); (3.41666666666667 : 31 : JumpEnd); (3.25 : 31); (3.25 : 32.5777498372396); (3.29166666666667 : 32.5777498372396 : JumpStart); (3.58333333333333 : 32.5777498372396 : JumpEnd); (3.75 : 32.5777498372396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Supplier/Supplier_Ingredient" />
       <nodes>
-        <classShapeMoniker Id="171e158f-74b1-4e4f-a513-ae8941cf28b5" />
-        <classShapeMoniker Id="36acca64-b6dc-4ac4-96b9-4bf60ddc7f61" />
+        <classShapeMoniker Id="b48e2010-884a-433b-b1e3-405a4a37a46a" />
+        <classShapeMoniker Id="382e2f46-30d3-4ab5-a43f-927c4ab46d6e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.515626 : 3.82859537760417); (1.515626 : 4.875); (1.94791866666667 : 4.875 : JumpStart); (2.11458533333333 : 4.875 : JumpEnd); (3 : 4.875); (3 : 17.125); (3.07291666666667 : 17.125 : JumpStart); (3.47395833333333 : 17.125 : JumpEnd); (5.57291666666667 : 17.125 : JumpStart); (5.73958333333333 : 17.125 : JumpEnd); (5.79166666666667 : 17.125 : JumpStart); (6.08333333333333 : 17.125 : JumpEnd); (6.16666666666667 : 17.125 : JumpStart); (6.45833333333333 : 17.125 : JumpEnd); (9.01041666666667 : 17.125 : JumpStart); (9.17708333333333 : 17.125 : JumpEnd); (9.25 : 17.125); (9.25 : 17.5653214863281); (9.5 : 17.5653214863281)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(1.515626 : 3.82859537760417); (1.515626 : 4.875); (1.94791866666667 : 4.875 : JumpStart); (2.11458533333333 : 4.875 : JumpEnd); (3 : 4.875); (3 : 17.125); (3.07291666666667 : 17.125 : JumpStart); (3.47395833333333 : 17.125 : JumpEnd); (5.57291666666667 : 17.125 : JumpStart); (5.73958333333333 : 17.125 : JumpEnd); (5.79166666666667 : 17.125 : JumpStart); (6.08333333333333 : 17.125 : JumpEnd); (6.16666666666667 : 17.125 : JumpStart); (6.45833333333333 : 17.125 : JumpEnd); (9.01041666666667 : 17.125 : JumpStart); (9.17708333333333 : 17.125 : JumpEnd); (9.25 : 17.125); (9.25 : 17.5653214863281); (9.5 : 17.5653214863281)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Supplier/Supplier_IngredientsMapSupplier" />
       <nodes>
-        <classShapeMoniker Id="171e158f-74b1-4e4f-a513-ae8941cf28b5" />
-        <classShapeMoniker Id="a7c1616c-b039-4f29-9f93-bafc15a5c5fb" />
+        <classShapeMoniker Id="b48e2010-884a-433b-b1e3-405a4a37a46a" />
+        <classShapeMoniker Id="536e7dbd-2b55-44f4-bcfe-951eee70a40d" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.96875 : 3.82859537760417); (2.96875 : 20); (5.57291666666667 : 20 : JumpStart); (5.73958333333333 : 20 : JumpEnd); (5.91666666666667 : 20 : JumpStart); (6.08333333333333 : 20 : JumpEnd); (6.16666666666667 : 20 : JumpStart); (6.42708333333333 : 20 : JumpEnd); (6.5 : 20)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.96875 : 3.82859537760417); (2.96875 : 20); (3.29166666666667 : 20 : JumpStart); (3.45833333333333 : 20 : JumpEnd); (5.57291666666667 : 20 : JumpStart); (5.73958333333333 : 20 : JumpEnd); (5.91666666666667 : 20 : JumpStart); (6.08333333333333 : 20 : JumpEnd); (6.16666666666667 : 20 : JumpStart); (6.42708333333333 : 20 : JumpEnd); (6.5 : 20)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Supplier/Supplier_ReceiptDetail" />
       <nodes>
-        <classShapeMoniker Id="171e158f-74b1-4e4f-a513-ae8941cf28b5" />
-        <classShapeMoniker Id="3eba78a1-4c7a-4dd1-8bab-3544451e1611" />
+        <classShapeMoniker Id="b48e2010-884a-433b-b1e3-405a4a37a46a" />
+        <classShapeMoniker Id="3124a438-9774-4584-8601-88a9265d01cf" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 46.7604484049479); (6.25 : 46.7604484049479)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.5 : 47.0104484049479); (6.25 : 47.0104484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/TimeSheet/TimeSheet_TimeSheetDetail" />
       <nodes>
-        <classShapeMoniker Id="ced6a2fa-4ffc-4615-aa92-0e6654475572" />
-        <classShapeMoniker Id="b0322e09-f41c-4833-9e23-5b54931d9c01" />
+        <classShapeMoniker Id="afbe877d-e633-4d83-8997-b20da5396865" />
+        <classShapeMoniker Id="53117aa6-2e86-402d-a2a3-1b614e50a101" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.265626 : 19.0497054036458); (1.265626 : 20.25); (2.94791916666667 : 20.25 : JumpStart); (3.11458583333333 : 20.25 : JumpEnd); (3.25 : 20.25); (3.25 : 24.375); (3.8125 : 24.375); (3.8125 : 31.375); (3.58333333333333 : 31.375 : JumpStart); (3.41666666666667 : 31.375 : JumpEnd); (3.125 : 31.375); (3.125 : 46.7604484049479); (3.5 : 46.7604484049479)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(1.265626 : 19.0497054036458); (1.265626 : 20.25); (2.72916666666667 : 20.25 : JumpStart); (3.11458583333333 : 20.25 : JumpEnd); (3.25 : 20.25); (3.25 : 24.375); (3.54166666666667 : 24.375 : JumpStart); (3.70833333333333 : 24.375 : JumpEnd); (3.8125 : 24.375); (3.8125 : 31.375); (3.58333333333333 : 31.375 : JumpStart); (3.16666666666667 : 31.375 : JumpEnd); (3.125 : 31.375); (3.125 : 47.0104484049479); (3.16666666666667 : 47.0104484049479 : JumpStart); (3.33333333333333 : 47.0104484049479 : JumpEnd); (3.5 : 47.0104484049479)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CoffeeShopDBDataContext/Employee/Employee_TimeSheet" />
       <nodes>
-        <classShapeMoniker Id="0c372aca-59a7-44c1-9cb6-266b1ada8390" />
-        <classShapeMoniker Id="ced6a2fa-4ffc-4615-aa92-0e6654475572" />
+        <classShapeMoniker Id="3024dafe-f2d1-47d0-bac1-5cafeedec065" />
+        <classShapeMoniker Id="afbe877d-e633-4d83-8997-b20da5396865" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

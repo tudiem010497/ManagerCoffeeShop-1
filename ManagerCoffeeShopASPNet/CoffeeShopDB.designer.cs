@@ -36,6 +36,9 @@ namespace ManagerCoffeeShopASPNet
     partial void InsertBannerImage(BannerImage instance);
     partial void UpdateBannerImage(BannerImage instance);
     partial void DeleteBannerImage(BannerImage instance);
+    partial void InsertBasicSalary(BasicSalary instance);
+    partial void UpdateBasicSalary(BasicSalary instance);
+    partial void DeleteBasicSalary(BasicSalary instance);
     partial void InsertBlog(Blog instance);
     partial void UpdateBlog(Blog instance);
     partial void DeleteBlog(Blog instance);
@@ -1175,15 +1178,58 @@ namespace ManagerCoffeeShopASPNet
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.BasicSalary")]
-	public partial class BasicSalary
+	public partial class BasicSalary : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _BasicSalaryID;
 		
 		private int _EmployeeID;
 		
 		private int _SalaryID;
 		
+		private EntityRef<Employee> _Employee;
+		
+		private EntityRef<Salary> _Salary;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnBasicSalaryIDChanging(int value);
+    partial void OnBasicSalaryIDChanged();
+    partial void OnEmployeeIDChanging(int value);
+    partial void OnEmployeeIDChanged();
+    partial void OnSalaryIDChanging(int value);
+    partial void OnSalaryIDChanged();
+    #endregion
+		
 		public BasicSalary()
 		{
+			this._Employee = default(EntityRef<Employee>);
+			this._Salary = default(EntityRef<Salary>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BasicSalaryID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int BasicSalaryID
+		{
+			get
+			{
+				return this._BasicSalaryID;
+			}
+			set
+			{
+				if ((this._BasicSalaryID != value))
+				{
+					this.OnBasicSalaryIDChanging(value);
+					this.SendPropertyChanging();
+					this._BasicSalaryID = value;
+					this.SendPropertyChanged("BasicSalaryID");
+					this.OnBasicSalaryIDChanged();
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeID", DbType="Int NOT NULL")]
@@ -1197,7 +1243,15 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._EmployeeID != value))
 				{
+					if (this._Employee.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEmployeeIDChanging(value);
+					this.SendPropertyChanging();
 					this._EmployeeID = value;
+					this.SendPropertyChanged("EmployeeID");
+					this.OnEmployeeIDChanged();
 				}
 			}
 		}
@@ -1213,8 +1267,104 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._SalaryID != value))
 				{
+					if (this._Salary.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSalaryIDChanging(value);
+					this.SendPropertyChanging();
 					this._SalaryID = value;
+					this.SendPropertyChanged("SalaryID");
+					this.OnSalaryIDChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_BasicSalary", Storage="_Employee", ThisKey="EmployeeID", OtherKey="EmployeeID", IsForeignKey=true)]
+		public Employee Employee
+		{
+			get
+			{
+				return this._Employee.Entity;
+			}
+			set
+			{
+				Employee previousValue = this._Employee.Entity;
+				if (((previousValue != value) 
+							|| (this._Employee.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Employee.Entity = null;
+						previousValue.BasicSalaries.Remove(this);
+					}
+					this._Employee.Entity = value;
+					if ((value != null))
+					{
+						value.BasicSalaries.Add(this);
+						this._EmployeeID = value.EmployeeID;
+					}
+					else
+					{
+						this._EmployeeID = default(int);
+					}
+					this.SendPropertyChanged("Employee");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Salary_BasicSalary", Storage="_Salary", ThisKey="SalaryID", OtherKey="SalaryID", IsForeignKey=true)]
+		public Salary Salary
+		{
+			get
+			{
+				return this._Salary.Entity;
+			}
+			set
+			{
+				Salary previousValue = this._Salary.Entity;
+				if (((previousValue != value) 
+							|| (this._Salary.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Salary.Entity = null;
+						previousValue.BasicSalaries.Remove(this);
+					}
+					this._Salary.Entity = value;
+					if ((value != null))
+					{
+						value.BasicSalaries.Add(this);
+						this._SalaryID = value.SalaryID;
+					}
+					else
+					{
+						this._SalaryID = default(int);
+					}
+					this.SendPropertyChanged("Salary");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -2668,6 +2818,8 @@ namespace ManagerCoffeeShopASPNet
 		
 		private string _Status;
 		
+		private EntitySet<BasicSalary> _BasicSalaries;
+		
 		private EntitySet<IngredientMessage> _IngredientMessages;
 		
 		private EntitySet<Ship> _Ships;
@@ -2708,6 +2860,7 @@ namespace ManagerCoffeeShopASPNet
 		
 		public Employee()
 		{
+			this._BasicSalaries = new EntitySet<BasicSalary>(new Action<BasicSalary>(this.attach_BasicSalaries), new Action<BasicSalary>(this.detach_BasicSalaries));
 			this._IngredientMessages = new EntitySet<IngredientMessage>(new Action<IngredientMessage>(this.attach_IngredientMessages), new Action<IngredientMessage>(this.detach_IngredientMessages));
 			this._Ships = new EntitySet<Ship>(new Action<Ship>(this.attach_Ships), new Action<Ship>(this.detach_Ships));
 			this._TimeSheets = new EntitySet<TimeSheet>(new Action<TimeSheet>(this.attach_TimeSheets), new Action<TimeSheet>(this.detach_TimeSheets));
@@ -2944,6 +3097,19 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_BasicSalary", Storage="_BasicSalaries", ThisKey="EmployeeID", OtherKey="EmployeeID")]
+		public EntitySet<BasicSalary> BasicSalaries
+		{
+			get
+			{
+				return this._BasicSalaries;
+			}
+			set
+			{
+				this._BasicSalaries.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_IngredientMessage", Storage="_IngredientMessages", ThisKey="EmployeeID", OtherKey="EmployeeID")]
 		public EntitySet<IngredientMessage> IngredientMessages
 		{
@@ -3069,6 +3235,18 @@ namespace ManagerCoffeeShopASPNet
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_BasicSalaries(BasicSalary entity)
+		{
+			this.SendPropertyChanging();
+			entity.Employee = this;
+		}
+		
+		private void detach_BasicSalaries(BasicSalary entity)
+		{
+			this.SendPropertyChanging();
+			entity.Employee = null;
 		}
 		
 		private void attach_IngredientMessages(IngredientMessage entity)
@@ -9613,6 +9791,8 @@ namespace ManagerCoffeeShopASPNet
 		
 		private string _Desc;
 		
+		private EntitySet<BasicSalary> _BasicSalaries;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -9633,6 +9813,7 @@ namespace ManagerCoffeeShopASPNet
 		
 		public Salary()
 		{
+			this._BasicSalaries = new EntitySet<BasicSalary>(new Action<BasicSalary>(this.attach_BasicSalaries), new Action<BasicSalary>(this.detach_BasicSalaries));
 			OnCreated();
 		}
 		
@@ -9756,6 +9937,19 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Salary_BasicSalary", Storage="_BasicSalaries", ThisKey="SalaryID", OtherKey="SalaryID")]
+		public EntitySet<BasicSalary> BasicSalaries
+		{
+			get
+			{
+				return this._BasicSalaries;
+			}
+			set
+			{
+				this._BasicSalaries.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -9774,6 +9968,18 @@ namespace ManagerCoffeeShopASPNet
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_BasicSalaries(BasicSalary entity)
+		{
+			this.SendPropertyChanging();
+			entity.Salary = this;
+		}
+		
+		private void detach_BasicSalaries(BasicSalary entity)
+		{
+			this.SendPropertyChanging();
+			entity.Salary = null;
 		}
 	}
 	
