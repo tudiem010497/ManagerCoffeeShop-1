@@ -86,6 +86,10 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._coffeeShopDAO.EditCoffeeShop(cs);
         }
+        public BasicSalary GetBasicSalaryByEmployeeID(int EmployeeID)
+        {
+            return this._basicSalaryDAO.GetBasicSalaryByEmployeeID(EmployeeID);
+        }
         public bool InsertBasicSalary(int EmployeeID, int SalaryID)
         {
             return this._basicSalaryDAO.InsertBasicSalary(EmployeeID, SalaryID);
@@ -97,6 +101,10 @@ namespace ManagerCoffeeShopASPNet.Information
         public Salary GetSalaryByDesc(string Desc)
         {
             return this._salaryDAO.GetSalaryByDesc(Desc);
+        }
+        public Salary GetSalaryBySalaryID(int SalaryID)
+        {
+            return this._salaryDAO.GetSalaryBySalaryID(SalaryID);
         }
         public bool UpdateBasicSalary(int EmployeeID, int SalaryID)
         {

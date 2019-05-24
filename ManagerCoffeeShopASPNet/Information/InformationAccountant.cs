@@ -14,12 +14,17 @@ namespace ManagerCoffeeShopASPNet.Information
         private FoodAndDrinkDAO _foodAndDrinkDAO;
         private ReceiptDAO _receiptDAO;
         private ReceiptDetailDAO _receiptDetailDAO;
+        private EmployeeDAO _employeeDAO;
+        private TimeSheetDAO _timeSheetDAO;
+        private TimeSheetDetailDAO _timeSheetDetailDAO;
         public InformationAccountant()
         {
             this._orderDAO = (OrderDAO)new OrderDAOImpl();
             this._orderItemDAO = (OrderItemDAO)new OrderItemDAOImpl();
             this._receiptDAO = (ReceiptDAO)new ReceiptDAOImpl();
             this._receiptDetailDAO = (ReceiptDetailDAO)new ReceiptDetailDAOImpl();
+            this._timeSheetDAO = (TimeSheetDAO)new TimeSheetDAOImpl();
+            this._timeSheetDetailDAO = (TimeSheetDetailDAO)new TimeSheetDetailDAOImpl();
         }
 
         /// <summary>
@@ -68,6 +73,18 @@ namespace ManagerCoffeeShopASPNet.Information
         public bool UpdateReceiptDetail(int ReceiptDetailID, string Status)
         {
             return this._receiptDetailDAO.UpdateReceiptDetail(ReceiptDetailID, Status);
+        }
+        public TimeSheet GetTimeSheetByEmployeeID(int EmployeeID)
+        {
+            return this._timeSheetDAO.GetTimeSheetByEmployeeID(EmployeeID);
+        }
+        public bool InsertTimeSheet(int EmployeeID, int WorkDay, int Total, string Currency)
+        {
+            return this._timeSheetDAO.InsertTimeSheet(EmployeeID, WorkDay, Total, Currency);
+        }
+        public bool InsertTimeSheetDetail(int TimeSheetID, int Bonus, int Penalty, string Currency, string Desc)
+        {
+            return this._timeSheetDetailDAO.InsertTimeSheetDetail(TimeSheetID, Bonus, Penalty, Currency, Desc);
         }
     }
 }
