@@ -1,0 +1,27 @@
+﻿@model ManagerCoffeeShopASPNet.Areas.Admin.Models.PayrollModel
+@{
+    ViewBag.Title = "CreatePayrollForEmployee";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>CreatePayrollForEmployee</h2>
+@using (Html.BeginForm("CreatePayroll", "Accountant", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Mã nhân viên", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.EmployeeID, (List<SelectListItem>)ViewData["listEmployee"], new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-sm-4" style="float:right">
+                <input type="submit" value="OK" class="btn btn-outline-info" />
+            </div>
+        </div>
+    </div>
+}

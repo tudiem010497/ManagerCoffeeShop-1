@@ -1,4 +1,6 @@
-﻿using ManagerCoffeeShopASPNet.Information;
+﻿using ManagerCoffeeShopASPNet.Areas.Admin.Models;
+using ManagerCoffeeShopASPNet.Information;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
     public class AccountantController : Controller
     {
         private InformationAccountant info = new InformationAccountant();
+        private InformationWeb infoWeb = new InformationWeb();
         // GET: Admin/Accountant
         public ActionResult Index()
         {
@@ -43,10 +46,10 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             {
                 info.UpdateReceipt(ReceiptID, Status1);
             }
-            if(View == "GetReceiptDetailByReceiptID")
+            if (View == "GetReceiptDetailByReceiptID")
             {
                 IEnumerable<ReceiptDetail> receiptDetail = info.GetReceiptDetailByReceiptID(ReceiptID);
-                foreach(var item in receiptDetail)
+                foreach (var item in receiptDetail)
                 {
                     if (item.Status != Status1)
                     {
@@ -89,6 +92,48 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             ReceiptDetail receiptDetail = info.GetReceiptDetailByReceiptDetailID(ReceiptDetailID);
             info.UpdateReceiptDetail(ReceiptDetailID, "Cancel");
             return RedirectToAction("GetReceiptDetailByReceiptID", new { ReceiptID = receiptDetail.ReceiptID });
+        }
+
+        //Tạo phiếu lập bảng lương
+        //Bước 1: chọn mã nhân viên cần tạo phiếu
+        //[Route("CreatePayrollForEmployee")]
+        //public ActionResult CreatePayrollForEmployee()
+        //{
+        //    IEnumerable<Employee> employees = infoWeb.GetAllEmployee();
+        //    List<SelectListItem> listEmployee = new List<SelectListItem>();
+        //    foreach (var item in employees)
+        //    {
+        //        SelectListItem selectID = new SelectListItem();
+        //        selectID.Text = item.EmployeeID.ToString();
+        //        listEmployee.Add(selectID);
+        //    }
+        //    ViewData["listEmployee"] = listEmployee;
+        //    return View();
+        //}
+        //Bước 2: Điền thông tin vào phiếu tương ứng với mã nhân viên đã chọn
+        [Route("CreatePayroll")]
+        public ActionResult CreatePayroll(int EmployeeID)
+        {
+            Employee em = infoWeb.GetEmployeeByID(EmployeeID);
+            Account acc = infoWeb.GetAccountByEmail(em.Email);
+            BasicSalary basicSalary = infoWeb.GetBasicSalaryByEmployeeID(EmployeeID);
+            Salary salary = infoWeb.GetSalaryBySalaryID(basicSalary.SalaryID);
+            ViewData["EmployeeID"] = EmployeeID;
+            ViewData["EmployeeName"] = em.Name;
+            ViewData["Position"] = acc.AccType + " " + acc.Position;
+            ViewData["SalaryType"] = salary.Type;
+            ViewData["BasicSalary"] = salary.UnitPrice;
+            return View();
+        }
+        //Bước 3: thực hiện tạo bảng lương
+        [Route("DoCreatePayroll")]
+        public ActionResult DoCreatePayroll(string json)
+        {
+            PayrollModel payrollModel = JsonConvert.DeserializeObject<PayrollModel>(json);
+            info.InsertTimeSheet(payrollModel.EmployeeID, payrollModel.WorkDay,payrollModel.Total,"VND");
+            TimeSheet timeSheet = info.GetTimeSheetByEmployeeID(payrollModel.EmployeeID);
+            info.InsertTimeSheetDetail(timeSheet.TimeSheetID, payrollModel.Bonus, payrollModel.Penalty, "VND", payrollModel.Desc);
+            return Json(JsonRequestBehavior.AllowGet);
         }
     }
 }
