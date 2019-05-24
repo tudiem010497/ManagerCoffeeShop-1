@@ -30,6 +30,9 @@ namespace ManagerCoffeeShopASPNet
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertTimeSheetDetail(TimeSheetDetail instance);
+    partial void UpdateTimeSheetDetail(TimeSheetDetail instance);
+    partial void DeleteTimeSheetDetail(TimeSheetDetail instance);
     partial void InsertAccount(Account instance);
     partial void UpdateAccount(Account instance);
     partial void DeleteAccount(Account instance);
@@ -135,9 +138,6 @@ namespace ManagerCoffeeShopASPNet
     partial void InsertSupplier(Supplier instance);
     partial void UpdateSupplier(Supplier instance);
     partial void DeleteSupplier(Supplier instance);
-    partial void InsertTest(Test instance);
-    partial void UpdateTest(Test instance);
-    partial void DeleteTest(Test instance);
     partial void InsertTimeSheet(TimeSheet instance);
     partial void UpdateTimeSheet(TimeSheet instance);
     partial void DeleteTimeSheet(TimeSheet instance);
@@ -173,19 +173,19 @@ namespace ManagerCoffeeShopASPNet
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Account> Accounts
-		{
-			get
-			{
-				return this.GetTable<Account>();
-			}
-		}
-		
 		public System.Data.Linq.Table<TimeSheetDetail> TimeSheetDetails
 		{
 			get
 			{
 				return this.GetTable<TimeSheetDetail>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Account> Accounts
+		{
+			get
+			{
+				return this.GetTable<Account>();
 			}
 		}
 		
@@ -565,14 +565,6 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
-		public System.Data.Linq.Table<Test> Tests
-		{
-			get
-			{
-				return this.GetTable<Test>();
-			}
-		}
-		
 		public System.Data.Linq.Table<TimeSheet> TimeSheets
 		{
 			get
@@ -609,6 +601,373 @@ namespace ManagerCoffeeShopASPNet
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), orderID);
 			return ((ISingleResult<OrderCustomerResult>)(result.ReturnValue));
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TimeSheetDetail")]
+	public partial class TimeSheetDetail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _TimeSheetDetailID;
+		
+		private int _TimeSheetID;
+		
+		private string _Day;
+		
+		private System.DateTime _Date;
+		
+		private System.TimeSpan _RegisterTimeIn;
+		
+		private System.TimeSpan _RegisterTimeOut;
+		
+		private System.TimeSpan _TimeIn;
+		
+		private System.TimeSpan _TimeOut;
+		
+		private System.Nullable<double> _Bonus;
+		
+		private System.Nullable<double> _Penalty;
+		
+		private string _Currency;
+		
+		private string _Desc;
+		
+		private EntityRef<TimeSheet> _TimeSheet;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTimeSheetDetailIDChanging(int value);
+    partial void OnTimeSheetDetailIDChanged();
+    partial void OnTimeSheetIDChanging(int value);
+    partial void OnTimeSheetIDChanged();
+    partial void OnDayChanging(string value);
+    partial void OnDayChanged();
+    partial void OnDateChanging(System.DateTime value);
+    partial void OnDateChanged();
+    partial void OnRegisterTimeInChanging(System.TimeSpan value);
+    partial void OnRegisterTimeInChanged();
+    partial void OnRegisterTimeOutChanging(System.TimeSpan value);
+    partial void OnRegisterTimeOutChanged();
+    partial void OnTimeInChanging(System.TimeSpan value);
+    partial void OnTimeInChanged();
+    partial void OnTimeOutChanging(System.TimeSpan value);
+    partial void OnTimeOutChanged();
+    partial void OnBonusChanging(System.Nullable<double> value);
+    partial void OnBonusChanged();
+    partial void OnPenaltyChanging(System.Nullable<double> value);
+    partial void OnPenaltyChanged();
+    partial void OnCurrencyChanging(string value);
+    partial void OnCurrencyChanged();
+    partial void OnDescChanging(string value);
+    partial void OnDescChanged();
+    #endregion
+		
+		public TimeSheetDetail()
+		{
+			this._TimeSheet = default(EntityRef<TimeSheet>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeSheetDetailID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int TimeSheetDetailID
+		{
+			get
+			{
+				return this._TimeSheetDetailID;
+			}
+			set
+			{
+				if ((this._TimeSheetDetailID != value))
+				{
+					this.OnTimeSheetDetailIDChanging(value);
+					this.SendPropertyChanging();
+					this._TimeSheetDetailID = value;
+					this.SendPropertyChanged("TimeSheetDetailID");
+					this.OnTimeSheetDetailIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeSheetID", DbType="Int NOT NULL")]
+		public int TimeSheetID
+		{
+			get
+			{
+				return this._TimeSheetID;
+			}
+			set
+			{
+				if ((this._TimeSheetID != value))
+				{
+					if (this._TimeSheet.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTimeSheetIDChanging(value);
+					this.SendPropertyChanging();
+					this._TimeSheetID = value;
+					this.SendPropertyChanged("TimeSheetID");
+					this.OnTimeSheetIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Day", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Day
+		{
+			get
+			{
+				return this._Day;
+			}
+			set
+			{
+				if ((this._Day != value))
+				{
+					this.OnDayChanging(value);
+					this.SendPropertyChanging();
+					this._Day = value;
+					this.SendPropertyChanged("Day");
+					this.OnDayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="Date NOT NULL")]
+		public System.DateTime Date
+		{
+			get
+			{
+				return this._Date;
+			}
+			set
+			{
+				if ((this._Date != value))
+				{
+					this.OnDateChanging(value);
+					this.SendPropertyChanging();
+					this._Date = value;
+					this.SendPropertyChanged("Date");
+					this.OnDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisterTimeIn", DbType="Time NOT NULL")]
+		public System.TimeSpan RegisterTimeIn
+		{
+			get
+			{
+				return this._RegisterTimeIn;
+			}
+			set
+			{
+				if ((this._RegisterTimeIn != value))
+				{
+					this.OnRegisterTimeInChanging(value);
+					this.SendPropertyChanging();
+					this._RegisterTimeIn = value;
+					this.SendPropertyChanged("RegisterTimeIn");
+					this.OnRegisterTimeInChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisterTimeOut", DbType="Time NOT NULL")]
+		public System.TimeSpan RegisterTimeOut
+		{
+			get
+			{
+				return this._RegisterTimeOut;
+			}
+			set
+			{
+				if ((this._RegisterTimeOut != value))
+				{
+					this.OnRegisterTimeOutChanging(value);
+					this.SendPropertyChanging();
+					this._RegisterTimeOut = value;
+					this.SendPropertyChanged("RegisterTimeOut");
+					this.OnRegisterTimeOutChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeIn", DbType="Time NOT NULL")]
+		public System.TimeSpan TimeIn
+		{
+			get
+			{
+				return this._TimeIn;
+			}
+			set
+			{
+				if ((this._TimeIn != value))
+				{
+					this.OnTimeInChanging(value);
+					this.SendPropertyChanging();
+					this._TimeIn = value;
+					this.SendPropertyChanged("TimeIn");
+					this.OnTimeInChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeOut", DbType="Time NOT NULL")]
+		public System.TimeSpan TimeOut
+		{
+			get
+			{
+				return this._TimeOut;
+			}
+			set
+			{
+				if ((this._TimeOut != value))
+				{
+					this.OnTimeOutChanging(value);
+					this.SendPropertyChanging();
+					this._TimeOut = value;
+					this.SendPropertyChanged("TimeOut");
+					this.OnTimeOutChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bonus", DbType="Float")]
+		public System.Nullable<double> Bonus
+		{
+			get
+			{
+				return this._Bonus;
+			}
+			set
+			{
+				if ((this._Bonus != value))
+				{
+					this.OnBonusChanging(value);
+					this.SendPropertyChanging();
+					this._Bonus = value;
+					this.SendPropertyChanged("Bonus");
+					this.OnBonusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Penalty", DbType="Float")]
+		public System.Nullable<double> Penalty
+		{
+			get
+			{
+				return this._Penalty;
+			}
+			set
+			{
+				if ((this._Penalty != value))
+				{
+					this.OnPenaltyChanging(value);
+					this.SendPropertyChanging();
+					this._Penalty = value;
+					this.SendPropertyChanged("Penalty");
+					this.OnPenaltyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Currency", DbType="VarChar(10)")]
+		public string Currency
+		{
+			get
+			{
+				return this._Currency;
+			}
+			set
+			{
+				if ((this._Currency != value))
+				{
+					this.OnCurrencyChanging(value);
+					this.SendPropertyChanging();
+					this._Currency = value;
+					this.SendPropertyChanged("Currency");
+					this.OnCurrencyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Desc]", Storage="_Desc", DbType="NVarChar(50)")]
+		public string Desc
+		{
+			get
+			{
+				return this._Desc;
+			}
+			set
+			{
+				if ((this._Desc != value))
+				{
+					this.OnDescChanging(value);
+					this.SendPropertyChanging();
+					this._Desc = value;
+					this.SendPropertyChanged("Desc");
+					this.OnDescChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TimeSheet_TimeSheetDetail", Storage="_TimeSheet", ThisKey="TimeSheetID", OtherKey="TimeSheetID", IsForeignKey=true)]
+		public TimeSheet TimeSheet
+		{
+			get
+			{
+				return this._TimeSheet.Entity;
+			}
+			set
+			{
+				TimeSheet previousValue = this._TimeSheet.Entity;
+				if (((previousValue != value) 
+							|| (this._TimeSheet.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TimeSheet.Entity = null;
+						previousValue.TimeSheetDetails.Remove(this);
+					}
+					this._TimeSheet.Entity = value;
+					if ((value != null))
+					{
+						value.TimeSheetDetails.Add(this);
+						this._TimeSheetID = value.TimeSheetID;
+					}
+					else
+					{
+						this._TimeSheetID = default(int);
+					}
+					this.SendPropertyChanged("TimeSheet");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -899,195 +1258,6 @@ namespace ManagerCoffeeShopASPNet
 		{
 			this.SendPropertyChanging();
 			entity.Account = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TimeSheetDetail")]
-	public partial class TimeSheetDetail
-	{
-		
-		private int _TimeSheetID;
-		
-		private string _Day;
-		
-		private System.DateTime _Date;
-		
-		private System.TimeSpan _RegisterTimeIn;
-		
-		private System.TimeSpan _RegisterTimeOut;
-		
-		private System.TimeSpan _TimeIn;
-		
-		private System.TimeSpan _TimeOut;
-		
-		private System.Nullable<double> _Bonus;
-		
-		private string _Currency;
-		
-		private string _Desc;
-		
-		public TimeSheetDetail()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeSheetID", DbType="Int NOT NULL")]
-		public int TimeSheetID
-		{
-			get
-			{
-				return this._TimeSheetID;
-			}
-			set
-			{
-				if ((this._TimeSheetID != value))
-				{
-					this._TimeSheetID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Day", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string Day
-		{
-			get
-			{
-				return this._Day;
-			}
-			set
-			{
-				if ((this._Day != value))
-				{
-					this._Day = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="Date NOT NULL")]
-		public System.DateTime Date
-		{
-			get
-			{
-				return this._Date;
-			}
-			set
-			{
-				if ((this._Date != value))
-				{
-					this._Date = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisterTimeIn", DbType="Time NOT NULL")]
-		public System.TimeSpan RegisterTimeIn
-		{
-			get
-			{
-				return this._RegisterTimeIn;
-			}
-			set
-			{
-				if ((this._RegisterTimeIn != value))
-				{
-					this._RegisterTimeIn = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisterTimeOut", DbType="Time NOT NULL")]
-		public System.TimeSpan RegisterTimeOut
-		{
-			get
-			{
-				return this._RegisterTimeOut;
-			}
-			set
-			{
-				if ((this._RegisterTimeOut != value))
-				{
-					this._RegisterTimeOut = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeIn", DbType="Time NOT NULL")]
-		public System.TimeSpan TimeIn
-		{
-			get
-			{
-				return this._TimeIn;
-			}
-			set
-			{
-				if ((this._TimeIn != value))
-				{
-					this._TimeIn = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeOut", DbType="Time NOT NULL")]
-		public System.TimeSpan TimeOut
-		{
-			get
-			{
-				return this._TimeOut;
-			}
-			set
-			{
-				if ((this._TimeOut != value))
-				{
-					this._TimeOut = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bonus", DbType="Float")]
-		public System.Nullable<double> Bonus
-		{
-			get
-			{
-				return this._Bonus;
-			}
-			set
-			{
-				if ((this._Bonus != value))
-				{
-					this._Bonus = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Currency", DbType="VarChar(10)")]
-		public string Currency
-		{
-			get
-			{
-				return this._Currency;
-			}
-			set
-			{
-				if ((this._Currency != value))
-				{
-					this._Currency = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Desc]", Storage="_Desc", DbType="NVarChar(50)")]
-		public string Desc
-		{
-			get
-			{
-				return this._Desc;
-			}
-			set
-			{
-				if ((this._Desc != value))
-				{
-					this._Desc = value;
-				}
-			}
 		}
 	}
 	
@@ -10931,68 +11101,6 @@ namespace ManagerCoffeeShopASPNet
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Test")]
-	public partial class Test : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _CSID;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnCSIDChanging(int value);
-    partial void OnCSIDChanged();
-    #endregion
-		
-		public Test()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CSID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int CSID
-		{
-			get
-			{
-				return this._CSID;
-			}
-			set
-			{
-				if ((this._CSID != value))
-				{
-					this.OnCSIDChanging(value);
-					this.SendPropertyChanging();
-					this._CSID = value;
-					this.SendPropertyChanged("CSID");
-					this.OnCSIDChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TimeSheet")]
 	public partial class TimeSheet : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -11008,6 +11116,8 @@ namespace ManagerCoffeeShopASPNet
 		private double _TotalAmount;
 		
 		private string _Currency;
+		
+		private EntitySet<TimeSheetDetail> _TimeSheetDetails;
 		
 		private EntityRef<Employee> _Employee;
 		
@@ -11029,6 +11139,7 @@ namespace ManagerCoffeeShopASPNet
 		
 		public TimeSheet()
 		{
+			this._TimeSheetDetails = new EntitySet<TimeSheetDetail>(new Action<TimeSheetDetail>(this.attach_TimeSheetDetails), new Action<TimeSheetDetail>(this.detach_TimeSheetDetails));
 			this._Employee = default(EntityRef<Employee>);
 			OnCreated();
 		}
@@ -11137,6 +11248,19 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TimeSheet_TimeSheetDetail", Storage="_TimeSheetDetails", ThisKey="TimeSheetID", OtherKey="TimeSheetID")]
+		public EntitySet<TimeSheetDetail> TimeSheetDetails
+		{
+			get
+			{
+				return this._TimeSheetDetails;
+			}
+			set
+			{
+				this._TimeSheetDetails.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_TimeSheet", Storage="_Employee", ThisKey="EmployeeID", OtherKey="EmployeeID", IsForeignKey=true)]
 		public Employee Employee
 		{
@@ -11189,6 +11313,18 @@ namespace ManagerCoffeeShopASPNet
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_TimeSheetDetails(TimeSheetDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.TimeSheet = this;
+		}
+		
+		private void detach_TimeSheetDetails(TimeSheetDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.TimeSheet = null;
 		}
 	}
 	
