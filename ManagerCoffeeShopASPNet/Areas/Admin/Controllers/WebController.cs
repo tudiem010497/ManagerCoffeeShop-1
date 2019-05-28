@@ -291,5 +291,22 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             IEnumerable<CoffeeShop> cs = info.GetCoffeeShopByCSID(CSID);
             return View(cs);
         }
+
+        [Route("CreateDiagram")]
+        public ActionResult CreateDiagram(float width, float height, float ratio)
+        {
+            ViewData["width"] = width;
+            ViewData["height"] = height;
+            ViewData["ratio"] = ratio;
+            return View();
+        }
+
+        [HttpPost]
+        [Route("SaveDiagram")]
+        public ActionResult SaveDiagram(string json)
+        {
+            Diagram diagram = JsonConvert.DeserializeObject<Diagram>(json);
+            return View();
+        }
     }
 }
