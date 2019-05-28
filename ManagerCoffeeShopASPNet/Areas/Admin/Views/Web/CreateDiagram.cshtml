@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewBag.Title = "CreateDiagram";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<script type="text/javascript" src="http://beneposto.pl/jqueryrotate/js/jQueryRotateCompressed.js"></script>
+@*<script type="text/javascript" src="~/Assets/Admin/jQuery-Plugin-For-Rotating-Html-Elements-multirotation/jquery.multirotation-1.0.0.js"></script>*@
+<h2>CreateDiagram</h2>
+<div id= "viewDiagram">
+    <div class="row">
+        <div id="information" class="col-sm-2">
+            <form action="/admin/Web/CreateDiagram" method="post">
+                <div class="form-group">
+                    <label for="width">Chiều rộng: </label>
+                    <input type="number" class="form-control" id="width" name="width" value="@ViewData["width"]">
+                </div>
+                <div class="form-group">
+                    <label for="height">Chiều dài:</label>
+                    <input type="number" class="form-control" id="height" name="height" value="@ViewData["height"]">
+                </div>
+                <div class="form-group">
+                    <label for="ratio">Tỷ lệ</label>
+                    <input class="form-control" id="ratio" name="ratio" value="@ViewData["ratio"]">
+                </div>
+                <button type="submit" class="btn btn-outline-primary">Nhập</button>
+            </form>
+        </div>
+        <div class="col-sm-10">
+            <img src="~/Assets/Admin/image/diagram/bank-one.png" class="draggable draggable-droppable"/>
+            <img src="~/Assets/Admin/image/diagram/bank-two.png" class="draggable draggable-droppable" /> 
+            <img src="~/Assets/Admin/image/diagram/bookshelt.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/chair-1.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/chair-2.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/desk-four.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/desk-six.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/door-left.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/door-right.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/door-two.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/plan.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/table-four.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/table-round-four.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/table-round-six.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/table-six.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/table-two.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/table.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/toilet.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/work-place.png" class="draggable draggable-droppable" />
+        </div>
+    </div>
+    <div class="container">
+        @if (float.Parse(ViewData["width"].ToString()) != 0 && float.Parse(ViewData["height"].ToString()) != 0)
+        {
+            int ratio = (int)Math.Floor(1 / float.Parse(ViewData["ratio"].ToString()));
+            int width = (int)Math.Floor(float.Parse(ViewData["width"].ToString())) * ratio;
+            int height = (int)Math.Floor(float.Parse(ViewData["height"].ToString())) * ratio;
+            <svg class="dropzone resizable"
+                 id="svg-dropzone"
+                 viewBox="0 0 @width @height"
+                 width="@width"
+                 height="@height" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="gray" stroke-width="0.5" />
+                    </pattern>
+                    <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+                        <rect width="100" height="100" fill="url(#smallGrid)" />
+                        <path d="M 100 0 L 0 0 0 100" fill="none" stroke="gray" stroke-width="1" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+        }
+        <button type="button" id="btnSaveDiagram" class="btn btn-outline-info">Lưu</button>
+    </div>
+    
+    <div id="contextMenu" class="dropdown clearfix">
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
+            <li>
+                <a tabindex="-1" href="#" id="delete">Xóa</a>
+            </li>
+            <li>
+                <a tabindex="-1" href="#" id="rotate-right">Trái </a>
+            </li>
+        </ul>
+    </div>
+    <style type="text/css">
+        #contextMenu {
+          position: absolute;
+          display: none;
+        }
+    </style>
+    
+    <script>
+        $(function () {
+            var $contextMenu = $("#contextMenu");
+            var test
+            $("body").on("contextmenu", "image", function (e) {
+                $contextMenu.css({
+                    display: "block",
+                    left: e.pageX,
+                    top: e.pageY
+                });
+                test = $(this)
+                
+                return false;
+            });
+            $(document).ready(function () {
+                $("#delete").click(function () {
+                    test.remove()
+                })
+                $("#rotate-right").click(function () {
+                    //test.css({
+                    //    "-ms-transform": "rotate(90deg)", /* IE 9 */
+                    //    "-webkit-transform": "rotate(90deg)", /* Safari 3-8 */
+                    //    "transform": "rotate(90deg)"
+                    //})
+                    test.rotate(90);
+                    //test.toggleClass('flip');
+                    return false;
+                })
+                //$("#rotate-right").rotate({
+                //    bind: {
+                //        click: function () {
+                //            test.rotate({
+                //                angle: 0,
+                //                animateTo: 90
+                //            })
+                //            var widthImage = test.attr("width")
+                //            var heightImage = test.attr("height")
+                //            var xImage = test.attr("x")
+
+                //            test.attr("width", widthImage)
+                //            test.attr("height", heightImage)
+                //        }
+                //    }
+                    
+                //});
+                $("#rotate-right").click(function () {
+                    plus(test)
+                    return false;
+                })
+            })
+            
+            $('html').click(function () {
+                $contextMenu.hide();
+            });
+
+        });
+    </script>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.2.9/interact.min.js'></script>
+<script src="~/Assets/Admin/drag-drop-plugin/js/index.js"></script>
