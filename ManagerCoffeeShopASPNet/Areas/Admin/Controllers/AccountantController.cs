@@ -181,7 +181,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 sqlBulk.ColumnMappings.Add("Desc", "Desc");
                 sqlBulk.ColumnMappings.Add("BasicSalary", "BasicSalary");
                 sqlBulk.ColumnMappings.Add("EmployeeName", "EmployeeName");
-                
+                sqlBulk.ColumnMappings.Add("EmployeeID", "EmployeeID");
                 sqlBulk.ColumnMappings.Add("WorkDay", "WorkDay");
                 sqlBulk.ColumnMappings.Add("Bonus", "Bonus");
                 sqlBulk.ColumnMappings.Add("Penalty", "Penalty");
