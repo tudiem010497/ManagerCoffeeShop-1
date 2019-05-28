@@ -22,14 +22,13 @@ $(document).ready(function () {
         $("#modalOption form div.IngreID input").attr("value", IngreID);
         $("#modalOption form div.Name input").attr("value", Name);
         $("#modalOption form div.UnitPrice input").attr("value", UnitPrice);
-        $("#modalOption form div.Quantity input").attr("value", 1);
     })
     $(".btnAddToReceipt").click(function () {
         var row = "";
         var IngreID = $("#modalOption form div.IngreID input[name='IngreID']").attr("value");
         var Name = $("#modalOption form div.Name input[name='Name']").attr("value");
         var UnitPrice = $("#modalOption form div.UnitPrice input[name='UnitPrice']").attr("value");
-        var Quantity= $("#modalOption form div.Quantity input[name='Quantity']").attr("value");
+        var Quantity = $("#modalOption form div.Quantity input[name='Quantity']").val();
         if (!CheckExistIngre(IngreID, arrIngreID)) {
             var item = [IngreID, Name, Quantity, UnitPrice]
             arrIngreID.push(IngreID);
