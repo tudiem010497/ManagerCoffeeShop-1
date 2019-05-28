@@ -1,0 +1,33 @@
+﻿.colGrid{
+     width:15px;
+     height:15px;
+     border:0.02px dashed #9b8d8d;
+     float:left;
+}
+
+#context-menu{
+    display:none;
+    position:absolute;
+}
+ul#context-menu li{
+    list-style-type:none;
+} 
+ul#context-menu li a{
+    color:#ff0000;
+    background:#28e2ee;
+    display:block;
+    width:50px;
+    height:25px;
+}
+ul#context-menu li a:hover{
+    background:#374cee;
+    color:#ffffff;
+}
+#listImage .geSidebar .row > .col-sm-2:hover{
+    background:#c1b8b8;
+}
+.demo-1{
+    width:100px;
+    height:100px;
+}
+.flip { transform: rotate(-180deg);}
