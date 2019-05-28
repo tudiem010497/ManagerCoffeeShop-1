@@ -135,7 +135,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult DoCreatePayroll(string json)
         {
             PayrollModel payrollModel = JsonConvert.DeserializeObject<PayrollModel>(json);
-            info.InsertPayroll(payrollModel.EmployeeID, payrollModel.WorkDay, payrollModel.Bonus, payrollModel.Penalty, payrollModel.Total, "VND", payrollModel.Desc);
+            info.InsertPayroll(payrollModel.EmployeeID, payrollModel.EmployeeName, payrollModel.WorkDay, payrollModel.Bonus, payrollModel.Penalty, payrollModel.Total, "VND", payrollModel.Desc);
             //TimeSheet timeSheet = info.GetTimeSheetByEmployeeID(payrollModel.EmployeeID);
             //info.InsertTimeSheetDetail(timeSheet.TimeSheetID, payrollModel.Bonus, payrollModel.Penalty, "VND", payrollModel.Desc);
             return Json(JsonRequestBehavior.AllowGet);
