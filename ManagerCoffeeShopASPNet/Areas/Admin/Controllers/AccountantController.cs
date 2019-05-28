@@ -3,6 +3,9 @@ using ManagerCoffeeShopASPNet.Information;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.OleDb;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -118,11 +121,13 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             Account acc = infoWeb.GetAccountByEmail(em.Email);
             BasicSalary basicSalary = infoWeb.GetBasicSalaryByEmployeeID(EmployeeID);
             Salary salary = infoWeb.GetSalaryBySalaryID(basicSalary.SalaryID);
+            TimeSheet timeSheet = info.GetTimeSheetByEmployeeID(EmployeeID);
             ViewData["EmployeeID"] = EmployeeID;
             ViewData["EmployeeName"] = em.Name;
             ViewData["Position"] = acc.AccType + " " + acc.Position;
             ViewData["SalaryType"] = salary.Type;
             ViewData["BasicSalary"] = salary.UnitPrice;
+            ViewData["WorkDay"] = timeSheet.TotalDay;
             return View();
         }
         //Bước 3: thực hiện tạo bảng lương
@@ -130,10 +135,66 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult DoCreatePayroll(string json)
         {
             PayrollModel payrollModel = JsonConvert.DeserializeObject<PayrollModel>(json);
-            info.InsertTimeSheet(payrollModel.EmployeeID, payrollModel.WorkDay,payrollModel.Total,"VND");
-            TimeSheet timeSheet = info.GetTimeSheetByEmployeeID(payrollModel.EmployeeID);
-            info.InsertTimeSheetDetail(timeSheet.TimeSheetID, payrollModel.Bonus, payrollModel.Penalty, "VND", payrollModel.Desc);
+            info.InsertPayroll(payrollModel.EmployeeID, payrollModel.WorkDay, payrollModel.Bonus, payrollModel.Penalty, payrollModel.Total, "VND", payrollModel.Desc);
+            //TimeSheet timeSheet = info.GetTimeSheetByEmployeeID(payrollModel.EmployeeID);
+            //info.InsertTimeSheetDetail(timeSheet.TimeSheetID, payrollModel.Bonus, payrollModel.Penalty, "VND", payrollModel.Desc);
             return Json(JsonRequestBehavior.AllowGet);
+        }
+
+        [Route("ImportExcelFileCreatePayrollForAllEmployee")]
+        public ActionResult ImportExcelFileCreatePayrollForAllEmployee()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("DoImportExcelFileCreatePayrollForAllEmployee")]
+        public ActionResult DoImportExcelFileCreatePayrollForAllEmployee(ImportExcel importExcel)
+        {
+            if (ModelState.IsValid)
+            {
+                string path = Server.MapPath("~/Assets/Content/Upload/" + importExcel.file.FileName);
+                importExcel.file.SaveAs(path);
+
+                string excelConnectionString = @"Provider='Microsoft.ACE.OLEDB.12.0';Data Source='" + path + "';Extended Properties='Excel 12.0 Xml;IMEX=1'";
+                OleDbConnection excelConnection = new OleDbConnection(excelConnectionString);
+
+                //Sheet Name
+                excelConnection.Open();
+                string tableName = excelConnection.GetSchema("Tables").Rows[0]["TABLE_NAME"].ToString();
+                excelConnection.Close();
+                //End
+
+                OleDbCommand cmd = new OleDbCommand("Select * from [" + tableName + "]", excelConnection);
+
+                excelConnection.Open();
+
+                OleDbDataReader dReader;
+                dReader = cmd.ExecuteReader();
+                SqlBulkCopy sqlBulk = new SqlBulkCopy(ConfigurationManager.ConnectionStrings["CoffeeShopDBConnectionString"].ConnectionString);
+
+                //Give your Destination table name
+                sqlBulk.DestinationTableName = "Payroll";
+
+                //Mappings
+                sqlBulk.ColumnMappings.Add("Date", "AddedOn");
+                sqlBulk.ColumnMappings.Add("Desc", "Desc");
+                sqlBulk.ColumnMappings.Add("BasicSalary", "BasicSalary");
+                sqlBulk.ColumnMappings.Add("EmployeeName", "EmployeeName");
+                
+                sqlBulk.ColumnMappings.Add("WorkDay", "WorkDay");
+                sqlBulk.ColumnMappings.Add("Bonus", "Bonus");
+                sqlBulk.ColumnMappings.Add("Penalty", "Penalty");
+                sqlBulk.ColumnMappings.Add("Total", "Total");
+                sqlBulk.ColumnMappings.Add("Currency", "Currency");
+                
+                sqlBulk.WriteToServer(dReader);
+                excelConnection.Close();
+
+                ViewData["ResultImportExcel"] = "Successfully Imported";
+            }
+            return RedirectToAction("ImportExcelFileCreatePayrollForAllEmployee");
+            //return View();
         }
     }
 }

@@ -67,7 +67,7 @@
         <td>
             @Html.ActionLink("Edit", "EditEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-outline-primary" })
             @Html.ActionLink("Details", "DetailEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-outline-info " })
-            @Html.ActionLink("Create Payroll", "CreatePayroll", "Accountant",new { EmployeeID=item.EmployeeID}, new { @class="btn btn-outline-success"})
+            @Html.ActionLink("Detail Payroll", "CreatePayroll", "Accountant",new { EmployeeID=item.EmployeeID}, new { @class="btn btn-outline-success"})
             @if (item.Status == "Lay_off")
             {
                 @Html.ActionLink("Delete", "DeleteEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-outline-danger active" })
