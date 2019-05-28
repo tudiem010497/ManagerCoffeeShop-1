@@ -35,12 +35,14 @@
     })
     $('button.createPayroll').click(function () {
         var employeeID = $('#employeeID').val()
+        var employeeName = $('#employeename').val()
         var WorkDay = Number($('#WorkDay').val())
         var Bonus = Number($('#Bonus').val())
         var Penalty = Number($('#Penalty').val())
         var Desc = $('#Desc').val()
         var total = $('#Total').val();
         var data = '{"EmployeeID" : ' + employeeID + ', '
+        data += '"EmployeeName" : "' + employeeName + '", '
         data += '"WorkDay" : ' + WorkDay + ', '
         data += '"Total" : ' + total + ', '
         data += '"Bonus" : ' + Bonus + ', '
@@ -60,5 +62,9 @@
                 alert("Error: " + err.responseText);
             }
         })
+    })
+
+    $('button#submitButton').click(function () {
+        alert("Lập bảng lương cho tất cả nhân viên thành công.")
     })
 })
