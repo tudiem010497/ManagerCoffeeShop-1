@@ -17,6 +17,7 @@ namespace ManagerCoffeeShopASPNet.Information
         private EmployeeDAO _employeeDAO;
         private TimeSheetDAO _timeSheetDAO;
         private TimeSheetDetailDAO _timeSheetDetailDAO;
+        private PayrollDAO _payrollDAO;
         public InformationAccountant()
         {
             this._orderDAO = (OrderDAO)new OrderDAOImpl();
@@ -25,6 +26,7 @@ namespace ManagerCoffeeShopASPNet.Information
             this._receiptDetailDAO = (ReceiptDetailDAO)new ReceiptDetailDAOImpl();
             this._timeSheetDAO = (TimeSheetDAO)new TimeSheetDAOImpl();
             this._timeSheetDetailDAO = (TimeSheetDetailDAO)new TimeSheetDetailDAOImpl();
+            this._payrollDAO = (PayrollDAO)new PayrollDAOImpl();
         }
 
         /// <summary>
@@ -85,6 +87,10 @@ namespace ManagerCoffeeShopASPNet.Information
         public bool InsertTimeSheetDetail(int TimeSheetID, int Bonus, int Penalty, string Currency, string Desc)
         {
             return this._timeSheetDetailDAO.InsertTimeSheetDetail(TimeSheetID, Bonus, Penalty, Currency, Desc);
+        }
+        public bool InsertPayroll(int EmployeeID, string EmployeeName, int WorkDay, int Bonus, int Penalty, int Total, string Currency, string Desc)
+        {
+            return this._payrollDAO.InsertPayroll(EmployeeID, EmployeeName, WorkDay, Bonus, Penalty, Total, Currency, Desc);
         }
     }
 }
