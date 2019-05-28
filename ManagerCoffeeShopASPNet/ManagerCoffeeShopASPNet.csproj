@@ -55,6 +55,10 @@
     <Reference Include="CrystalDecisions.Shared">
       <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
     </Reference>
+    <Reference Include="LinqToExcel, Version=1.11.0.0, Culture=neutral, PublicKeyToken=9c8ea65a58f03f1f, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqToExcel.1.11.0\lib\LinqToExcel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -90,6 +94,18 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mvc.Grid.Core, Version=6.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NonFactors.Grid.Core.Mvc5.6.1.0\lib\net45\Mvc.Grid.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Remotion, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqToExcel.1.11.0\lib\Remotion.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqToExcel.1.11.0\lib\Remotion.Data.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Remotion.Interfaces, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqToExcel.1.11.0\lib\Remotion.Interfaces.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -230,6 +246,7 @@
     <Compile Include="Areas\Admin\Controllers\WarehouseController.cs" />
     <Compile Include="Areas\Admin\Controllers\WebController.cs" />
     <Compile Include="Areas\Admin\Models\AccountModel.cs" />
+    <Compile Include="Areas\Admin\Models\ImportExcel.cs" />
     <Compile Include="Areas\Admin\Models\ListOrderItemGroupByFoodAndDrink.cs" />
     <Compile Include="Areas\Admin\Models\OrderItemGroupByFoodAndDrink.cs" />
     <Compile Include="Areas\Admin\Models\OrderItemModel.cs" />
@@ -244,6 +261,7 @@
     <Compile Include="Areas\Main\Models\AccountModel.cs" />
     <Compile Include="Areas\Main\Models\Cart.cs" />
     <Compile Include="Areas\Main\Models\LoginModel.cs" />
+    <Compile Include="Class\FileExt.cs" />
     <Compile Include="CoffeeShopDB.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -268,6 +286,7 @@
     <Compile Include="DAOImpl\IngredientMessageDAOImpl.cs" />
     <Compile Include="DAOImpl\OrderDAOImpl.cs" />
     <Compile Include="DAOImpl\OrderItemDAOImpl.cs" />
+    <Compile Include="DAOImpl\PayrollDAOImpl.cs" />
     <Compile Include="DAOImpl\PositionDAOImpl.cs" />
     <Compile Include="DAOImpl\PromotionDAOImpl.cs" />
     <Compile Include="DAOImpl\ReceiptDAOImpl.cs" />
@@ -295,6 +314,7 @@
     <Compile Include="DAO\IngredientMessageDAO.cs" />
     <Compile Include="DAO\OrderDAO.cs" />
     <Compile Include="DAO\OrderItemDAO.cs" />
+    <Compile Include="DAO\PayrollDAO.cs" />
     <Compile Include="DAO\PositionDAO.cs" />
     <Compile Include="DAO\PromotionDAO.cs" />
     <Compile Include="DAO\ReceiptDAO.cs" />
@@ -477,6 +497,7 @@
     <Content Include="Areas\Admin\Views\Accountant\GetReceiptDetailByReceiptID.cshtml" />
     <Content Include="Areas\Admin\Views\Accountant\CreatePayrollForEmployee.cshtml" />
     <Content Include="Areas\Admin\Views\Accountant\CreatePayroll.cshtml" />
+    <Content Include="Areas\Admin\Views\Accountant\ImportExcelFileCreatePayrollForAllEmployee.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

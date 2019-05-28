@@ -1,22 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CoffeeShopDB" Class="CoffeeShopDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-UE1A1CU\SQLEXPRESS;Initial Catalog=CoffeeShopDB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="CoffeeShopDBConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.TimeSheetDetail" Member="TimeSheetDetails">
-    <Type Name="TimeSheetDetail">
-      <Column Name="TimeSheetDetailID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TimeSheetID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Day" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="RegisterTimeIn" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="RegisterTimeOut" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="TimeIn" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="TimeOut" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
-      <Column Name="Bonus" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Penalty" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Currency" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="TimeSheet_TimeSheetDetail" Member="TimeSheet" ThisKey="TimeSheetID" OtherKey="TimeSheetID" Type="TimeSheet" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Account" Member="Accounts">
     <Type Name="Account">
       <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -29,6 +12,23 @@
       <Association Name="Account_Customer" Member="Customers" ThisKey="UserID" OtherKey="UserID" Type="Customer" />
       <Association Name="Account_Employee" Member="Employees" ThisKey="UserID" OtherKey="UserID" Type="Employee" />
       <Association Name="Account_RoleMap" Member="RoleMaps" ThisKey="UserID" OtherKey="UserID" Type="RoleMap" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TimeSheetDetail" Member="TimeSheetDetails">
+    <Type Name="TimeSheetDetail">
+      <Column Name="TimeSheetDetailID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TimeSheetID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Day" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="RegisterTimeIn" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="RegisterTimeOut" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="TimeIn" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="TimeOut" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="Bonus" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Penalty" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="TimeSheet_TimeSheetDetail" Member="TimeSheet" ThisKey="TimeSheetID" OtherKey="TimeSheetID" Type="TimeSheet" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.BannerImage" Member="BannerImages">
@@ -137,6 +137,7 @@
       <Association Name="Employee_BasicSalary" Member="BasicSalaries" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="BasicSalary" />
       <Association Name="Employee_CoffeeBrewing" Member="CoffeeBrewings" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="CoffeeBrewing" />
       <Association Name="Employee_IngredientMessage" Member="IngredientMessages" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="IngredientMessage" />
+      <Association Name="Employee_Payroll" Member="Payrolls" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Payroll" />
       <Association Name="Employee_Server" Member="Servers" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Server" />
       <Association Name="Employee_Ship" Member="Ships" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Ship" />
       <Association Name="Employee_TimeSheet" Member="TimeSheets" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="TimeSheet" />
@@ -387,6 +388,22 @@
       <Column Name="PromotionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Order_OrderPromotion" Member="Order" ThisKey="OrderID" OtherKey="OrderID" Type="Order" IsForeignKey="true" />
       <Association Name="Promotion_OrderPromotion" Member="Promotion" ThisKey="PromotionID" OtherKey="PromotionID" Type="Promotion" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Payroll" Member="Payrolls">
+    <Type Name="Payroll">
+      <Column Name="PayrollID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeName" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="BasicSalary" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="WorkDay" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Bonus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Penalty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Total" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Currency" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="AddedOn" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="Employee_Payroll" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Position" Member="Positions">
