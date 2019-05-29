@@ -62,9 +62,9 @@
     <![endif]-->
 
     <script>
-    $(function () {
-        $(".datepicker").datepicker();
-    });
+        $(function () {
+            $(".datepicker").datepicker();
+        });
     </script>
 </head>
 <body>
@@ -169,7 +169,7 @@
                         <li>
                             <a href="#" onclick="prelogin()">Login</a>
                             <div id="id01" class="modal" style="width: 750px; margin: auto;">
-
+                                
                                 @*<form class="modal-content animate">*@
                                 @using (Html.BeginForm("Login", "Home", FormMethod.Post))
                                 {
@@ -206,8 +206,9 @@
 
                                 @*</form>*@
                             </div>
-                        </li>
 
+                        </li>
+                        
                         @*SignIn*@
                         <li>
                             @*<a onclick="preRegister()">Register</a>*@
@@ -313,7 +314,7 @@
                         </div>
 
                     </ul>
-
+                    
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>

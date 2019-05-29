@@ -20,7 +20,7 @@
                     columns.Add(ingre => ingre.Unit).Titled("Đơn vị tính");
                     columns.Add(ingre => ingre.IngreID).Encoded(false).RenderedAs(ingre =>
                     "<button data-toggle='modal' data-target='#modalOption' class='btnPreAddToReceipt btn btn-primary' name ='" + ingre.Name + "' ingreid = " + ingre.IngreID + " unitprice = " + ingre.UnitPrice + ">" + "Thêm" + "</button>"
-                    + "<button class ='btnRemoveFromReceipt btn btn-danger' ingreid ="+ ingre.IngreID +">Xóa</button>").Filterable(false);
+                    /*+ "<button class ='btnRemoveFromReceipt btn btn-danger' ingreid ="+ ingre.IngreID +">Xóa</button>"*/).Filterable(false);
                 }).Filterable()
         )
     </div>
