@@ -47,7 +47,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             foreach(var item in coffeeShop)
             {
                 SelectListItem select = new SelectListItem();
-                select.Text = item.CSID.ToString();
+                select.Value = item.CSID.ToString();
+                select.Text = item.Name.ToString();
                 listCoffeeShop.Add(select);
             }
             ViewData["listCoffeeShop"] = listCoffeeShop;
@@ -293,11 +294,21 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         }
 
         [Route("CreateDiagram")]
-        public ActionResult CreateDiagram(float width, float height, float ratio)
+        public ActionResult CreateDiagram(float width, float height, float ratio, string FloorID)
         {
+            IEnumerable<CoffeeShop> coffeeShop = info.GetAllCoffeeShop();
+            List<SelectListItem> listCoffeeShop = new List<SelectListItem>();
+            foreach (var item in coffeeShop)
+            {
+                SelectListItem select = new SelectListItem();
+                select.Text = item.Name;
+                listCoffeeShop.Add(select);
+            }
+            ViewData["listCoffeeShop"] = listCoffeeShop;
             ViewData["width"] = width;
             ViewData["height"] = height;
             ViewData["ratio"] = ratio;
+            ViewData["FloorID"] = FloorID;
             return View();
         }
 
