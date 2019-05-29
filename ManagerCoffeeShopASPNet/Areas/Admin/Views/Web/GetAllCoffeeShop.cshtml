@@ -1,0 +1,82 @@
+﻿@model IEnumerable<ManagerCoffeeShopASPNet.CoffeeShop>
+
+@{
+    ViewBag.Title = "GetAllCoffeeShop";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>GetAllCoffeeShop</h2>
+
+<p>
+    @Html.ActionLink("Add New Coffee Shop", "GetAddNewCoffeeShop", "Web")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.LogoImagePath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TitleAbout)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescAbout)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TitleContact)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescContact)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.LogoImagePath)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TitleAbout)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DescAbout)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TitleContact)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DescContact)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditCoffeeShop", new { CSID = item.CSID }, new { @class= "btn btn-outline-primary" }) 
+            @Html.ActionLink("Details", "DetailsCoffeeShop", new { CSID = item.CSID }, new { @class= "btn btn-outline-info" })
+            @Html.ActionLink("Delete", "DeleteCoffeeShop", new { CSID = item.CSID }, new { @class= "btn btn-outline-danger" })
+        </td>
+    </tr>
+}
+
+</table>

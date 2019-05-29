@@ -1,0 +1,118 @@
+﻿@*@model ManagerCoffeeShopASPNet.CoffeeShop*@
+@model IEnumerable<CoffeeShop>
+@using NonFactors.Mvc.Grid
+
+@{
+    ViewBag.Title = "DetailsCoffeeShop";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>DetailsCoffeeShop</h2>
+
+@*<div>
+        <h4>CoffeeShop</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Phone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Phone)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LogoImagePath)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LogoImagePath)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TitleAbout)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TitleAbout)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DescAbout)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DescAbout)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TitleContact)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TitleContact)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DescContact)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DescContact)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.CSID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
+<div>
+    @(Html
+        .Grid(Model)
+        .Build(column =>
+        {
+            column.Add(m => m.Name).Titled("Name").Sortable(false).Filterable(false);
+            column.Add(m => m.Address).Titled("Address").Sortable(false).Filterable(false);
+            column.Add(m => m.Phone).Titled("Phone").Sortable(false).Filterable(false);
+            column.Add(m => m.LogoImagePath).Titled("Logo ImagePath").Sortable(false).Filterable(false);
+            column.Add(m => m.TitleAbout).Titled("Title About").Sortable(false).Filterable(false);
+            column.Add(m => m.DescAbout).Titled("Desc About").Sortable(false).Filterable(false);
+            column.Add(m => m.TitleContact).Titled("Title Contact").Sortable(false).Filterable(false);
+            column.Add(m => m.DescContact).Titled("Desc Contact").Sortable(false).Filterable(false);
+            column.Add(m => m.Email).Titled("Email").Sortable(false).Filterable(false);
+        })
+        .WithFilterMode(GridFilterMode.FilterRow)
+        .Sortable()
+        .Empty("Data is empty")
+        .Filterable()
+    )
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.CSID }) |*@
+    @Html.ActionLink("Back to List", "GetAllCoffeeShop", "Web")
+</p>
