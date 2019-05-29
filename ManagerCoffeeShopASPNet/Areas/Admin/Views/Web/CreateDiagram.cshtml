@@ -26,25 +26,25 @@
             </form>
         </div>
         <div class="col-sm-10">
-            <img src="~/Assets/Admin/image/diagram/bank-one.png" class="draggable draggable-droppable"/>
-            <img src="~/Assets/Admin/image/diagram/bank-two.png" class="draggable draggable-droppable" /> 
-            <img src="~/Assets/Admin/image/diagram/bookshelt.png" class="draggable draggable-droppable" />
-            <img src="~/Assets/Admin/image/diagram/chair-1.png" class="draggable draggable-droppable" />
-            <img src="~/Assets/Admin/image/diagram/chair-2.png" class="draggable draggable-droppable" />
-            <img src="~/Assets/Admin/image/diagram/desk-four.png" class="draggable draggable-droppable" />
-            <img src="~/Assets/Admin/image/diagram/desk-six.png" class="draggable draggable-droppable" />
-            <img src="~/Assets/Admin/image/diagram/door-left.jpg" class="draggable draggable-droppable" />
-            <img src="~/Assets/Admin/image/diagram/door-right.png" class="draggable draggable-droppable" />
-            <img src="~/Assets/Admin/image/diagram/door-two.png" class="draggable draggable-droppable" />
-            <img src="~/Assets/Admin/image/diagram/plan.png" class="draggable draggable-droppable" />
-            <img src="~/Assets/Admin/image/diagram/table-four.png" class="draggable draggable-droppable" />
-            <img src="~/Assets/Admin/image/diagram/table-round-four.png" class="draggable draggable-droppable" />
-            <img src="~/Assets/Admin/image/diagram/table-round-six.png" class="draggable draggable-droppable" />
-            <img src="~/Assets/Admin/image/diagram/table-six.png" class="draggable draggable-droppable" />
-            <img src="~/Assets/Admin/image/diagram/table-two.png" class="draggable draggable-droppable" />
-            <img src="~/Assets/Admin/image/diagram/table.png" class="draggable draggable-droppable" />
-            <img src="~/Assets/Admin/image/diagram/toilet.png" class="draggable draggable-droppable" />
-            <img src="~/Assets/Admin/image/diagram/work-place.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/bank-one-000.png" class="draggable draggable-droppable"/>
+            <img src="~/Assets/Admin/image/diagram/bank-two-000.png" class="draggable draggable-droppable" /> 
+            <img src="~/Assets/Admin/image/diagram/bookshelt-000.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/chair-1-000.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/chair-2-000.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/desk-four-000.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/desk-six-000.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/door-left-000.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/door-right-000.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/door-two-000.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/plan-000.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/table-four-000.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/table-round-four-000.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/table-round-six-000.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/table-six-000.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/table-two-000.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/table-000.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/toilet-000.png" class="draggable draggable-droppable" />
+            <img src="~/Assets/Admin/image/diagram/work-place-000.png" class="draggable draggable-droppable" />
         </div>
     </div>
     <div class="container">
@@ -114,7 +114,7 @@
                     //    "-webkit-transform": "rotate(90deg)", /* Safari 3-8 */
                     //    "transform": "rotate(90deg)"
                     //})
-                    test.rotate(90);
+                    //test.rotate(90);
                     //test.toggleClass('flip');
                     return false;
                 })
@@ -136,8 +136,28 @@
                     
                 //});
                 $("#rotate-right").click(function () {
-                    plus(test)
-                    return false;
+                    var xlink = test.attr("xlink:href")
+                    var width = test.attr("width")
+                    var height = test.attr("height")
+                    var rotate = test.attr("rotate")
+                    if (rotate == null) {
+                        rotate = "090"
+                    }
+                    else {
+                        if(0 <= Number(rotate) && Number(rotate) < 270){                            
+                            if (Number(rotate) == 0) rotate = "090"
+                            else rotate = Number(rotate) + 90
+                        }
+                            
+                        else rotate = "000"
+                    }
+                    test.attr("rotate", rotate.toString())
+                    xlink = xlink.substr(0, xlink.indexOf(".png"))
+                    xlink = xlink.slice(0, -4)
+                    var newXlink =  xlink + "-" + rotate + ".png"
+                    test.attr("width", height)
+                    test.attr("height", width)
+                    test.attr("xlink:href", newXlink)
                 })
             })
             

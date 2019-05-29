@@ -21,6 +21,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Models
         public int width { get; set; }
         [JsonProperty(PropertyName = "height")]
         public int height { get; set; }
+        [JsonProperty(PropertyName = "rotate")]
+        public string rotate { get; set; }
 
     }
 }
