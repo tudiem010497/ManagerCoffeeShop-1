@@ -29,6 +29,7 @@ $(document).ready(function () {
         var Name = $("#modalOption form div.Name input[name='Name']").attr("value");
         var UnitPrice = $("#modalOption form div.UnitPrice input[name='UnitPrice']").attr("value");
         var Quantity = $("#modalOption form div.Quantity input[name='Quantity']").val();
+        
         if (!CheckExistIngre(IngreID, arrIngreID)) {
             var item = [IngreID, Name, Quantity, UnitPrice]
             arrIngreID.push(IngreID);
@@ -39,7 +40,8 @@ $(document).ready(function () {
         }
         $(".list-receiptdetail tbody").html(row);
     })
-    $(".btnRemoveFromReceipt").click(function () {
+    //$(".btnRemoveFromReceipt").click(function () {
+    $("table.list-receiptdetail").on('click', 'button.btnRemoveFromReceipt', function(){
         var row = "";
         var IngreID = $(this).attr("ingreid");
         if (CheckExistIngre(IngreID, arrIngreID)) {
@@ -96,6 +98,7 @@ $(document).ready(function () {
             + "><td class= 'Name'>" + Name + "</td>"
             + "<td class= 'Quantity'>" + Quantity  + "</td>"
             + "<td class='TotalAmount'>" + TotalAmount + "</td>"
+            + "<td><button type='submit' class='btnRemoveFromReceipt btn btn-danger' ingreid='" + IngreID + "'>Xóa</button></td>"
             + "</tr>";
         return row;
     }
