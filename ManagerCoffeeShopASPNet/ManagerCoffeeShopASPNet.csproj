@@ -246,6 +246,8 @@
     <Compile Include="Areas\Admin\Controllers\WarehouseController.cs" />
     <Compile Include="Areas\Admin\Controllers\WebController.cs" />
     <Compile Include="Areas\Admin\Models\AccountModel.cs" />
+    <Compile Include="Areas\Admin\Models\Diagram.cs" />
+    <Compile Include="Areas\Admin\Models\ImageDiagram.cs" />
     <Compile Include="Areas\Admin\Models\ImportExcel.cs" />
     <Compile Include="Areas\Admin\Models\ListOrderItemGroupByFoodAndDrink.cs" />
     <Compile Include="Areas\Admin\Models\OrderItemGroupByFoodAndDrink.cs" />
@@ -402,7 +404,6 @@
     <Content Include="Assets\Admin\js\sb-admin.js" />
     <Content Include="Assets\Admin\js\sb-admin.min.js" />
     <Content Include="Assets\Admin\js\service.js" />
-    <Content Include="Assets\Admin\js\TestResize__Accountant.js" />
     <Content Include="Assets\Admin\js\warehouse.js" />
     <Content Include="Assets\Admin\js\web.js" />
     <Content Include="Assets\Main\css\styleLogin.css" />
@@ -498,6 +499,7 @@
     <Content Include="Areas\Admin\Views\Accountant\CreatePayrollForEmployee.cshtml" />
     <Content Include="Areas\Admin\Views\Accountant\CreatePayroll.cshtml" />
     <Content Include="Areas\Admin\Views\Accountant\ImportExcelFileCreatePayrollForAllEmployee.cshtml" />
+    <Content Include="Areas\Admin\Views\Web\CreateDiagram.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

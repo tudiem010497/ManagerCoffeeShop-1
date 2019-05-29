@@ -211,6 +211,30 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href=@Url.Action("GetAllCoffeeShop", "Web")>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Danh sách các cửa hàng</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href=@Url.Action("CreateDiagram", "Web", new { width=5, height=5, ratio=0.01})>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Tạo sơ đồ quán</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href=@Url.Action("GetAllReceiptWaitToConfirm", "Accountant")>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Danh sách các phiếu nhập cần xác nhận</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href=@Url.Action("ImportExcelFileCreatePayrollForAllEmployee", "Accountant")>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Tạo bảng lương cho toàn bộ nhân viên</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href=@Url.Action("GetAllIngredient", "Warehouse")>
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Danh sách nguyên vật liệu</span>

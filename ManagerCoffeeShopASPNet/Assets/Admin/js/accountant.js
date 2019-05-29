@@ -1,14 +1,10 @@
 ﻿$(document).ready(function () {
     $('button.preCreatePayroll').click(function () {
         document.getElementById('sum').style.display = 'block'
-        //var employeeID = $('#employeeID').val()
-        //var employeeName = $('#employeename').val()
-        //var position = $('#Position').val()
         var BasicSalary = Number($('#BasicSalary').val())
         var WorkDay = Number($('#WorkDay').val())
         var Bonus = Number($('#Bonus').val())
         var Penalty = Number($('#Penalty').val())
-        //var Desc = $('#Desc').val()
         var SalaryType = $('#SalaryType').val()
         var total
         if (SalaryType == 'Giờ') {
@@ -20,7 +16,6 @@
         else {//SalaryType == 'Tháng'
             total = BasicSalary + Bonus - Penalty;
         }
-        //alert(total)
         $('div input#Total').attr('value', total)
             //điền thông tin vào form thông tin
         //$('#modalOptionPayroll form .EmployeeID input').attr('value', employeeID)
@@ -62,9 +57,5 @@
                 alert("Error: " + err.responseText);
             }
         })
-    })
-
-    $('button#submitButton').click(function () {
-        alert("Lập bảng lương cho tất cả nhân viên thành công.")
     })
 })

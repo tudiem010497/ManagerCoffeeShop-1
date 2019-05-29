@@ -92,8 +92,7 @@
                 @Html.ActionLink("Hủy", "Cancel", new { ReceiptDetailID = item.ReceiptDetailID }, new { @class = "btn btn-outline-danger" })
             </td>
         </tr>
-    }s
-
+    }
 </table>
 <div>
     @Html.ActionLink("OK", "ConfirmAll", new { ReceiptID = ViewData["ReceiptID"], View = "GetReceiptDetailByReceiptID" }, new { @class = "btn btn-outline-info" })

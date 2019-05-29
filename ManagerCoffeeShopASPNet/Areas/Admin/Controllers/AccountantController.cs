@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
 
 namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
 {
@@ -153,7 +154,18 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                string path = Server.MapPath("~/Assets/Content/Upload/" + importExcel.file.FileName);
+                string fileName = importExcel.file.FileName;
+                string path = Path.Combine(Server.MapPath("~/Assets/Content/Upload/"), fileName);
+                //string path = Server.MapPath("~/Assets/Content/Upload/" + importExcel.file.FileName);
+                string fileNameNoExtension = Path.GetFileNameWithoutExtension(fileName);
+                string extension = Path.GetExtension(fileName);
+                int temp = 1;
+                while (System.IO.File.Exists(path))
+                {
+                    fileName = fileNameNoExtension + "Copy(" + temp + ")" + extension;
+                    path = Path.Combine(Server.MapPath("~/Assets/Content/Upload/"), fileName);
+                    temp++;
+                }
                 importExcel.file.SaveAs(path);
 
                 string excelConnectionString = @"Provider='Microsoft.ACE.OLEDB.12.0';Data Source='" + path + "';Extended Properties='Excel 12.0 Xml;IMEX=1'";
