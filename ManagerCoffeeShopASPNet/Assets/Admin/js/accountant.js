@@ -58,4 +58,26 @@
             }
         })
     })
+    $('input.btn-detailpayroll').click(function () {
+        var employeeID = $('#employeeID').val()
+        var addedOn = $('#addedOn').val()
+        //alert(employeeID + " " + addedOn)
+        var data = '{"EmployeeID" : ' + employeeID + ', '
+        data += '"AddedOn" : "' + addedOn + '"}'
+        $.ajax({
+            url: '/Admin/Accountant/DoDetailPayrollOfEmployee?json=' + data,
+            type: "POST",
+            contenType: "application/json; charset=utf-8",
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                alert(employeeID + " " + addedOn)
+                //alert("Tạo phiếu lương thành công.");
+                window.location = "http://localhost:64599/Admin/Accountant/DoDetailPayrollOfEmployee?json" + data;
+            },
+            error: function (err) {
+                alert("Error: " + err.responseText);
+            }
+        })
+    })
 })
