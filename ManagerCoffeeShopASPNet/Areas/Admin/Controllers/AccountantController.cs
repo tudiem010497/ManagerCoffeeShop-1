@@ -10,6 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.IO;
+using Microsoft.Ajax.Utilities;
 
 namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
 {
@@ -97,7 +98,6 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             info.UpdateReceiptDetail(ReceiptDetailID, "Cancel");
             return RedirectToAction("GetReceiptDetailByReceiptID", new { ReceiptID = receiptDetail.ReceiptID });
         }
-
         //Tạo phiếu lập bảng lương
         //Bước 1: chọn mã nhân viên cần tạo phiếu
         //[Route("CreatePayrollForEmployee")]
@@ -136,18 +136,17 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult DoCreatePayroll(string json)
         {
             PayrollModel payrollModel = JsonConvert.DeserializeObject<PayrollModel>(json);
-            info.InsertPayroll(payrollModel.EmployeeID, payrollModel.EmployeeName, payrollModel.WorkDay, payrollModel.Bonus, payrollModel.Penalty, payrollModel.Total, "VND", payrollModel.Desc);
+            info.InsertPayroll(payrollModel.EmployeeID, payrollModel.EmployeeName, payrollModel.WorkDay, payrollModel.Bonus, payrollModel.Penalty, payrollModel.Total, "VND", payrollModel.Desc, DateTime.Now);
             //TimeSheet timeSheet = info.GetTimeSheetByEmployeeID(payrollModel.EmployeeID);
             //info.InsertTimeSheetDetail(timeSheet.TimeSheetID, payrollModel.Bonus, payrollModel.Penalty, "VND", payrollModel.Desc);
             return Json(JsonRequestBehavior.AllowGet);
         }
-
+        //Thêm bảng lương cho nhân viên bằng file excel 
         [Route("ImportExcelFileCreatePayrollForAllEmployee")]
         public ActionResult ImportExcelFileCreatePayrollForAllEmployee()
         {
             return View();
         }
-
         [HttpPost]
         [Route("DoImportExcelFileCreatePayrollForAllEmployee")]
         public ActionResult DoImportExcelFileCreatePayrollForAllEmployee(ImportExcel importExcel)
@@ -156,7 +155,6 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             {
                 string fileName = importExcel.file.FileName;
                 string path = Path.Combine(Server.MapPath("~/Assets/Content/Upload/"), fileName);
-                //string path = Server.MapPath("~/Assets/Content/Upload/" + importExcel.file.FileName);
                 string fileNameNoExtension = Path.GetFileNameWithoutExtension(fileName);
                 string extension = Path.GetExtension(fileName);
                 int temp = 1;
@@ -167,27 +165,20 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                     temp++;
                 }
                 importExcel.file.SaveAs(path);
-
                 string excelConnectionString = @"Provider='Microsoft.ACE.OLEDB.12.0';Data Source='" + path + "';Extended Properties='Excel 12.0 Xml;IMEX=1'";
                 OleDbConnection excelConnection = new OleDbConnection(excelConnectionString);
-
                 //Sheet Name
                 excelConnection.Open();
                 string tableName = excelConnection.GetSchema("Tables").Rows[0]["TABLE_NAME"].ToString();
                 excelConnection.Close();
                 //End
-
                 OleDbCommand cmd = new OleDbCommand("Select * from [" + tableName + "]", excelConnection);
-
                 excelConnection.Open();
-
                 OleDbDataReader dReader;
                 dReader = cmd.ExecuteReader();
                 SqlBulkCopy sqlBulk = new SqlBulkCopy(ConfigurationManager.ConnectionStrings["CoffeeShopDBConnectionString"].ConnectionString);
-
                 //Give your Destination table name
                 sqlBulk.DestinationTableName = "Payroll";
-
                 //Mappings
                 sqlBulk.ColumnMappings.Add("Date", "AddedOn");
                 sqlBulk.ColumnMappings.Add("Desc", "Desc");
@@ -199,14 +190,44 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 sqlBulk.ColumnMappings.Add("Penalty", "Penalty");
                 sqlBulk.ColumnMappings.Add("Total", "Total");
                 sqlBulk.ColumnMappings.Add("Currency", "Currency");
-                
                 sqlBulk.WriteToServer(dReader);
                 excelConnection.Close();
-
                 ViewData["ResultImportExcel"] = "Successfully Imported";
             }
             return RedirectToAction("ImportExcelFileCreatePayrollForAllEmployee");
-            //return View();
+        }
+        //xem bảng lương của nhân viên dựa vào EmployeeID
+        [Route("DetailPayrollOfEmployee")]
+        public ActionResult DetailPayrollOfEmployee(/*int EmployeeID*/)
+        {
+            IEnumerable<Payroll> payroll = info.GetAllAddedOnOfPayroll();
+            IEnumerable<Employee> em = infoWeb.GetAllEmployee();
+            List<SelectListItem> listAddedOnPayroll = new List<SelectListItem>();
+            List<SelectListItem> listEmployeeName = new List<SelectListItem>();
+            foreach (var item in payroll.DistinctBy(p =>p.AddedOn))
+            {
+                SelectListItem select = new SelectListItem();
+                select.Text = item.AddedOn.ToString();
+                listAddedOnPayroll.Add(select);
+            }
+            foreach (var item in em)
+            {
+                SelectListItem select = new SelectListItem();
+                select.Text = item.Name.ToString();
+                select.Value = item.EmployeeID.ToString();
+                listEmployeeName.Add(select);
+            }
+            ViewData["listAddedOnPayroll"] = listAddedOnPayroll;
+            ViewData["listEmployeeName"] = listEmployeeName;
+            return View();
+        }
+        [Route("DoDetailPayrollOfEmployee")]
+        public ActionResult DoDetailPayrollOfEmployee(int EmployeeName, DateTime AddedOn)
+        {
+            //Payroll p = JsonConvert.DeserializeObject<Payroll>(json);
+            IEnumerable<Payroll> payroll = info.GetParyollByEmployeeIDAndAddedOn(EmployeeName, AddedOn);
+            return View(payroll);
+            //return Json(JsonRequestBehavior.AllowGet);
         }
     }
 }
