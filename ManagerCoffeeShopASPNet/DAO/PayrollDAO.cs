@@ -8,6 +8,10 @@ namespace ManagerCoffeeShopASPNet.DAO
 {
     interface PayrollDAO
     {
-        bool InsertPayroll(int EmployeeID, string EmployeeName, int WorkDay, int Bonus, int Penalty, int Total, string Currency, string Desc);
+        Payroll GetPayrollByEmployeeID(int EmployeeID);
+        bool InsertPayroll(int EmployeeID, string EmployeeName, int WorkDay, int Bonus, int Penalty, int Total, string Currency, string Desc, DateTime AddedOn);
+        Payroll GetPayrollByAddedOn(DateTime AddedOn);
+        IEnumerable<Payroll> GetAllAddedOnOfPayroll();
+        IEnumerable<Payroll> GetParyollByEmployeeIDAndAddedOn(int EmployeeID, DateTime AddedOn);
     }
 }

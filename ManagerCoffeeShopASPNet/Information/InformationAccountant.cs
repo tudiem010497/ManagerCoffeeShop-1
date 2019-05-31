@@ -88,9 +88,21 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._timeSheetDetailDAO.InsertTimeSheetDetail(TimeSheetID, Bonus, Penalty, Currency, Desc);
         }
-        public bool InsertPayroll(int EmployeeID, string EmployeeName, int WorkDay, int Bonus, int Penalty, int Total, string Currency, string Desc)
+        public Payroll GetPayrollByEmployeeID(int EmployeeID)
         {
-            return this._payrollDAO.InsertPayroll(EmployeeID, EmployeeName, WorkDay, Bonus, Penalty, Total, Currency, Desc);
+            return this._payrollDAO.GetPayrollByEmployeeID(EmployeeID);
+        }
+        public IEnumerable<Payroll> GetAllAddedOnOfPayroll()
+        {
+            return this._payrollDAO.GetAllAddedOnOfPayroll();
+        }
+        public bool InsertPayroll(int EmployeeID, string EmployeeName, int WorkDay, int Bonus, int Penalty, int Total, string Currency, string Desc, DateTime AddedOn)
+        {
+            return this._payrollDAO.InsertPayroll(EmployeeID, EmployeeName, WorkDay, Bonus, Penalty, Total, Currency, Desc, AddedOn);
+        }
+        public IEnumerable<Payroll> GetParyollByEmployeeIDAndAddedOn(int EmployeeName, DateTime AddedOn)
+        {
+            return this._payrollDAO.GetParyollByEmployeeIDAndAddedOn(EmployeeName, AddedOn);
         }
     }
 }
