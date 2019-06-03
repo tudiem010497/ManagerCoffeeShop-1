@@ -1,105 +1,21 @@
-﻿    @model IEnumerable<Payroll>
-    @using NonFactors.Mvc.Grid
+﻿@model IEnumerable<Payroll>
+@using NonFactors.Mvc.Grid
 
-    @{
-        ViewBag.Title = "DoDetailPayrollOfEmployee";
-        Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
-    }
+@{
+    ViewBag.Title = "DoDetailPayrollOfEmployee";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<br />
+<h2 style="text-align:center">CHI TIẾT BẢNG LƯƠNG</h2>
 
-    <h2>DoDetailPayrollOfEmployee</h2>
-
-    <div>
-        @*<h4>Payroll</h4>
-            <hr />
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.EmployeeID)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.EmployeeID)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.EmployeeName)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.EmployeeName)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.BasicSalary)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.BasicSalary)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.WorkDay)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.WorkDay)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Bonus)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Bonus)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Penalty)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Penalty)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Total)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Total)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Currency)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Currency)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Desc)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Desc)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.AddedOn)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.AddedOn)
-                </dd>
-
-            </dl>*@
-        @(Html
+<div>
+    @(Html
         .Grid(Model)
         .Build(column =>
         {
             column.Add(m => m.EmployeeName).Titled("Tên nhân viên").Sortable(false).Filterable(false);
             column.Add(m => m.BasicSalary).Titled("Lương cơ bản").Sortable(false).Filterable(false);
-            column.Add(m => m.WorkDay).Titled("Số ngày làm việc").Sortable(false).Filterable(false);
+            column.Add(m => m.WorkDay).Titled("Số ngày/giờ làm việc").Sortable(false).Filterable(false);
             column.Add(m => m.Bonus).Titled("Thưởng").Sortable(false).Filterable(false);
             column.Add(m => m.Penalty).Titled("Phạt").Sortable(false).Filterable(false);
             column.Add(m => m.Total).Titled("Tổng lương").Sortable(false).Filterable(false);
@@ -107,13 +23,17 @@
             column.Add(m => m.Desc).Titled("Ghi chú").Sortable(false).Filterable(false);
             column.Add(m => m.AddedOn).Titled("Ngày tạo bảng lương").Sortable(false).Filterable(false);
         })
-        .WithFilterMode(GridFilterMode.FilterRow)
         .Sortable()
         .Empty("Data is empty")
         .Filterable()
-        )
+    )
+</div>
+<br />
+<div class="row">
+    <div class="col-md-8">
+        @Html.ActionLink("Trở về", "DetailPayrollOfEmployee", "Account")
     </div>
-    <p>
-        @*@Html.ActionLink("Edit", "Edit", new { id = Model.PayrollID }) |*@
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+    <div class="col-md-4">
+        @Html.ActionLink("Chỉnh sửa", "EditPayrollOfEmployee", "Accountant", new { PayrollID = @ViewData["payrollID"] }, new { @class = "btn btn-outline-primary" })
+    </div>
+</div>

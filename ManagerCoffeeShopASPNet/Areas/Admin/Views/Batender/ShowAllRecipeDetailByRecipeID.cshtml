@@ -5,7 +5,8 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>ShowAllRecipeDetailByRecipeID</h2>
+<br />
+<h2>Hiển thị chi tiết các công thức pha chế</h2>
 
 <p>
     @Html.ActionLink("Thêm bước", "CreateRecipeDetail", "Batender", new { RecipeID = ViewData["RecipeID"] }, new { @class="btn btn-primary" })
@@ -13,22 +14,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.RecID)
+            @Html.DisplayName("RecID")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Step)
+            @Html.DisplayName("Bước")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IngreID)
+            @Html.DisplayName("Mã NVL")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Amount)
+            @Html.DisplayName("Số lượng")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Unit)
+            @Html.DisplayName("Đơn vị tính")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Desc)
+            @Html.DisplayName("Ghi chú")
         </th>
         <th></th>
     </tr>
@@ -63,6 +64,4 @@
         </tr>
     }
 }
-
-
 </table>

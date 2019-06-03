@@ -4,8 +4,9 @@
     ViewBag.Title = "SendMessageIngredientWithOut";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h2>SendMessageIngredientWithOut</h2>
+<br />
+<h2 style="text-align:center">GỬI THÔNG BÁO THIẾU NGUYÊN VẬT LIỆU</h2>
+<br />
 @if (TempData["message"] != null)
 {
     <div class="alert alert-success">@TempData["message"]</div>
@@ -20,7 +21,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>IngredientMessage</h4>
+      @*  <h4>IngredientMessage</h4>*@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @*<div class="form-group">
@@ -32,16 +33,16 @@
         </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Ingredient.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Tên NVL", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })*@
-                @Html.DropDownList("IngreID", (List<SelectListItem>)ViewData["listIngre"])
+                @Html.DropDownList("IngreID", (List<SelectListItem>)ViewData["listIngre"], new { @class="form-control"})
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Số lượng", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
@@ -49,27 +50,30 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Unit, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Đơn vị tính", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Unit, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Unit, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.SendMessage, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Thông tin cần gửi", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.SendMessage, new { htmlAttributes = new { @class = "form-control"}, @rows = 3, @cols = 130 })
                 @Html.ValidationMessageFor(model => model.SendMessage, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Gửi" class="btn btn-success" />
+            <div class="row">
+                <div class="col-md-9">
+                    @*@Html.ActionLink("Trở về", "Index")*@
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" value="Gửi" class="btn btn-success" />
+                </div>
             </div>
+            
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

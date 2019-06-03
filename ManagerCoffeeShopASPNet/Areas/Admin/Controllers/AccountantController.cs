@@ -226,8 +226,31 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             //Payroll p = JsonConvert.DeserializeObject<Payroll>(json);
             IEnumerable<Payroll> payroll = info.GetParyollByEmployeeIDAndAddedOn(EmployeeName, AddedOn);
+            Payroll p = info.GetPayrollByEmployeeIDAndAddedOnNo(EmployeeName, AddedOn);
+            ViewData["payrollID"] = p.PayrollID;
             return View(payroll);
             //return Json(JsonRequestBehavior.AllowGet);
+        }
+        [Route("EditPayrollOfEmployee")]
+        public ActionResult EditPayrollOfEmployee(int PayrollID)
+        {
+            Payroll payroll = info.GetPayrollByPayrollID(PayrollID);
+            BasicSalary bs = infoWeb.GetBasicSalaryByEmployeeID(payroll.EmployeeID);
+            Salary salary = infoWeb.GetSalaryBySalaryID(bs.SalaryID);
+            ViewData["SalaryType"] = salary.Type;
+            ViewData["PayrollID"] = PayrollID;
+            return View(payroll);
+        }
+        [Route("DoEditPayrollOfEmployee")]
+        public ActionResult DoEditPayrollOfEmployee(int PayrollID, int WorkDay, int Bonus, int Penalty, int Total, string Currency, string Desc)
+        {
+
+            bool result = info.EditPayroll(PayrollID, WorkDay, Bonus, Penalty, Total, Currency, Desc);
+            if (result)
+            {
+                TempData["edit"] = "Sửa thành công";
+            }
+            return RedirectToAction("EditPayrollOfEmployee", new { PayrollID = PayrollID});
         }
     }
 }

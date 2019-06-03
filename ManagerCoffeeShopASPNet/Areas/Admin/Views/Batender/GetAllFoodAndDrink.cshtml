@@ -7,21 +7,21 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>GetAllFoodAndDrink</h2>
-
-
+<br />
+<h2 style="text-align:center">DANH SÁCH ĐỒ UỐNG</h2>
+<br />
 <div class="row">
     <div class="col-sm-6">@Html.ActionLink("Thêm đồ uống", "GetFormAddNewFoodAndDrink", "Batender", new { @class = "btn btn-primary" })</div>
     <div class="col-sm-6">
         @using(Html.BeginForm("Batender", "GetAllFoodAndDrink", FormMethod.Get))
         {
             @Html.TextBox("Search")
-            <button type="submit">Search</button>
+            <button type="submit" class="btn btn-sm btn-outline-secondary">Search</button>
         }
     </div>
 </div>
-@*<input type="text" id="GridSearch" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">*@
-<table class="table">
+<br />
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -29,9 +29,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Desc)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Size)
         </th>
@@ -55,9 +52,6 @@
         <td>
             @Html.DisplayFor(modelItem => item.Desc)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.ImagePath)
-        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Size)
         </td>
@@ -71,14 +65,14 @@
             @Html.DisplayFor(modelItem => item.Currency)
         </td>
         <td>
-            @Html.ActionLink("Sửa", "EditFoodAndDrink", "Batender", new { FDID=item.FDID }, new { @class = "btn btn-primary" }) 
-            @Html.ActionLink("Xóa", "DeleteFoodAndDrink","Batender", new { FDID = item.FDID }, new { @class = "btn btn-danger" })
-            @Html.ActionLink("Xem công thức pha chế", "ReadRecipe", "Batender", new { FDID = item.FDID}, new { @class= "btn btn-info" })
+            @Html.ActionLink("Sửa", "EditFoodAndDrink", "Batender", new { FDID=item.FDID }, new { @class = "btn btn-sm btn-primary" }) 
+            @Html.ActionLink("Xóa", "DeleteFoodAndDrink","Batender", new { FDID = item.FDID }, new { @class = "btn btn-sm btn-danger" })
+            @Html.ActionLink("Xem công thức pha chế", "ReadRecipe", "Batender", new { FDID = item.FDID}, new { @class= "btn btn-sm btn-info" })
         </td>
     </tr>
 }
 
-</table>
+</table>*@
   
 @*@Html.AjaxGrid(Url.Action("IndexGrid"))
 
@@ -89,23 +83,23 @@
 
             grid.reload();
         });
-</script>
+</script>*@
 
 @(Html
     .Grid(Model)
     .Build(columns =>
     {
-        columns.Add(m => m.FDID).Titled("FDID");
-        columns.Add(m => m.Name).Titled("Name");
-        columns.Add(m => m.Desc).Titled("Desc");
-        columns.Add(m => m.Size).Titled("Size");
-        columns.Add(m => m.Type).Titled("Type");
-        columns.Add(m => m.UnitPrice).Titled("UnitPrice");
-        columns.Add(m => m.Currency).Titled("Currency");
+        columns.Add(m => m.FDID).Titled("Mã đồ uống");
+        columns.Add(m => m.Name).Titled("Tên đồ uống");
+        columns.Add(m => m.Desc).Titled("Mô tả");
+        columns.Add(m => m.Size).Titled("Kích thước");
+        columns.Add(m => m.Type).Titled("Loại");
+        columns.Add(m => m.UnitPrice).Titled("Giá");
+        columns.Add(m => m.Currency).Titled("Đơn vị tiền");
         columns.Add(m => m.FDID).Encoded(false).RenderedAs(m => (
-              @Html.ActionLink("Sửa", "EditFoodAndDrink", "Batender", new { FDID = m.FDID }, new { @class = "btn btn-primary" }).ToHtmlString()
-              + @Html.ActionLink("Xóa", "DeleteFoodAndDrink", "Batender", new { FDID = m.FDID }, new { @class = "btn btn-danger" }).ToHtmlString()
-              + @Html.ActionLink("Xem công thức pha chế", "ReadRecipe", "Batender", new { FDID = m.FDID }, new { @class = "btn btn-info" }).ToHtmlString()
+              @Html.ActionLink("Sửa", "EditFoodAndDrink", "Batender", new { FDID = m.FDID }, new { @class = "btn btn-sm btn-primary" }).ToHtmlString()
+              + @Html.ActionLink("Xóa", "DeleteFoodAndDrink", "Batender", new { FDID = m.FDID }, new { @class = "btn btn-sm btn-danger" }).ToHtmlString()
+              + @Html.ActionLink("Xem công thức pha chế", "ReadRecipe", "Batender", new { FDID = m.FDID }, new { @class = "btn btn-sm btn-info" }).ToHtmlString()
         ));
     })
-)*@
+)

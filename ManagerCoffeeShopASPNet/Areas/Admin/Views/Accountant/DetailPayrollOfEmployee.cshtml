@@ -5,8 +5,8 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 @*<script src="~/Assets/Admin/js/accountant.js"></script>*@
-<h2>DetailPayrollOfEmployee</h2>
-
+<br />
+<h2>Xem chi tiết bảng lương của nhân viên dựa vào ngày tạo</h2>
 
 @using (Html.BeginForm("DoDetailPayrollOfEmployee", "Accountant", FormMethod.Post))
 {
@@ -32,9 +32,11 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-2" style="float:right">
+            <div class="col-md-offset-2 col-md-3" style="float:right">
                 <input type="submit" value="Xem chi tiết" class="btn btn-outline-primary btn-detailpayroll" />
+                @*@Html.ActionLink("Sửa", "EditPayrollOfEmployee", new{ EmployeeID = Model.EmployeeID, AddedOn = Model.AddedOn }, new { @class = "btn btn-outline-success" })*@
             </div>
         </div>
     </div>
 }
+

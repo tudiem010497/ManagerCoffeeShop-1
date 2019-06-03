@@ -1,16 +1,18 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.ReceiptDetail>
+@using NonFactors.Mvc.Grid
 
 @{
     ViewBag.Title = "GetReceiptDetailByReceiptID";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>GetReceiptDetailByReceiptID</h2>
-
+<br />
+<h2 style="text-align:center">CHI TIẾT PHIẾU NHẬP</h2>
+<hr />
 @*<p>
         @Html.ActionLink("Create New", "Create")
     </p>*@
-<table class="table">
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ReceiptID)
@@ -85,16 +87,44 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @*@Html.ActionLink("Edit", "Edit", new { id=item.ReceiptDetailID }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.ReceiptDetailID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.ReceiptDetailID })*@
                 @Html.ActionLink("Xác nhận", "Confirm", new { ReceiptDetailID = item.ReceiptDetailID }, new { @class = "btn btn-outline-success" })
                 @Html.ActionLink("Hủy", "Cancel", new { ReceiptDetailID = item.ReceiptDetailID }, new { @class = "btn btn-outline-danger" })
             </td>
         </tr>
     }
-</table>
+</table>*@
 <div>
-    @Html.ActionLink("OK", "ConfirmAll", new { ReceiptID = ViewData["ReceiptID"], View = "GetReceiptDetailByReceiptID" }, new { @class = "btn btn-outline-info" })
-    @Html.ActionLink("Back to list", "GetAllReceiptWaitToConfirm", "Accountant")
+    @(Html
+        .Grid(Model)
+        .Build(column =>
+        {
+            column.Add(m => m.ReceiptID).Titled("Mã phiếu nhập").Sortable(false).Filterable(false);
+            column.Add(m => m.IngreID).Titled("Mã NVL").Sortable(false).Filterable(false);
+            column.Add(m => m.GiftID).Titled("Mã quà").Sortable(false).Filterable(false);
+            column.Add(m => m.FacilitiesID).Titled("Mã CSVC").Sortable(false).Filterable(false);
+            column.Add(m => m.SupplierID).Titled("Mã NCC").Sortable(false).Filterable(false);
+            column.Add(m => m.ReferenceDesc).Titled("Ghi chú").Sortable(false).Filterable(false);
+            column.Add(m => m.Amount).Titled("Số lượng nhập").Sortable(false).Filterable(false);
+            column.Add(m => m.Unit).Titled("Đơn vị tính").Sortable(false).Filterable(false);
+            column.Add(m => m.UnitPrice).Titled("Đơn giá").Sortable(false).Filterable(false);
+            column.Add(m => m.Currency).Titled("Đơn vị tiền").Sortable(false).Filterable(false);
+            column.Add(m => m.Status).Titled("Trạng thái").Sortable(false).Filterable(false);
+            column.Add(m => m.ReceiptDetailID).Encoded(false).RenderedAs(m => (
+                @Html.ActionLink("Xác nhận", "Confirm", new { ReceiptDetailID = m.ReceiptDetailID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
+                + @Html.ActionLink("Hủy", "Cancel", new { ReceiptDetailID = m.ReceiptDetailID }, new { @class = "btn btn-sm btn-outline-danger" }).ToHtmlString()
+            )).Filterable(false).Sortable(false).Titled("Action");
+        })
+        .Sortable()
+        .Empty("Data is empty")
+        .Filterable()
+    )
+</div>
+<br />
+<div class="row">
+    <div class="col-md-8">
+        @Html.ActionLink("Trở về", "GetAllReceiptWaitToConfirm", "Accountant")
+    </div>
+    <div class="col-md-4">
+        @Html.ActionLink("OK", "ConfirmAll", new { ReceiptID = ViewData["ReceiptID"], View = "GetReceiptDetailByReceiptID" }, new { @class = "btn btn-outline-info" })
+    </div>
 </div>

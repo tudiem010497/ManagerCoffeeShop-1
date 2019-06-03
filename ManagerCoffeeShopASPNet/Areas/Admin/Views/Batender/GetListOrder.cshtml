@@ -6,27 +6,25 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>GetListOrder</h2>
+<br />
+<h2 style=" text-align:center">DANH SÁCH PHA CHẾ THEO HÓA ĐƠN</h2>
 
-<div class="container">
+<div>
     @(Html
         .Grid(Model).Build(columns =>
         {
             columns.Add(o => o.PosID).Titled("Vị trí");
             columns.Add(o => o.Customer.Name).Titled("Tên khách hàng");
             columns.Add(o => o.OrderDateTime).Titled("Thời gian vào");
-            columns.Add(o => o.Desc).Titled("Desc");
-            columns.Add(o => o.Status).Titled("Status").Sortable(false);
+            columns.Add(o => o.Desc).Titled("Ghi chú");
+            columns.Add(o => o.Status).Titled("Trạng thái").Sortable(false);
             columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o => (
             Html.ActionLink("Xem Chi tiết", "DetailOrder", "Batender", new { OrderID = o.OrderID }, new { @class = "btn btn-primary btnDetailOrder" })
             )).Filterable(false);
         })
-        .WithFilterMode(GridFilterMode.FilterRow)
         .Empty("Data is empty")
         .Filterable()
         .Sortable()
     )
-
-
 </div>
 

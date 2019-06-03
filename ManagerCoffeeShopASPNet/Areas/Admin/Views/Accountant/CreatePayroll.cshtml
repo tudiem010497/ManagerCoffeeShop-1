@@ -1,12 +1,14 @@
 ﻿@model ManagerCoffeeShopASPNet.Areas.Admin.Models.PayrollModel
 @using ManagerCoffeeShopASPNet.Enum
+
 @{
     ViewBag.Title = "CreatePayroll";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 <script src="~/Assets/Admin/js/accountant.js"></script>
-<h2>CreatePayroll</h2>
-@*"CreatePayrollDetail", "Accountant", FormMethod.Post*@
+<br />
+<h2 style="text-align:center">Tạo bảng lương cho nhân viên</h2>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -17,21 +19,21 @@
         <div class="form-group">
             @Html.Label("Tên nhân viên", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="text" value="@ViewData["EmployeeName"]" class="form-control" id="employeename" disabled/>
+                <input type="text" value="@ViewData["EmployeeName"]" class="form-control" id="employeename" disabled />
                 @Html.ValidationMessageFor(model => model.EmployeeName, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.Label("Chức vụ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="text" value="@ViewData["Position"]" class="form-control" id="Position" disabled/>
+                <input type="text" value="@ViewData["Position"]" class="form-control" id="Position" disabled />
                 @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.Label("Lương cơ bản", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="number" value="@ViewData["BasicSalary"]" class="form-control" id="BasicSalary" disabled/>
+                <input type="number" value="@ViewData["BasicSalary"]" class="form-control" id="BasicSalary" disabled />
                 @Html.ValidationMessageFor(model => model.BasicSalary, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -52,15 +54,14 @@
         <div class="form-group">
             @Html.Label("Đơn vị tính", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="text" value="@ViewData["SalaryType"]" class="form-control", id= "SalaryType"/>
-                @*@Html.DropDownListFor(model => model.SalaryType, new SelectList(Enum.GetValues(typeof(EnumUtilities.Type))), new { @class="form-control", id= "SalaryType" })*@
+                <input type="text" value="@ViewData["SalaryType"]" class="form-control" , id="SalaryType" />
                 @Html.ValidationMessageFor(model => model.SalaryType, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             @Html.Label("Tiền thưởng", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="number" class="form-control" id="Bonus"/>
+                <input type="number" class="form-control" id="Bonus" />
                 @Html.ValidationMessageFor(model => model.Bonus, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -79,86 +80,25 @@
             </div>
         </div>
     </div>
-}
-
-<div class="form-group" >
-    @Html.Label("Tổng cộng", htmlAttributes: new { @class = "control-label col-md-2" })
     <div class="form-group">
-        <div class="col-md-offset-2 col-sm-4" style="float:right">
-            <button type="submit" class="btn btn-outline-success preCreatePayroll" >Tính tổng</button>
+        @Html.Label("Tổng cộng", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="row col-md-10">
+            <div class="col-md-7" id="sum">
+                <input type="text" class="form-control" id="Total" value="0" readonly />
+            </div>
+            <div class="col-md-5">
+                <button type="button" class="btn btn-sm btn-outline-success preCreatePayroll">Tính tổng</button>
+            </div>
         </div>
     </div>
     <br />
-    <div class="col-md-10" style="display:none" id="sum">
-        <input type="text" class="form-control" id="Total" />
-        @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
-    </div>
-</div>
-<br />
-<div class="form-group">
-    <div class="col-md-offset-2 col-sm-4" style="float:right">
-        <button type="submit" value="Create" class="btn btn-outline-info createPayroll" data-toggle='modal' data-target='#modalOptionPayroll'>Create</button>
-        @*@Html.ActionLink("Create", "DoCreatePayroll", "Accountant", new { EmployeeID = ViewData["EmployeeID"]}, new { @class="btn btn-primary"})*@
-    </div>
-    <div class="col-md-offset-2 col-sm-4">
-        @Html.ActionLink("Back", "GetAllEmployee","Web")
-    </div>
-</div>
-
-    @*from thông tin*@
-@*<div class="modal fade" id="modalOptionPayroll" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Thông tin bảng lương</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group EmployeeID">
-                            <label for="EmployeeID">Mã nhân viên</label>
-                            <input type="number" value="" name="EmployeeID" readonly class="form-control" />
-                        </div>
-                        <div class="form-group Name">
-                            <label for="Name">Tên nhân viên</label>
-                            <input type="text" name="Name" readonly class="form-control" />
-                        </div>
-                        <div class="form-group Position">
-                            <label for="Position">Chức vụ</label>
-                            <input type="text" name="Position" readonly class="form-control" />
-                        </div>
-                        <div class="form-group BasicSalary">
-                            <label for="BasicSalary">Lương cơ bản</label>
-                            <input type="number" value="" name="BasicSalary" readonly class="form-control" />
-                        </div>
-                        <div class="form-group WorkDay">
-                            <label for="WorkDay">Số ngày làm việc</label>
-                            <input type="number" value="" name="WorkDay" readonly class="form-control" />
-                        </div>
-                        <div class="form-group Bonus">
-                            <label for="Bonus">Tiền thưởng</label>
-                            <input type="number" value="" name="Bonus" readonly class="form-control" />
-                        </div>
-                        <div class="form-group Penalty">
-                            <label for="Penalty">Tiền phạt</label>
-                            <input type="number" value="" name="Penalty" readonly class="form-control" />
-                        </div>
-                        <div class="form-group Desc">
-                            <label for="Desc">Ghi chú</label>
-                            <input type="text" value="" name="Desc" readonly class="form-control" />
-                        </div>
-                        <div class="form-group Total">
-                            <label for="Total">Tổng cộng</label>
-                            <input type="number" value="" name="Total" readonly class="form-control" />
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btnAddToPayroll btn btn-primary">Ok</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                </div>
-            </div>
-
+    <div class="form-group">
+        <div class="col-md-offset-2 col-sm-4" style="float:right">
+            <button type="submit" value="Create" class="btn btn-outline-info createPayroll" data-toggle='modal' data-target='#modalOptionPayroll'>Tạo</button>
+            @*@Html.ActionLink("Create", "DoCreatePayroll", "Accountant", new { EmployeeID = ViewData["EmployeeID"]}, new { @class="btn btn-primary"})*@
         </div>
-    </div>*@
+        <div class="col-md-offset-2 col-sm-4">
+            @Html.ActionLink("Trở về", "GetAllEmployee", "Web")
+        </div>
+    </div>
+}

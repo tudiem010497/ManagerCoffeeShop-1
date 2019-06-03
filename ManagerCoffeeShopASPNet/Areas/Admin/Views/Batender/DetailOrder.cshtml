@@ -5,9 +5,9 @@
     ViewBag.Title = "DetailOrder";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h2>DetailOrder</h2>
-
+<br />
+<h2 style="text-align:center">CHI TIẾT HÓA ĐƠN</h2>
+<hr />
 @*<p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -56,25 +56,26 @@
     </tr>
 }
 </table>*@
-@(Html
+<div>
+    @(Html
         .Grid(Model).Build(columns =>
         {
-            columns.Add(o => o.OrderID).Titled("OrderID").Sortable(false);
+            columns.Add(o => o.OrderID).Titled("Mã hóa đơn").Sortable(false);
             columns.Add(o => o.Order.Customer.Name).Titled("Tên khách hàng").Sortable(false);
             columns.Add(o => o.Order.PosID).Titled("Vị trí").Sortable(false);
             columns.Add(o => o.Order.OrderDateTime).Titled("Thời gian vào");
-            columns.Add(o => o.FoodAndDrink.Name).Titled("Name").Sortable(false);
-            columns.Add(o => o.Quantity).Titled("Quantity").Sortable(false);
-            columns.Add(o => o.Desc).Titled("Desc").Sortable(false);
-            columns.Add(o => o.Status).Titled("Status").Sortable(false);
+            columns.Add(o => o.FoodAndDrink.Name).Titled("Tên đồ uống").Sortable(false);
+            columns.Add(o => o.Quantity).Titled("Số lượng").Sortable(false);
+            columns.Add(o => o.Desc).Titled("Ghi chú").Sortable(false);
+            columns.Add(o => o.Status).Titled("Trạng thái").Sortable(false);
             columns.Add(o => o.OrderItemID).Encoded(false).RenderedAs(o => (
-                Html.ActionLink("Xong", "UpdateReady", "Batender", new { OrderItemID = o.OrderItemID, OrderID = o.OrderID, NumOfOrderItem = Model.Count(), view = "DetailOrder" }, new { @class = "btn btn-success" }).ToHtmlString()
-                + Html.ActionLink("Xem công thức pha chế", "ReadRecipe", "Batender", new { FDID = o.FDID }, new { @class = "btn btn-info btnReadRecipe" }).ToHtmlString()
-                + Html.ActionLink("Hủy", "UpdateCancel", "Batender", new { OrderItemID = o.OrderItemID, OrderID = o.OrderID, NumOfOrderItem = Model.Count(), view = "DetailOrder" }, new { @class = "btn btn-danger btnCancel" })
+                Html.ActionLink("Xong", "UpdateReady", "Batender", new { OrderItemID = o.OrderItemID, OrderID = o.OrderID, NumOfOrderItem = Model.Count(), view = "DetailOrder" }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
+                + Html.ActionLink("Xem công thức pha chế", "ReadRecipe", "Batender", new { FDID = o.FDID }, new { @class = "btn btn-sm btn-outline-info btnReadRecipe" }).ToHtmlString()
+                + Html.ActionLink("Hủy", "UpdateCancel", "Batender", new { OrderItemID = o.OrderItemID, OrderID = o.OrderID, NumOfOrderItem = Model.Count(), view = "DetailOrder" }, new { @class = "btn btn-sm btn-outline-danger btnCancel" })
             )).Filterable(false);
         })
-        .WithFilterMode(GridFilterMode.FilterRow)
         .Empty("Data is empty")
         .Filterable()
         .Sortable()
-)
+    )
+</div>
