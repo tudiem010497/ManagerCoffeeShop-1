@@ -17,6 +17,7 @@
             total = BasicSalary + Bonus - Penalty;
         }
         $('div input#Total').attr('value', total)
+        $('.totalEdit').attr('value', total)
             //điền thông tin vào form thông tin
         //$('#modalOptionPayroll form .EmployeeID input').attr('value', employeeID)
         //$('#modalOptionPayroll form .Name input').attr('value', employeeName)
@@ -27,6 +28,24 @@
         //$('#modalOptionPayroll form .Penalty input').attr('value', Penalty)
         //$('#modalOptionPayroll form .Desc input').attr('value', Desc)
         //$('#modalOptionPayroll form .Total input').attr('value', total)
+    })
+    $('button.preEditPayroll').click(function () {
+        var BasicSalary = Number($('#BasicSalary').val())
+        var WorkDay = Number($('#WorkDay').val())
+        var Bonus = Number($('#Bonus').val())
+        var Penalty = Number($('#Penalty').val())
+        var SalaryType = $('#SalaryType').val()
+        var total
+        if (SalaryType == 'Giờ') {
+            total = BasicSalary * WorkDay + Bonus - Penalty;
+        }
+        else if (SalaryType == 'Ca') {
+            total = BasicSalary * WorkDay + Bonus - Penalty;
+        }
+        else {//SalaryType == 'Tháng'
+            total = BasicSalary + Bonus - Penalty;
+        }
+        $('.totalEdit').attr('value', total)
     })
     $('button.createPayroll').click(function () {
         var employeeID = $('#employeeID').val()
