@@ -92,6 +92,10 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._payrollDAO.GetPayrollByEmployeeID(EmployeeID);
         }
+        public Payroll GetPayrollByEmployeeIDAndAddedOnNo(int EmployeeID, DateTime AddedOn)
+        {
+            return this._payrollDAO.GetPayrollByEmployeeIDAndAddedOnNo(EmployeeID, AddedOn);
+        }
         public IEnumerable<Payroll> GetAllAddedOnOfPayroll()
         {
             return this._payrollDAO.GetAllAddedOnOfPayroll();
@@ -103,6 +107,14 @@ namespace ManagerCoffeeShopASPNet.Information
         public IEnumerable<Payroll> GetParyollByEmployeeIDAndAddedOn(int EmployeeName, DateTime AddedOn)
         {
             return this._payrollDAO.GetParyollByEmployeeIDAndAddedOn(EmployeeName, AddedOn);
+        }
+        public bool EditPayroll(int PayrollID, int WorkDay, int Bonus, int Penalty, int Total, string Currency, string Desc)
+        {
+            return this._payrollDAO.EditPayroll(PayrollID, WorkDay, Bonus, Penalty, Total, Currency, Desc);
+        }
+        public Payroll GetPayrollByPayrollID(int PayrollID)
+        {
+            return this._payrollDAO.GetPayrollByPayrollID(PayrollID);
         }
     }
 }
