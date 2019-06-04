@@ -4,22 +4,29 @@
     ViewBag.Title = "GetAllOrderItem";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-@Html.ActionLink("Xuất báo cáo", "PrintReport","Service",new { @class="btn btn-primary" })
-@(Html
+<br />
+<h2 style="text-align:center">DANH SÁCH CHI TIẾT ĐƠN HÀNG</h2>
+<br />
+<div>
+    @Html.ActionLink("Xuất báo cáo", "PrintReport", "Service", new { @class = "btn btn-sm btn-primary" })
+</div>
+<br />
+<div>
+    @(Html
         .Grid(Model).Build(columns =>
         {
-            columns.Add(o => o.OrderID).Titled("OrderID").Sortable(false);
+            columns.Add(o => o.OrderID).Titled("Mã HĐ").Sortable(false);
             columns.Add(o => o.Order.Customer.Name).Titled("Tên khách hàng").Sortable(false);
             columns.Add(o => o.Order.PosID).Titled("Vị trí").Sortable(false);
             columns.Add(o => o.Order.OrderDateTime).Titled("Thời gian vào");
-            columns.Add(o => o.FoodAndDrink.Name).Titled("Name").Sortable(false);
-            columns.Add(o => o.Quantity).Titled("Quantity").Sortable(false);
-            columns.Add(o => o.Desc).Titled("Desc").Sortable(false);
-            columns.Add(o => o.Status).Titled("Status").Sortable(false);
+            columns.Add(o => o.FoodAndDrink.Name).Titled("Tên đồ uống").Sortable(false);
+            columns.Add(o => o.Quantity).Titled("Số lượng").Sortable(false);
+            columns.Add(o => o.Desc).Titled("Ghi chú").Sortable(false);
+            columns.Add(o => o.Status).Titled("Trạng thái").Sortable(false);
         })
-        .WithFilterMode(GridFilterMode.FilterRow)
+        //.WithFilterMode(GridFilterMode.FilterRow)
         .Empty("Data is empty")
         .Filterable()
         .Sortable()
-)
-
+    )
+</div>

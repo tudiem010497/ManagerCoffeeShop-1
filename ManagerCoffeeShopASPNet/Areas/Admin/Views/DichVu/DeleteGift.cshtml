@@ -1,67 +1,47 @@
-﻿@model ManagerCoffeeShopASPNet.Gift
+﻿@model IEnumerable<Gift>
+@using NonFactors.Mvc.Grid
 
 @{
     ViewBag.Title = "DeleteGift";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h2>DeleteGift</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<br />
+<h2 style="text-align:center">XÓA THÔNG TIN QUÀ TẶNG</h2>
+<br />
+<h4>Bạn có chắc chắn muốn xóa?</h4>
 <div>
-    <h4>Gift</h4>
+    @*<h4>Gift</h4>*@
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.SupplierID)
-        </dt>
+    @(Html
+        .Grid(Model)
+        .Build(column =>
+        {
+            column.Add(m => m.SupplierID).Titled("Mã NCC");
+            column.Add(m => m.Name).Titled("Tên quà tặng").Sortable(false);
+            column.Add(m => m.UnitPrice).Titled("Giá");
+            column.Add(m => m.Currency).Titled("Đơn vị tiền");
+            column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);
+            //column.Add(m => m.GiftID).Encoded(false).RenderedAs(m => (
+            //   @Html.ActionLink("Xóa", "DeleteGift", "DichVu", new { GiftID = m.GiftID }, new { @class = "btn btn-sm btn-outline-danger" }).ToHtmlString()
+            //)).Filterable(false).Sortable(false).Titled("Action");
+        })
+        .Sortable()
+        .Empty("Data is empty")
+        .Filterable()
+    )
 
-        <dd>
-            @Html.DisplayFor(model => model.SupplierID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UnitPrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UnitPrice)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Currency)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Currency)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Desc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Desc)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+    @*@using (Html.BeginForm()) {*@
+        @*@Html.AntiForgeryToken()*@
 
         <div class="form-actions no-color">
-            @*<input type="submit" value="Delete" class="btn btn-default" /> |*@
-            @Html.ActionLink("Delete", "DoDeleteGift", "DichVu", new { GiftID = Model.GiftID }, new { @class="btn btn-default"})
-            <br />
-            @Html.ActionLink("Back to List", "GetAllGift")
+            <div class="row">
+                <div class="col-md-9">
+                    @Html.ActionLink("Trở về", "GetAllGift")
+                </div>
+                <div class="col-md-3">
+                    @Html.ActionLink("Delete", "DoDeleteGift", "DichVu", new { GiftID = @ViewData["GiftID"] }, new { @class = "btn btn-primary" })
+                </div>
+            </div>
         </div>
-    }
+    @*}*@
 </div>

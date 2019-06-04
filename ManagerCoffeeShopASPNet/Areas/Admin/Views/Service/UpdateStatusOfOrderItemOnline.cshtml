@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.OrderItem>
 @using ManagerCoffeeShopASPNet.Enum
-
+@using NonFactors.Mvc.Grid
 @{
     ViewBag.Title = "UpdateStatusOfOrderItemOnline";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+<br />
+<h2 style="text-align:center">CHI TIẾT DANH SÁCH CẦN XÁC NHẬN</h2>
+<br />
 
-<h2>UpdateStatusOfOrderItemOnline</h2>
-
-
-<table class="table">
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.OrderID)
@@ -46,7 +46,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
-                @*@Html.DropDownListFor(modelItem => item.Status, new SelectList(Enum.GetValues(typeof(EnumStatusOrder.Status))), new { @class = "form-control" })*@
             </td>
             <td>
                 @Html.ActionLink("Confirm", "Confirm", new { OrderItemID = item.OrderItemID }, new { @class = "btn btn-outline-success" })
@@ -57,7 +56,34 @@
 </table>
 
 <div style="float:right">
-    @*@html.actionlink("ok", "confirmall", new { @class = "btn btn-outline-info" })*@
-    @*@Html.ActionLink("OK", "ConfirmAll", new { @class = "btn btn-outline-info" })*@
     <a class="btn btn-outline-info" href="@Url.Action("ConfirmAll", "Service", new { OrderID = ViewData["OrderID"]})">Ok</a>
+</div>*@
+
+<div >
+    @(Html
+        .Grid(Model)
+        .Build(column =>
+        {
+            column.Add(m => m.OrderID).Titled("Mã hóa đơn").Sortable(false);
+            column.Add(m => m.FDID).Titled("Mã đồ uống");
+            column.Add(m => m.Quantity).Titled("Số lượng");
+            column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);
+            column.Add(m => m.Status).Titled("Trạng thái").Filterable(false);
+            column.Add(m => m.OrderID).Encoded(false).RenderedAs(m => (
+                @Html.ActionLink("Xác nhận", "Confirm", new { OrderItemID = m.OrderItemID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
+                + " "+ @Html.ActionLink("Hủy", "Cancel", new { OrderItemID = m.OrderItemID }, new { @class = "btn btn-sm btn-outline-danger" }).ToHtmlString()
+            )).Filterable(false).Sortable(false);
+        })
+        .Sortable()
+        .Empty("Data is empty")
+        .Filterable()
+    )
+</div><br />
+<div class="row">
+    <div class="col-md-9">
+        @Html.ActionLink("Trở về", "GetAllOrderOnlineNeedConfirm")
+    </div>
+    <div class="col-md-3">
+        <a class="btn btn-outline-info" href="@Url.Action("ConfirmAll", "Service", new { OrderID = ViewData["OrderID"]})">Xác nhận tất cả</a>
+    </div>
 </div>

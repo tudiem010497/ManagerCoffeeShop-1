@@ -1,15 +1,17 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.Gift>
-
+@using NonFactors.Mvc.Grid
 @{
     ViewBag.Title = "GetAllGift";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<h2>GetAllGift</h2>
+<br />
+<h2 style="text-align:center">DANH SÁCH QUÀ TẶNG</h2>
+<br />
 <div class="row">
-    <div class="col-sm-6">
-        @Html.ActionLink("Add Gift", "GetFormAddNewGift", "DichVu", new { @class = "btn btn-default" })
+    <div class="col-sm-8">
+        @Html.ActionLink("Thêm quà tặng", "GetFormAddNewGift", "DichVu", new { @class = "btn btn-primary" })
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         @using (Html.BeginForm("DichVu", "GetAllGift", FormMethod.Get))
         {
             @Html.TextBox("Search")
@@ -17,48 +19,24 @@
         }
     </div>
 </div>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.SupplierID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Currency)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Desc)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SupplierID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Currency)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Desc)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "EditGift", "DichVu", new { GiftID = item.GiftID }, new { @class = "btn btn-default"})
-            @Html.ActionLink("Delete", "DeleteGift", "DichVu", new { GiftID = item.GiftID }, new { @class = "btn btn-default" })
-        </td>
-    </tr>
-}
-
-</table>
+<br />
+<div>
+    @(Html
+        .Grid(Model)
+        .Build(column =>
+        {
+            column.Add(m => m.SupplierID).Titled("Mã NCC");
+            column.Add(m => m.Name).Titled("Tên quà tặng").Sortable(false);
+            column.Add(m => m.UnitPrice).Titled("Giá");
+            column.Add(m => m.Currency).Titled("Đơn vị tiền");
+            column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);
+            column.Add(m => m.GiftID).Encoded(false).RenderedAs(m => (
+                @Html.ActionLink("Sửa", "EditGift", "DichVu", new { GiftID = m.GiftID }, new { @class = "btn btn-sm btn-outline-info" }).ToHtmlString()
+            //+ " " + @Html.ActionLink("Xóa", "DeleteGift", "DichVu", new { GiftID = m.GiftID }, new { @class = "btn btn-sm btn-outline-danger" }).ToHtmlString()
+            )).Filterable(false).Sortable(false).Titled("Action");
+        })
+        .Sortable()
+        .Empty("Data is empty")
+        .Filterable()
+    )
+</div>

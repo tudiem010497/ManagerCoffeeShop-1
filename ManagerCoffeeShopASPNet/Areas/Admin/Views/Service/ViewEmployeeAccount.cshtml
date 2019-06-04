@@ -4,39 +4,28 @@
     ViewBag.Title = "ViewEmployeeAccount";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h2>ViewEmployeeAccount</h2>
+<br />
+<h2 style="text-align:center">THÔNG TIN TÀI KHOẢN</h2>
 
 <div>
-    <h4>Account</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Avatar)
+            @Html.DisplayName("Ảnh đại diện")
         </dt>
 
         <dd>
-            @*@Html.DisplayFor(model => model.Avatar)*@
             <img src="@Url.Content(Model.Avatar)" alt="Sample Image" style="height:50px;width:100px;"/>
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.UserName)
+            @Html.DisplayName("Tên đặng nhập")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.UserName)
         </dd>
-
-        @*<dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>*@
-
         <dt>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayName("Email")
         </dt>
 
         <dd>
@@ -44,7 +33,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AccType)
+            @Html.DisplayName("Kiểu tài khoản")
         </dt>
 
         <dd>
@@ -52,18 +41,14 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Position)
+            @Html.DisplayName("Vị trí làm việc")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Position)
         </dd>
-
-        
-
     </dl>
 </div>
 <p>
-    @*@Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |*@
-    @Html.ActionLink("Back to List", "ServiceEmployee")
+    @Html.ActionLink("Trở về", "ServiceEmployee")
 </p>

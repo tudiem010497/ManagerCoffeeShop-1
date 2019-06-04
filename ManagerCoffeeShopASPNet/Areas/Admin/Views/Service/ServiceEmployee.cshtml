@@ -1,12 +1,12 @@
-﻿
+﻿    
 @{
     ViewBag.Title = "ServiceEmployee";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 <br />
 <div class="row">
-    <div class="col-sm-6"></div>
-    <div class="col-sm-6">
+    <div class="col-sm-8"></div>
+    <div class="col-sm-4">
         @using (Html.BeginForm("Service", "ServiceEmployee", FormMethod.Get))
         {
             @Html.TextBox("SearchString")
@@ -64,6 +64,7 @@
                 </select>
             </div>
         </div>
+        <br />
         <div class="row">
             <table class="table" id="order">
                 <thead>

@@ -1,83 +1,32 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.Order>
-
+@using NonFactors.Mvc.Grid
 @{
     ViewBag.Title = "GetAllOrderOnlineNeedConfirm";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+<br />
+<h2 style="text-align:center">DANH SÁCH HÓA ĐƠN ONLINE CẦN XÁC NHẬN</h2>
+<br />
 
-<h2>GetAllOrderOnlineNeedConfirm</h2>
-
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CustomerID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PosID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderDateTime)
-        </th>
-        @*<th>
-        @Html.DisplayNameFor(model => model.PaidDateTime)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.DiscountMoney)
-    </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.TotalAmount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Currency)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Desc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustomerID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PosID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderDateTime)
-        </td>
-        @*<td>
-        @Html.DisplayFor(modelItem => item.PaidDateTime)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.DiscountMoney)
-    </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalAmount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Currency)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Desc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @*UpdateStatusOfOrderItemOnline*@
-            @Html.ActionLink("Confirm", "UpdateStatusOfOrderItemOnline", new { OrderID = item.OrderID }, new { @class = "btn btn-outline-success" })
-            @*@Html.ActionLink("Details", "Details", new { id=item.OrderID }) |*@
-            @Html.ActionLink("Delete", "Delete", new { OrderID = item.OrderID }, new { @class = "btn btn-outline-danger" })
-        </td>
-    </tr>
-}
-
-</table>
+<div>
+    @(Html
+        .Grid(Model)
+        .Build(column =>
+        {
+            column.Add(m => m.CustomerID).Titled("Mã KH");
+            column.Add(m => m.PosID).Titled("Vị trí").Sortable(false);
+            column.Add(m => m.OrderDateTime).Titled("Ngày giờ đặt");
+            column.Add(m => m.TotalAmount).Titled("Tổng tiền");
+            column.Add(m => m.Currency).Titled("Đơn vị tiền");
+            column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);
+            column.Add(m => m.Status).Titled("Trạng thái");
+            column.Add(m => m.OrderID).Encoded(false).RenderedAs(m => (
+                @Html.ActionLink("Xác nhận", "UpdateStatusOfOrderItemOnline", new { OrderID = m.OrderID }, new { @class = "btn btn-outline-success" }).ToHtmlString()
+            + " " + @Html.ActionLink("Xóa", "Delete", new { OrderID = m.OrderID }, new { @class = "btn btn-outline-danger" }).ToHtmlString()
+            )).Filterable(false).Sortable(false);
+        })
+        .Sortable()
+        .Empty("Không có dữ liệu.")
+        .Filterable()
+    )
+</div>

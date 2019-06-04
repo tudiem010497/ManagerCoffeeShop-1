@@ -1,14 +1,13 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.ShipDetail>
-
+@using NonFactors.Mvc.Grid
 @{
     ViewBag.Title = "GetListShipDelivery";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>GetListShipDelivery</h2>
+<h2 style="text-align:center">DANH SÁCH GIAO HÀNG</h2>
 
-
-<table class="table">
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ShipID)
@@ -52,12 +51,29 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.ShipDetailID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ShipDetailID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ShipDetailID })*@
             @Html.ActionLink("Confirm Deliveried", "ConfirmDeliveried", new { ShipDetailID=item.ShipDetailID}, new { @class="btn btn-outline-success"})
         </td>
     </tr>
 }
 
-</table>
+</table>*@
+<div>
+    @(Html
+        .Grid(Model)
+        .Build(column =>
+        {
+            column.Add(m => m.ShipID).Titled("Mã Ship").Sortable(false);
+            column.Add(m => m.OrderID).Titled("Mã HĐ");
+            column.Add(m => m.CustName).Titled("Tên KH");
+            column.Add(m => m.Address).Titled("Địa chỉ giao hàng").Filterable(false);
+            column.Add(m => m.Phone).Titled("Sđt liên hệ").Filterable(false);
+            column.Add(m => m.Status).Titled("Trạng thái").Filterable(false);
+            column.Add(m => m.ShipDetailID).Encoded(false).RenderedAs(m => (
+                @Html.ActionLink("Xác nhận giao hàng", "ConfirmDeliveried", new { ShipDetailID = m.ShipDetailID }, new { @class = "btn bt-sm btn-outline-success" }).ToHtmlString()
+            )).Filterable(false).Sortable(false);
+        })
+        .Sortable()
+        .Empty("Không có dữ liệu.")
+        .Filterable()
+    )
+</div>

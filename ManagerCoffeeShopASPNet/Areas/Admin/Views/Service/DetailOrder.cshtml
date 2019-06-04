@@ -1,16 +1,13 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.OrderItem>
-
+@using NonFactors.Mvc.Grid
 @{
     ViewBag.Title = "DetailOrder";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h2>DetailOrder</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<br />
+<h2 style="text-align:center">CHI TIẾT HÓA ĐƠN</h2>
+<br />
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.OrderID)
@@ -48,13 +45,30 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.OrderItemID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.OrderItemID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.OrderItemID })*@
-            @Html.ActionLink("Đã phục vụ", "UpdatedOrderItemClosed", "Service",
-           new { OrderItemID = item.OrderItemID, OrderID = item.OrderID, View = "DetailOrder" }, new { @class="btn btn-success" })
+            @Html.ActionLink("Đã phục vụ", "UpdatedOrderItemClosed", "Service", new { OrderItemID = item.OrderItemID, OrderID = item.OrderID, View = "DetailOrder" }, new { @class="btn btn-success" })
         </td>
     </tr>
 }
 
-</table>
+</table>*@
+
+<div>
+    @(Html
+        .Grid(Model)
+        .Build(column =>
+        {
+            column.Add(m => m.OrderID).Titled("Mã HĐ").Sortable(false);
+            column.Add(m => m.FDID).Titled("Mã đồ uống");
+            column.Add(m => m.Quantity).Titled("Số lượng");
+            column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);
+            column.Add(m => m.Status).Titled("Trạng thái").Filterable(false);
+            column.Add(m => m.OrderItemID).Encoded(false).RenderedAs(m => (
+                @Html.ActionLink("Đã phục vụ", "UpdatedOrderItemClosed", "Service", new { OrderItemID = m.OrderItemID, OrderID = m.OrderID, View = "DetailOrder" }, new { @class = "btn btn-sm btn-success" }).ToHtmlString()
+            )).Filterable(false).Sortable(false).Titled("Action");
+        })
+        //.WithFilterMode(GridFilterMode.FilterRow)
+        .Sortable()
+        .Empty("Data is empty")
+        .Filterable()
+    )
+</div>

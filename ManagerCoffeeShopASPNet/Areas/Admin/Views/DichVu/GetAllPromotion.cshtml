@@ -6,10 +6,11 @@
     ViewBag.Title = "GetAllPromotion";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h2>GetAllPromotion</h2>
+<br />
+<h2 style="text-align:center">DANH SÁCH KHUYẾN MÃI</h2>
+<br />
 <div class="row">
-    <div class="col-sm-6">@Html.ActionLink("Add Promotion", "GetFormAddNewPromotion", "DichVu", new { @class = "btn btn-primary" })</div>
+    <div class="col-sm-6">@Html.ActionLink("Thêm khuyến mãi", "GetFormAddNewPromotion", "DichVu", new { @class = "btn btn-primary" })</div>
     <div class="col-sm-6">
         @using (Html.BeginForm("DichVu", "GetAllPromotion", FormMethod.Get))
         {
@@ -17,8 +18,8 @@
             <button type="submit">Search</button>
         }
     </div>
-   
 </div>
+<hr />
 <div>
     @*<table class="table">
         <tr>
@@ -61,12 +62,12 @@
         .Grid(Model)
         .Build(column =>
         {
-            column.Add(m => m.Name).Titled("Name").Sortable(false);
-            column.Add(m => m.StartDate).Titled("StartDate");
-            column.Add(m => m.EndDate).Titled("EndDate");
-            column.Add(m => m.Desc).Titled("Desc").Filterable(false);
+            column.Add(m => m.Name).Titled("Tên khuyến mãi").Sortable(false);
+            column.Add(m => m.StartDate).Titled("Ngày bắt đầu");
+            column.Add(m => m.EndDate).Titled("Ngày kết thúc");
+            column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);
             column.Add(m => m.PromotionID).Encoded(false).RenderedAs(m => (
-                @Html.ActionLink("Edit", "EditPromotion", "DichVu", new { PromotionID = m.PromotionID }, new { @class = "btn btn-primary" }).ToHtmlString()
+                @Html.ActionLink("Sửa", "EditPromotion", "DichVu", new { PromotionID = m.PromotionID }, new { @class = "btn btn-sm btn-primary" }).ToHtmlString()
             )).Filterable(false).Sortable(false).Titled("Action");
         })
         .WithFilterMode(GridFilterMode.FilterRow)

@@ -1,16 +1,14 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.Order>
-
+@using NonFactors.Mvc.Grid
 @{
     ViewBag.Title = "GetAllOrderNeedDelivery";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+<br />
+<h2 style="text-align:center">DANH SÁCH HÓA ĐƠN CẦN GIAO</h2>
+<br />
 
-<h2>GetAllOrderNeedDelivery</h2>
-
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
-<table class="table">
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.CustomerID)
@@ -72,12 +70,34 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.OrderID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.OrderID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.OrderID })*@
             @Html.ActionLink("Xem Chi tiết", "DetailOrderNeedSevice", "Service", new { OrderID = item.OrderID }, new { @class = "btn btn-primary btnDetailOrder" })
             @Html.ActionLink("Xác nhận giao hàng", "ConfirmDelivery", new { OrderID = item.OrderID}, new { @class = "btn btn-outline-success"})
         </td>
     </tr>
 }
-</table>
+</table>*@
+
+<div>
+    @(Html
+        .Grid(Model)
+        .Build(column =>
+        {
+            column.Add(m => m.CustomerID).Titled("Mã KH").Sortable(false);
+            column.Add(m => m.PosID).Titled("Vị trí");
+            column.Add(m => m.OrderDateTime).Titled("Ngày giờ đặt");
+            column.Add(m => m.PaidDateTime).Titled("Ngày giờ giao").Filterable(false);
+            column.Add(m => m.DiscountMoney).Titled("Giảm giá").Filterable(false);
+            column.Add(m => m.TotalAmount).Titled("Tổng tiền").Filterable(false);
+            column.Add(m => m.Currency).Titled("Đơn vị tiền").Filterable(false);
+            column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);
+            column.Add(m => m.Status).Titled("Trạng thái").Filterable(false);
+            column.Add(m => m.OrderID).Encoded(false).RenderedAs(m => (
+                @Html.ActionLink("Xem Chi tiết", "DetailOrderNeedSevice", "Service", new { OrderID = m.OrderID }, new { @class = "btn btn-sm btn-primary btnDetailOrder" }).ToHtmlString()
+                + " " + @Html.ActionLink("Xác nhận giao hàng", "ConfirmDelivery", new { OrderID = m.OrderID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
+            )).Filterable(false).Sortable(false);
+        })
+        .Sortable()
+        .Empty("Không có dữ liệu.")
+        .Filterable()
+    )
+</div>

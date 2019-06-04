@@ -4,19 +4,20 @@
     ViewBag.Title = "GetAllOrder";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h2>GetAllOrder</h2>
+<br />
+<h2 style="text-align:center">DANH SÁCH HÓA ĐƠN</h2>
+<br />
 @(Html
         .Grid(Model).Build(columns =>
         {
-            columns.Add(o => o.OrderID).Titled("OrderID").Sortable(false);
+            columns.Add(o => o.OrderID).Titled("Mã HĐ").Sortable(false);
             columns.Add(o => o.Customer.Name).Titled("Tên khách hàng").Sortable(false);
             columns.Add(o => o.PosID).Titled("Vị trí").Sortable(false);
             columns.Add(o => o.OrderDateTime).Titled("Thời gian vào");
             columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o =>
-            Html.ActionLink("Xuất hóa đơn", "PrintOrder", "Service", new { OrderID = o.OrderID }, new { @class = "btn btn-primary" })).Filterable(false);
+            Html.ActionLink("Xuất hóa đơn", "PrintOrder", "Service", new { OrderID = o.OrderID }, new { @class = "btn btn-sm btn-primary" })).Filterable(false);
         })
-        .WithFilterMode(GridFilterMode.FilterRow)
+        //.WithFilterMode(GridFilterMode.FilterRow)
         .Empty("Data is empty")
         .Filterable()
         .Sortable()

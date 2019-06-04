@@ -122,7 +122,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("DeleteGift")]
         public ActionResult DeleteGift(int GiftID)
         {
-            Gift gift = info.GetGiftByID(GiftID);
+            IEnumerable<Gift> gift = info.GetGiftByGiftID(GiftID);
+            ViewData["GiftID"] = GiftID;
             return View(gift);
         }
         [Route("DoDeleteGift")]
