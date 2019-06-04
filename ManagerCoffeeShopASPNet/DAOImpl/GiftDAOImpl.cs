@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ManagerCoffeeShopASPNet.DAOImpl
 {
-    public class GiftDAOImpl:GiftDAO
+    public class GiftDAOImpl : GiftDAO
     {
         CoffeeShopDBDataContext context;
         public GiftDAOImpl()
@@ -20,7 +20,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 int id = (from gift in context.Gifts orderby gift.GiftID descending select gift.GiftID).FirstOrDefault();
                 return id;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return 0;
             }
@@ -34,6 +34,13 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             var g = (from gift in context.Gifts
                      where gift.GiftID == GiftID
                      select gift).SingleOrDefault();
+            return g;
+        }
+        public IEnumerable<Gift> GetGiftByGiftID(int GiftID)
+        {
+            IEnumerable<Gift> g = from gift in context.Gifts
+                                  where gift.GiftID == GiftID
+                                  select gift;
             return g;
         }
         public bool InsertGift(int SupplierID, string Name, float UnitPrice, string Currency, string Desc)
@@ -51,7 +58,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 context.SubmitChanges();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception("Error insert gift " + e.Message);
             }
@@ -84,7 +91,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 context.SubmitChanges();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception("Error delete gift " + e.Message);
             }

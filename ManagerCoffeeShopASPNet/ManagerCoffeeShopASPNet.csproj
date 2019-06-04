@@ -502,6 +502,9 @@
     <Content Include="Areas\Admin\Views\Web\CreateDiagram.cshtml" />
     <Content Include="Areas\Admin\Views\Accountant\DetailPayrollOfEmployee.cshtml" />
     <Content Include="Areas\Admin\Views\Accountant\DoDetailPayrollOfEmployee.cshtml" />
+    <Content Include="Areas\Admin\Views\Accountant\EditPayrollOfEmployee.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\DetailOrderNeedSevice.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\GetAllOrder.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -41,6 +41,10 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._giftDAO.GetGiftByID(GiftID);
         }
+        public IEnumerable<Gift> GetGiftByGiftID(int GiftID)
+        {
+            return this._giftDAO.GetGiftByGiftID(GiftID);
+        }
         public bool InsertGift(int SupplierID, string Name, float UnitPrice, string Currency, string Desc)
         {
             return this._giftDAO.InsertGift(SupplierID, Name, UnitPrice, Currency, Desc);
