@@ -6,91 +6,9 @@
     ViewBag.Title = "DetailsCoffeeShop";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h2>DetailsCoffeeShop</h2>
-
-@*<div>
-        <h4>CoffeeShop</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Address)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Address)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Phone)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Phone)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.LogoImagePath)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.LogoImagePath)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.TitleAbout)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.TitleAbout)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.DescAbout)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.DescAbout)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.TitleContact)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.TitleContact)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.DescContact)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.DescContact)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
-
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.CSID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>*@
+<br />
+<h2 style="text-align:center">THÔNG TIN CHI TIẾT CỦA QUÁN</h2>
+<br />
 <div>
     @(Html
         .Grid(Model)
@@ -106,13 +24,17 @@
             column.Add(m => m.DescContact).Titled("Desc Contact").Sortable(false).Filterable(false);
             column.Add(m => m.Email).Titled("Email").Sortable(false).Filterable(false);
         })
-        .WithFilterMode(GridFilterMode.FilterRow)
         .Sortable()
         .Empty("Data is empty")
         .Filterable()
     )
 </div>
-<p>
-    @*@Html.ActionLink("Edit", "Edit", new { id = Model.CSID }) |*@
-    @Html.ActionLink("Back to List", "GetAllCoffeeShop", "Web")
-</p>
+<br />
+<div class="row">
+    <div class="col-md-9">
+        @Html.ActionLink("Trở về", "GetAllCoffeeShop", "Web")
+    </div>
+    <div class="col-md-3">
+        @Html.ActionLink("Sửa", "EditCoffeeShop", new { CSID = ViewData["CSID"] }, new { @class = "btn btn-sm btn-outline-primary" })
+    </div>
+</div>

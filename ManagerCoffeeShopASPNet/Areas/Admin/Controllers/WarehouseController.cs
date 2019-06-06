@@ -77,6 +77,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("DoCreateIngredient")]
         public ActionResult DoCreateIngredient(int SupplierID, string Name, double Amount, string Unit, double UnitPrice, string Currency)
         {
+            
             bool result = info.InsertIngredient(SupplierID, Name, Amount, Unit, UnitPrice, Currency);
             if (result)
             {
@@ -128,14 +129,21 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("DoCreateSupplier")]
         public ActionResult DoCreateSupplier(string Name, string Address, string Phone)
         {
-            bool result = info.InsertSupplier(Name, Address, Phone);
-            if (result)
+            if (Name == null || Address == null || Phone == null || Name == "" || Address == "" || Phone == "")
             {
-                TempData["message"] = "Lưu thành công";
+                TempData["ErrorInfo"] = "Hãy điền đầy đủ thông tin";
             }
             else
             {
-                TempData["error"] = "Lưu thất bại";
+                bool result = info.InsertSupplier(Name, Address, Phone);
+                if (result)
+                {
+                    TempData["message"] = "Lưu thành công";
+                }
+                else
+                {
+                    TempData["error"] = "Lưu thất bại";
+                }
             }
             return RedirectToAction("CreateSupplier", "Warehouse");
         }

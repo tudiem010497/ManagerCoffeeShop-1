@@ -69,6 +69,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult DetailEmployee(int EmployeeID)
         {
             IEnumerable<Employee> em = info.GetEmployeeByEmployeeID(EmployeeID);
+            ViewData["EmployeeID"] = EmployeeID;
+            ViewData["Status"] = em.FirstOrDefault().Status;
             return View(em);
         }
         [Route("DeleteEmployee")]
@@ -148,7 +150,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             Employee employee = info.GetEmployeeByID(EmployeeID);
             Salary salary = info.GetSalaryByDesc(em.Status);//lấy thông tin mức lương dựa vào status của nhân viên
             info.UpdateBasicSalary(EmployeeID, salary.SalaryID);
-            return RedirectToAction("GetAllEmployee", "Web");
+            return RedirectToAction("DetailEmployee", "Web");
         }
         [Route("GetFormAddNewAccountForEmployee")]
         public ActionResult GetFormAddNewAccountForEmployee(int EmployeeID)
@@ -290,6 +292,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult DetailsCoffeeShop(int CSID)
         {
             IEnumerable<CoffeeShop> cs = info.GetCoffeeShopByCSID(CSID);
+            ViewData["CSID"] = CSID;
             return View(cs);
         }
 

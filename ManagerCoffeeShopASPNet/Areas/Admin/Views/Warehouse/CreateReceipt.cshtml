@@ -5,8 +5,9 @@
     ViewBag.Title = "CreateReceipt";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h2>CreateReceipt</h2>
+<br />
+<h2 style="text-align:center">THÊM PHIẾU NHẬP MỚI</h2>
+<br />
 <div class="row">
     <div class="col-sm-8">
         @(Html
@@ -14,7 +15,7 @@
                 .Build(columns =>
                 {
                     columns.Add(ingre => ingre.IngreID).Titled("Mã MVL");
-                    columns.Add(ingre => ingre.Name).Titled("Nguyên vật liệu");
+                    columns.Add(ingre => ingre.Name).Titled("Tên nguyên vật liệu");
                     columns.Add(ingre => ingre.Supplier.Name).Titled("Tên nhà cung cấp");
                     columns.Add(ingre => ingre.UnitPrice).Titled("Đơn giá");
                     columns.Add(ingre => ingre.Unit).Titled("Đơn vị tính");
@@ -135,6 +136,7 @@
         
     </div>
 </div>
+<br />
 <div>
     @Html.ActionLink("Trở về", "GetAllReceipt", "Warehouse")
 </div>

@@ -4,7 +4,8 @@
     ViewBag.Title = "GetAllIngredient";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<h2>Danh sách nguyên vật liệu trong kho</h2>
+<br />
+<h2 style="text-align:center">DANH SÁCH NGUYÊN VẬT LIỆU TRONG KHO</h2>
 @if (TempData["message"] != null)
 {
     <div class="alert alert-success">@TempData["message"]</div>
@@ -13,22 +14,24 @@
 {
     <div class="alert alert-danger">@TempData["error"]</div>
 }
+<br />
 <div class="container-fluid">
-    @Html.ActionLink("Thêm", "CreateIngredient","Warehouse",new { @class="btn btn-primary"})
-    <div class="row">
+    @Html.ActionLink("Thêm", "CreateIngredient","Warehouse",new { @class="btn btn-sm btn-primary"})
+    <br />
+    <div @*class="row"*@>
         @(Html
             .Grid(Model)
             .Build(columns =>
             {
-                columns.Add(model => model.Name).Titled("Tên nguyên vật liệu");
-                columns.Add(model => model.Supplier.Name).Titled("Nhà cung cấp");
+                columns.Add(model => model.Name).Titled("Tên NVL");
+                columns.Add(model => model.Supplier.Name).Titled("Tên NCC");
                 columns.Add(model => model.Amount).Titled("Số lượng");
                 columns.Add(model => model.Unit).Titled("Đơn vị tính");
                 columns.Add(model => model.UnitPrice).Titled("Đơn giá");
                 columns.Add(model => model.Currency).Titled("Đơn vị tiền");
                 columns.Add(model => model.IngreID).Encoded(false).
                     RenderedAs(model => (
-                     Html.ActionLink("Sửa", "EditIngredient", "WareHouse", new { IngreID = model.IngreID }, new { @class = "btn btn-success" }).ToHtmlString()
+                     Html.ActionLink("Sửa", "EditIngredient", "WareHouse", new { IngreID = model.IngreID }, new { @class = "btn btn-sm btn-success" }).ToHtmlString()
                     )).Filterable(false);
             }).Filterable()
         )

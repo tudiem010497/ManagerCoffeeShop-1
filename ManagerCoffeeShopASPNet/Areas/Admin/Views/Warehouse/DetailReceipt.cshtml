@@ -4,9 +4,11 @@
     ViewBag.Title = "DetailReceipt";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h2>DetailReceipt</h2>
-@(Html
+<br />
+<h2 style="text-align:center">CHI TIẾT PHIẾU NHẬP</h2>
+<br />
+<div>
+    @(Html
             .Grid(Model)
             .Build(columns =>
             {
@@ -19,5 +21,7 @@
                 columns.Add(model => model.UnitPrice).Titled("Đơn giá");
                 columns.Add(model => model.Currency).Titled("Đơn vị tiền").Filterable(false);
             }).Filterable()
-)
+    )
+</div>
+<br />
 @Html.ActionLink("Trở về", "GetAllReceipt", "Warehouse", new { @class = "btn btn-outline-primary" })

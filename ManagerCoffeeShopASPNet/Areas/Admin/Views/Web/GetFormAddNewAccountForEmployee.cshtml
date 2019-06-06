@@ -7,19 +7,19 @@
 }
 
 <script src="~/Assets/Admin/js/web.js"></script>
-
-<h2>GetFormAddNewAccountForEmployee</h2>
+<br />
+<h2 style="text-align:center">THÊM TÀI KHOẢN CHO NHÂN VIÊN</h2>
 
 @using (Html.BeginForm("CreateAccountForEmployee", "Web", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Account</h4>
+        @*<h4>Account</h4>*@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.Label("EmployeeID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Mã nhân viên", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="text" value="@TempData["EmployeeID"]" name="employeeID" id="employeeID" class="form-control" />
                 @Html.ValidationMessage("EmployeeID", "", new { @class = "text-danger" })
@@ -28,7 +28,7 @@
         
         @*@Html.EditorFor(model=>model.EmployeeID, new { type="hidden"})*@
         <div class="form-group">
-            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Tên đăng nhập", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", id="username" } })
                 @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
@@ -36,7 +36,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Mật khẩu", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", id="password", type="password"} })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
@@ -52,7 +52,7 @@
         </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AccType, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Kiểu tài khoản", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.AccType, new SelectList(Enum.GetValues(typeof(EnumAccount.AccType))), new { @class = "form-control", id="acctype" })
                 @Html.ValidationMessageFor(model => model.AccType, "", new { @class = "text-danger" })
@@ -60,7 +60,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Position, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Vị trí làm việc", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.Position, new SelectList(Enum.GetValues(typeof(EnumAccount.Position))), new { @class = "form-control", id="position"})
                 @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
@@ -75,7 +75,7 @@
             </div>
         </div>*@
         <div class="form-group">
-            @Html.LabelFor(model => model.Avatar, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Ảnh đại diện", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.Avatar, new{ type = "file", id="avatar"})
                 @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
@@ -83,15 +83,17 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" id="btnCreateAccount" />
-                @*onclick="createAccount()"*@
+            <div class="row">
+                <div class="col-md-8">
+                    @Html.ActionLink("Trở lại", "GetAllEmployee")
+                </div>
+                <div class="col-md-4">
+                    <input type="submit" value="Thêm" class="btn btn-primary" id="btnCreateAccount" />
+                    @*onclick="createAccount()"*@
+                </div>
             </div>
+            
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "GetAllEmployee")
-</div>
 

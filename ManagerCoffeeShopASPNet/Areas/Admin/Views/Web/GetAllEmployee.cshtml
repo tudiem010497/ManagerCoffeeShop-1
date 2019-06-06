@@ -3,13 +3,13 @@
     ViewBag.Title = "GetAllEmployee";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h2>GetAllEmployee</h2>
+<br />
+<h2 style="text-align:center">DANH SÁCH NHÂN VIÊN</h2>
 <div class="row">
-    <div class="col-sm-6">
-        @Html.ActionLink("Add Employee", "GetFormAddNewEmployee", "Web", new { @class = "btn btn-outline-primary" })
+    <div class="col-sm-7">
+        @Html.ActionLink("Thêm nhân viên", "GetFormAddNewEmployee", "Web", new { @class = "btn btn-outline-primary" })
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-5">
         @using (Html.BeginForm("Web", "GetAllEmployee", FormMethod.Get))
         {
             @Html.TextBox("Search")
@@ -17,6 +17,7 @@
         }
     </div>
 </div>
+<br />
 @if (TempData["messageSuccess"] != null)
 {
     <div class="alert alert-success">@TempData["messageSuccess"]</div>
@@ -34,10 +35,10 @@
             @Html.DisplayNameFor(model => model.CSID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayName("Tên nhân viên")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayName("Trạng thái")
         </th>
         <th></th>
     </tr>
@@ -52,7 +53,7 @@
             }
             else
             {
-                @Html.ActionLink("Create Account", "GetFormAddNewAccountForEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-outline-light text-dark btn-sm" })
+                @Html.ActionLink("Tạo tài khoản", "GetFormAddNewAccountForEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-light text-dark btn-sm" })
             }
         </td>
         <td>
@@ -65,17 +66,13 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @Html.ActionLink("Edit", "EditEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-outline-primary" })
-            @Html.ActionLink("Details", "DetailEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-outline-info " })
-            @Html.ActionLink("Create Payroll", "CreatePayroll", "Accountant",new { EmployeeID=item.EmployeeID}, new { @class="btn btn-outline-success"})
-            @Html.ActionLink("Detail Payroll", "DetailPayrollOfEmployee", "Accountant", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-outline-success" })
-            @if (item.Status == "Lay_off")
-            {
-                @Html.ActionLink("Delete", "DeleteEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-outline-danger active" })
-            }
+            
+            @Html.ActionLink("Chi tiết", "DetailEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-info " })
+            @Html.ActionLink("Thêm bảng lương", "CreatePayroll", "Accountant",new { EmployeeID=item.EmployeeID}, new { @class="btn btn-sm btn-outline-success"})
+            @Html.ActionLink("Chi tiết bảng lương", "DetailPayrollOfEmployee", "Accountant", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-success" })
             @if (item.UserID != null)
             {
-                @Html.ActionLink("View Account", "ViewAccountInformation", "Web", new { UserID = item.UserID }, new { @class = "btn btn-outline-success " })
+                @Html.ActionLink("Xem tài khoản", "ViewAccountInformation", "Web", new { UserID = item.UserID }, new { @class = "btn btn-sm btn-outline-success " })
             }
         </td>
     </tr>

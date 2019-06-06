@@ -5,16 +5,21 @@
     ViewBag.Title = "GetAllReceipt";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-@Html.ActionLink("Thêm phiếu nhập", "CreateReceipt","Warehouse", new { @class= "btn btn-primary"})
-<h2>GetAllReceipt</h2>
-<div class="row">
+<br />
+<h2 style="text-align:center">DANH SÁCH PHIẾU NHẬP</h2>
+<br />
+<div>
+    @Html.ActionLink("Thêm phiếu nhập", "CreateReceipt", "Warehouse", new { @class = "btn btn-primary" })
+</div>
+<br />
+<div >
     @(Html
             .Grid(Model)
             .Build(columns =>
             {
-                columns.Add(model => model.Date).Titled("Tên nhà cung cấp");
-                columns.Add(model => model.TotalAmount).Titled("Địa chỉ nhà cung cấp");
-                columns.Add(model => model.Currency).Titled("Số điện thoại");
+                columns.Add(model => model.Date).Titled("Ngày nhập");
+                columns.Add(model => model.TotalAmount).Titled("Tổng tiền");
+                columns.Add(model => model.Currency).Titled("Đơn vị tiền");
                 columns.Add(model => model.ReceiptID).Encoded(false).
                         RenderedAs(model => (
                          Html.ActionLink("Xem chi tiết", "DetailReceipt", "WareHouse", new { ReceiptID = model.ReceiptID }, new { @class = "btn btn-success" }).ToHtmlString()

@@ -5,113 +5,41 @@
     ViewBag.Title = "DetailEmployee";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h2>DetailEmployee</h2>
-
+<br />
+<h2 style="text-align:center">THÔNG TIN CHI TIẾT CỦA NHÂN VIÊN</h2>
+<br />
 <div>
-    @*<h4>Employee</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CSID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CSID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DOB)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DOB)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IndentityNum)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IndentityNum)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-    </dl>*@
     @(Html
         .Grid(Model)
         .Build(column =>
         {
             column.Add(m => m.UserID).Titled("UserID");
             column.Add(m => m.CSID).Titled("CSID");
-            column.Add(m => m.Name).Titled("Name");
-            column.Add(m => m.Address).Titled("Address");
+            column.Add(m => m.Name).Titled("Tên NV");
+            column.Add(m => m.Address).Titled("Địa chỉ");
             column.Add(m => m.Email).Titled("Email");
-            column.Add(m => m.Phone).Titled("Phone");
-            column.Add(m => m.DOB).Titled("Date of Birth");
-            column.Add(m => m.Gender).Titled("Gender");
-            column.Add(m => m.IndentityNum).Titled("Indentity Number");
-            column.Add(m => m.Status).Titled("Status");
+            column.Add(m => m.Phone).Titled("SĐT");
+            column.Add(m => m.DOB).Titled("Ngày sinh");
+            column.Add(m => m.Gender).Titled("Giới tính");
+            column.Add(m => m.IndentityNum).Titled("Số CMND");
+            column.Add(m => m.Status).Titled("Trạng thái");
         })
     )
 </div>
-
-<p>
-    @*@Html.ActionLink("Edit", "EditEmployee", "Web", new { EmployeeID = Model.EmployeeID }, new { @class="btn btn-primary"})*@
-    @Html.ActionLink("Back to List", "GetAllEmployee")
-</p>
+<br />
+<div class="row">
+    <div class="col-md-9">
+        @Html.ActionLink("Trở về", "GetAllEmployee")
+    </div>
+    <div class="col-md-3">
+        @Html.ActionLink("Sửa", "EditEmployee", "Web", new { EmployeeID = ViewData["EmployeeID"] }, new { @class = "btn btn-sm btn-outline-primary" })
+        @if (ViewData["Status"].ToString() == "Lay_off")
+        {
+            @Html.ActionLink("Xóa", "DeleteEmployee", "Web", new { EmployeeID = ViewData["EmployeeID"] }, new { @class = "btn btn-sm btn-outline-danger active" })
+        }
+        else
+        {
+            @Html.ActionLink("Xóa", "DeleteEmployee", "Web", new { EmployeeID = ViewData["EmployeeID"] }, new { @class = "btn btn-sm btn-outline-danger disabled" })
+        }
+    </div>
+</div>

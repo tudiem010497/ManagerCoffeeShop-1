@@ -4,6 +4,10 @@
     ViewBag.Title = "GetAllSupplier";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+
+<br />
+<h2 style="text-align:center">DANH SÁCH NHÀ CUNG CẤP</h2>
+<br />
 @if(TempData["message"] != null)
 {
     <div class="alert alert-success">@TempData["message"]</div>
@@ -12,10 +16,9 @@
 {
     <div class="alert alert-danger">@TempData["error"]</div>
 }
-<h2>GetAllSupplier</h2>
 <div class="container-fluid">
     @Html.ActionLink("Thêm", "CreateSupplier", "Warehouse", new { @class = "btn btn-primary" })
-    <div class="row">
+    <div >
         @(Html
             .Grid(Model)
             .Build(columns =>
@@ -25,7 +28,7 @@
                 columns.Add(model => model.Phone).Titled("Số điện thoại");
                 columns.Add(model => model.SupplierID).Encoded(false).
                     RenderedAs(model => (
-                     Html.ActionLink("Sửa", "EditSupplier", "WareHouse", new { SupplierID = model.SupplierID }, new { @class = "btn btn-success" }).ToHtmlString()
+                     Html.ActionLink("Sửa", "EditSupplier", "WareHouse", new { SupplierID = model.SupplierID }, new { @class = "btn btn-sm btn-success" }).ToHtmlString()
                     )).Filterable(false);
             }).Filterable()
         )

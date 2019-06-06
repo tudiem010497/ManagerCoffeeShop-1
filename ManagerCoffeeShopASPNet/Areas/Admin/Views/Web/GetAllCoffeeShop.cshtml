@@ -4,38 +4,25 @@
     ViewBag.Title = "GetAllCoffeeShop";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+<br />
+<h2 style="text-align:center">DANH SÁCH QUÁN COFFEE</h2>
 
-<h2>GetAllCoffeeShop</h2>
-
-<p>
-    @Html.ActionLink("Add New Coffee Shop", "GetAddNewCoffeeShop", "Web")
-</p>
+<div>
+    @Html.ActionLink("Thêm quán mới", "GetAddNewCoffeeShop", "Web", new { @class="btn btn-sm btn-primary"})
+</div>
+<br />
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayName("Tên quán Coffee")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayName("Địa chỉ")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Phone)
+            @Html.DisplayName("SĐT")
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.LogoImagePath)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TitleAbout)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DescAbout)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TitleContact)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DescContact)
-        </th>*@
+        
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
@@ -53,28 +40,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.Phone)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.LogoImagePath)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TitleAbout)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DescAbout)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TitleContact)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DescContact)
-        </td>*@
+        
         <td>
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.ActionLink("Edit", "EditCoffeeShop", new { CSID = item.CSID }, new { @class= "btn btn-outline-primary" }) 
-            @Html.ActionLink("Details", "DetailsCoffeeShop", new { CSID = item.CSID }, new { @class= "btn btn-outline-info" })
-            @Html.ActionLink("Delete", "DeleteCoffeeShop", new { CSID = item.CSID }, new { @class= "btn btn-outline-danger" })
+            @Html.ActionLink("Sửa", "EditCoffeeShop", new { CSID = item.CSID }, new { @class= "btn btn-sm btn-outline-primary" }) 
+            @Html.ActionLink("Chi tiết", "DetailsCoffeeShop", new { CSID = item.CSID }, new { @class= "btn btn-sm btn-outline-info" })
+            @Html.ActionLink("Xóa", "DeleteCoffeeShop", new { CSID = item.CSID }, new { @class= "btn btn-sm btn-outline-danger" })
         </td>
     </tr>
 }

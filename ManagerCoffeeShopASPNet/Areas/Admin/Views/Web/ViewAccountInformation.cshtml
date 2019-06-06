@@ -5,62 +5,11 @@
     ViewBag.Title = "ViewAccountInformation";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h2>ViewAccountInformation</h2>
+<br />
+<h2 style="text-align:center">THÔNG TIN TÀI KHOẢN</h2>
 
 <div>
-    <h4>Account</h4>
     <hr />
-    @*<dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AccType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AccType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Position)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Position)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Avatar)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Avatar)
-        </dd>
-
-    </dl>*@
     @(Html
         .Grid(Model)
         .Build(column =>
@@ -69,12 +18,10 @@
         column.Add(m => m.Email).Titled("Email");
         column.Add(m => m.AccType).Titled("AccType");
         column.Add(m => m.Position).Titled("Position");
-        //column.Add(/*m => m.Avatar*/).Encoded(false).Titled("Avatar").RenderedAs(m =>@<div style="width:100px;"><img alt="Image" src='@m.Avatar' )" /></div>);
-        //column.Add().Encoded(false).RenderValue(@<div style="width:100px"><img src="m.Avatar"/></div>);
         })
-)
+    )
 </div>
-<p>
-    @*@Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |*@
-    @Html.ActionLink("Back to List", "GetAllEmployee")
-</p>
+<br />
+<div>
+    @Html.ActionLink("Trở lại", "GetAllEmployee")
+</div>
