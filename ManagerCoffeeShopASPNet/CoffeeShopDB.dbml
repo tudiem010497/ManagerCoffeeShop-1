@@ -69,8 +69,10 @@
     <Type Name="CoffeeLandScape">
       <Column Name="CLSID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CSID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="FloorID" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="MapRatio" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="FloorID" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="MapRatio" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Width" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Height" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Association Name="CoffeeLandScape_CoffeeLandScapeDetail" Member="CoffeeLandScapeDetails" ThisKey="CLSID" OtherKey="CLSID" Type="CoffeeLandScapeDetail" />
       <Association Name="CoffeeShop_CoffeeLandScape" Member="CoffeeShop" ThisKey="CSID" OtherKey="CSID" Type="CoffeeShop" IsForeignKey="true" />
     </Type>
@@ -79,14 +81,14 @@
     <Type Name="CoffeeLandScapeDetail">
       <Column Name="ItemID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CLSID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ShapeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="RowID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ColID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ImageID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Href" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="x" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="y" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="Width" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="Length" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="ItemType" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Height" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Rotate" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="CoffeeLandScape_CoffeeLandScapeDetail" Member="CoffeeLandScape" ThisKey="CLSID" OtherKey="CLSID" Type="CoffeeLandScape" IsForeignKey="true" />
-      <Association Name="Shape_CoffeeLandScapeDetail" Member="Shape" ThisKey="ShapeID" OtherKey="ShapeID" Type="Shape" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.CoffeeShop" Member="CoffeeShops">
@@ -564,6 +566,18 @@
       <Association Name="Salary_BasicSalary" Member="BasicSalaries" ThisKey="SalaryID" OtherKey="SalaryID" Type="BasicSalary" />
     </Type>
   </Table>
+  <Table Name="dbo.Sale" Member="Sales">
+    <Type Name="Sale">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Region" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="Person" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="Item" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="Units" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UnitCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Total" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="AddedOn" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.Server" Member="Servers">
     <Type Name="Server">
       <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -576,7 +590,6 @@
     <Type Name="Shape">
       <Column Name="ShapeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="ImagePath" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Shape_CoffeeLandScapeDetail" Member="CoffeeLandScapeDetails" ThisKey="ShapeID" OtherKey="ShapeID" Type="CoffeeLandScapeDetail" />
     </Type>
   </Table>
   <Table Name="dbo.Ship" Member="Ships">

@@ -129,6 +129,9 @@ namespace ManagerCoffeeShopASPNet
     partial void InsertSalary(Salary instance);
     partial void UpdateSalary(Salary instance);
     partial void DeleteSalary(Salary instance);
+    partial void InsertSale(Sale instance);
+    partial void UpdateSale(Sale instance);
+    partial void DeleteSale(Sale instance);
     partial void InsertShape(Shape instance);
     partial void UpdateShape(Shape instance);
     partial void DeleteShape(Shape instance);
@@ -533,6 +536,14 @@ namespace ManagerCoffeeShopASPNet
 			get
 			{
 				return this.GetTable<Salary>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Sale> Sales
+		{
+			get
+			{
+				return this.GetTable<Sale>();
 			}
 		}
 		
@@ -1807,7 +1818,11 @@ namespace ManagerCoffeeShopASPNet
 		
 		private string _FloorID;
 		
-		private string _MapRatio;
+		private double _MapRatio;
+		
+		private double _Width;
+		
+		private double _Height;
 		
 		private EntitySet<CoffeeLandScapeDetail> _CoffeeLandScapeDetails;
 		
@@ -1823,8 +1838,12 @@ namespace ManagerCoffeeShopASPNet
     partial void OnCSIDChanged();
     partial void OnFloorIDChanging(string value);
     partial void OnFloorIDChanged();
-    partial void OnMapRatioChanging(string value);
+    partial void OnMapRatioChanging(double value);
     partial void OnMapRatioChanged();
+    partial void OnWidthChanging(double value);
+    partial void OnWidthChanged();
+    partial void OnHeightChanging(double value);
+    partial void OnHeightChanged();
     #endregion
 		
 		public CoffeeLandScape()
@@ -1878,7 +1897,7 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FloorID", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FloorID", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
 		public string FloorID
 		{
 			get
@@ -1898,8 +1917,8 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MapRatio", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string MapRatio
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MapRatio", DbType="Float NOT NULL")]
+		public double MapRatio
 		{
 			get
 			{
@@ -1914,6 +1933,46 @@ namespace ManagerCoffeeShopASPNet
 					this._MapRatio = value;
 					this.SendPropertyChanged("MapRatio");
 					this.OnMapRatioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Width", DbType="Float NOT NULL")]
+		public double Width
+		{
+			get
+			{
+				return this._Width;
+			}
+			set
+			{
+				if ((this._Width != value))
+				{
+					this.OnWidthChanging(value);
+					this.SendPropertyChanging();
+					this._Width = value;
+					this.SendPropertyChanged("Width");
+					this.OnWidthChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Height", DbType="Float NOT NULL")]
+		public double Height
+		{
+			get
+			{
+				return this._Height;
+			}
+			set
+			{
+				if ((this._Height != value))
+				{
+					this.OnHeightChanging(value);
+					this.SendPropertyChanging();
+					this._Height = value;
+					this.SendPropertyChanged("Height");
+					this.OnHeightChanged();
 				}
 			}
 		}
@@ -2008,21 +2067,21 @@ namespace ManagerCoffeeShopASPNet
 		
 		private int _CLSID;
 		
-		private int _ShapeID;
+		private int _ImageID;
 		
-		private int _RowID;
+		private string _Href;
 		
-		private int _ColID;
+		private double _x;
+		
+		private double _y;
 		
 		private double _Width;
 		
-		private double _Length;
+		private double _Height;
 		
-		private string _ItemType;
+		private int _Rotate;
 		
 		private EntityRef<CoffeeLandScape> _CoffeeLandScape;
-		
-		private EntityRef<Shape> _Shape;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2032,24 +2091,25 @@ namespace ManagerCoffeeShopASPNet
     partial void OnItemIDChanged();
     partial void OnCLSIDChanging(int value);
     partial void OnCLSIDChanged();
-    partial void OnShapeIDChanging(int value);
-    partial void OnShapeIDChanged();
-    partial void OnRowIDChanging(int value);
-    partial void OnRowIDChanged();
-    partial void OnColIDChanging(int value);
-    partial void OnColIDChanged();
+    partial void OnImageIDChanging(int value);
+    partial void OnImageIDChanged();
+    partial void OnHrefChanging(string value);
+    partial void OnHrefChanged();
+    partial void OnxChanging(double value);
+    partial void OnxChanged();
+    partial void OnyChanging(double value);
+    partial void OnyChanged();
     partial void OnWidthChanging(double value);
     partial void OnWidthChanged();
-    partial void OnLengthChanging(double value);
-    partial void OnLengthChanged();
-    partial void OnItemTypeChanging(string value);
-    partial void OnItemTypeChanged();
+    partial void OnHeightChanging(double value);
+    partial void OnHeightChanged();
+    partial void OnRotateChanging(int value);
+    partial void OnRotateChanged();
     #endregion
 		
 		public CoffeeLandScapeDetail()
 		{
 			this._CoffeeLandScape = default(EntityRef<CoffeeLandScape>);
-			this._Shape = default(EntityRef<Shape>);
 			OnCreated();
 		}
 		
@@ -2097,66 +2157,82 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShapeID", DbType="Int NOT NULL")]
-		public int ShapeID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImageID", DbType="Int NOT NULL")]
+		public int ImageID
 		{
 			get
 			{
-				return this._ShapeID;
+				return this._ImageID;
 			}
 			set
 			{
-				if ((this._ShapeID != value))
+				if ((this._ImageID != value))
 				{
-					if (this._Shape.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnShapeIDChanging(value);
+					this.OnImageIDChanging(value);
 					this.SendPropertyChanging();
-					this._ShapeID = value;
-					this.SendPropertyChanged("ShapeID");
-					this.OnShapeIDChanged();
+					this._ImageID = value;
+					this.SendPropertyChanged("ImageID");
+					this.OnImageIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RowID", DbType="Int NOT NULL")]
-		public int RowID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Href", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Href
 		{
 			get
 			{
-				return this._RowID;
+				return this._Href;
 			}
 			set
 			{
-				if ((this._RowID != value))
+				if ((this._Href != value))
 				{
-					this.OnRowIDChanging(value);
+					this.OnHrefChanging(value);
 					this.SendPropertyChanging();
-					this._RowID = value;
-					this.SendPropertyChanged("RowID");
-					this.OnRowIDChanged();
+					this._Href = value;
+					this.SendPropertyChanged("Href");
+					this.OnHrefChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ColID", DbType="Int NOT NULL")]
-		public int ColID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_x", DbType="Float NOT NULL")]
+		public double x
 		{
 			get
 			{
-				return this._ColID;
+				return this._x;
 			}
 			set
 			{
-				if ((this._ColID != value))
+				if ((this._x != value))
 				{
-					this.OnColIDChanging(value);
+					this.OnxChanging(value);
 					this.SendPropertyChanging();
-					this._ColID = value;
-					this.SendPropertyChanged("ColID");
-					this.OnColIDChanged();
+					this._x = value;
+					this.SendPropertyChanged("x");
+					this.OnxChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_y", DbType="Float NOT NULL")]
+		public double y
+		{
+			get
+			{
+				return this._y;
+			}
+			set
+			{
+				if ((this._y != value))
+				{
+					this.OnyChanging(value);
+					this.SendPropertyChanging();
+					this._y = value;
+					this.SendPropertyChanged("y");
+					this.OnyChanged();
 				}
 			}
 		}
@@ -2181,42 +2257,42 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Length", DbType="Float NOT NULL")]
-		public double Length
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Height", DbType="Float NOT NULL")]
+		public double Height
 		{
 			get
 			{
-				return this._Length;
+				return this._Height;
 			}
 			set
 			{
-				if ((this._Length != value))
+				if ((this._Height != value))
 				{
-					this.OnLengthChanging(value);
+					this.OnHeightChanging(value);
 					this.SendPropertyChanging();
-					this._Length = value;
-					this.SendPropertyChanged("Length");
-					this.OnLengthChanged();
+					this._Height = value;
+					this.SendPropertyChanged("Height");
+					this.OnHeightChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemType", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
-		public string ItemType
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rotate", DbType="Int NOT NULL")]
+		public int Rotate
 		{
 			get
 			{
-				return this._ItemType;
+				return this._Rotate;
 			}
 			set
 			{
-				if ((this._ItemType != value))
+				if ((this._Rotate != value))
 				{
-					this.OnItemTypeChanging(value);
+					this.OnRotateChanging(value);
 					this.SendPropertyChanging();
-					this._ItemType = value;
-					this.SendPropertyChanged("ItemType");
-					this.OnItemTypeChanged();
+					this._Rotate = value;
+					this.SendPropertyChanged("Rotate");
+					this.OnRotateChanged();
 				}
 			}
 		}
@@ -2251,40 +2327,6 @@ namespace ManagerCoffeeShopASPNet
 						this._CLSID = default(int);
 					}
 					this.SendPropertyChanged("CoffeeLandScape");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Shape_CoffeeLandScapeDetail", Storage="_Shape", ThisKey="ShapeID", OtherKey="ShapeID", IsForeignKey=true)]
-		public Shape Shape
-		{
-			get
-			{
-				return this._Shape.Entity;
-			}
-			set
-			{
-				Shape previousValue = this._Shape.Entity;
-				if (((previousValue != value) 
-							|| (this._Shape.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Shape.Entity = null;
-						previousValue.CoffeeLandScapeDetails.Remove(this);
-					}
-					this._Shape.Entity = value;
-					if ((value != null))
-					{
-						value.CoffeeLandScapeDetails.Add(this);
-						this._ShapeID = value.ShapeID;
-					}
-					else
-					{
-						this._ShapeID = default(int);
-					}
-					this.SendPropertyChanged("Shape");
 				}
 			}
 		}
@@ -10535,6 +10577,236 @@ namespace ManagerCoffeeShopASPNet
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Sale")]
+	public partial class Sale : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Region;
+		
+		private string _Person;
+		
+		private string _Item;
+		
+		private int _Units;
+		
+		private decimal _UnitCost;
+		
+		private decimal _Total;
+		
+		private System.DateTime _AddedOn;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnRegionChanging(string value);
+    partial void OnRegionChanged();
+    partial void OnPersonChanging(string value);
+    partial void OnPersonChanged();
+    partial void OnItemChanging(string value);
+    partial void OnItemChanged();
+    partial void OnUnitsChanging(int value);
+    partial void OnUnitsChanged();
+    partial void OnUnitCostChanging(decimal value);
+    partial void OnUnitCostChanged();
+    partial void OnTotalChanging(decimal value);
+    partial void OnTotalChanged();
+    partial void OnAddedOnChanging(System.DateTime value);
+    partial void OnAddedOnChanged();
+    #endregion
+		
+		public Sale()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Region", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
+		public string Region
+		{
+			get
+			{
+				return this._Region;
+			}
+			set
+			{
+				if ((this._Region != value))
+				{
+					this.OnRegionChanging(value);
+					this.SendPropertyChanging();
+					this._Region = value;
+					this.SendPropertyChanged("Region");
+					this.OnRegionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Person", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
+		public string Person
+		{
+			get
+			{
+				return this._Person;
+			}
+			set
+			{
+				if ((this._Person != value))
+				{
+					this.OnPersonChanging(value);
+					this.SendPropertyChanging();
+					this._Person = value;
+					this.SendPropertyChanged("Person");
+					this.OnPersonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Item", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
+		public string Item
+		{
+			get
+			{
+				return this._Item;
+			}
+			set
+			{
+				if ((this._Item != value))
+				{
+					this.OnItemChanging(value);
+					this.SendPropertyChanging();
+					this._Item = value;
+					this.SendPropertyChanged("Item");
+					this.OnItemChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Units", DbType="Int NOT NULL")]
+		public int Units
+		{
+			get
+			{
+				return this._Units;
+			}
+			set
+			{
+				if ((this._Units != value))
+				{
+					this.OnUnitsChanging(value);
+					this.SendPropertyChanging();
+					this._Units = value;
+					this.SendPropertyChanged("Units");
+					this.OnUnitsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitCost", DbType="Money NOT NULL")]
+		public decimal UnitCost
+		{
+			get
+			{
+				return this._UnitCost;
+			}
+			set
+			{
+				if ((this._UnitCost != value))
+				{
+					this.OnUnitCostChanging(value);
+					this.SendPropertyChanging();
+					this._UnitCost = value;
+					this.SendPropertyChanged("UnitCost");
+					this.OnUnitCostChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Total", DbType="Money NOT NULL")]
+		public decimal Total
+		{
+			get
+			{
+				return this._Total;
+			}
+			set
+			{
+				if ((this._Total != value))
+				{
+					this.OnTotalChanging(value);
+					this.SendPropertyChanging();
+					this._Total = value;
+					this.SendPropertyChanged("Total");
+					this.OnTotalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddedOn", DbType="Date NOT NULL")]
+		public System.DateTime AddedOn
+		{
+			get
+			{
+				return this._AddedOn;
+			}
+			set
+			{
+				if ((this._AddedOn != value))
+				{
+					this.OnAddedOnChanging(value);
+					this.SendPropertyChanging();
+					this._AddedOn = value;
+					this.SendPropertyChanged("AddedOn");
+					this.OnAddedOnChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Server")]
 	public partial class Server
 	{
@@ -10590,8 +10862,6 @@ namespace ManagerCoffeeShopASPNet
 		
 		private string _ImagePath;
 		
-		private EntitySet<CoffeeLandScapeDetail> _CoffeeLandScapeDetails;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -10604,7 +10874,6 @@ namespace ManagerCoffeeShopASPNet
 		
 		public Shape()
 		{
-			this._CoffeeLandScapeDetails = new EntitySet<CoffeeLandScapeDetail>(new Action<CoffeeLandScapeDetail>(this.attach_CoffeeLandScapeDetails), new Action<CoffeeLandScapeDetail>(this.detach_CoffeeLandScapeDetails));
 			OnCreated();
 		}
 		
@@ -10648,19 +10917,6 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Shape_CoffeeLandScapeDetail", Storage="_CoffeeLandScapeDetails", ThisKey="ShapeID", OtherKey="ShapeID")]
-		public EntitySet<CoffeeLandScapeDetail> CoffeeLandScapeDetails
-		{
-			get
-			{
-				return this._CoffeeLandScapeDetails;
-			}
-			set
-			{
-				this._CoffeeLandScapeDetails.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -10679,18 +10935,6 @@ namespace ManagerCoffeeShopASPNet
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_CoffeeLandScapeDetails(CoffeeLandScapeDetail entity)
-		{
-			this.SendPropertyChanging();
-			entity.Shape = this;
-		}
-		
-		private void detach_CoffeeLandScapeDetails(CoffeeLandScapeDetail entity)
-		{
-			this.SendPropertyChanging();
-			entity.Shape = null;
 		}
 	}
 	
