@@ -54,7 +54,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         /// <returns></returns>
         [Route("ServiceEmployee")]
         [HttpGet]
-        public ActionResult ServiceEmployee(string SearchString)
+        public ActionResult ServiceEmployee(string SearchString/*, string json*/)
         {
             IEnumerable<FoodAndDrink> fds = info.GetFoodAndDrink();
             List<FoodAndDrink> list = fds.ToList();

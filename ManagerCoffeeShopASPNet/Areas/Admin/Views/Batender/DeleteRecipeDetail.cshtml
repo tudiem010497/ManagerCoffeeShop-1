@@ -1,0 +1,81 @@
+﻿@model ManagerCoffeeShopASPNet.RecipeDetail
+
+@{
+    ViewBag.Title = "DeleteRecipeDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<br />
+<h2 style="text-align:center">XÓA CHI TIẾT CÔNG THỨC PHA CHẾ</h2>
+<br />
+<h3>Bạn có chắc muốn xóa?</h3>
+<div>
+    @*<h4>RecipeDetail</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RecID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecID)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Bước")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Step)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Tên NVL")
+        </dt>
+
+        <dd>
+            @ViewData["IngreID"]
+            @*@Html.DisplayFor(model => model.IngreID)*@
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Số lượng")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Đơn vị tính")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unit)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Ghi chú")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Desc)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <div class="row">
+                <div class="col-md-8">
+                    @Html.ActionLink("Trở về", "ReadRecipe", new { FDID = ViewData["FDID"] })
+                </div>
+                <div class="col-md-4">
+                    @*<input type="submit" value="Xóa" class="btn btn-outline-danger btn-sm" />*@
+                    @Html.ActionLink("Xóa", "DoDeleteRecipeDetail", "Batender", new { RecipeDetailID = Model.RecipeDetailID }, new { @class = "btn btn-outline-danger btn-sm" })
+                </div>
+            </div>
+        </div>
+    }
+</div>

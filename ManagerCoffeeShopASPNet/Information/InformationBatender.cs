@@ -59,6 +59,10 @@ namespace ManagerCoffeeShopASPNet.Information
             int num = this._recipeDetailDAO.GetAllRecipeDetailByRecipeID(RecipeID).Count();
             return this._recipeDetailDAO.GetAllRecipeDetailByRecipeID(RecipeID);
         }
+        public RecipeDetail GetAllRecipeDetailByrecipeID(int RecipeID)
+        {
+            return this._recipeDetailDAO.GetAllRecipeDetailByrecipeID(RecipeID);
+        }
         public IEnumerable<FoodAndDrink> GetAllFoodAndDrink()
         {
             return this._foodAndDrinkDAO.GetAllFoodAndDrink();
@@ -103,6 +107,26 @@ namespace ManagerCoffeeShopASPNet.Information
         public bool InsertIngredientMessage(int IngreID, int EmployeeID, double Amount, string Unit, string SendMessage)
         {
             return this._ingredientMessageDAO.InsertIngredientMessage(IngreID, EmployeeID, Amount, Unit, SendMessage);
+        }
+        public RecipeDetail GetRecipeDetailByRecipeDetailID(int RecipeDetailID)
+        {
+            return this._recipeDetailDAO.GetRecipeDetailByRecipeDetailID(RecipeDetailID);
+        }
+        public Ingredient GetIngredientByIngreID(int IngreID)
+        {
+            return this._ingredientDAO.GetIngredientByIngreID(IngreID);
+        }
+        public Recipe GetRecipeByRecipeID(int RecipeID)
+        {
+            return this._recipeDAO.GetRecipeByRecipeID(RecipeID);
+        }
+        public bool EditRecipeDetail(int RecipeDetailID, int Step, int IngreID, float Amount, string Unit, string Desc)
+        {
+            return this._recipeDetailDAO.EditRecipeDetail(RecipeDetailID, Step, IngreID, Amount, Unit, Desc);
+        }
+        public bool DeleteRecipeDetail(int RecipeDetailID)
+        {
+            return this._recipeDetailDAO.DeleteRecipeDetail(RecipeDetailID);
         }
     }
 }

@@ -5,7 +5,7 @@
 }
 <br />
 <h2 style="text-align:center">CÔNG THỨC PHA CHẾ</h2>
-<hr />
+@*<hr />*@
 <div>
     @Html.ActionLink("Thêm bước", "CreateRecipeDetail", "Batender", new { RecipeID = ViewData["RecipeID"] }, new { @class = "btn btn-primary" })
 </div>
@@ -16,6 +16,7 @@
             <td>Bước</td>
             <td>Mô tả</td>
             <td>Lưu ý</td>
+            <td></td>
         </tr>
     </thead>
     <tbody>
@@ -26,11 +27,15 @@
                 foreach (RecipeDetail item in (IEnumerable<RecipeDetail>)ViewData["recipeDetails"])
                 {
                     <tr>
-                        <td> Bước @item.Step </td>
+                        <td>@item.Step </td>
                         <td>
                             @item.Amount @item.Unit @item.Ingredient.Name<br />
                         </td>
-                        <td>Lưu ý : @item.Desc</td>
+                        <td>@item.Desc</td>
+                        <td>
+                            @Html.ActionLink("Sửa", "EditRecipeDetail", new { RecipeDetailID = item.RecipeDetailID }, new { @class = "btn btn-sm btn-outline-primary" })
+                            @Html.ActionLink("Xóa", "DeleteRecipeDetail", new { RecipeDetailID = item.RecipeDetailID }, new { @class = "btn btn-sm btn-outline-danger" })
+                        </td>
                     </tr>
                 }
             }

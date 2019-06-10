@@ -6,11 +6,12 @@
 }
 
 <br />
-<h2>Hiển thị chi tiết các công thức pha chế</h2>
+<h2 style="text-align:center">THÊM CÔNG THỨC PHA CHẾ</h2>
 
-<p>
+<div>
     @Html.ActionLink("Thêm bước", "CreateRecipeDetail", "Batender", new { RecipeID = ViewData["RecipeID"] }, new { @class="btn btn-primary" })
-</p>
+</div>
+<br />
 <table class="table">
     <tr>
         <th>
@@ -20,7 +21,7 @@
             @Html.DisplayName("Bước")
         </th>
         <th>
-            @Html.DisplayName("Mã NVL")
+            @Html.DisplayName("Tên NVL")
         </th>
         <th>
             @Html.DisplayName("Số lượng")
@@ -45,7 +46,9 @@
                 @Html.DisplayFor(modelItem => item.Step)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IngreID)
+                
+                @ViewData["IngreID"]
+                @*@Html.Display(ViewData["IngreID"].ToString())*@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Amount)
@@ -57,9 +60,8 @@
                 @Html.DisplayFor(modelItem => item.Desc)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.RecipeDetailID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.RecipeDetailID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.RecipeDetailID })
+                @Html.ActionLink("Sửa", "EditRecipeDetail", new { RecipeDetailID = item.RecipeDetailID }, new { @class="btn btn-sm btn-outline-primary"})
+                @Html.ActionLink("Xóa", "DeleteRecipeDetail", new { RecipeDetailID = item.RecipeDetailID }, new { @class = "btn btn-sm btn-outline-danger" })
             </td>
         </tr>
     }

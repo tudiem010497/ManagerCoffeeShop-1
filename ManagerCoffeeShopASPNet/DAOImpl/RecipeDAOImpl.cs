@@ -33,6 +33,11 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             Recipe rec = this.context.Recipes.FirstOrDefault(o => o.FDID == FoodAndDrinkID);
             return rec;
         }
+        public Recipe GetRecipeByRecipeID(int RecipeID)
+        {
+            Recipe rec = this.context.Recipes.FirstOrDefault(o => o.RecID == RecipeID);
+            return rec;
+        }
         public bool InsertRecipe(int FDID)
         {
             try

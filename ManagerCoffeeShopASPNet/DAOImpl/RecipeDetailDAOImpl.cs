@@ -37,6 +37,21 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             int num = recipeDetails.ToList<RecipeDetail>().Count;
             return recipeDetails;
         }
+        public RecipeDetail GetAllRecipeDetailByrecipeID(int RecipeID)
+        {
+            RecipeDetail recipeDetails = (from recipedetail in this.context.RecipeDetails
+                                          where recipedetail.RecID == RecipeID
+                                          orderby recipedetail.Step ascending
+                                          select recipedetail).SingleOrDefault();
+            return recipeDetails;
+        }
+        public RecipeDetail GetRecipeDetailByRecipeDetailID(int RecipeDetailID)
+        {
+            RecipeDetail recipeDetail = (from RD in context.RecipeDetails
+                                         where RD.RecipeDetailID == RecipeDetailID
+                                         select RD).SingleOrDefault();
+            return recipeDetail;
+        }
         public bool InsertRecipeDetail(int RecID, int Step, int IngreID, double Amount, string Unit, string Desc)
         {
             try
@@ -65,6 +80,38 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                           where recipeDetail.RecID == RecipeID
                           select recipeDetail).Count();
             return result;
+        }
+        public bool EditRecipeDetail(int RecipeDetailID, int Step, int IngreID, float Amount, string Unit, string Desc)
+        {
+            try
+            {
+                RecipeDetail recipedetail = this.context.RecipeDetails.Single(o => o.RecipeDetailID == RecipeDetailID);
+                recipedetail.Step = Step;
+                recipedetail.IngreID = IngreID;
+                recipedetail.Amount = Amount;
+                recipedetail.Unit = Unit;
+                recipedetail.Desc = Desc;
+                context.SubmitChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                throw new Exception("Error Edit RecipeDetail: " + e.Message);
+            }
+        }
+        public bool DeleteRecipeDetail(int RecipeDetailID)
+        {
+            try
+            {
+                RecipeDetail recipedetail = this.context.RecipeDetails.Single(o => o.RecipeDetailID == RecipeDetailID);
+                context.RecipeDetails.DeleteOnSubmit(recipedetail);
+                context.SubmitChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                throw new Exception("Error delete recipeDetail: " + e.Message);
+            }
         }
     }
 }

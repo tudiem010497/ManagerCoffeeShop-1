@@ -88,11 +88,11 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         /// <param name="NumOfOrderItem"></param>
         /// <returns></returns>
         [Route("UpdateReady")]
-        public ActionResult UpdateReady(int OrderItemID,int OrderID, int NumOfOrderItem, string view)
+        public ActionResult UpdateReady(int OrderItemID, int OrderID, int NumOfOrderItem, string view)
         {
             string status = "Ready";
             bool result = info.UpdateStatus(OrderItemID, status);
-            if(view == "GetListOrderItemNeedPreparetion")
+            if (view == "GetListOrderItemNeedPreparetion")
             {
                 return RedirectToAction("GetListOrderItemNeedPreparetion", "Batender");
             }
@@ -121,12 +121,12 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("UpdateCancel")]
         public ActionResult UpdateCancel(int OrderItemID, int OrderID, int NumOfOrderItem, string confirm, string view)
         {
-            if(confirm == "true")
+            if (confirm == "true")
             {
                 string statusOrderItem = "Cancel";
                 string statusOrder = "Ready";
                 bool result = info.UpdateStatus(OrderItemID, statusOrderItem);
-                if(view == "GetListOrderItemNeedPreparetion")
+                if (view == "GetListOrderItemNeedPreparetion")
                 {
                     return RedirectToAction("GetListOrderItemNeedPreparetion", "Batender");
                 }
@@ -145,7 +145,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             }
             else
             {
-                if(view == "GetListOrderItemNeedPreparetion")
+                if (view == "GetListOrderItemNeedPreparetion")
                     return RedirectToAction("GetListOrderItemNeedPreparetion", "Batender");
                 else
                     return RedirectToAction("DetailOrder", "Batender", new { OrderID = OrderID });
@@ -164,7 +164,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             {
                 IEnumerable<RecipeDetail> recipeDetails = info.GetAllRecipeDetailByRecipeID(recipe.RecID);
                 int count = recipeDetails.Count<RecipeDetail>();
-                if(count == 0)
+                if (count == 0)
                 {
                     return RedirectToAction("ShowAllRecipeDetailByRecipeID", "Batender", new { RecipeID = recipe.RecID });
                 }
@@ -213,7 +213,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("CreateFoodAndDrink")]
         [HttpPost]
         public ActionResult CreateFoodAndDrink(string Name, string Desc,
-            HttpPostedFileBase ImagePath,string Size, string Type, double UnitPrice, string Currency )
+            HttpPostedFileBase ImagePath, string Size, string Type, double UnitPrice, string Currency)
         {
             var Image = ImagePath;
             string fileName = ImagePath.FileName;
@@ -223,7 +223,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             int temp = 1;
             while (System.IO.File.Exists(path))
             {
-                fileName = fileNameNoExtension + "Copy(" + temp + ")"  + extension;
+                fileName = fileNameNoExtension + "Copy(" + temp + ")" + extension;
                 path = Path.Combine(Server.MapPath("~/Assets/resource/img/recype"), fileName);
                 temp++;
             }
@@ -239,15 +239,15 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             FoodAndDrink fd = info.GetFoodAndDrinkByFDID(FDID);
             return View(fd);
         }
-        
+
         [Route("DeleteFoodAndDrink")]
         public ActionResult DeleteFoodAndDrink(int FDID)
         {
             FoodAndDrink fd = info.GetFoodAndDrinkByFDID(FDID);
             return View(fd);
         }
-        
-        
+
+
         [Route("DoDeleteFoodAndDrink")]
         public ActionResult DoDeleteFoodAndDrink(int FDID)
         {
@@ -255,9 +255,9 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             return RedirectToAction("GetAllFoodAndDrink", "Batender");
         }
 
-        
+
         [Route("DoEditFoodAndDrink")]
-        public ActionResult DoEditFoodAndDrink(int FDID,string Name, string Desc,
+        public ActionResult DoEditFoodAndDrink(int FDID, string Name, string Desc,
             HttpPostedFileBase ImagePath, string Size, string Type, double UnitPrice, string Currency)
         {
             var Image = ImagePath;
@@ -292,7 +292,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             bool result = info.InsertRecipe(FDID);
             Recipe recipe = info.GetRecipeByFDID(FDID);
-            return RedirectToAction("ShowAllRecipeDetailByRecipeID", "Batender", new { RecipeID = recipe.RecID});
+            return RedirectToAction("ShowAllRecipeDetailByRecipeID", "Batender", new { RecipeID = recipe.RecID });
         }
 
         [Route("ShowAllRecipeDetailByRecipeID")] // show bước làm
@@ -302,10 +302,23 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             {
                 IEnumerable<RecipeDetail> recipeDetails = info.GetAllRecipeDetailByRecipeID(RecipeID);
                 int count = recipeDetails.Count();
-                ViewData["RecipeID"] = RecipeID;
-                return View(recipeDetails);
+                if (count > 1)
+                {
+                    Recipe rec = info.GetRecipeByRecipeID(RecipeID);
+                    return RedirectToAction("ReadRecipe", new { FDID  = rec.FDID});
+                }
+                else
+                {
+                    ViewData["RecipeID"] = RecipeID;
+                    RecipeDetail RD = info.GetAllRecipeDetailByrecipeID(RecipeID);
+                    Ingredient ingredient = info.GetIngredientByIngreID(RD.IngreID);
+
+                    ViewData["IngreID"] = ingredient.Name;
+                    return View(recipeDetails);
+                }
+                
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ViewData["RecipeID"] = RecipeID;
                 return View();
@@ -324,13 +337,14 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             // Load tất cả nguyên vật liệu vào dropdown
             IEnumerable<Ingredient> ingredients = info.GetAllIngredient();
             List<SelectListItem> listIngedients = new List<SelectListItem>();
-            foreach(Ingredient ingre in ingredients)
+            foreach (Ingredient ingre in ingredients)
             {
                 SelectListItem item = new SelectListItem { Text = ingre.Name, Value = ingre.IngreID.ToString() };
                 listIngedients.Add(item);
             }
             ViewData["listIngedients"] = listIngedients;
-
+            Recipe rec = info.GetRecipeByRecipeID(RecipeID);
+            ViewData["FDID"] = rec.FDID;
             // Hiển thị mặc định bước tiếp theo
             int Step = info.CountRecipeDetailByRecipeID(RecipeID) + 1;
             ViewData["Step"] = Step;
@@ -343,7 +357,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             string Unit, string Desc)
         {
             bool result = info.InsertRecipeDetail(RecipeID, Step, IngreID, Amount, Unit, Desc);
-            return RedirectToAction("ShowAllRecipeDetailByRecipeID", "Batender", new { RecipeID = RecipeID});
+            return RedirectToAction("ShowAllRecipeDetailByRecipeID", "Batender", new { RecipeID = RecipeID });
         }
 
         [Route("SendMessageIngredientWithOut")]
@@ -351,7 +365,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             List<Ingredient> ingres = info.GetAllIngredient().ToList();
             List<SelectListItem> listIngre = new List<SelectListItem>();
-            foreach(Ingredient item in ingres)
+            foreach (Ingredient item in ingres)
             {
                 SelectListItem select = new SelectListItem();
                 select.Value = item.IngreID.ToString();
@@ -366,7 +380,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("DoSendMessageIngredientWithOut")]
         public ActionResult DoSendMessageIngredientWithOut(int IngreID, double Amount, string Unit, string SendMessage)
         {
-            
+
             ManagerSessionLogin session = new ManagerSessionLogin();
             bool result = false;
             if (session.GetCurrentEmployee() != null)
@@ -381,9 +395,52 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             else
             {
                 TempData["error"] = "Vui lòng đăng nhập với tài khoản admin";
-                return RedirectToAction("Index", "Home", new { area = "Main"});
+                return RedirectToAction("Index", "Home", new { area = "Main" });
             }
             return RedirectToAction("SendMessageIngredientWithOut", "Batender");
+        }
+        [Route("EditRecipeDetail")]
+        public ActionResult EditRecipeDetail(int RecipeDetailID)
+        {
+            RecipeDetail recipeDetail = info.GetRecipeDetailByRecipeDetailID(RecipeDetailID);
+            List<SelectListItem> listIngredient = new List<SelectListItem>();
+            IEnumerable<Ingredient> ingres = info.GetAllIngredient();
+            foreach(var item in ingres)
+            {
+                SelectListItem select = new SelectListItem();
+                select.Value = item.IngreID.ToString();
+                select.Text = item.Name.ToString();
+                listIngredient.Add(select);
+            }
+            ViewData["listIngreID"] = listIngredient;
+            Recipe rec = info.GetRecipeByRecipeID(recipeDetail.RecID);
+            ViewData["FDID"] = rec.FDID;
+            return View(recipeDetail);
+        }
+        [Route("DoEditRecipeDetail")]
+        public ActionResult DoEditRecipeDetail(int RecipeDetailID, int RecID, int Step, int IngreID, float Amount, string Unit, string Desc)
+        {
+            info.EditRecipeDetail(RecipeDetailID, Step, IngreID, Amount, Unit, Desc);
+            Recipe rec = info.GetRecipeByRecipeID(RecID);
+            return RedirectToAction("ReadRecipe", "Batender", new { FDID = rec.FDID });
+        }
+        [Route("DeleteRecipeDetail")]
+        public ActionResult DeleteRecipeDetail(int RecipeDetailID)
+        {
+            RecipeDetail recipedetail = info.GetRecipeDetailByRecipeDetailID(RecipeDetailID);
+            Ingredient ingre = info.GetIngredientByIngreID(recipedetail.IngreID);
+            ViewData["IngreID"] = ingre.Name;
+            Recipe rec = info.GetRecipeByRecipeID(recipedetail.RecID);
+            ViewData["FDID"] = rec.FDID;
+            return View(recipedetail);
+        }
+        [Route("DoDeleteRecipeDetail")]
+        public ActionResult DoDeleteRecipeDetail(int RecipeDetailID)
+        {
+            RecipeDetail recipedetail = info.GetRecipeDetailByRecipeDetailID(RecipeDetailID);
+            Recipe rec = info.GetRecipeByRecipeID(recipedetail.RecID);
+            info.DeleteRecipeDetail(RecipeDetailID);
+            return RedirectToAction("ReadRecipe", "Batender", new { FDID = rec.FDID });
         }
     }
 }

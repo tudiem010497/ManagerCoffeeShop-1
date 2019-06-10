@@ -150,7 +150,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             Employee employee = info.GetEmployeeByID(EmployeeID);
             Salary salary = info.GetSalaryByDesc(em.Status);//lấy thông tin mức lương dựa vào status của nhân viên
             info.UpdateBasicSalary(EmployeeID, salary.SalaryID);
-            return RedirectToAction("DetailEmployee", "Web");
+            return RedirectToAction("DetailEmployee", "Web", new { EmployeeID = EmployeeID });
         }
         [Route("GetFormAddNewAccountForEmployee")]
         public ActionResult GetFormAddNewAccountForEmployee(int EmployeeID)
