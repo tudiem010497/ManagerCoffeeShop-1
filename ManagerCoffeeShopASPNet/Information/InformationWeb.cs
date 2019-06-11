@@ -14,6 +14,8 @@ namespace ManagerCoffeeShopASPNet.Information
         private CoffeeShopDAO _coffeeShopDAO;
         private BasicSalaryDAO _basicSalaryDAO;
         private SalaryDAO _salaryDAO;
+        private CoffeeLandScapeDAO _coffeeLandScapeDAO;
+        private CoffeeLandScapeDetailDAO _coffeeLandScapeDetailDAO;
         public InformationWeb()
         {
             this._employeeDAO = (EmployeeDAO)new EmployeeDAOImpl();
@@ -21,6 +23,8 @@ namespace ManagerCoffeeShopASPNet.Information
             this._coffeeShopDAO = (CoffeeShopDAO)new CoffeeShopDAOImpl();
             this._basicSalaryDAO = (BasicSalaryDAO)new BasicSalaryDAOImpl();
             this._salaryDAO = (SalaryDAO)new SalaryDAOImpl();
+            this._coffeeLandScapeDAO = (CoffeeLandScapeDAO)new CoffeeLandScapeDAOImpl();
+            this._coffeeLandScapeDetailDAO = (CoffeeLandScapeDetailDAO)new CoffeeLandScapeDetailDAOImpl();
         }
         public IEnumerable<Employee> GetAllEmployee()
         {
@@ -109,6 +113,42 @@ namespace ManagerCoffeeShopASPNet.Information
         public bool UpdateBasicSalary(int EmployeeID, int SalaryID)
         {
             return this._basicSalaryDAO.UpdateBasicSalary(EmployeeID, SalaryID);
+        }
+        public bool InsertCoffeeLandScape(int CSID, string FloorID, double MapRatio, double width, double height)
+        {
+            return this._coffeeLandScapeDAO.InsertCoffeeLandScape(CSID, FloorID, MapRatio, width, height);
+        }
+        public bool InsertCoffeeLandScapeDetail(int CLSID, string Href, float x, float y, float width, float height, int Rotate)
+        {
+            return this._coffeeLandScapeDetailDAO.InsertCoffeeLandScapeDetail(CLSID, Href, x, y, width, height, Rotate);
+        }
+        public int GetLastCoffeeLandScapeID()
+        {
+            return this._coffeeLandScapeDAO.GetLastCoffeeLandScapeID();
+        }
+        public IEnumerable<CoffeeLandScape> GetAllCoffeeLandScape()
+        {
+            return this._coffeeLandScapeDAO.GetAllCoffeeLandScape();
+        }
+        public IEnumerable<CoffeeLandScapeDetail> GetAllCoffeeLandScapeDetailByCoffeeLandScapeID(int CLSID)
+        {
+            return this._coffeeLandScapeDetailDAO.GetAllCoffeeLandScapeDetailByCoffeeLandScapeID(CLSID);
+        }
+        public CoffeeLandScape GetCoffeeLandScapeByID(int ID)
+        {
+            return this._coffeeLandScapeDAO.GetCoffeeLandScapeByID(ID);
+        }
+        public bool UpdateCoffeeLandScape(int CLSID, float width, float height, float ratio, int CSID, string FloorID)
+        {
+            return this._coffeeLandScapeDAO.UpdateCoffeeLandScape(CLSID, width, height, ratio, CSID, FloorID);
+        }
+        public bool UpdateCoffeeLandScapeDetail(int CLSDetailID, int CLSID, string Href, float x, float y, float width, float height, int Rotate)
+        {
+            return this._coffeeLandScapeDetailDAO.UpdateCoffeeLandScapeDetail(CLSDetailID, CLSID, Href, x, y, width, height, Rotate);
+        }
+        public bool CheckCoffeeLandScapeDetailIsExistsByID(int ID)
+        {
+            return this._coffeeLandScapeDetailDAO.CheckCoffeeLandScapeDetailIsExistsByID(ID);
         }
     }
 }
