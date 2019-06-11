@@ -7,8 +7,11 @@ using System.Web;
 namespace ManagerCoffeeShopASPNet.Areas.Admin.Models
 {
     [JsonObject(Id = "Diagram")]
-    public class Diagram
+    public class DiagramUpdate
     {
+        [JsonProperty(PropertyName = "CLSID")]
+        public int CLSID { get; set; }
+
         [JsonProperty(PropertyName = "widthDiagram")]
         public float widthDiagram { get; set; }
         [JsonProperty(PropertyName = "heightDiagram")]

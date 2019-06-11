@@ -18,11 +18,11 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Models
         [JsonProperty(PropertyName = "y")]
         public float y { get; set; }
         [JsonProperty(PropertyName = "width")]
-        public int width { get; set; }
+        public float width { get; set; }
         [JsonProperty(PropertyName = "height")]
-        public int height { get; set; }
+        public float height { get; set; }
         [JsonProperty(PropertyName = "rotate")]
-        public string rotate { get; set; }
+        public int rotate { get; set; }
 
     }
 }
