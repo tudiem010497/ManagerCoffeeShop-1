@@ -305,6 +305,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             {
                 SelectListItem select = new SelectListItem();
                 select.Text = item.Name;
+                select.Value = item.CSID.ToString();
                 listCoffeeShop.Add(select);
             }
             ViewData["listCoffeeShop"] = listCoffeeShop;
@@ -319,8 +320,113 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("SaveDiagram")]
         public ActionResult SaveDiagram(string json)
         {
-            Diagram diagram = JsonConvert.DeserializeObject<Diagram>(json);
+            DiagramUpdate diagram = JsonConvert.DeserializeObject<DiagramUpdate>(json);
+            float widthDiagram = diagram.widthDiagram;
+            float heightDiagram = diagram.heightDiagram;
+            float ratioDiagram = diagram.ratioDiagram;
+            string FloorID = diagram.FloorID;
+            int CSID = diagram.CSID;
+            List<ImageDiagram> ListImageDiagram = diagram.ListImageDiagram;
+            bool result = info.InsertCoffeeLandScape(CSID, FloorID, ratioDiagram, widthDiagram, heightDiagram);
+            int CoffeeLandScapeID = info.GetLastCoffeeLandScapeID();
+            foreach(ImageDiagram image in ListImageDiagram)
+            {
+                result = info.InsertCoffeeLandScapeDetail(CoffeeLandScapeID, image.Href, image.x, image.y, image.width, image.height, image.rotate);
+            }
+            return Json(JsonRequestBehavior.AllowGet); 
+           
+        }
+        [Route("ViewDiagram")]
+        public ActionResult ViewDiagram(int CLSID)
+        {
+            ViewData["reset"] = TempData["reset"];
+            string url = Request.Url.AbsoluteUri;
+            int end = url.IndexOf("/admin");
+            string domain = url.Substring(0, end);
+            IEnumerable<CoffeeLandScape> coffeeLandScapes = info.GetAllCoffeeLandScape();
+            if(coffeeLandScapes.Count() != 0)
+            {
+                List<SelectListItem> listCoffeeLandScape = new List<SelectListItem>();
+                foreach (var coffeelandscape in coffeeLandScapes)
+                {
+                    SelectListItem select = new SelectListItem();
+                    select.Text = coffeelandscape.CLSID.ToString();
+                    select.Value = coffeelandscape.CLSID.ToString();
+                    listCoffeeLandScape.Add(select);
+                }
+                ViewData["listCoffeeLandScape"] = listCoffeeLandScape;
+            }
+            IEnumerable<CoffeeShop> coffeeShop = info.GetAllCoffeeShop();
+            List<SelectListItem> listCoffeeShop = new List<SelectListItem>();
+            foreach (var item in coffeeShop)
+            {
+                SelectListItem select = new SelectListItem();
+                select.Text = item.Name;
+                select.Value = item.CSID.ToString();
+                listCoffeeShop.Add(select);
+            }
+            ViewData["listCoffeeShop"] = listCoffeeShop;
+            CoffeeLandScape landscape = info.GetCoffeeLandScapeByID(CLSID);
+            IEnumerable<CoffeeLandScapeDetail> detailLandScapes = info.GetAllCoffeeLandScapeDetailByCoffeeLandScapeID(CLSID);
+            ViewData["landscape"] = landscape;
+            ViewData["detailLandScapes"] = detailLandScapes;
+            ViewData["domain"] = domain;
+            //ViewData["CLSID"] = CLSID;
             return View();
+        }
+        [Route("DoViewDiagram")]
+        public ActionResult DoViewDiagram(int CLSID)
+        {
+            //if(TempData["width"] != null)
+            //{
+            //    TempData["width"] = TempData["width"];
+            //    TempData["height"] = TempData["height"];
+            //    TempData["ratio"] = TempData["ratio"];
+            //    TempData["CSID"] = TempData["CSID"];
+            //    TempData["FloorID"] = TempData["FloorID"];
+            //}
+            
+            return RedirectToAction("ViewDiagram", "Web", new { CLSID = CLSID });
+        }
+
+        [HttpPost]
+        [Route("ResetDiagram")]
+        public ActionResult ResetDiagram(int CLSID, float width, float height, float ratio,int CSID, string FloorID)
+        {
+            TempData["reset"] = "true";
+            bool result = info.UpdateCoffeeLandScape(CLSID, width, height, ratio, CSID, FloorID);
+            return Json(new { CLSID = CLSID });
+        }
+
+        [Route("SaveEditDiagram")]
+        public ActionResult SaveEditDiagram(string json)
+        {
+            DiagramUpdate diagram = JsonConvert.DeserializeObject<DiagramUpdate>(json);
+            //DiagramUpdate diagram = JsonConvert.DeserializeObject<DiagramUpdate>(json);
+            //double widthDiagram = diagram.widthDiagram;
+            //double heightDiagram = diagram.heightDiagram;
+            //double ratioDiagram = diagram.ratioDiagram;
+            //string FloorID = diagram.FloorID;
+            float widthDiagram = diagram.widthDiagram;
+            float heightDiagram = diagram.heightDiagram;
+            float ratioDiagram = diagram.ratioDiagram;
+            string FloorID = diagram.FloorID;
+            int CSID = diagram.CSID;
+            int CLSID = diagram.CLSID;
+            List<ImageDiagram> ListImageDiagram = diagram.ListImageDiagram;
+            bool result = info.UpdateCoffeeLandScape(CLSID, widthDiagram, heightDiagram, ratioDiagram, CSID, FloorID);
+            foreach (ImageDiagram image in ListImageDiagram)
+            {
+                if (info.CheckCoffeeLandScapeDetailIsExistsByID(image.ID))
+                {
+                    result = info.UpdateCoffeeLandScapeDetail(image.ID, CLSID, image.Href, image.x, image.y, image.width, image.height, image.rotate);
+                }
+                else
+                {
+                    result = info.InsertCoffeeLandScapeDetail(CLSID, image.Href, image.x, image.y, image.width, image.height, image.rotate);
+                }
+            }
+            return Json(JsonRequestBehavior.AllowGet);
         }
     }
 }
