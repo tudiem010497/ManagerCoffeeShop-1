@@ -19,8 +19,16 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         }
         public int GetLastUserID()
         {
-            int id = (from user in context.Accounts orderby user.UserID descending select user.UserID).FirstOrDefault();
-            return id;
+            try
+            {
+                int id = (from user in context.Accounts orderby user.UserID descending select user.UserID).FirstOrDefault();
+                return id;
+            }
+            catch(Exception ex)
+            {
+                return 0;
+                throw new Exception("Error GetLastUserID : " + ex.Message);
+            }
         }
         public Account GetAccountByEmail(string Email)
         {
