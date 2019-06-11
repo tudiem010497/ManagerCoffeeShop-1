@@ -5,6 +5,7 @@
 <script type="text/javascript" src="http://beneposto.pl/jqueryrotate/js/jQueryRotateCompressed.js"></script>
 @*<script type="text/javascript" src="~/Assets/Admin/jQuery-Plugin-For-Rotating-Html-Elements-multirotation/jquery.multirotation-1.0.0.js"></script>*@
 <h2>CreateDiagram</h2>
+@Html.ActionLink("Xem các sơ đồ quán hiện có", "ViewDiagram", "Web", new { @CLSID = 0},new { @class = "btn btn-outline-info"})
 <div id= "viewDiagram">
     <div class="row">
         <div id="information" class="col-sm-2">
@@ -91,6 +92,7 @@
             </li>
         </ul>
     </div>
+
     <style type="text/css">
         #contextMenu {
           position: absolute;

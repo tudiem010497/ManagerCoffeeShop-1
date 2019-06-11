@@ -1,0 +1,485 @@
+﻿@{
+    ViewBag.Title = "ViewDiagram";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .draggable {
+         cursor: move;
+    }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script>
+     //test
+    //function makeDraggable(evt) {
+    //    var selectedElement = false;
+    //    var svg = evt.target;
+    //    svg.addEventListener('mousedown', startDrag);
+    //    svg.addEventListener('mousemove', drag);
+    //    svg.addEventListener('mouseup', endDrag);
+    //    svg.addEventListener('mouseleave', endDrag);
+    //    function startDrag(evt) {
+    //        if (evt.target.classList.contains('draggable')) {
+    //            selectedElement = evt.target;
+    //            offset = getMousePosition(evt);
+    //            // Get all the transforms currently on this element
+    //            var transforms = selectedElement.transform.baseVal;
+    //            // Ensure the first transform is a translate transform
+    //            if (transforms.length === 0 ||
+    //                transforms.getItem(0).type !== SVGTransform.SVG_TRANSFORM_TRANSLATE) {
+    //                // Create an transform that translates by (0, 0)
+    //                var translate = svg.createSVGTransform();
+    //                translate.setTranslate(0, 0);
+    //                // Add the translation to the front of the transforms list
+    //                selectedElement.transform.baseVal.insertItemBefore(translate, 0);
+    //            }
+    //            // Get initial translation amount
+    //            transform = transforms.getItem(0);
+    //            offset.x -= transform.matrix.e;
+    //            offset.y -= transform.matrix.f;
+    //        }
+    //    }
+    //    function drag(evt) {
+    //        if (selectedElement) {
+    //            evt.preventDefault();
+    //            var coord = getMousePosition(evt);
+    //            transform.setTranslate(coord.x - offset.x, coord.y - offset.y);
+    //        }
+    //    }
+    //    function endDrag(evt) {
+    //        selectedElement = null;
+    //    }
+    //    function getMousePosition(evt) {
+    //        var CTM = svg.getScreenCTM();
+    //        return {
+    //            x: (evt.clientX - CTM.e) / CTM.a,
+    //            y: (evt.clientY - CTM.f) / CTM.d
+    //        };
+    //    }
+    //}
+    // test 1
+    // test
+    //function makeDraggable(evt) {
+    //    var selectedElement = false;
+    //    var svg = evt.target;
+    //    //svg.addEventListener('mousedown', startDrag);
+    //    //svg.addEventListener('mousemove', drag);
+    //    //svg.addEventListener('mouseup', endDrag);
+    //    //svg.addEventListener('mouseleave', endDrag);
+    //    //function startDrag(evt) {
+            
+    //    //}
+    //    //function drag(evt) {
+            
+    //    //}
+    //    //function endDrag(evt) {
+            
+    //    //}
+    //    //function getMousePosition(evt) {
+            
+    //    //}
+    //    // enable draggables to be dropped into this
+    //    // Private Functions
+    //    var interactBasicOptions = {
+    //        dropzone: {
+    //            // only accept elements matching this CSS selector
+    //            accept: ".draggable-droppable",
+    //            // Require a 75% element overlap for a drop to be possible
+    //            overlap: 0.75,
+
+    //            // listen for drop related events:
+
+    //            ondropactivate: function (event) {
+    //                // add active dropzone feedback
+    //                event.target.classList.add("drop-active");
+    //            },
+    //            ondragenter: function (event) {
+    //                var draggableElement = event.relatedTarget,
+    //                    dropzoneElement = event.target;
+
+    //                // feedback the possibility of a drop
+    //                dropzoneElement.classList.add("drop-target");
+    //                draggableElement.classList.add("drag-can-drop");
+    //                draggableElement.textContent = "Dragged in";
+    //            },
+    //            ondragleave: function (event) {
+    //                // remove the drop feedback style
+    //                event.target.classList.remove("drop-target");
+    //                event.relatedTarget.classList.remove("drag-can-drop");
+    //                event.relatedTarget.textContent = "Dragged out";
+    //            },
+    //            ondropdeactivate: function (event) {
+    //                // remove active dropzone feedback
+    //                event.target.classList.remove("drop-active");
+    //                event.target.classList.remove("drop-target");
+    //            }
+    //        },
+    //        draggable: {
+    //            // enable inertial throwing
+    //            inertia: true,
+    //            // keep the element within the area of it's parent
+    //            restrict: {
+    //                restriction: "parent",
+    //                endOnly: true,
+    //                elementRect: {
+    //                    top: 0,
+    //                    left: 0,
+    //                    bottom: 1,
+    //                    right: 1
+    //                }
+    //            },
+    //            // enable autoScroll
+    //            autoScroll: true,
+    //            // call this function on every dragmove event
+    //            // onmove: {},
+    //            // call this function on every dragend event
+    //            onend: function (event) {
+    //                // remove dragging class
+    //                event.target.classList.remove("drag-dragging");
+    //                event.target.classList.add("drag-dropped");
+
+    //                console.log(
+    //                    "moved a distance of " +
+    //                    (Math.sqrt(event.dx * event.dx + event.dy * event.dy) | 0) + "px"
+    //                );
+    //            }
+    //        },
+    //        resizable: {
+    //            // preserveAspectRatio: true,
+    //            edges: {
+    //                left: true,
+    //                right: true,
+    //                bottom: true,
+    //                top: true
+    //            }
+    //        }
+    //    };
+        
+    //}
+</script>
+@{ 
+    double ratioDiagram = 0;
+    double widthDiagram = 0;
+    double heightDiagram = 0;
+    int CSID = 0;
+    string CSName = "";
+    string FloorID = "";
+    int CLSID = 0;
+    if (ViewData["landscape"] != null)
+    {
+        CoffeeLandScape coffeeLandScape = (CoffeeLandScape)ViewData["landscape"];
+        IEnumerable<CoffeeLandScapeDetail> details = (IEnumerable<CoffeeLandScapeDetail>)ViewData["detailLandScapes"];
+        CSName = coffeeLandScape.CoffeeShop.Name;
+        CSID = coffeeLandScape.CSID;
+        ratioDiagram = coffeeLandScape.MapRatio;
+        widthDiagram = coffeeLandScape.Width;
+        heightDiagram = coffeeLandScape.Height;
+        FloorID = coffeeLandScape.FloorID;
+        CLSID = coffeeLandScape.CLSID;
+    }
+    
+}
+<h2>ViewDiagram</h2>
+<div class="row">
+    <div class="col-sm-2">
+        
+        @{
+            if (ViewData["listCoffeeLandScape"] != null)
+            {
+                using (Html.BeginForm("DoViewDiagram", "Web", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label class="form-control" for="CLSID">Mã sơ đồ</label>
+                        @Html.DropDownList("CLSID", (List<SelectListItem>)ViewData["listCoffeeLandScape"], new { @class = "form-control" })
+                    </div>
+                    <button type="submit" class="btn btn-outline-info" id="viewDiagram">Xem sơ đồ</button>
+                }
+            }
+            else
+            {
+                <div class="alert alert-danger">Bạn chưa tạo sơ đồ quán nào</div>
+                
+            }
+        }
+        @Html.ActionLink("Thêm sơ đồ", "CreateDiagram", "Web", new { width = 5, height = 5, ratio = 0.01 }, new { @class = "btn btn-outline-primary" })
+
+
+    </div>
+    <div class="col-sm-10">
+
+        <img src="~/Assets/Admin/image/diagram/bank-one-000.png" class="draggable draggable-droppable" />
+        <img src="~/Assets/Admin/image/diagram/bank-two-000.png" class="draggable draggable-droppable" />
+        <img src="~/Assets/Admin/image/diagram/bookshelt-000.png" class="draggable draggable-droppable" />
+        <img src="~/Assets/Admin/image/diagram/chair-1-000.png" class="draggable draggable-droppable" />
+        <img src="~/Assets/Admin/image/diagram/chair-2-000.png" class="draggable draggable-droppable" />
+        <img src="~/Assets/Admin/image/diagram/desk-four-000.png" class="draggable draggable-droppable" />
+        <img src="~/Assets/Admin/image/diagram/desk-six-000.png" class="draggable draggable-droppable" />
+        <img src="~/Assets/Admin/image/diagram/door-left-000.png" class="draggable draggable-droppable" />
+        <img src="~/Assets/Admin/image/diagram/door-right-000.png" class="draggable draggable-droppable" />
+        <img src="~/Assets/Admin/image/diagram/door-two-000.png" class="draggable draggable-droppable" />
+        <img src="~/Assets/Admin/image/diagram/plan-000.png" class="draggable draggable-droppable" />
+        <img src="~/Assets/Admin/image/diagram/table-four-000.png" class="draggable draggable-droppable" />
+        <img src="~/Assets/Admin/image/diagram/table-round-four-000.png" class="draggable draggable-droppable" />
+        <img src="~/Assets/Admin/image/diagram/table-round-six-000.png" class="draggable draggable-droppable" />
+        <img src="~/Assets/Admin/image/diagram/table-six-000.png" class="draggable draggable-droppable" />
+        <img src="~/Assets/Admin/image/diagram/table-two-000.png" class="draggable draggable-droppable" />
+        <img src="~/Assets/Admin/image/diagram/table-000.png" class="draggable draggable-droppable" />
+        <img src="~/Assets/Admin/image/diagram/toilet-000.png" class="draggable draggable-droppable" />
+        <img src="~/Assets/Admin/image/diagram/work-place-000.png" class="draggable draggable-droppable" />
+    </div>
+</div>
+<div class="row">
+    @{
+        
+        //if(ViewData["width"] != null)
+        //{
+        //    CoffeeLandScape coffeeLandScape = (CoffeeLandScape)ViewData["landscape"];
+        //    IEnumerable<CoffeeLandScapeDetail> details = (IEnumerable<CoffeeLandScapeDetail>)ViewData["detailLandScapes"];
+        //    CSID = int.Parse(ViewData["CSID"].ToString());
+        //    CSName = ViewData["CSName"].ToString();
+        //    ratioDiagram = double.Parse(ViewData["ratio"].ToString());
+        //    widthDiagram = double.Parse(ViewData["width"].ToString());
+        //    heightDiagram = double.Parse(ViewData["height"].ToString());
+        //    FloorID = ViewData["FloorID"].ToString();
+        //    CLSID = coffeeLandScape.CLSID;
+        //}
+    }    
+   
+    @if (ViewData["landscape"] != null)
+    {
+        <div id="information" class="col-sm-2">
+            <form action="" method="post">
+                <input name="CLSID" value="@CLSID" id="CLSID" type="hidden" />
+                <div class="form-group">
+                    <label for="width">Chiều rộng: </label>
+                    <input type="number" class="form-control" id="width" name="width" value="@widthDiagram" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="height">Chiều dài:</label>
+                    <input type="number" class="form-control" id="height" name="height" value="@heightDiagram" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="ratio">Tỷ lệ</label>
+                    <input class="form-control" id="ratio" name="ratio" value="@ratioDiagram" readonly>
+                </div>
+                <div class="form-group">
+                    @*@Html.Label("Chi nhánh", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.CSID, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @*@Html.DropDownList("CSID", (List<SelectListItem>)ViewData["listCoffeeShop"], new { @class = "form-control" })*@
+                    <label for="ratio">Chi nhánh</label>
+                    <input class="form-control" id="CSID" name="CSID" value="@CSID" type="hidden" />
+                    <input class="form-control" id="CSName" name="CSName" value="@CSName" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="ratio">Tầng</label>
+                    <input class="form-control" id="FloorID" name="FloorID" value="@FloorID" readonly>
+                </div>
+                
+            </form>
+            <button type="button" id="btnEditDiagram" class="btn btn-info btn-outline-primary" data-toggle="modal" data-target="#modalInfomation">Sửa</button>
+        </div>
+    }
+    
+    <div class="col-sm-10">
+        @{
+            if (ViewData["landscape"] != null)
+            {
+                <div class="container">
+                    @if (double.Parse(widthDiagram.ToString()) != 0 && double.Parse(heightDiagram.ToString()) != 0)
+                    {
+                        int ratio = (int)Math.Floor(1 / ratioDiagram);
+                        int width = (int)Math.Floor(widthDiagram) * ratio;
+                        int height = (int)Math.Floor(heightDiagram) * ratio;
+                        //int CLSID = int.Parse(ViewData["CLSID"].ToString());
+                        <svg class="dropzone resizable dragOn-dropzone"
+                             id="svg-dropzone"
+                             viewBox="0 0 @width @height"
+                             CLSID=@CLSID
+                             width="@width"
+                             height="@height" xmlns="http://www.w3.org/2000/svg"  @*onload="makeDraggable(evt)"*@>
+                            <defs>
+                                <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+                                    <path d="M 10 0 L 0 0 0 10" fill="none" stroke="gray" stroke-width="0.5" />
+                                </pattern>
+                                <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+                                    <rect width="100" height="100" fill="url(#smallGrid)" />
+                                    <path d="M 100 0 L 0 0 0 100" fill="none" stroke="gray" stroke-width="1" />
+                                </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#grid)" />
+                            <g class="dragOn-drawArea " width="100%" height="100%">
+                                @foreach (CoffeeLandScapeDetail detail in (IEnumerable<CoffeeLandScapeDetail>)ViewData["detailLandScapes"])
+                                {
+                                    string href = ViewData["domain"].ToString() + detail.Href;
+                                    float x = float.Parse(detail.x.ToString());
+                                    float y = float.Parse(detail.y.ToString());
+                                    float widthDetail = float.Parse(detail.Width.ToString());
+                                    float heightDetail = float.Parse(detail.Height.ToString());
+                                    <image id=@detail.ItemID xlink:href="@href" x="@x" y="@y" width="@widthDetail" height="@heightDetail" preserveAspectRatio="none" class="drag-dropped draggable" onmousedown="mouseDown()" onmouseup="mouseUp()" onload="makeDraggable(evt)"></image>
+                                    @*<img id=@detail.ItemID src="@detail.Href" x="@x" y="@y" width="@widthDetail" height="@heightDetail" preserveAspectRatio="none" class="drag-dropped draggable" onmousedown="mouseDown()" onmouseup="mouseUp()" onload="makeDraggable(evt)">*@
+                                }
+
+                            </g>
+                        </svg>
+                    }
+                    <button type="button" id="btnSaveEditDiagram" class="btn btn-outline-info">Lưu</button>
+                </div>
+            }
+        }
+        
+    </div>
+    
+    
+</div>
+<div id="contextMenu" class="dropdown clearfix">
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
+        <li>
+            <a tabindex="-1" href="#" id="delete">Xóa</a>
+        </li>
+        <li>
+            <a tabindex="-1" href="#" id="rotate-right">Xoay </a>
+        </li>
+    </ul>
+</div>
+<!-- Modal -->
+@*Form sửa thông tin*@
+<div class="modal fade" id="modalInfomation" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thay đổi thông tin kích thước</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form action="admin/Web/ResetDiagram" method="post">
+                    <input name="CLSID" value="@CLSID" id="CLSID" type="hidden" />
+                    <div class="form-group">
+                        <label for="width">Chiều rộng: </label>
+                        <input type="number" class="form-control" id="width" name="width" value="@widthDiagram">
+                    </div>
+                    <div class="form-group">
+                        <label for="height">Chiều dài:</label>
+                        <input type="number" class="form-control" id="height" name="height" value="@heightDiagram" >
+                    </div>
+                    <div class="form-group">
+                        <label for="ratio">Tỷ lệ</label>
+                        <input class="form-control" id="ratio" name="ratio" value="@ratioDiagram" >
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Chi nhánh", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.DropDownList("CSID", (List<SelectListItem>)ViewData["listCoffeeShop"], new { @class = "form-control" })
+                        @*<label for="ratio">Chi nhánh</label>
+                        <input class="form-control" id="CSID" name="CSID" value="CSID" type="hidden" />
+                        <input class="form-control" id="CSName" name="CSName" value="@CSName" readonly />*@
+                    </div>
+                    <div class="form-group">
+                        <label for="FoorID">Tầng</label>
+                        <input class="form-control" id="FoorID" name="FoorID" value="@FloorID" >
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success" data-dismiss="modal" id="btnPreSaveDiagram">Lưu</button>
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    #contextMenu {
+        position: absolute;
+        display: none;
+    }
+
+</style>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+        $(function () {
+            var $contextMenu = $("#contextMenu");
+            var test
+            $("body").on("contextmenu", "image", function (e) {
+                $contextMenu.css({
+                    display: "block",
+                    left: e.pageX,
+                    top: e.pageY
+                });
+                test = $(this)
+
+                return false;
+            });
+            $(document).ready(function () {
+                $("#delete").click(function () {
+                    test.remove()
+                })
+                $("#rotate-right").click(function () {
+                    //test.css({
+                    //    "-ms-transform": "rotate(90deg)", /* IE 9 */
+                    //    "-webkit-transform": "rotate(90deg)", /* Safari 3-8 */
+                    //    "transform": "rotate(90deg)"
+                    //})
+                    //test.rotate(90);
+                    //test.toggleClass('flip');
+                    return false;
+                })
+                //$("#rotate-right").rotate({
+                //    bind: {
+                //        click: function () {
+                //            test.rotate({
+                //                angle: 0,
+                //                animateTo: 90
+                //            })
+                //            var widthImage = test.attr("width")
+                //            var heightImage = test.attr("height")
+                //            var xImage = test.attr("x")
+
+                //            test.attr("width", widthImage)
+                //            test.attr("height", heightImage)
+                //        }
+                //    }
+
+                //});
+                $("#rotate-right").click(function () {
+                    var xlink = test.attr("xlink:href")
+                    var width = test.attr("width")
+                    var height = test.attr("height")
+                    var rotate = test.attr("rotate")
+                    if (rotate == null) {
+                        rotate = "090"
+                    }
+                    else {
+                        if (0 <= Number(rotate) && Number(rotate) < 270) {
+                            if (Number(rotate) == 0) rotate = "090"
+                            else rotate = Number(rotate) + 90
+                        }
+
+                        else rotate = "000"
+                    }
+                    test.attr("rotate", rotate.toString())
+                    xlink = xlink.substr(0, xlink.indexOf(".png"))
+                    xlink = xlink.slice(0, -4)
+                    var newXlink = xlink + "-" + rotate + ".png"
+                    test.attr("width", height)
+                    test.attr("height", width)
+                    test.attr("xlink:href", newXlink)
+                })
+            })
+
+            $('html').click(function () {
+                $contextMenu.hide();
+            });
+            
+
+        });
+</script>
+<script type="text/javascript" src="http://beneposto.pl/jqueryrotate/js/jQueryRotateCompressed.js"></script>
+<script src="~/Assets/Admin/js/svg-js/svg.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.2.9/interact.min.js'></script>
+<script src="~/Assets/Admin/drag-drop-plugin/js/index.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+
+
