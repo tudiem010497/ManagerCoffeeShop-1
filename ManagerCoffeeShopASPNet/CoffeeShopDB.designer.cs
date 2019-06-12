@@ -2067,8 +2067,6 @@ namespace ManagerCoffeeShopASPNet
 		
 		private int _CLSID;
 		
-		private int _ImageID;
-		
 		private string _Href;
 		
 		private double _x;
@@ -2091,8 +2089,6 @@ namespace ManagerCoffeeShopASPNet
     partial void OnItemIDChanged();
     partial void OnCLSIDChanging(int value);
     partial void OnCLSIDChanged();
-    partial void OnImageIDChanging(int value);
-    partial void OnImageIDChanged();
     partial void OnHrefChanging(string value);
     partial void OnHrefChanged();
     partial void OnxChanging(double value);
@@ -2153,26 +2149,6 @@ namespace ManagerCoffeeShopASPNet
 					this._CLSID = value;
 					this.SendPropertyChanged("CLSID");
 					this.OnCLSIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImageID", DbType="Int NOT NULL")]
-		public int ImageID
-		{
-			get
-			{
-				return this._ImageID;
-			}
-			set
-			{
-				if ((this._ImageID != value))
-				{
-					this.OnImageIDChanging(value);
-					this.SendPropertyChanging();
-					this._ImageID = value;
-					this.SendPropertyChanged("ImageID");
-					this.OnImageIDChanged();
 				}
 			}
 		}

@@ -78,10 +78,24 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             {
                 CoffeeLandScapeDetail detail = (from coffeeLandScapeDetail in context.CoffeeLandScapeDetails
                                                 where coffeeLandScapeDetail.ItemID == ID
-                                                select coffeeLandScapeDetail).SingleOrDefault();
+                                                select coffeeLandScapeDetail).Single();
                 return true;
             }
             catch(Exception ex)
+            {
+                return false;
+            }
+        }
+        public bool DeleteCoffeeLandScapeDetail(int CLSDetailID)
+        {
+            try
+            {
+                CoffeeLandScapeDetail detail = this.context.CoffeeLandScapeDetails.Single(o => o.ItemID == CLSDetailID);
+                this.context.CoffeeLandScapeDetails.DeleteOnSubmit(detail);
+                this.context.SubmitChanges();
+                return true;
+            }
+            catch(Exception e)
             {
                 return false;
             }

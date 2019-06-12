@@ -150,5 +150,9 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._coffeeLandScapeDetailDAO.CheckCoffeeLandScapeDetailIsExistsByID(ID);
         }
+        public bool DeleteCoffeeLandScapeDetail(int CLSDetailID)
+        {
+            return this._coffeeLandScapeDetailDAO.DeleteCoffeeLandScapeDetail(CLSDetailID);
+        }
     }
 }

@@ -81,7 +81,6 @@
     <Type Name="CoffeeLandScapeDetail">
       <Column Name="ItemID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CLSID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ImageID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Href" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="x" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="y" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />

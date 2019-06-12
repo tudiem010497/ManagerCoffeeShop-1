@@ -247,6 +247,7 @@
     <Compile Include="Areas\Admin\Controllers\WebController.cs" />
     <Compile Include="Areas\Admin\Models\AccountModel.cs" />
     <Compile Include="Areas\Admin\Models\Diagram.cs" />
+    <Compile Include="Areas\Admin\Models\DiagramUpdate.cs" />
     <Compile Include="Areas\Admin\Models\ImageDiagram.cs" />
     <Compile Include="Areas\Admin\Models\ImportExcel.cs" />
     <Compile Include="Areas\Admin\Models\ListOrderItemGroupByFoodAndDrink.cs" />
@@ -277,6 +278,8 @@
     <Compile Include="DAOImpl\BannerImageDAOImpl.cs" />
     <Compile Include="DAOImpl\BasicSalaryDAOImpl.cs" />
     <Compile Include="DAOImpl\BlogDAOImpl.cs" />
+    <Compile Include="DAOImpl\CoffeeLandScapeDAOImpl.cs" />
+    <Compile Include="DAOImpl\CoffeeLandScapeDetailDAOImpl.cs" />
     <Compile Include="DAOImpl\CoffeeShopDAOImpl.cs" />
     <Compile Include="DAOImpl\CustomerDAOImpl.cs" />
     <Compile Include="DAOImpl\EmployeeDAOImpl.cs" />
@@ -305,6 +308,8 @@
     <Compile Include="DAO\BannerImageDAO.cs" />
     <Compile Include="DAO\BasicSalaryDAO.cs" />
     <Compile Include="DAO\BlogDAO.cs" />
+    <Compile Include="DAO\CoffeeLandScapeDAO.cs" />
+    <Compile Include="DAO\CoffeeLandScapeDetailDAO.cs" />
     <Compile Include="DAO\CoffeeShopDAO.cs" />
     <Compile Include="DAO\CustomerDAO.cs" />
     <Compile Include="DAO\EmployeeDAO.cs" />
@@ -505,6 +510,9 @@
     <Content Include="Areas\Admin\Views\Accountant\EditPayrollOfEmployee.cshtml" />
     <Content Include="Areas\Admin\Views\Service\DetailOrderNeedSevice.cshtml" />
     <Content Include="Areas\Admin\Views\Service\GetAllOrder.cshtml" />
+    <Content Include="Areas\Admin\Views\Batender\EditRecipeDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Batender\DeleteRecipeDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Web\ViewDiagram.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

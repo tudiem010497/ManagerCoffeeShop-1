@@ -94,12 +94,12 @@ $(document).ready(function () {
     })
     $("#btnPreSaveDiagram").click(function () {
         var CLSID = $("#information form input#CLSID").attr("value")
-        var widthDiagram = $("#modalInfomation form input#width").attr("value")
-        var heightDiagram = $("#modalInfomation form input#height").attr("value")
-        var ratioDiagram = $("#modalInfomation form input#ratio").attr("value")
+        var widthDiagram = $("#modalInfomation form input#width").val()
+        var heightDiagram = $("#modalInfomation form input#height").val()
+        var ratioDiagram = $("#modalInfomation form input#ratio").val()
         var CSID = $("#modalInfomation form #CSID option:selected").val()
         var CSName = $("#modalInfomation form #CSID option:selected").html()
-        var FloorID = $("#modalInfomation form input#FoorID").attr("value")
+        var FloorID = $("#modalInfomation form input#FoorID").val()
         $.ajax({
             url: '/admin/web/ResetDiagram',
             type: "POST",

@@ -402,11 +402,6 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult SaveEditDiagram(string json)
         {
             DiagramUpdate diagram = JsonConvert.DeserializeObject<DiagramUpdate>(json);
-            //DiagramUpdate diagram = JsonConvert.DeserializeObject<DiagramUpdate>(json);
-            //double widthDiagram = diagram.widthDiagram;
-            //double heightDiagram = diagram.heightDiagram;
-            //double ratioDiagram = diagram.ratioDiagram;
-            //string FloorID = diagram.FloorID;
             float widthDiagram = diagram.widthDiagram;
             float heightDiagram = diagram.heightDiagram;
             float ratioDiagram = diagram.ratioDiagram;
@@ -425,6 +420,24 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 {
                     result = info.InsertCoffeeLandScapeDetail(CLSID, image.Href, image.x, image.y, image.width, image.height, image.rotate);
                 }
+            }
+            //xóa image trong db
+            List<int> intListID = new List<int>();
+            List<int> ItemID = new List<int>();
+            IEnumerable<CoffeeLandScapeDetail> detail = info.GetAllCoffeeLandScapeDetailByCoffeeLandScapeID(CLSID);
+            foreach (var imagedelete in detail)
+            {
+                ItemID.Add(imagedelete.ItemID);
+            }
+
+            foreach (ImageDiagram temp in ListImageDiagram)
+            {
+                intListID.Add(temp.ID);
+            }
+            IEnumerable<int> differenceTwoList = ItemID.Except(intListID);
+            foreach(var temp in differenceTwoList)
+            {
+                info.DeleteCoffeeLandScapeDetail(temp);
             }
             return Json(JsonRequestBehavior.AllowGet);
         }
