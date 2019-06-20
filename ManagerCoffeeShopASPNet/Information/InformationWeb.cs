@@ -154,5 +154,9 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._coffeeLandScapeDetailDAO.DeleteCoffeeLandScapeDetail(CLSDetailID);
         }
+        public bool DeleteBasicSalary(int EmployeeID)
+        {
+            return this._basicSalaryDAO.DeleteBasicSalary(EmployeeID);
+        }
     }
 }

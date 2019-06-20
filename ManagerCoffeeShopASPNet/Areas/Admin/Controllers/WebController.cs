@@ -77,6 +77,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult DeleteEmployee(int EmployeeID)
         {
             Employee em = info.GetEmployeeByID(EmployeeID);
+            ViewData["EmployeeID"] = EmployeeID;
             return View(em);
         }
         [Route("DoDeleteEmployee")]
@@ -86,10 +87,11 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             Account acc = info.GetAccountByEmail(em.Email);
             if (em.UserID != null)
             {
+                bool resultBasicSalary = info.DeleteBasicSalary(EmployeeID);
                 bool result = info.DeleteEmployee(EmployeeID);
                 bool resultAcc = info.DeleteAccount(acc.UserID);
 
-                if (result == true && resultAcc == true)
+                if (result == true && resultAcc == true && resultBasicSalary==true)
                 {
                     TempData["messageSuccess"] = "Xóa thành công";
                     return RedirectToAction("GetAllEmployee", "Web");
@@ -102,8 +104,9 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             }
             else
             {
+                bool resultBasicSalary = info.DeleteBasicSalary(EmployeeID);
                 bool result = info.DeleteEmployee(EmployeeID);
-                if (result == true)
+                if (result == true && resultBasicSalary==true)
                 {
                     TempData["messageSuccess"] = "Xóa thành công";
                     return RedirectToAction("GetAllEmployee", "Web");
@@ -128,6 +131,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 listCoffeeShop.Add(select);
             }
             ViewData["listCoffeeShop"] = listCoffeeShop;
+            ViewData["EmployeeID"] = EmployeeID;
             return View(em);
         }
         [Route("DoEditEmployee")]

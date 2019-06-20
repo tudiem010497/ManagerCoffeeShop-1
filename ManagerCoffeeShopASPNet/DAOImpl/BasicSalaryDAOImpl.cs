@@ -57,5 +57,19 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 throw new Exception("Error Update BasicSalary: " + e.Message);
             }
         }
+        public bool DeleteBasicSalary(int EmployeeID)
+        {
+            try
+            {
+                BasicSalary basicSalary = context.BasicSalaries.FirstOrDefault(bs => bs.EmployeeID == EmployeeID);
+                context.BasicSalaries.DeleteOnSubmit(basicSalary);
+                context.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error Delete BasicSalary: " + e.Message);
+            }
+        }
     }
 }

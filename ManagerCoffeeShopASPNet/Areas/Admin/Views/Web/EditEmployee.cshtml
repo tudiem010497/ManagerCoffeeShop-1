@@ -107,7 +107,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-9">
-                    @Html.ActionLink("Trở về", "DetailEmployee")
+                    @Html.ActionLink("Trở về", "DetailEmployee", new { EmployeeID = ViewData["EmployeeID"] })
                 </div>
                 <div class="col-md-3">
                     <input type="submit" value="Lưu" class="btn btn-primary" />

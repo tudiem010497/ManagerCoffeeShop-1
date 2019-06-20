@@ -100,7 +100,7 @@
         <div class="form-actions no-color">
             <div class="row">
                 <div class="col-md-8">
-                    @Html.ActionLink("Trở lại", "DetailEmployee")
+                    @Html.ActionLink("Trở về", "DetailEmployee", new { EMployeeID = ViewData["EmployeeID"] })
                 </div>
                 <div class="col-md-4">
                     @Html.ActionLink("Xóa", "DoDeleteEmployee", "Web", new { EmployeeID = Model.EmployeeID }, new { @class = "btn btn-primary btn-sm" })
