@@ -36,9 +36,7 @@
         <div class="form-group">
             @Html.Label("Tên NVL", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.IngreID, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.DropDownListFor(model => model.IngreID, (List<SelectListItem>)ViewData["listIngreID"], new { @class = "form-control" })
-                @*<input type="text" value="@ViewData["IngreID"]" class="form-control" id="SalaryType" />*@
                 @Html.ValidationMessageFor(model => model.IngreID, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -256,4 +256,88 @@ $(document).ready(function () {
         //});
         
     })
+    $("#btnDeleteDiagram").click(function () {
+        var CLSID, widthDiagram, heightDiagram, ratioDiagram, CSID, FloorID
+        CLSID = $("svg#svg-dropzone").attr("clsid")
+        widthDiagram = $("#information form input#width").attr("value")
+        heightDiagram = $("#information form input#height").attr("value")
+        ratioDiagram = $("#information form input#ratio").attr("value")
+        CSID = $("#information form input#CSID").attr("value")
+        FloorID = $("#information form input#FloorID").attr("value")
+        var data = "";
+        data = data + '{"widthDiagram" : ' + widthDiagram + ","
+        data = data + '"CLSID" : ' + CLSID + ","
+        data = data + '"heightDiagram" : ' + heightDiagram + ","
+        data = data + '"ratioDiagram" : ' + ratioDiagram + ","
+        data = data + '"CSID" :' + CSID + ","
+        data = data + '"FloorID" : "' + FloorID + '",'
+        data = data + '"ListImageDiagram" : '
+        var temp = 0
+        $("#svg-dropzone g.dragOn-drawArea").each(function (index, element) {
+
+            $(this).children("image").each(function (index1, element1) {
+                if (temp != 0) {
+                    data = data + ","
+                }
+                else {
+                    data = data + "["
+                }
+                temp++;
+                var ID = $(this).attr("id")
+                if (ID != null) {
+                    var xlink = $(this).attr("xlink:href")
+                    var width = $(this).attr("width")
+                    var height = $(this).attr("height")
+                    var rotate = $(this).attr("rotate")
+                    if (rotate == null) rotate = "000"
+                    var x = $(this).attr("x")
+                    var y = $(this).attr("y")
+                    var indexHref = xlink.indexOf("/Assets/Admin")
+                    var Href = xlink.substr(indexHref)
+                    data = data + '{ "ID":' + ID + ",";
+                    data = data + '"Href" : "' + Href + '",';
+                    data = data + '"x" :' + x + ",";
+                    data = data + '"y" :' + y + ",";
+                    data = data + '"width" : ' + width + ",";
+                    data = data + '"height" : ' + height + ",";
+                    data = data + '"rotate" : "' + rotate + '"}'
+                }
+                if (ID == null) {
+                    var xlink = $(this).attr("xlink:href")
+                    var width = $(this).attr("width")
+                    var height = $(this).attr("height")
+                    var rotate = $(this).attr("rotate")
+                    if (rotate == null) rotate = "000"
+                    var x = $(this).attr("x")
+                    var y = $(this).attr("y")
+                    var indexHref = xlink.indexOf("/Assets/Admin")
+                    var Href = xlink.substr(indexHref)
+                    data = data + '{ "ID":' + temp + ",";
+                    data = data + '"Href" : "' + Href + '",';
+                    data = data + '"x" :' + x + ",";
+                    data = data + '"y" :' + y + ",";
+                    data = data + '"width" : ' + width + ",";
+                    data = data + '"height" : ' + height + ",";
+                    data = data + '"rotate" : "' + rotate + '"}'
+                }
+            })
+        })
+        data = data + "]}"
+        //if (temp != 0) {
+            $.ajax({
+                url: '/admin/web/DeleteDiagram?json=' + data,
+                type: "POST",
+                contenType: "application/json; charset=utf-8",
+                data: data,
+                dataType: "json",
+                success: function (data) {
+                    alert("Xóa thành công ");
+                    window.location = "/admin/web/CreateDiagram?width=5&height=5&ratio=0.01"
+                },
+                error: function (err) {
+                    alert("Error1 : " + err.error);
+                }
+            });
+        //}
+    })
 })

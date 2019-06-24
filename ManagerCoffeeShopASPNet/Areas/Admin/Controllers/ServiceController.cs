@@ -222,6 +222,15 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             info.UpdateShipDetailStatusByShipDetailID(ShipDetailID, Status);
             return RedirectToAction("GetListShipDelivery", new { ShipDetailID = ship.ShipDetailID});
         }
+        //nhấn nút xác nhận giao hàng thất bại, cập nhật là "Failed"
+        [Route("ConfirmDeliveriedFailed")]
+        public ActionResult ConfirmDeliveriedFailed(int ShipDetailID)
+        {
+            string Status = "Failed";
+            ShipDetail ship = info.GetShipDeliveryByShipDetailID(ShipDetailID);
+            info.UpdateShipDetailStatusByShipDetailID(ShipDetailID, Status);
+            return RedirectToAction("GetListShipDelivery", new { ShipDetailID = ship.ShipDetailID });
+        }
         /// <summary>
         /// Xem thông tin đồ uống để phục vụ (theo hóa đơn) => hiển thị status = Ready && Pending
         /// </summary>  

@@ -10,154 +10,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-<script>
-     //test
-    //function makeDraggable(evt) {
-    //    var selectedElement = false;
-    //    var svg = evt.target;
-    //    svg.addEventListener('mousedown', startDrag);
-    //    svg.addEventListener('mousemove', drag);
-    //    svg.addEventListener('mouseup', endDrag);
-    //    svg.addEventListener('mouseleave', endDrag);
-    //    function startDrag(evt) {
-    //        if (evt.target.classList.contains('draggable')) {
-    //            selectedElement = evt.target;
-    //            offset = getMousePosition(evt);
-    //            // Get all the transforms currently on this element
-    //            var transforms = selectedElement.transform.baseVal;
-    //            // Ensure the first transform is a translate transform
-    //            if (transforms.length === 0 ||
-    //                transforms.getItem(0).type !== SVGTransform.SVG_TRANSFORM_TRANSLATE) {
-    //                // Create an transform that translates by (0, 0)
-    //                var translate = svg.createSVGTransform();
-    //                translate.setTranslate(0, 0);
-    //                // Add the translation to the front of the transforms list
-    //                selectedElement.transform.baseVal.insertItemBefore(translate, 0);
-    //            }
-    //            // Get initial translation amount
-    //            transform = transforms.getItem(0);
-    //            offset.x -= transform.matrix.e;
-    //            offset.y -= transform.matrix.f;
-    //        }
-    //    }
-    //    function drag(evt) {
-    //        if (selectedElement) {
-    //            evt.preventDefault();
-    //            var coord = getMousePosition(evt);
-    //            transform.setTranslate(coord.x - offset.x, coord.y - offset.y);
-    //        }
-    //    }
-    //    function endDrag(evt) {
-    //        selectedElement = null;
-    //    }
-    //    function getMousePosition(evt) {
-    //        var CTM = svg.getScreenCTM();
-    //        return {
-    //            x: (evt.clientX - CTM.e) / CTM.a,
-    //            y: (evt.clientY - CTM.f) / CTM.d
-    //        };
-    //    }
-    //}
-    // test 1
-    // test
-    //function makeDraggable(evt) {
-    //    var selectedElement = false;
-    //    var svg = evt.target;
-    //    //svg.addEventListener('mousedown', startDrag);
-    //    //svg.addEventListener('mousemove', drag);
-    //    //svg.addEventListener('mouseup', endDrag);
-    //    //svg.addEventListener('mouseleave', endDrag);
-    //    //function startDrag(evt) {
-            
-    //    //}
-    //    //function drag(evt) {
-            
-    //    //}
-    //    //function endDrag(evt) {
-            
-    //    //}
-    //    //function getMousePosition(evt) {
-            
-    //    //}
-    //    // enable draggables to be dropped into this
-    //    // Private Functions
-    //    var interactBasicOptions = {
-    //        dropzone: {
-    //            // only accept elements matching this CSS selector
-    //            accept: ".draggable-droppable",
-    //            // Require a 75% element overlap for a drop to be possible
-    //            overlap: 0.75,
-
-    //            // listen for drop related events:
-
-    //            ondropactivate: function (event) {
-    //                // add active dropzone feedback
-    //                event.target.classList.add("drop-active");
-    //            },
-    //            ondragenter: function (event) {
-    //                var draggableElement = event.relatedTarget,
-    //                    dropzoneElement = event.target;
-
-    //                // feedback the possibility of a drop
-    //                dropzoneElement.classList.add("drop-target");
-    //                draggableElement.classList.add("drag-can-drop");
-    //                draggableElement.textContent = "Dragged in";
-    //            },
-    //            ondragleave: function (event) {
-    //                // remove the drop feedback style
-    //                event.target.classList.remove("drop-target");
-    //                event.relatedTarget.classList.remove("drag-can-drop");
-    //                event.relatedTarget.textContent = "Dragged out";
-    //            },
-    //            ondropdeactivate: function (event) {
-    //                // remove active dropzone feedback
-    //                event.target.classList.remove("drop-active");
-    //                event.target.classList.remove("drop-target");
-    //            }
-    //        },
-    //        draggable: {
-    //            // enable inertial throwing
-    //            inertia: true,
-    //            // keep the element within the area of it's parent
-    //            restrict: {
-    //                restriction: "parent",
-    //                endOnly: true,
-    //                elementRect: {
-    //                    top: 0,
-    //                    left: 0,
-    //                    bottom: 1,
-    //                    right: 1
-    //                }
-    //            },
-    //            // enable autoScroll
-    //            autoScroll: true,
-    //            // call this function on every dragmove event
-    //            // onmove: {},
-    //            // call this function on every dragend event
-    //            onend: function (event) {
-    //                // remove dragging class
-    //                event.target.classList.remove("drag-dragging");
-    //                event.target.classList.add("drag-dropped");
-
-    //                console.log(
-    //                    "moved a distance of " +
-    //                    (Math.sqrt(event.dx * event.dx + event.dy * event.dy) | 0) + "px"
-    //                );
-    //            }
-    //        },
-    //        resizable: {
-    //            // preserveAspectRatio: true,
-    //            edges: {
-    //                left: true,
-    //                right: true,
-    //                bottom: true,
-    //                top: true
-    //            }
-    //        }
-    //    };
-        
-    //}
-</script>
 @{ 
     double ratioDiagram = 0;
     double widthDiagram = 0;
@@ -264,9 +116,6 @@
                     <input class="form-control" id="ratio" name="ratio" value="@ratioDiagram" readonly>
                 </div>
                 <div class="form-group">
-                    @*@Html.Label("Chi nhánh", htmlAttributes: new { @class = "control-label col-md-2" })
-                        @Html.EditorFor(model => model.CSID, new { htmlAttributes = new { @class = "form-control" } })*@
-                    @*@Html.DropDownList("CSID", (List<SelectListItem>)ViewData["listCoffeeShop"], new { @class = "form-control" })*@
                     <label for="ratio">Chi nhánh</label>
                     <input class="form-control" id="CSID" name="CSID" value="@CSID" type="hidden" />
                     <input class="form-control" id="CSName" name="CSName" value="@CSName" readonly />
@@ -291,7 +140,6 @@
                         int ratio = (int)Math.Floor(1 / ratioDiagram);
                         int width = (int)Math.Floor(widthDiagram) * ratio;
                         int height = (int)Math.Floor(heightDiagram) * ratio;
-                        //int CLSID = int.Parse(ViewData["CLSID"].ToString());
                         <svg class="dropzone resizable dragOn-dropzone"
                              id="svg-dropzone"
                              viewBox="0 0 @width @height"
@@ -324,6 +172,7 @@
                         </svg>
                     }
                     <button type="button" id="btnSaveEditDiagram" class="btn btn-outline-info">Lưu</button>
+                    <button type="button" id="btnDeleteDiagram" class="btn btn-outline-danger" >Xóa sơ đồ</button>
                 </div>
             }
         }

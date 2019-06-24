@@ -13,5 +13,6 @@ namespace ManagerCoffeeShopASPNet.DAO
         IEnumerable<CoffeeLandScape> GetAllCoffeeLandScape();
         CoffeeLandScape GetCoffeeLandScapeByID(int ID);
         bool UpdateCoffeeLandScape(int CLSID, float width, float height, float ratio, int CSID, string FloorID);
+        bool DeleteCoffeeLandScape(int CLSID);
     }
 }

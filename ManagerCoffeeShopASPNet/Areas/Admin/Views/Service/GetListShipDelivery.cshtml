@@ -68,8 +68,9 @@
             column.Add(m => m.Address).Titled("Địa chỉ giao hàng").Filterable(false);
             column.Add(m => m.Phone).Titled("Sđt liên hệ").Filterable(false);
             column.Add(m => m.Status).Titled("Trạng thái").Filterable(false);
-            column.Add(m => m.ShipDetailID).Encoded(false).RenderedAs(m => (
-                @Html.ActionLink("Xác nhận giao hàng", "ConfirmDeliveried", new { ShipDetailID = m.ShipDetailID }, new { @class = "btn bt-sm btn-outline-success" }).ToHtmlString()
+            column.Add(m => m.ShipDetailID).Titled("Xác nhận giao hàng").Encoded(false).RenderedAs(m => (
+                @Html.ActionLink("Thành công", "ConfirmDeliveried", new { ShipDetailID = m.ShipDetailID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
+                + ' ' + @Html.ActionLink("Thất bại", "ConfirmDeliveriedFailed", new { ShipDetailID = m.ShipDetailID }, new { @class = "btn btn-sm btn-outline-danger" }).ToHtmlString()
             )).Filterable(false).Sortable(false);
         })
         .Sortable()

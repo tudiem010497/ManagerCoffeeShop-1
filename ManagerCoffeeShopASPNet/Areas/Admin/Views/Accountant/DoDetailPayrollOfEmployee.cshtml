@@ -24,16 +24,16 @@
             column.Add(m => m.AddedOn).Titled("Ngày tạo bảng lương").Sortable(false).Filterable(false);
         })
         .Sortable()
-        .Empty("Data is empty")
+        .Empty("Không có dữ liệu")
         .Filterable()
     )
 </div>
 <br />
 <div class="row">
     <div class="col-md-8">
-        @Html.ActionLink("Trở về", "DetailPayrollOfEmployee", "Account")
+        @Html.ActionLink("Trở về", "DetailPayrollOfEmployee", "Accountant")
     </div>
     <div class="col-md-4">
-        @Html.ActionLink("Chỉnh sửa", "EditPayrollOfEmployee", "Accountant", new { PayrollID = @ViewData["payrollID"] }, new { @class = "btn btn-outline-primary" })
+        @Html.ActionLink("Chỉnh sửa", "EditPayrollOfEmployee", "Accountant", new { PayrollID = @ViewData["payrollID"] }, new { @class = "btn btn-sm btn-outline-primary" })
     </div>
 </div>

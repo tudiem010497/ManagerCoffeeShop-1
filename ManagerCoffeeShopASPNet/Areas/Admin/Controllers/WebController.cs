@@ -445,5 +445,18 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             }
             return Json(JsonRequestBehavior.AllowGet);
         }
+        [Route("DeleteDiagram")]
+        public ActionResult DeleteDiagram(string json)
+        {
+            DiagramUpdate diagram = JsonConvert.DeserializeObject<DiagramUpdate>(json);
+            IEnumerable<CoffeeLandScapeDetail> details = info.GetAllCoffeeLandScapeDetailByCoffeeLandScapeID(diagram.CLSID);
+            foreach(var item in details)
+            {
+                info.DeleteCoffeeLandScapeDetail(item.ItemID);
+            }
+            bool result = info.DeleteCoffeeLandScape(diagram.CLSID);
+
+            return Json(JsonRequestBehavior.AllowGet);
+        }
     }
 }

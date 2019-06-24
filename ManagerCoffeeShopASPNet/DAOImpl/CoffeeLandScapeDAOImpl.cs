@@ -92,5 +92,19 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 return false;
             }
         }
+        public bool DeleteCoffeeLandScape(int CLSID)
+        {
+            try
+            {
+                CoffeeLandScape cls = context.CoffeeLandScapes.Single(m => m.CLSID == CLSID);
+                context.CoffeeLandScapes.DeleteOnSubmit(cls);
+                context.SubmitChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                throw new Exception("Error delete" + e.Message);
+            }
+        }
     }
 }

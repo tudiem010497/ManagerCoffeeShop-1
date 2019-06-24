@@ -50,6 +50,11 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             if (View == "GetAllReceiptWaitToConfirm")
             {
                 info.UpdateReceipt(ReceiptID, Status1);
+                IEnumerable<ReceiptDetail> receiptDetail = info.GetReceiptDetailByReceiptID(ReceiptID);
+                foreach(var item in receiptDetail)
+                {
+                    info.UpdateReceiptDetail(item.ReceiptDetailID, Status1);
+                }
             }
             if (View == "GetReceiptDetailByReceiptID")
             {
@@ -80,6 +85,11 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             string Status = "Cancel";
             IEnumerable<Receipt> receipt = info.GetReceiptByReceiptID(ReceiptID);
             info.UpdateReceipt(ReceiptID, Status);
+            IEnumerable<ReceiptDetail> receiptDetail = info.GetReceiptDetailByReceiptID(ReceiptID);
+            foreach(var item in receiptDetail)
+            {
+                info.UpdateReceiptDetail(item.ReceiptDetailID, Status);
+            }
             return RedirectToAction("GetAllReceiptWaitToConfirm");
         }
         //nhấn nút duyệt chi tiết phiếu nhập

@@ -13,6 +13,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
     public class DichVuController : Controller
     {
         private InformationDichVu info = new InformationDichVu();
+        private InformationWareHouse infoWarehouse = new InformationWareHouse();
         // GET: Admin/DichVu
         public ActionResult Index()
         {
@@ -92,6 +93,16 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("GetFormAddNewGift")]
         public ActionResult GetFormAddNewGift()
         {
+            List<SelectListItem> listSupplier = new List<SelectListItem>();
+            IEnumerable<Supplier> suppliers = infoWarehouse.GetAllSupplier();
+            foreach(var item in suppliers)
+            {
+                SelectListItem select = new SelectListItem();
+                select.Value = item.SupplierID.ToString();
+                select.Text = item.Name.ToString();
+                listSupplier.Add(select);
+            }
+            ViewData["listSupplier"] = listSupplier;
             return View();
         }
         [Route("CreateGift")]
@@ -104,6 +115,16 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult EditGift(int GiftID)
         {
             Gift gift = info.GetGiftByID(GiftID);
+            List<SelectListItem> listSupplier = new List<SelectListItem>();
+            IEnumerable<Supplier> suppliers = infoWarehouse.GetAllSupplier();
+            foreach (var item in suppliers)
+            {
+                SelectListItem select = new SelectListItem();
+                select.Value = item.SupplierID.ToString();
+                select.Text = item.Name.ToString();
+                listSupplier.Add(select);
+            }
+            ViewData["listSupplier"] = listSupplier;
             return View(gift);
         }
         [Route("DoEditGift")]

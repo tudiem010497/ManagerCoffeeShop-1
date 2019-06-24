@@ -84,6 +84,6 @@
         @Html.ActionLink("Trở về", "GetAllOrderOnlineNeedConfirm")
     </div>
     <div class="col-md-3">
-        <a class="btn btn-outline-info" href="@Url.Action("ConfirmAll", "Service", new { OrderID = ViewData["OrderID"]})">Xác nhận tất cả</a>
+        <a class="btn btn-sm btn-outline-info" href="@Url.Action("ConfirmAll", "Service", new { OrderID = ViewData["OrderID"]})">Hoàn tất</a>
     </div>
 </div>

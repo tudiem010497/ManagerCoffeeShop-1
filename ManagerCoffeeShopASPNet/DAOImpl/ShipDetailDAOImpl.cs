@@ -21,7 +21,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         {
             //string Status
             IEnumerable<ShipDetail> s = from ship in context.ShipDetails
-                                        where ship.Status == "Delivery" || ship.Status=="Close"
+                                        where ship.Status == "Delivery" || ship.Status == "Close" || ship.Status == "Failed"
                                         select ship;
             return s;
         }
