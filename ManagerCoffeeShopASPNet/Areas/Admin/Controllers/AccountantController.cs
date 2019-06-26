@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.IO;
 using Microsoft.Ajax.Utilities;
+using ManagerCoffeeShopASPNet.Reporting;
 
 namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
 {
@@ -261,6 +262,27 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 TempData["edit"] = "Sửa thành công";
             }
             return RedirectToAction("EditPayrollOfEmployee", new { PayrollID = PayrollID});
+        }
+
+        [Route("Report")]
+        public ActionResult Report()
+        {
+            return View();
+        }
+
+        [Route("ReportTurnOverGroupByFoodAndDrink")]
+        public ActionResult ReportTurnOverGroupByFoodAndDrink(string dateTimeFrom, string dateTimeTo)
+        {
+            ReportTurnOverGroupByFoodAndDrink rp = new ReportTurnOverGroupByFoodAndDrink();
+
+            DateTime DateTimeFrom = Convert.ToDateTime(dateTimeFrom).AddHours(0).AddMinutes(0).AddSeconds(0);
+            DateTime DateTimeTo = Convert.ToDateTime(dateTimeTo).AddHours(0).AddMinutes(0).AddSeconds(0);
+            rp.SetParameterValue("@DateTimeFrom", DateTimeFrom);
+            rp.SetParameterValue("@DateTimeTo", DateTimeTo);
+            Stream stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "Report.pdf");
+            // return View();
         }
     }
 }
