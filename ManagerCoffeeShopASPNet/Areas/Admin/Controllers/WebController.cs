@@ -299,7 +299,18 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             ViewData["CSID"] = CSID;
             return View(cs);
         }
-
+        [Route("DeleteCoffeeShop")]
+        public ActionResult DeleteCoffeeShop(int CSID)
+        {
+            CoffeeShop cs = info.GetCoffeeShopByID(CSID);
+            return View(cs);
+        }
+        [Route("DoDeleteCofffeeShop")]
+        public ActionResult DoDeleteCofffeeShop(int CSID)
+        {
+            info.DeleteCoffeeShop(CSID);
+            return RedirectToAction("GetAllCoffeeShop", "Web");
+        }
         [Route("CreateDiagram")]
         public ActionResult CreateDiagram(float width, float height, float ratio, string FloorID)
         {

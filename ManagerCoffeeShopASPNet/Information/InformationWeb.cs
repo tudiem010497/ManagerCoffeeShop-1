@@ -82,6 +82,10 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._coffeeShopDAO.GetCoffeeShopByCSID(CSID);
         }
+        public CoffeeShop GetCoffeeShopByID(int CSID)
+        {
+            return this._coffeeShopDAO.GetCoffeeShopByID(CSID);
+        }
         public bool InsertCoffeeShop(string Name, string Address, string Phone, string LogoImagePath, string TitleAbout, string DescAbout, string TitleContact, string DescContact, string Email)
         {
             return this._coffeeShopDAO.InsertCoffeeShop(Name, Address, Phone, LogoImagePath, TitleAbout, DescAbout, TitleContact, DescContact, Email);
@@ -161,6 +165,10 @@ namespace ManagerCoffeeShopASPNet.Information
         public bool DeleteCoffeeLandScape(int CLSID)
         {
             return this._coffeeLandScapeDAO.DeleteCoffeeLandScape(CLSID);
+        }
+        public bool DeleteCoffeeShop(int CSID)
+        {
+            return this._coffeeShopDAO.DeleteCoffeeShop(CSID);
         }
     }
 }

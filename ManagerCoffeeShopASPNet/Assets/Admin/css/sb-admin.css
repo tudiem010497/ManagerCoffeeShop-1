@@ -4366,6 +4366,10 @@ input[type="button"].btn-block {
   margin-bottom: -1px;
 }
 
+div.nav-item{
+    display:none;
+}
+
 .nav-tabs .nav-link {
   border: 1px solid transparent;
   border-top-left-radius: 0.25rem;

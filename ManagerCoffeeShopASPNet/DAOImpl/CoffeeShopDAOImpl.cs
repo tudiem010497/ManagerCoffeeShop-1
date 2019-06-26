@@ -24,6 +24,13 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                                           select coffeeshop);
             return cs;
         }
+        public CoffeeShop GetCoffeeShopByID(int CSID)
+        {
+            CoffeeShop cs = (from coffeeshop in context.CoffeeShops
+                             where coffeeshop.CSID == CSID
+                             select coffeeshop).SingleOrDefault();
+            return cs;
+        }
         public bool InsertCoffeeShop(string Name, string Address, string Phone, string LogoImagePath, string TitleAbout, string DescAbout, string TitleContact, string DescContact, string Email)
         {
             try
@@ -68,6 +75,20 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             catch (Exception e)
             {
                 throw new Exception("Error edit coffee shop " + e.Message);
+            }
+        }
+        public bool DeleteCoffeeShop(int CSID)
+        {
+            try
+            {
+                CoffeeShop cs = context.CoffeeShops.Single(m => m.CSID == CSID);
+                context.CoffeeShops.DeleteOnSubmit(cs);
+                context.SubmitChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                throw new Exception("Error delete " + e.Message);
             }
         }
     }
