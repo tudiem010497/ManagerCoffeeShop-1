@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Experimenting with Editable SVG Text</title>
+  <link href="https://fonts.googleapis.com/css?family=Erica+One" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  
+      <link rel="stylesheet" href="/Assets/Admin/js/edit-text-svg-js/style.css">
+
+  
+</head>
+
+<body>
+
+  <div contenteditable id="app">
+  <svg viewBox="0 0 500 500">
+    <defs>
+      <pattern
+        id="p-fire"
+        viewBox="0 0 300 300"
+        patternUnits="userSpaceOnUse"
+        width="250" height="300"
+        x="0" y="0">
+        <!--<image
+            xlink:href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/giphy-downsized%20(1).gif"
+            width="480" height="480"/>-->
+      </pattern>
+    </defs>
+  
+    <text v-model="type" x="50%" y="250" fill="url(#p-fire)" font-family="Erica One" font-size="140" stroke="white" text-anchor="middle">{{ type }}</text>
+  </svg>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js'></script>
+
+  
+
+    <script  src="../edit-text-svg-js/script.js"></script>
+
+
+
+
+</body>
+
+</html>
