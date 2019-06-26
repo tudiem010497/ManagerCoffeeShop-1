@@ -189,6 +189,9 @@
         <li>
             <a tabindex="-1" href="#" id="rotate-right">Xoay </a>
         </li>
+        <li>
+            <a tabindex="-1" id="add-text">Thêm text</a>
+        </li>
     </ul>
 </div>
 <!-- Modal -->
@@ -273,6 +276,9 @@
                     //test.rotate(90);
                     //test.toggleClass('flip');
                     return false;
+                })
+                $("#add-text").click(function () {
+                    $("#svg-dropzone").html('<text x="'+test.attr('x') +'" y="'+ test.attr('y')+'" >I love SVG</text>')
                 })
                 //$("#rotate-right").rotate({
                 //    bind: {
