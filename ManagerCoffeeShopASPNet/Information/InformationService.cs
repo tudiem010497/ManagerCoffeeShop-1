@@ -12,6 +12,7 @@ namespace ManagerCoffeeShopASPNet.Information
         private FoodAndDrinkDAO _foodAndDrinkDAO;
         private OrderDAO _orderDAO;
         private OrderItemDAO _orderItemDAO;
+        private OrderPromotionDAO _orderPromotionDAO;
         private PositionDAO _positionDAO;
         private AccountDAO _accountDAO;
         private ShipDAO _shipDAO;
@@ -21,6 +22,7 @@ namespace ManagerCoffeeShopASPNet.Information
             this._foodAndDrinkDAO = (FoodAndDrinkDAO)new FoodAndDrinkDAOImpl();
             this._orderDAO = (OrderDAO)new OrderDAOImpl();
             this._orderItemDAO = (OrderItemDAO)new OrderItemDAOImpl();
+            this._orderPromotionDAO = (OrderPromotionDAO)new OrderPromotionDAOImpl();
             this._positionDAO = (PositionDAO)new PositionDAOImpl();
             this._accountDAO = (AccountDAO)new AccountDAOImpl();
             this._shipDAO = (ShipDAO)new ShipDAOImpl();
@@ -150,6 +152,10 @@ namespace ManagerCoffeeShopASPNet.Information
         public bool UpdateShipDetailStatusByShipDetailID(int ShipDetailID, string Status)
         {
             return this._shipDetailDAO.UpdateShipDetailStatusByShipDetailID(ShipDetailID, Status);
+        }
+        public bool InsertOrderPromotion(int PromotionID, int OrderID)
+        {
+            return this._orderPromotionDAO.InsertOrderPromotion(PromotionID, OrderID);
         }
     }
 }

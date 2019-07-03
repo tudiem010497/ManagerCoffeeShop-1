@@ -87,12 +87,13 @@
 
     // Xử lý button Gửi đến quầy pha chế
     $("#btnSendToBatender").click(function () {
-        var temp = 0;
-       
-        var chooseService = $("#chooseService option:selected").val();
-        var choosePos = $("#choosePos option:selected").val();
+       var temp = 0;
+       var choosePromotion = $("#choosePromotion option:selected").val();
+       var chooseService = $("#chooseService option:selected").val();
+       var choosePos = $("#choosePos option:selected").val();
        var data =  '{"Desc" : "' + chooseService + '",' +
-                    '"PosID" : ' + choosePos +
+                    '"PosID" : ' + choosePos + ',' +
+                    '"PromotionID" : '+choosePromotion +
                     ',"OrderItemModel" : [';
         $("table#order tbody.order tr").each(function () {
             if (temp != 0)

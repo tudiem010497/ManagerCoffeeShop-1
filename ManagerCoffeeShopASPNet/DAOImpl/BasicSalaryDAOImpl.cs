@@ -71,5 +71,12 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 throw new Exception("Error Delete BasicSalary: " + e.Message);
             }
         }
+        public bool CheckBasicSalaryOfEmployee(int EmployeeID)
+        {
+            BasicSalary bs = (from basicSalary in context.BasicSalaries
+                              where basicSalary.EmployeeID == EmployeeID
+                              select basicSalary).SingleOrDefault();
+            return true;
+        }
     }
 }

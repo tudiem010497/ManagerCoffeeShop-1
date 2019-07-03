@@ -41,7 +41,49 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 return null;
             }
         }
-        public bool InsertReceiptDetail(int ReceiptID, int IngreID, double Amount, string Unit, double UnitPrice, string Currency, string Status)
+        public bool InsertReceiptDetail(int ReceiptID, int IngreID, int GiftID, double Amount, string Unit, double UnitPrice, string Currency, string Status)
+        {
+            try
+            {
+                ReceiptDetail detail = new ReceiptDetail();
+                detail.ReceiptID = ReceiptID;
+                detail.IngreID = IngreID;
+                detail.GiftID = GiftID;
+                detail.Amount = Amount;
+                detail.Unit = Unit;
+                detail.UnitPrice = UnitPrice;
+                detail.Currency = Currency;
+                detail.Status = Status;
+                context.ReceiptDetails.InsertOnSubmit(detail);
+                context.SubmitChanges();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error InsertReceiptDetailByReceiptID" + ex.Message);
+            }
+        }
+        public bool InsertReceiptDetailMissIngreID(int ReceiptID, int GiftID, double Amount, double UnitPrice, string Currency, string Status)
+        {
+            try
+            {
+                ReceiptDetail detail = new ReceiptDetail();
+                detail.ReceiptID = ReceiptID;
+                detail.GiftID = GiftID;
+                detail.Amount = Amount;
+                detail.UnitPrice = UnitPrice;
+                detail.Currency = Currency;
+                detail.Status = Status;
+                context.ReceiptDetails.InsertOnSubmit(detail);
+                context.SubmitChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error InsertReceiptDetailByReceiptID" + ex.Message);
+            }
+        }
+        public bool InsertReceiptDetailMissGiftID(int ReceiptID, int IngreID, double Amount, string Unit, double UnitPrice, string Currency, string Status)
         {
             try
             {
@@ -57,7 +99,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 context.SubmitChanges();
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Error InsertReceiptDetailByReceiptID" + ex.Message);
             }

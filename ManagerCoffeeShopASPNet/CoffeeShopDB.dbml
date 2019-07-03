@@ -385,6 +385,7 @@
   </Table>
   <Table Name="dbo.OrderPromotion" Member="OrderPromotions">
     <Type Name="OrderPromotion">
+      <Column Name="OrderPromotionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="PromotionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Order_OrderPromotion" Member="Order" ThisKey="OrderID" OtherKey="OrderID" Type="Order" IsForeignKey="true" />
@@ -563,18 +564,6 @@
       <Column Name="Currency" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="Salary_BasicSalary" Member="BasicSalaries" ThisKey="SalaryID" OtherKey="SalaryID" Type="BasicSalary" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Sale" Member="Sales">
-    <Type Name="Sale">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Region" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
-      <Column Name="Person" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
-      <Column Name="Item" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
-      <Column Name="Units" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="UnitCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="Total" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Column Name="AddedOn" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.Server" Member="Servers">

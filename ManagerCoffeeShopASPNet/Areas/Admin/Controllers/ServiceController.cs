@@ -39,6 +39,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
     public class ServiceController : Controller
     {
         private InformationService info = new InformationService();
+        private InformationDichVu infoDV = new InformationDichVu();
         // GET: Admin/Service
         [Route("Index")]
         [HttpGet]
@@ -71,7 +72,9 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 fds = (IEnumerable<FoodAndDrink>)temp;
             }
             IEnumerable<Position> positions = info.GetAllPosition();
+            IEnumerable<Promotion> promotions = infoDV.GetPromotionByDateTime();
             ViewData["positions"] = positions;
+            ViewData["promotions"] = promotions;
             ViewData["fds"] = fds;
             ViewData["successEmployee"] = Session["successEmployee"];
             ViewData["successUserID"] = Session["successUserID"];
@@ -111,6 +114,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             OrderModel test = JsonConvert.DeserializeObject<OrderModel>(json);
             string Desc = test.Desc;
             int PosID = test.PosID;
+            int PromotionID = test.PromotionID;
             double TotalAmount = 0;
             List<OrderItemModel> OrderItemModel = test.OrderItemModel;
             foreach (var item in OrderItemModel)
@@ -123,6 +127,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             {
                 info.InsertOrderItem(OrderID, item.FoodAndDrinkID, item.Quantity, item.Desc, "Pending");
             }
+            info.InsertOrderPromotion(PromotionID, OrderID);
             return Json(new { PosID = PosID }, JsonRequestBehavior.AllowGet);
         }
 

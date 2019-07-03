@@ -73,5 +73,12 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 throw new Exception("Error edit promotion " + e.Message);
             }
         }
+        public IEnumerable<Promotion> GetPromotionByDateTime()
+        {
+            var p = from promotion in context.Promotions
+                    where DateTime.Now >= promotion.StartDate && DateTime.Now <= promotion.EndDate
+                    select promotion;
+            return p;
+        }
     }
 }

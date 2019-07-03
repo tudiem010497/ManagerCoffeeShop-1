@@ -96,6 +96,9 @@ namespace ManagerCoffeeShopASPNet
     partial void InsertOrderItem(OrderItem instance);
     partial void UpdateOrderItem(OrderItem instance);
     partial void DeleteOrderItem(OrderItem instance);
+    partial void InsertOrderPromotion(OrderPromotion instance);
+    partial void UpdateOrderPromotion(OrderPromotion instance);
+    partial void DeleteOrderPromotion(OrderPromotion instance);
     partial void InsertPayroll(Payroll instance);
     partial void UpdatePayroll(Payroll instance);
     partial void DeletePayroll(Payroll instance);
@@ -129,9 +132,6 @@ namespace ManagerCoffeeShopASPNet
     partial void InsertSalary(Salary instance);
     partial void UpdateSalary(Salary instance);
     partial void DeleteSalary(Salary instance);
-    partial void InsertSale(Sale instance);
-    partial void UpdateSale(Sale instance);
-    partial void DeleteSale(Sale instance);
     partial void InsertShape(Shape instance);
     partial void UpdateShape(Shape instance);
     partial void DeleteShape(Shape instance);
@@ -536,14 +536,6 @@ namespace ManagerCoffeeShopASPNet
 			get
 			{
 				return this.GetTable<Salary>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Sale> Sales
-		{
-			get
-			{
-				return this.GetTable<Sale>();
 			}
 		}
 		
@@ -6766,6 +6758,8 @@ namespace ManagerCoffeeShopASPNet
 		
 		private EntitySet<OrderItem> _OrderItems;
 		
+		private EntitySet<OrderPromotion> _OrderPromotions;
+		
 		private EntitySet<ShipDetail> _ShipDetails;
 		
 		private EntityRef<Customer> _Customer;
@@ -6801,6 +6795,7 @@ namespace ManagerCoffeeShopASPNet
 		public Order()
 		{
 			this._OrderItems = new EntitySet<OrderItem>(new Action<OrderItem>(this.attach_OrderItems), new Action<OrderItem>(this.detach_OrderItems));
+			this._OrderPromotions = new EntitySet<OrderPromotion>(new Action<OrderPromotion>(this.attach_OrderPromotions), new Action<OrderPromotion>(this.detach_OrderPromotions));
 			this._ShipDetails = new EntitySet<ShipDetail>(new Action<ShipDetail>(this.attach_ShipDetails), new Action<ShipDetail>(this.detach_ShipDetails));
 			this._Customer = default(EntityRef<Customer>);
 			this._Position = default(EntityRef<Position>);
@@ -7028,6 +7023,19 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Order_OrderPromotion", Storage="_OrderPromotions", ThisKey="OrderID", OtherKey="OrderID")]
+		public EntitySet<OrderPromotion> OrderPromotions
+		{
+			get
+			{
+				return this._OrderPromotions;
+			}
+			set
+			{
+				this._OrderPromotions.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Order_ShipDetail", Storage="_ShipDetails", ThisKey="OrderID", OtherKey="OrderID")]
 		public EntitySet<ShipDetail> ShipDetails
 		{
@@ -7136,6 +7144,18 @@ namespace ManagerCoffeeShopASPNet
 		}
 		
 		private void detach_OrderItems(OrderItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.Order = null;
+		}
+		
+		private void attach_OrderPromotions(OrderPromotion entity)
+		{
+			this.SendPropertyChanging();
+			entity.Order = this;
+		}
+		
+		private void detach_OrderPromotions(OrderPromotion entity)
 		{
 			this.SendPropertyChanging();
 			entity.Order = null;
@@ -7419,15 +7439,58 @@ namespace ManagerCoffeeShopASPNet
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.OrderPromotion")]
-	public partial class OrderPromotion
+	public partial class OrderPromotion : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _OrderPromotionID;
 		
 		private int _OrderID;
 		
 		private System.Nullable<int> _PromotionID;
 		
+		private EntityRef<Order> _Order;
+		
+		private EntityRef<Promotion> _Promotion;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnOrderPromotionIDChanging(int value);
+    partial void OnOrderPromotionIDChanged();
+    partial void OnOrderIDChanging(int value);
+    partial void OnOrderIDChanged();
+    partial void OnPromotionIDChanging(System.Nullable<int> value);
+    partial void OnPromotionIDChanged();
+    #endregion
+		
 		public OrderPromotion()
 		{
+			this._Order = default(EntityRef<Order>);
+			this._Promotion = default(EntityRef<Promotion>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderPromotionID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int OrderPromotionID
+		{
+			get
+			{
+				return this._OrderPromotionID;
+			}
+			set
+			{
+				if ((this._OrderPromotionID != value))
+				{
+					this.OnOrderPromotionIDChanging(value);
+					this.SendPropertyChanging();
+					this._OrderPromotionID = value;
+					this.SendPropertyChanged("OrderPromotionID");
+					this.OnOrderPromotionIDChanged();
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderID", DbType="Int NOT NULL")]
@@ -7441,7 +7504,15 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._OrderID != value))
 				{
+					if (this._Order.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnOrderIDChanging(value);
+					this.SendPropertyChanging();
 					this._OrderID = value;
+					this.SendPropertyChanged("OrderID");
+					this.OnOrderIDChanged();
 				}
 			}
 		}
@@ -7457,8 +7528,104 @@ namespace ManagerCoffeeShopASPNet
 			{
 				if ((this._PromotionID != value))
 				{
+					if (this._Promotion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPromotionIDChanging(value);
+					this.SendPropertyChanging();
 					this._PromotionID = value;
+					this.SendPropertyChanged("PromotionID");
+					this.OnPromotionIDChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Order_OrderPromotion", Storage="_Order", ThisKey="OrderID", OtherKey="OrderID", IsForeignKey=true)]
+		public Order Order
+		{
+			get
+			{
+				return this._Order.Entity;
+			}
+			set
+			{
+				Order previousValue = this._Order.Entity;
+				if (((previousValue != value) 
+							|| (this._Order.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Order.Entity = null;
+						previousValue.OrderPromotions.Remove(this);
+					}
+					this._Order.Entity = value;
+					if ((value != null))
+					{
+						value.OrderPromotions.Add(this);
+						this._OrderID = value.OrderID;
+					}
+					else
+					{
+						this._OrderID = default(int);
+					}
+					this.SendPropertyChanged("Order");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Promotion_OrderPromotion", Storage="_Promotion", ThisKey="PromotionID", OtherKey="PromotionID", IsForeignKey=true)]
+		public Promotion Promotion
+		{
+			get
+			{
+				return this._Promotion.Entity;
+			}
+			set
+			{
+				Promotion previousValue = this._Promotion.Entity;
+				if (((previousValue != value) 
+							|| (this._Promotion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Promotion.Entity = null;
+						previousValue.OrderPromotions.Remove(this);
+					}
+					this._Promotion.Entity = value;
+					if ((value != null))
+					{
+						value.OrderPromotions.Add(this);
+						this._PromotionID = value.PromotionID;
+					}
+					else
+					{
+						this._PromotionID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Promotion");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -7988,6 +8155,8 @@ namespace ManagerCoffeeShopASPNet
 		
 		private string _Desc;
 		
+		private EntitySet<OrderPromotion> _OrderPromotions;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -8006,6 +8175,7 @@ namespace ManagerCoffeeShopASPNet
 		
 		public Promotion()
 		{
+			this._OrderPromotions = new EntitySet<OrderPromotion>(new Action<OrderPromotion>(this.attach_OrderPromotions), new Action<OrderPromotion>(this.detach_OrderPromotions));
 			OnCreated();
 		}
 		
@@ -8109,6 +8279,19 @@ namespace ManagerCoffeeShopASPNet
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Promotion_OrderPromotion", Storage="_OrderPromotions", ThisKey="PromotionID", OtherKey="PromotionID")]
+		public EntitySet<OrderPromotion> OrderPromotions
+		{
+			get
+			{
+				return this._OrderPromotions;
+			}
+			set
+			{
+				this._OrderPromotions.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -8127,6 +8310,18 @@ namespace ManagerCoffeeShopASPNet
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_OrderPromotions(OrderPromotion entity)
+		{
+			this.SendPropertyChanging();
+			entity.Promotion = this;
+		}
+		
+		private void detach_OrderPromotions(OrderPromotion entity)
+		{
+			this.SendPropertyChanging();
+			entity.Promotion = null;
 		}
 	}
 	
@@ -10550,236 +10745,6 @@ namespace ManagerCoffeeShopASPNet
 		{
 			this.SendPropertyChanging();
 			entity.Salary = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Sale")]
-	public partial class Sale : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Region;
-		
-		private string _Person;
-		
-		private string _Item;
-		
-		private int _Units;
-		
-		private decimal _UnitCost;
-		
-		private decimal _Total;
-		
-		private System.DateTime _AddedOn;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnRegionChanging(string value);
-    partial void OnRegionChanged();
-    partial void OnPersonChanging(string value);
-    partial void OnPersonChanged();
-    partial void OnItemChanging(string value);
-    partial void OnItemChanged();
-    partial void OnUnitsChanging(int value);
-    partial void OnUnitsChanged();
-    partial void OnUnitCostChanging(decimal value);
-    partial void OnUnitCostChanged();
-    partial void OnTotalChanging(decimal value);
-    partial void OnTotalChanged();
-    partial void OnAddedOnChanging(System.DateTime value);
-    partial void OnAddedOnChanged();
-    #endregion
-		
-		public Sale()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Region", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
-		public string Region
-		{
-			get
-			{
-				return this._Region;
-			}
-			set
-			{
-				if ((this._Region != value))
-				{
-					this.OnRegionChanging(value);
-					this.SendPropertyChanging();
-					this._Region = value;
-					this.SendPropertyChanged("Region");
-					this.OnRegionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Person", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
-		public string Person
-		{
-			get
-			{
-				return this._Person;
-			}
-			set
-			{
-				if ((this._Person != value))
-				{
-					this.OnPersonChanging(value);
-					this.SendPropertyChanging();
-					this._Person = value;
-					this.SendPropertyChanged("Person");
-					this.OnPersonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Item", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
-		public string Item
-		{
-			get
-			{
-				return this._Item;
-			}
-			set
-			{
-				if ((this._Item != value))
-				{
-					this.OnItemChanging(value);
-					this.SendPropertyChanging();
-					this._Item = value;
-					this.SendPropertyChanged("Item");
-					this.OnItemChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Units", DbType="Int NOT NULL")]
-		public int Units
-		{
-			get
-			{
-				return this._Units;
-			}
-			set
-			{
-				if ((this._Units != value))
-				{
-					this.OnUnitsChanging(value);
-					this.SendPropertyChanging();
-					this._Units = value;
-					this.SendPropertyChanged("Units");
-					this.OnUnitsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnitCost", DbType="Money NOT NULL")]
-		public decimal UnitCost
-		{
-			get
-			{
-				return this._UnitCost;
-			}
-			set
-			{
-				if ((this._UnitCost != value))
-				{
-					this.OnUnitCostChanging(value);
-					this.SendPropertyChanging();
-					this._UnitCost = value;
-					this.SendPropertyChanged("UnitCost");
-					this.OnUnitCostChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Total", DbType="Money NOT NULL")]
-		public decimal Total
-		{
-			get
-			{
-				return this._Total;
-			}
-			set
-			{
-				if ((this._Total != value))
-				{
-					this.OnTotalChanging(value);
-					this.SendPropertyChanging();
-					this._Total = value;
-					this.SendPropertyChanged("Total");
-					this.OnTotalChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddedOn", DbType="Date NOT NULL")]
-		public System.DateTime AddedOn
-		{
-			get
-			{
-				return this._AddedOn;
-			}
-			set
-			{
-				if ((this._AddedOn != value))
-				{
-					this.OnAddedOnChanging(value);
-					this.SendPropertyChanging();
-					this._AddedOn = value;
-					this.SendPropertyChanged("AddedOn");
-					this.OnAddedOnChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	

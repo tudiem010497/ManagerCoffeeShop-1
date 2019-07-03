@@ -10,76 +10,41 @@
 <br />
 <div class="row">
     <div class="col-sm-8">
-        @(Html
+        <div>
+            @(Html
                 .Grid((IEnumerable<Ingredient>)ViewData["ingres"])
                 .Build(columns =>
                 {
-                    columns.Add(ingre => ingre.IngreID).Titled("Mã MVL");
                     columns.Add(ingre => ingre.Name).Titled("Tên nguyên vật liệu");
                     columns.Add(ingre => ingre.Supplier.Name).Titled("Tên nhà cung cấp");
                     columns.Add(ingre => ingre.UnitPrice).Titled("Đơn giá");
                     columns.Add(ingre => ingre.Unit).Titled("Đơn vị tính");
                     columns.Add(ingre => ingre.IngreID).Encoded(false).RenderedAs(ingre =>
-                    "<button data-toggle='modal' data-target='#modalOption' class='btnPreAddToReceipt btn btn-primary' name ='" + ingre.Name + "' ingreid = " + ingre.IngreID + " unitprice = " + ingre.UnitPrice + ">" + "Thêm" + "</button>"
-                    /*+ "<button class ='btnRemoveFromReceipt btn btn-danger' ingreid ="+ ingre.IngreID +">Xóa</button>"*/).Filterable(false);
+                        "<button data-toggle='modal' data-target='#modalOption' class='btnPreAddToReceipt btn btn-primary' name ='" + ingre.Name + "' ingreid = " + ingre.IngreID + " unitprice = " + ingre.UnitPrice + ">" + "Thêm" + "</button>"
+                    ).Filterable(false);
                 }).Filterable()
-        )
+
+            )
+        </div>
+        <br />
+        <div>
+            @(Html
+                .Grid((IEnumerable<Gift>)ViewData["gifts"])
+                .Build(columns =>
+                {
+                    columns.Add(gift => gift.Name).Titled("Tên quà tặng");
+                    columns.Add(gift => gift.Supplier.Name).Titled("Tên nhà cung cấp");
+                    columns.Add(gift => gift.UnitPrice).Titled("Đơn giá");
+                    columns.Add(gift => gift.GiftID).Encoded(false).RenderedAs(gift =>
+                        "<button data-toggle='modal' data-target='#modalOption_gift' class='btnPreAddGiftToReceipt btn btn-primary' name ='" + gift.Name + "' giftid = " + gift.GiftID + " unitprice = " + gift.UnitPrice + ">" + "Thêm" + "</button>"
+                    ).Filterable(false);
+                }).Filterable()
+            )
+        </div>
+        
     </div>
     <div class="col-sm-4">
-        @*@using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-
-                <div class="form-horizontal">
-                    <h4>Receipt</h4>
-                    <hr />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.TotalAmount, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Currency, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Create" class="btn btn-default" />
-                        </div>
-                    </div>
-                </div> 1 nhà cung cấp, lấy các mặt hàng theo nhà cung cấp đó
-            }*@
-        @*<div class="option modal fade" id="modalOption" role="dialog">
-                <input type="text" value="" name="IngreID" readonly />
-                <input type="text" value="" name="Name" readonly />
-                <input type="text" value="" name="UnitPrice" readonly />
-                <input type="text" value="" name="Quantity" />
-            </div>*@
-        <!-- Modal -->
+        <!-- Modal Ingredient-->
         <div class="modal fade" id="modalOption" role="dialog">
             <div class="modal-dialog">
 
@@ -117,23 +82,55 @@
 
             </div>
         </div>
+        <!-- Modal gift-->
+        <div class="modal fade" id="modalOption_gift" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Thông tin quà tặng</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group GiftID">
+                                <label for="IngreID">Mã quà tặng</label>
+                                <input type="number" value="" name="GiftID" readonly class="form-control" />
+                            </div>
+                            <div class="form-group Name_gift">
+                                <label for="Name">Tên quà tặng</label>
+                                <input type="text" name="Name_gift" readonly class="form-control" />
+                            </div>
+                            <div class="form-group UnitPrice_gift">
+                                <label for="UnitPrice">Đơn giá</label>
+                                <input type="number" value="" name="UnitPrice_gift" readonly class="form-control" />
+                            </div>
+                            <div class="form-group Quantity_gift">
+                                <label for="Quantity">Số lượng</label>
+                                <input type="number" value="" name="Quantity_gift" class="form-control" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btnAddGiftToReceipt btn btn-primary">Thêm vào phiếu nhập</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div>
             <div>
                 @Html.DropDownList("SupplierID", (List<SelectListItem>)ViewData["sups"], new { @class= "form-control" })
             </div>
             <table class="list-receiptdetail table">
-                @*<tr class="IngredientID">
-                <td>Name</td>
-                <td><input type="text" /></td>
-                <td>TotalAmount</td>
-                </tr>*@
                 <tbody>
-                    
                 </tbody>
+            </table>
+            <table class="list-receiptdetail-gift table">
+                <tbody></tbody>
             </table>
             <button class="btn btn-primary btnAddReceipt">Tạo phiếu nhập</button>
         </div>
-        
     </div>
 </div>
 <br />

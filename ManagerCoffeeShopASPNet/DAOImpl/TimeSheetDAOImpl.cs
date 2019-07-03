@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ManagerCoffeeShopASPNet.DAOImpl
 {
-    public class TimeSheetDAOImpl:TimeSheetDAO
+    public class TimeSheetDAOImpl : TimeSheetDAO
     {
         private CoffeeShopDBDataContext context;
         public TimeSheetDAOImpl()
@@ -33,9 +33,27 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 context.SubmitChanges();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new Exception("Error insert timeSheet: " + e.Message);
+            }
+        }
+        public bool CheckTimeSheetOfEmployee(int EmployeeID)
+        {
+            try
+            {
+                TimeSheet bs = (from ts in context.TimeSheets
+                                where ts.EmployeeID == EmployeeID
+                                select ts).Single();
+                if (EmployeeID == bs.EmployeeID)
+                {
+                    return true;
+                }
+                else { return false; }
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
     }

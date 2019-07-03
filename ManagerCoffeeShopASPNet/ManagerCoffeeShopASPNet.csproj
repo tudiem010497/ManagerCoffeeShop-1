@@ -291,6 +291,7 @@
     <Compile Include="DAOImpl\IngredientMessageDAOImpl.cs" />
     <Compile Include="DAOImpl\OrderDAOImpl.cs" />
     <Compile Include="DAOImpl\OrderItemDAOImpl.cs" />
+    <Compile Include="DAOImpl\OrderPromotionDAOImpl.cs" />
     <Compile Include="DAOImpl\PayrollDAOImpl.cs" />
     <Compile Include="DAOImpl\PositionDAOImpl.cs" />
     <Compile Include="DAOImpl\PromotionDAOImpl.cs" />
@@ -321,6 +322,7 @@
     <Compile Include="DAO\IngredientMessageDAO.cs" />
     <Compile Include="DAO\OrderDAO.cs" />
     <Compile Include="DAO\OrderItemDAO.cs" />
+    <Compile Include="DAO\OrderPromotionDAO.cs" />
     <Compile Include="DAO\PayrollDAO.cs" />
     <Compile Include="DAO\PositionDAO.cs" />
     <Compile Include="DAO\PromotionDAO.cs" />
@@ -389,6 +391,12 @@
       <DependentUpon>ExportOrderCustomer.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reporting\ReportTurnOverGroupByFoodAndDrink.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportTurnOverGroupByFoodAndDrink.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\Language.cs" />
   </ItemGroup>
@@ -401,10 +409,11 @@
     <Content Include="Assets\Admin\css\styleBatender.css" />
     <Content Include="Assets\Admin\css\styleService.css" />
     <Content Include="Assets\Admin\css\styleWarehouse.css" />
-    <Content Include="Assets\Admin\css\test.css" />
+    <Content Include="Assets\Admin\css\dropdownmenu.css" />
     <Content Include="Assets\Admin\js\accountant.js" />
     <Content Include="Assets\Admin\js\batender.js" />
     <Content Include="Assets\Admin\js\bootstrap.min.js" />
+    <Content Include="Assets\Admin\js\datetimePicker.js" />
     <Content Include="Assets\Admin\js\jquery.min.js" />
     <Content Include="Assets\Admin\js\sb-admin.js" />
     <Content Include="Assets\Admin\js\sb-admin.min.js" />
@@ -528,6 +537,7 @@
     <Content Include="Areas\Admin\Views\Batender\DeleteRecipeDetail.cshtml" />
     <Content Include="Areas\Admin\Views\Web\ViewDiagram.cshtml" />
     <Content Include="Areas\Admin\Views\Web\DeleteCoffeeShop.cshtml" />
+    <Content Include="Areas\Admin\Views\Accountant\Report.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -584,6 +594,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\ServiceEmployee\" />
+    <Folder Include="Assets\Admin\js\bootstrap-datetimepicker-master\" />
     <Folder Include="Assets\Admin\js\demo\" />
     <Folder Include="Assets\Admin\scss\" />
     <Folder Include="Assets\Admin\vendor\bootstrap\" />
@@ -629,6 +640,10 @@
     <EmbeddedResource Include="Reporting\ExportOrderCustomer.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ExportOrderCustomer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\ReportTurnOverGroupByFoodAndDrink.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportTurnOverGroupByFoodAndDrink.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="CoffeeShopDB.dbml.layout">
       <DependentUpon>CoffeeShopDB.dbml</DependentUpon>

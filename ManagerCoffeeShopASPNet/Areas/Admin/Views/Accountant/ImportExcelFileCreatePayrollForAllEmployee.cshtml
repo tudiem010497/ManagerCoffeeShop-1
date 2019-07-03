@@ -4,24 +4,25 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 <script src="~/Assets/Admin/js/accountant.js"></script>
-<h2>ImportExcelFileCreatePayrollForAllEmployee</h2>
-@*<h2>
-    
-    @using (Html.BeginForm("Reset", "ImportExcel"))
-    {
-        <button id="reset">Reset »</button>
-    }
-</h2>*@
+
+<br />
+<h2 style="text-align:center">THÊM BẢNG LƯƠNG CHO NHÂN VIÊN BẰNG FILE EXCEL</h2>
+<hr />
+
 <div id="viewContent">
     @if (ViewData["ResultImportExcel"] != null)
     {
         <h3>@ViewData["ResultImportExcel"]</h3>
     }
-    
+
     @using (Html.BeginForm("DoImportExcelFileCreatePayrollForAllEmployee", "Accountant", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-        @Html.TextBoxFor(m => m.file, new { type = "file" })
-        <button id="submitButton" type="submit">Submit</button>
-        @Html.ValidationMessageFor(model => model.file)
+    {
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.file, new { type = "file" })
+                @Html.ValidationMessageFor(model => model.file)
+                <button id="submitButton" type="submit">Thêm</button>
+            </div>
+        </div>
     }
 </div>

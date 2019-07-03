@@ -68,13 +68,14 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                                      select payroll;
             return p;
         }
-        public bool InsertPayroll(int EmployeeID, string EmployeeName, int WorkDay, int Bonus, int Penalty, int Total, string Currency, string Desc, DateTime AddedOn)
+        public bool InsertPayroll(int EmployeeID, string EmployeeName, int BasicSalary, int WorkDay, int Bonus, int Penalty, int Total, string Currency, string Desc, DateTime AddedOn)
         {
             try
             {
                 Payroll payroll = new Payroll();
                 payroll.EmployeeID = EmployeeID;
                 payroll.EmployeeName = EmployeeName;
+                payroll.BasicSalary = BasicSalary;
                 payroll.WorkDay = WorkDay;
                 payroll.Bonus = Bonus;
                 payroll.Penalty = Penalty;

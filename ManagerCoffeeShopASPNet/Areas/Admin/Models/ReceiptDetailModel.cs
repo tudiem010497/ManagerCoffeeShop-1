@@ -17,5 +17,13 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Models
         public double Quantity { get; set; }
         [JsonProperty(PropertyName ="TotalAmount")]
         public double TotalAmount { get; set; }
+        [JsonProperty(PropertyName = "GiftID")]
+        public int GiftID { get; set; }
+        [JsonProperty(PropertyName = "Name_gift")]
+        public string Name_gift { get; set; }
+        [JsonProperty(PropertyName = "Quantity_gift")]
+        public double Quantity_gift { get; set; }
+        [JsonProperty(PropertyName = "TotalAmount_gift")]
+        public double TotalAmount_gift { get; set; }
     }
 }

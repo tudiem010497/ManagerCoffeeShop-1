@@ -170,5 +170,9 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._coffeeShopDAO.DeleteCoffeeShop(CSID);
         }
+        public bool CheckBasicSalaryOfEmployee(int EmployeeID)
+        {
+            return this._basicSalaryDAO.CheckBasicSalaryOfEmployee(EmployeeID);
+        }
     }
 }

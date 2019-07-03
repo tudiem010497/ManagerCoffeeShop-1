@@ -133,13 +133,24 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             Account acc = infoWeb.GetAccountByEmail(em.Email);
             BasicSalary basicSalary = infoWeb.GetBasicSalaryByEmployeeID(EmployeeID);
             Salary salary = infoWeb.GetSalaryBySalaryID(basicSalary.SalaryID);
-            TimeSheet timeSheet = info.GetTimeSheetByEmployeeID(EmployeeID);
+            
             ViewData["EmployeeID"] = EmployeeID;
             ViewData["EmployeeName"] = em.Name;
             ViewData["Position"] = acc.AccType + " " + acc.Position;
             ViewData["SalaryType"] = salary.Type;
             ViewData["BasicSalary"] = salary.UnitPrice;
-            ViewData["WorkDay"] = timeSheet.TotalDay;
+            bool result = info.CheckTimeSheetOfEmployee(EmployeeID);
+            if (result == false)
+            {
+                ViewData["WorkDay"] = 0;
+            }
+            else
+            {
+                TimeSheet timeSheet = info.GetTimeSheetByEmployeeID(EmployeeID);
+                ViewData["WorkDay"] = timeSheet.TotalDay;
+            }
+            
+            
             return View();
         }
         //Bước 3: thực hiện tạo bảng lương
@@ -147,7 +158,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult DoCreatePayroll(string json)
         {
             PayrollModel payrollModel = JsonConvert.DeserializeObject<PayrollModel>(json);
-            info.InsertPayroll(payrollModel.EmployeeID, payrollModel.EmployeeName, payrollModel.WorkDay, payrollModel.Bonus, payrollModel.Penalty, payrollModel.Total, "VND", payrollModel.Desc, DateTime.Now);
+            info.InsertPayroll(payrollModel.EmployeeID, payrollModel.EmployeeName, payrollModel.BasicSalary, payrollModel.WorkDay, payrollModel.Bonus, payrollModel.Penalty, payrollModel.Total, "VND", payrollModel.Desc, DateTime.Now);
             //TimeSheet timeSheet = info.GetTimeSheetByEmployeeID(payrollModel.EmployeeID);
             //info.InsertTimeSheetDetail(timeSheet.TimeSheetID, payrollModel.Bonus, payrollModel.Penalty, "VND", payrollModel.Desc);
             return Json(JsonRequestBehavior.AllowGet);
@@ -238,7 +249,15 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             //Payroll p = JsonConvert.DeserializeObject<Payroll>(json);
             IEnumerable<Payroll> payroll = info.GetParyollByEmployeeIDAndAddedOn(EmployeeName, AddedOn);
             Payroll p = info.GetPayrollByEmployeeIDAndAddedOnNo(EmployeeName, AddedOn);
-            ViewData["payrollID"] = p.PayrollID;
+            if (p == null)
+            {
+                ViewData["payrollID"] = null;
+            }
+            else
+            {
+                ViewData["payrollID"] = p.PayrollID;
+            }
+           
             return View(payroll);
             //return Json(JsonRequestBehavior.AllowGet);
         }

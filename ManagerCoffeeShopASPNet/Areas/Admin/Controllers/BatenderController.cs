@@ -217,18 +217,18 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             var Image = ImagePath;
             string fileName = ImagePath.FileName;
-            var path = Path.Combine(Server.MapPath("~/Assets/resource/img/recype"), fileName);
+            var path = Path.Combine(Server.MapPath("/Assets/resource/img/recype"), fileName);
             string fileNameNoExtension = Path.GetFileNameWithoutExtension(fileName);
             string extension = Path.GetExtension(fileName);
             int temp = 1;
             while (System.IO.File.Exists(path))
             {
                 fileName = fileNameNoExtension + "Copy(" + temp + ")" + extension;
-                path = Path.Combine(Server.MapPath("~/Assets/resource/img/recype"), fileName);
+                path = Path.Combine(Server.MapPath("/Assets/resource/img/recype"), fileName);
                 temp++;
             }
             ImagePath.SaveAs(path);
-            string imagePath = "~/Assets/resource/img/recype/" + fileName;
+            string imagePath = "/Assets/resource/img/recype/" + fileName;
             bool result = info.InsertFoodAndDrink(Name, Desc, imagePath, Size, Type, UnitPrice, Currency);
             return RedirectToAction("GetAllFoodAndDrink", "Batender");
         }

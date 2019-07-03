@@ -100,9 +100,9 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._payrollDAO.GetAllAddedOnOfPayroll();
         }
-        public bool InsertPayroll(int EmployeeID, string EmployeeName, int WorkDay, int Bonus, int Penalty, int Total, string Currency, string Desc, DateTime AddedOn)
+        public bool InsertPayroll(int EmployeeID, string EmployeeName, int BasicSalary, int WorkDay, int Bonus, int Penalty, int Total, string Currency, string Desc, DateTime AddedOn)
         {
-            return this._payrollDAO.InsertPayroll(EmployeeID, EmployeeName, WorkDay, Bonus, Penalty, Total, Currency, Desc, AddedOn);
+            return this._payrollDAO.InsertPayroll(EmployeeID, EmployeeName, BasicSalary, WorkDay, Bonus, Penalty, Total, Currency, Desc, AddedOn);
         }
         public IEnumerable<Payroll> GetParyollByEmployeeIDAndAddedOn(int EmployeeName, DateTime AddedOn)
         {
@@ -115,6 +115,10 @@ namespace ManagerCoffeeShopASPNet.Information
         public Payroll GetPayrollByPayrollID(int PayrollID)
         {
             return this._payrollDAO.GetPayrollByPayrollID(PayrollID);
+        }
+        public bool CheckTimeSheetOfEmployee(int EmployeeID)
+        {
+            return this._timeSheetDAO.CheckTimeSheetOfEmployee(EmployeeID);
         }
     }
 }

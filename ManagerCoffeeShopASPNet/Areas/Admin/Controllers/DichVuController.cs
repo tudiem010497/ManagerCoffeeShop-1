@@ -46,8 +46,10 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             return View();
         }
         [Route("CreatePromotion")]
-        public ActionResult CreatePromotion(string Name, string Desc, DateTime StartDate, DateTime EndDate)
+        public ActionResult CreatePromotion(string Name, string Desc, string dateTimeFrom, string dateTimeTo)
         {
+            DateTime StartDate = Convert.ToDateTime(dateTimeFrom);
+            DateTime EndDate = Convert.ToDateTime(dateTimeTo);
             bool result = info.InsertPromotion(Name, Desc, StartDate, EndDate);
             return RedirectToAction("GetAllPromotion", "DichVu");
         }

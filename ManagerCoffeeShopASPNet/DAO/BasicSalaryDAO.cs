@@ -12,5 +12,6 @@ namespace ManagerCoffeeShopASPNet.DAO
         bool InsertBasicSalary(int EmployeeID, int SalaryID);
         bool UpdateBasicSalary(int EmployeeID, int SalaryID);
         bool DeleteBasicSalary(int EmployeeID);
+        bool CheckBasicSalaryOfEmployee(int EmployeeID);
     }
 }

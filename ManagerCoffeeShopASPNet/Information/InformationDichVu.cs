@@ -57,5 +57,9 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._giftDAO.DeleteGift(GiftID);
         }
+        public IEnumerable<Promotion> GetPromotionByDateTime()
+        {
+            return this._promotionDAO.GetPromotionByDateTime();
+        }
     }
 }

@@ -50,6 +50,7 @@
     $('button.createPayroll').click(function () {
         var employeeID = $('#employeeID').val()
         var employeeName = $('#employeename').val()
+        var BasicSalary=$('#BasicSalary').val()
         var WorkDay = Number($('#WorkDay').val())
         var Bonus = Number($('#Bonus').val())
         var Penalty = Number($('#Penalty').val())
@@ -57,6 +58,7 @@
         var total = $('#Total').val();
         var data = '{"EmployeeID" : ' + employeeID + ', '
         data += '"EmployeeName" : "' + employeeName + '", '
+        data += '"BasicSalary" : ' + BasicSalary + ', '
         data += '"WorkDay" : ' + WorkDay + ', '
         data += '"Total" : ' + total + ', '
         data += '"Bonus" : ' + Bonus + ', '

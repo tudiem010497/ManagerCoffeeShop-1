@@ -10,5 +10,6 @@ namespace ManagerCoffeeShopASPNet.DAO
     {
         TimeSheet GetTimeSheetByEmployeeID(int EmployeeID);
         bool InsertTimeSheet(int EmployeeID, int WorkDay, int Total, string Currency);
+        bool CheckTimeSheetOfEmployee(int EmployeeID);
     }
 }

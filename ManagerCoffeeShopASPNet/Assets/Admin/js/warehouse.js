@@ -1,27 +1,24 @@
 ﻿
 $(document).ready(function () {
     var arrIngreID = [];
+    var arrGiftID = [];
     var arrIngre = [];
+    var arrGift = [];
     $(".btnPreAddToReceipt").click(function () {
-        //document.addEventListener('rowclick', function (e) {
-        //    console.log('data: ', e.detail.data);
-        //    console.log('grid: ', e.detail.grid);
-        //    console.log('original event: ', e.detail.originalEvent);
-        //    var IngreID = e.detail.data["ingre-i-d"];
-        //    if (!CheckExistIngre(IngreID, arrIngreID)) {
-        //        var UnitPrice = e.detail.data["unit-price"];
-        //        showOption(IngreID, e.detail.data.name, UnitPrice);
-        //        row = row + addRow(IngreID, e.detail.data.name, 1, UnitPrice)
-        //        $(".list-receiptdetail tbody").html(row);
-        //        arrIngreID.push(IngreID);
-        //    }
-        //});
         var IngreID = $(this).attr("ingreid");
         var Name = $(this).attr("name");
         var UnitPrice = $(this).attr("unitprice");
         $("#modalOption form div.IngreID input").attr("value", IngreID);
         $("#modalOption form div.Name input").attr("value", Name);
         $("#modalOption form div.UnitPrice input").attr("value", UnitPrice);
+    })
+    $(".btnPreAddGiftToReceipt").click(function () {
+        var GiftID = $(this).attr("giftid");
+        var Name_gift = $(this).attr("name");
+        var UnitPrice_gift = $(this).attr("unitprice");
+        $("#modalOption_gift form div.GiftID input").attr("value", GiftID);
+        $("#modalOption_gift form div.Name_gift input").attr("value", Name_gift);
+        $("#modalOption_gift form div.UnitPrice_gift input").attr("value", UnitPrice_gift);
     })
     $(".btnAddToReceipt").click(function () {
         var row = "";
@@ -40,7 +37,24 @@ $(document).ready(function () {
         }
         $(".list-receiptdetail tbody").html(row);
     })
-    //$(".btnRemoveFromReceipt").click(function () {
+    $(".btnAddGiftToReceipt").click(function () {
+        var row = "";
+        var GiftID = $("#modalOption_gift form div.GiftID input[name='GiftID']").attr("value");
+        var Name_gift = $("#modalOption_gift form div.Name_gift input[name='Name_gift']").attr("value");
+        var UnitPrice_gift = $("#modalOption_gift form div.UnitPrice_gift input[name='UnitPrice_gift']").attr("value");
+        var Quantity_gift = $("#modalOption_gift form div.Quantity_gift input[name='Quantity_gift']").val();
+        
+        if (!CheckExistGift(GiftID, arrGiftID)) {
+            var item = [GiftID, Name_gift, Quantity_gift, UnitPrice_gift]
+            arrGiftID.push(GiftID);
+            arrGift.push(item)
+        }
+        for (var index in arrGift) {
+            row = row + addRowGift(arrGift[index][0], arrGift[index][1], arrGift[index][2], arrGift[index][3])
+        }
+        $(".list-receiptdetail-gift tbody").html(row);
+    })
+    
     $("table.list-receiptdetail").on('click', 'button.btnRemoveFromReceipt', function(){
         var row = "";
         var IngreID = $(this).attr("ingreid");
@@ -57,6 +71,22 @@ $(document).ready(function () {
             $(".list-receiptdetail tbody").html(row);
         }
     })
+    $("table.list-receiptdetail-gift").on('click', 'button.btnRemoveGiftFromReceipt', function () {
+        var row = "";
+        var GiftID = $(this).attr("giftid");
+        if (CheckExistGift(GiftID, arrGiftID)) {
+            $(".list-receiptdetail tbody tr[giftid='" + GiftID + "']")
+            var index = arrGiftID.indexOf(GiftID);
+            if (index > -1) {
+                arrGiftID.splice(index, 1);
+                arrGift.splice(index, 1);
+            }
+            for (var index in arrGift) {
+                row = row + addRowGift([index][0], arrGift[index][1], arrGift[index][2], arrGift[index][3])
+            }
+            $(".list-receiptdetail-gift tbody").html(row);
+        }
+    })
     $(".btnAddReceipt").click(function () {
         var temp = 0;
         var data = '';
@@ -70,10 +100,37 @@ $(document).ready(function () {
             var Name = $(this).children(".Name").text();
             var Quantity = $(this).children(".Quantity").text();
             var TotalAmount = $(this).children(".TotalAmount").text();
+
             data = data + '{"IngreID" :' + IngreID + ',';
             data = data + '"Name" : "' + Name + '",';
             data = data + '"Quantity" :' + Quantity + ',';
             data = data + '"TotalAmount" :' + TotalAmount + '}';
+            //data = data + '"GiftID" :' + GiftID + ',';
+            //data = data + '"Name_gift" : "' + Name_gift + '",';
+            //data = data + '"Quantity_gift" :' + Quantity_gift + ',';
+            //data = data + '"TotalAmount_gift" :' + TotalAmount_gift + '}';
+            temp++;// alert(data);
+        })
+        $("table.list-receiptdetail-gift tbody tr").each(function () {
+            if (temp != 0)
+                data = data + ',';
+            //var IngreID = $(this).attr("ingreid");
+            //var Name = $(this).children(".Name").text();
+            //var Quantity = $(this).children(".Quantity").text();
+            //var TotalAmount = $(this).children(".TotalAmount").text();
+
+            var GiftID = $(this).attr("giftid");
+            var Name_gift = $(this).children(".Name_gift").text();
+            var Quantity_gift = $(this).children(".Quantity_gift").text();
+            var TotalAmount_gift = $(this).children(".TotalAmount_gift").text();
+            //data = data + '{"IngreID" :' + IngreID + ',';
+            //data = data + '"Name" : "' + Name + '",';
+            //data = data + '"Quantity" :' + Quantity + ',';
+            //data = data + '"TotalAmount" :' + TotalAmount + ',';
+            data = data + '{"GiftID" :' + GiftID + ',';
+            data = data + '"Name_gift" : "' + Name_gift + '",';
+            data = data + '"Quantity_gift" :' + Quantity_gift + ',';
+            data = data + '"TotalAmount_gift" :' + TotalAmount_gift + '}';
             temp++;// alert(data);
         })
         data = data + "]}";
@@ -102,9 +159,27 @@ $(document).ready(function () {
             + "</tr>";
         return row;
     }
+    function addRowGift(GiftID, Name_gift, Quantity_gift, UnitPrice_gift) {
+        var TotalAmount_gift = UnitPrice_gift * Quantity_gift;
+        var row = "<tr giftid=" + GiftID
+            + "><td class= 'Name_gift'>" + Name_gift + "</td>"
+            + "<td class= 'Quantity_gift'>" + Quantity_gift + "</td>"
+            + "<td class='TotalAmount_gift'>" + TotalAmount_gift + "</td>"
+            + "<td><button type='submit' class='btnRemoveGiftFromReceipt btn btn-danger' giftid='" + GiftID + "'>Xóa</button></td>"
+            + "</tr>";
+        return row;
+    }
     function CheckExistIngre(IngreID, arrayIngreID) {
         for (var item in arrayIngreID) {
             if (IngreID == arrayIngreID[item]) {
+                return true;
+            }
+        }
+        return false;
+    }
+    function CheckExistGift(GiftID, arrayGiftID) {
+        for (var item in arrayGiftID) {
+            if (GiftID == arrayGiftID[item]) {
                 return true;
             }
         }

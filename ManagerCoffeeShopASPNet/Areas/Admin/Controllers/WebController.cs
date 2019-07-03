@@ -153,6 +153,11 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             info.EditEmployee(em);
             Employee employee = info.GetEmployeeByID(EmployeeID);
             Salary salary = info.GetSalaryByDesc(em.Status);//lấy thông tin mức lương dựa vào status của nhân viên
+            bool result = info.CheckBasicSalaryOfEmployee(EmployeeID);
+            if (result==false)
+            {
+                info.InsertBasicSalary(EmployeeID, salary.SalaryID);
+            }
             info.UpdateBasicSalary(EmployeeID, salary.SalaryID);
             return RedirectToAction("DetailEmployee", "Web", new { EmployeeID = EmployeeID });
         }
