@@ -63,7 +63,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 throw new Exception("Error InsertReceiptDetailByReceiptID" + ex.Message);
             }
         }
-        public bool InsertReceiptDetailMissIngreID(int ReceiptID, int GiftID, double Amount, double UnitPrice, string Currency, string Status)
+        public bool InsertReceiptDetailMissIngreID(int ReceiptID, int GiftID, double Amount, double UnitPrice, string ReferenceDesc, string Currency, string Status)
         {
             try
             {
@@ -72,6 +72,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 detail.GiftID = GiftID;
                 detail.Amount = Amount;
                 detail.UnitPrice = UnitPrice;
+                detail.ReferenceDesc = ReferenceDesc;
                 detail.Currency = Currency;
                 detail.Status = Status;
                 context.ReceiptDetails.InsertOnSubmit(detail);
@@ -83,7 +84,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 throw new Exception("Error InsertReceiptDetailByReceiptID" + ex.Message);
             }
         }
-        public bool InsertReceiptDetailMissGiftID(int ReceiptID, int IngreID, double Amount, string Unit, double UnitPrice, string Currency, string Status)
+        public bool InsertReceiptDetailMissGiftID(int ReceiptID, int IngreID, double Amount, string Unit, double UnitPrice, string ReferenceDesc, string Currency, string Status)
         {
             try
             {
@@ -93,6 +94,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 detail.Amount = Amount;
                 detail.Unit = Unit;
                 detail.UnitPrice = UnitPrice;
+                detail.ReferenceDesc = ReferenceDesc;
                 detail.Currency = Currency;
                 detail.Status = Status;
                 context.ReceiptDetails.InsertOnSubmit(detail);

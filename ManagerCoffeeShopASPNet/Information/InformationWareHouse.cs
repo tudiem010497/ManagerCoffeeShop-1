@@ -74,13 +74,13 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._receiptDAO.GetLastReceiptID();
         }
-        public bool InsertReceiptDetailMissIngreID(int ReceiptID, int GiftID, double Amount, double UnitPrice, string Currency, string Status)
+        public bool InsertReceiptDetailMissIngreID(int ReceiptID, int GiftID, double Amount, double UnitPrice, string ReferenceDesc, string Currency, string Status)
         {
-            return this._receiptDetailDAO.InsertReceiptDetailMissIngreID(ReceiptID, GiftID, Amount, UnitPrice, Currency, Status);
+            return this._receiptDetailDAO.InsertReceiptDetailMissIngreID(ReceiptID, GiftID, Amount, UnitPrice, ReferenceDesc, Currency, Status);
         }
-        public bool InsertReceiptDetailMissGiftID(int ReceiptID, int IngreID, double Amount, string Unit, double UnitPrice, string Currency, string Status)
+        public bool InsertReceiptDetailMissGiftID(int ReceiptID, int IngreID, double Amount, string Unit, double UnitPrice, string ReferenceDesc, string Currency, string Status)
         {
-            return this._receiptDetailDAO.InsertReceiptDetailMissGiftID(ReceiptID, IngreID, Amount, Unit, UnitPrice, Currency, Status);
+            return this._receiptDetailDAO.InsertReceiptDetailMissGiftID(ReceiptID, IngreID, Amount, Unit, UnitPrice, ReferenceDesc, Currency, Status);
         }
     }
 }

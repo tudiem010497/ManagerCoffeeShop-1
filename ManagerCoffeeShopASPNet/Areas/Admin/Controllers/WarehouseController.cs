@@ -188,12 +188,10 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             ReceiptModel receiptModel = JsonConvert.DeserializeObject<ReceiptModel>(json);
             List<ReceiptDetailModel> details = receiptModel.ReceiptDetailModel;
-            //double TotalAmount = 0;
-            //double TotalAmount_gift = 0;
             double Total = 0;
             foreach (ReceiptDetailModel detail in details)
             {
-                Total = Total /*+ TotalAmount + TotalAmount_gift */+ detail.TotalAmount * detail.Quantity + detail.TotalAmount_gift * detail.Quantity_gift;
+                Total = Total + detail.TotalAmount * detail.Quantity + detail.TotalAmount_gift * detail.Quantity_gift;
             }
             info.InsertReceipt(DateTime.Now, Total, "VND", "Waiting");
             int ReceiptID = info.GetLastReceiptID();
@@ -204,12 +202,12 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 if (IngreID != 0)
                 {
                     Ingredient ingre = info.GetIngredientByIngreID(IngreID);
-                    bool result = info.InsertReceiptDetailMissGiftID(ReceiptID, IngreID, detail.TotalAmount, ingre.Unit, ingre.UnitPrice, ingre.Currency, "Waiting");
+                    bool result = info.InsertReceiptDetailMissGiftID(ReceiptID, IngreID, detail.Quantity, ingre.Unit, ingre.UnitPrice, detail.ReferenceDesc, ingre.Currency, "Waiting");
                 }
                 if (GiftID != 0)
                 {
                     Gift gift = infoDV.GetGiftByID(GiftID);
-                    bool result = info.InsertReceiptDetailMissIngreID(ReceiptID, GiftID, detail.TotalAmount_gift, gift.UnitPrice, gift.Currency, "Waiting");
+                    bool result = info.InsertReceiptDetailMissIngreID(ReceiptID, GiftID, detail.Quantity_gift, gift.UnitPrice, detail.ReferenceDesc_gift, gift.Currency, "Waiting");
                 }
             }
             return Json(new { SupplierID = receiptModel.SupplierID }, JsonRequestBehavior.AllowGet);

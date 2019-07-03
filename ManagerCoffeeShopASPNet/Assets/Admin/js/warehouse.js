@@ -26,14 +26,14 @@ $(document).ready(function () {
         var Name = $("#modalOption form div.Name input[name='Name']").attr("value");
         var UnitPrice = $("#modalOption form div.UnitPrice input[name='UnitPrice']").attr("value");
         var Quantity = $("#modalOption form div.Quantity input[name='Quantity']").val();
-        
+        var ReferenceDesc = $("#modalOption form div.ReferenceDesc input[name='ReferenceDesc']").val();
         if (!CheckExistIngre(IngreID, arrIngreID)) {
-            var item = [IngreID, Name, Quantity, UnitPrice]
+            var item = [IngreID, Name, Quantity, UnitPrice, ReferenceDesc]
             arrIngreID.push(IngreID);
             arrIngre.push(item)
         }
         for (var index in arrIngre) {
-            row = row + addRow(arrIngre[index][0], arrIngre[index][1], arrIngre[index][2], arrIngre[index][3])
+            row = row + addRow(arrIngre[index][0], arrIngre[index][1], arrIngre[index][2], arrIngre[index][3], arrIngre[index][4])
         }
         $(".list-receiptdetail tbody").html(row);
     })
@@ -43,14 +43,14 @@ $(document).ready(function () {
         var Name_gift = $("#modalOption_gift form div.Name_gift input[name='Name_gift']").attr("value");
         var UnitPrice_gift = $("#modalOption_gift form div.UnitPrice_gift input[name='UnitPrice_gift']").attr("value");
         var Quantity_gift = $("#modalOption_gift form div.Quantity_gift input[name='Quantity_gift']").val();
-        
+        var ReferenceDesc_gift = $("#modalOption_gift form div.ReferenceDesc_gift input[name='ReferenceDesc_gift']").val();
         if (!CheckExistGift(GiftID, arrGiftID)) {
-            var item = [GiftID, Name_gift, Quantity_gift, UnitPrice_gift]
+            var item = [GiftID, Name_gift, Quantity_gift, UnitPrice_gift, ReferenceDesc_gift]
             arrGiftID.push(GiftID);
             arrGift.push(item)
         }
         for (var index in arrGift) {
-            row = row + addRowGift(arrGift[index][0], arrGift[index][1], arrGift[index][2], arrGift[index][3])
+            row = row + addRowGift(arrGift[index][0], arrGift[index][1], arrGift[index][2], arrGift[index][3], arrGift[index][4])
         }
         $(".list-receiptdetail-gift tbody").html(row);
     })
@@ -66,7 +66,7 @@ $(document).ready(function () {
                 arrIngre.splice(index, 1);
             }
             for (var index in arrIngre) {
-                row = row + addRow(arrIngre[index][0], arrIngre[index][1], arrIngre[index][2], arrIngre[index][3])
+                row = row + addRow(arrIngre[index][0], arrIngre[index][1], arrIngre[index][2], arrIngre[index][3], arrIngre[index][4])
             }
             $(".list-receiptdetail tbody").html(row);
         }
@@ -82,7 +82,7 @@ $(document).ready(function () {
                 arrGift.splice(index, 1);
             }
             for (var index in arrGift) {
-                row = row + addRowGift([index][0], arrGift[index][1], arrGift[index][2], arrGift[index][3])
+                row = row + addRowGift([index][0], arrGift[index][1], arrGift[index][2], arrGift[index][3], arrGift[index][4])
             }
             $(".list-receiptdetail-gift tbody").html(row);
         }
@@ -100,10 +100,11 @@ $(document).ready(function () {
             var Name = $(this).children(".Name").text();
             var Quantity = $(this).children(".Quantity").text();
             var TotalAmount = $(this).children(".TotalAmount").text();
-
+            var ReferenceDesc = $(this).children(".ReferenceDesc").text();
             data = data + '{"IngreID" :' + IngreID + ',';
             data = data + '"Name" : "' + Name + '",';
             data = data + '"Quantity" :' + Quantity + ',';
+            data = data + '"ReferenceDesc" : "' + ReferenceDesc + '",';
             data = data + '"TotalAmount" :' + TotalAmount + '}';
             //data = data + '"GiftID" :' + GiftID + ',';
             //data = data + '"Name_gift" : "' + Name_gift + '",';
@@ -123,6 +124,7 @@ $(document).ready(function () {
             var Name_gift = $(this).children(".Name_gift").text();
             var Quantity_gift = $(this).children(".Quantity_gift").text();
             var TotalAmount_gift = $(this).children(".TotalAmount_gift").text();
+            var ReferenceDesc_gift = $(this).children(".ReferenceDesc_gift").text();
             //data = data + '{"IngreID" :' + IngreID + ',';
             //data = data + '"Name" : "' + Name + '",';
             //data = data + '"Quantity" :' + Quantity + ',';
@@ -130,6 +132,7 @@ $(document).ready(function () {
             data = data + '{"GiftID" :' + GiftID + ',';
             data = data + '"Name_gift" : "' + Name_gift + '",';
             data = data + '"Quantity_gift" :' + Quantity_gift + ',';
+            data = data + '"ReferenceDesc_gift" : "' + ReferenceDesc_gift + '",';
             data = data + '"TotalAmount_gift" :' + TotalAmount_gift + '}';
             temp++;// alert(data);
         })
@@ -149,22 +152,24 @@ $(document).ready(function () {
             }
         });
     })
-    function addRow(IngreID, Name, Quantity, UnitPrice) {
+    function addRow(IngreID, Name, Quantity, UnitPrice, ReferenceDesc) {
         var TotalAmount = UnitPrice * Quantity;
         var row = "<tr ingreid=" + IngreID
             + "><td class= 'Name'>" + Name + "</td>"
             + "<td class= 'Quantity'>" + Quantity  + "</td>"
             + "<td class='TotalAmount'>" + TotalAmount + "</td>"
+            + "<td class='ReferenceDesc'>" + ReferenceDesc + "</td>"
             + "<td><button type='submit' class='btnRemoveFromReceipt btn btn-danger' ingreid='" + IngreID + "'>Xóa</button></td>"
             + "</tr>";
         return row;
     }
-    function addRowGift(GiftID, Name_gift, Quantity_gift, UnitPrice_gift) {
+    function addRowGift(GiftID, Name_gift, Quantity_gift, UnitPrice_gift, ReferenceDesc_gift) {
         var TotalAmount_gift = UnitPrice_gift * Quantity_gift;
         var row = "<tr giftid=" + GiftID
             + "><td class= 'Name_gift'>" + Name_gift + "</td>"
             + "<td class= 'Quantity_gift'>" + Quantity_gift + "</td>"
             + "<td class='TotalAmount_gift'>" + TotalAmount_gift + "</td>"
+            + "<td class='ReferenceDesc_gift'>" + ReferenceDesc_gift + "</td>"
             + "<td><button type='submit' class='btnRemoveGiftFromReceipt btn btn-danger' giftid='" + GiftID + "'>Xóa</button></td>"
             + "</tr>";
         return row;
