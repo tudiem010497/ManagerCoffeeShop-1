@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Report";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
@@ -8,8 +7,28 @@
 @*<link href="~/Assets/Admin/js/bootstrap-datetimepicker-master/sample in bootstrap v2/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">*@
 <link href="~/Assets/Admin/js/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 <script src="~/Assets/Admin/js/bootstrap-datetimepicker-master/sample in bootstrap v2/"></script>
-@using (Html.BeginForm("ReportTurnOverGroupByFoodAndDrink", "Accountant", FormMethod.Post, new { @class = "form-horizontal" }))
+@using (Html.BeginForm("DoReport", "Accountant", FormMethod.Post, new { @class = "form-horizontal" }))
 {
+    <div class="form-group">
+        <label for="ReportType">Loại báo cáo</label>
+        @Html.DropDownList("ReportType", (List<SelectListItem>)ViewData["ListReportType"], new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="ReportType">Loại file xuất</label>
+        @Html.DropDownList("ExportType", (List<SelectListItem>)ViewData["ListExport"], new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="ReportType">Loại sơ đồ</label>
+        <div class="checkbox">
+            <label><input type="checkbox" value="" checked name="column">Biểu đồ cột</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" value="" name="circle">Biểu đồ tròn</label>
+        </div>
+        <div class="checkbox disabled">
+            <label><input type="checkbox" value=""  name="line">Biểu đồ đường</label>
+        </div>
+    </div>
     <fieldset>
         <div class="control-group">
             <label class="control-label">Từ ngày</label>

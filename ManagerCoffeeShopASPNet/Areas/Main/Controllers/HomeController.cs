@@ -52,14 +52,14 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
                 
                 if(acc.AccType != "Customer")
                 {
-                    Session["successEmployee"] = "Wellcome " + acc.UserName;
+                    Session["successEmployee"] = "Chào mừng " + acc.UserName;
                     Session["successUserID"] = acc.UserID.ToString();
                     Session["email"] = model.Email;
                     return RedirectToAction("ServiceEmployee", "Admin/Service"/*, new { Areas = "Admin" }*/);
                 }
                 else
                 {
-                    Session["successCust"] = "Wellcome " + acc.UserName;
+                    Session["successCust"] = "Chào mừng  " + acc.UserName;
                     Session["successUserID"] = acc.UserID.ToString();
                     Session["email"] = model.Email;
                     return RedirectToAction("Index", "Home");
@@ -68,7 +68,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
             }
             else
             {
-                TempData["error"] = "Username or Password is incorrect. Please login again!";
+                TempData["error"] = "Tên đăng nhập hoặc mật khẩu sai. Vui lòng đăng nhập lại";
                 return RedirectToAction("Index");
             }
         }
@@ -104,12 +104,12 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
                 Account acc = infomationIndex.GetAccountByEmail(model.Email);
                 int UserID = acc.UserID;
                 bool result = infomationIndex.InsertCustomer(UserID, model.Name, model.DOB, model.Address, model.IdentityNum, model.Phone);
-                TempData["SignUpOK"] = "Congratulations on your successful registration. You can log in to your account.";
+                TempData["SignUpOK"] = "Đăng nhập thành công. Bạn hãy đăng nhập vào tài khoản";
                 return RedirectToAction("Index");
             }
             else
             {
-                TempData["warning"] = "Email already exists. Please enter another email.";
+                TempData["warning"] = "Email đã tồn tại. Nhập email khác";
                 return RedirectToAction("Index");
             }
         }

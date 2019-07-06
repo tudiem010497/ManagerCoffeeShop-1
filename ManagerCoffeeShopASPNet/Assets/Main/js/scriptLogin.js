@@ -25,6 +25,7 @@ $(document).ready(function () {
         element_name = '#' + fdId + ' #foodname'
         let fdname = $(element_name).text()
         let fdprice = $('#' + fdId + ' #price').text()
+        $('input#Desc').val("")
         $('input#fdId').val(fdId)
         $('#Quantity').val('1')
         $('span#foodname').text(fdname)
@@ -91,14 +92,14 @@ $(document).ready(function () {
             url: '/main/cart/Pay?json=' + data,
             type: "POST",
             contenType: "application/json; charset=utf-8",
-            data: data,
             dataType: "json",
             success: function (data) {
-                alert("Bạn đã đặt hàng thành công. Hãy chờ xác nhận từ nhân viên.");
-                window.location="Cart"
-            },
+                alert(data.Result);
+                //window.location="/Cart/Cart"
+            }
+            ,
             error: function (err) {
-                alert("Error 1 : " + err.responseText);
+                alert("huhu " + err.responseText);
             }
         })
     })

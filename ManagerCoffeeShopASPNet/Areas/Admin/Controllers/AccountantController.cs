@@ -286,22 +286,144 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("Report")]
         public ActionResult Report()
         {
+            // Loại file xuất
+            List<SelectListItem> ListExport = new List<SelectListItem>();
+            SelectListItem pdf = new SelectListItem();
+            pdf.Text = "Xuất file pdf";
+            pdf.Value = "pdf";
+            SelectListItem word = new SelectListItem();
+            word.Text = "Xuất file word";
+            word.Value = "word";
+            ListExport.Add(pdf);
+            ListExport.Add(word);
+            ViewData["ListExport"] = ListExport;
+
+            // Loại báo cáo
+            List<SelectListItem> ListReportType = new List<SelectListItem>();
+            SelectListItem GroupByFoodAndDrink = new SelectListItem();
+            GroupByFoodAndDrink.Value = "ReportTurnOverGroupByFoodAndDrink";
+            GroupByFoodAndDrink.Text = "Doanh thu theo loại đồ uống";
+            SelectListItem GroupByTotalAmount = new SelectListItem();
+            GroupByTotalAmount.Value = "ReportTurnOverGroupByMonth";
+            GroupByTotalAmount.Text = "Tổng doanh thu";
+            SelectListItem QuantityGroupByFoodAndDrink = new SelectListItem();
+            QuantityGroupByFoodAndDrink.Value = "ReportQuantityGroupByFoodAndDrink";
+            QuantityGroupByFoodAndDrink.Text = "Thống kê số lượng đồ uống";
+            ListReportType.Add(GroupByFoodAndDrink);
+            ListReportType.Add(GroupByTotalAmount);
+            ListReportType.Add(QuantityGroupByFoodAndDrink);
+
+            ViewData["ListReportType"] = ListReportType;
             return View();
         }
 
-        [Route("ReportTurnOverGroupByFoodAndDrink")]
-        public ActionResult ReportTurnOverGroupByFoodAndDrink(string dateTimeFrom, string dateTimeTo)
+        [Route("DoReport")]
+        public ActionResult DoReport(string dateTimeFrom, string dateTimeTo, string ReportType, string ExportType,
+            bool column, bool circle, bool line)
         {
-            ReportTurnOverGroupByFoodAndDrink rp = new ReportTurnOverGroupByFoodAndDrink();
-
             DateTime DateTimeFrom = Convert.ToDateTime(dateTimeFrom).AddHours(0).AddMinutes(0).AddSeconds(0);
             DateTime DateTimeTo = Convert.ToDateTime(dateTimeTo).AddHours(0).AddMinutes(0).AddSeconds(0);
-            rp.SetParameterValue("@DateTimeFrom", DateTimeFrom);
-            rp.SetParameterValue("@DateTimeTo", DateTimeTo);
-            Stream stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-            stream.Seek(0, SeekOrigin.Begin);
-            return File(stream, "application/pdf", "Report.pdf");
-            // return View();
+            string tempFileName = string.Empty;
+            string contentType = string.Empty;
+            if(column && !circle && !line) // Xuất biểu đồ cột
+            {
+                if (ExportType == "word")
+                {
+                    tempFileName = "doc";
+                    contentType = "application/msword";
+                }
+                else
+                {
+                    tempFileName += "pdf";
+                    contentType = "application/pdf";
+                }
+                if (ReportType == "ReportTurnOverGroupByFoodAndDrink")
+                {
+                    ReportTurnOverGroupByFoodAndDrink rp = new ReportTurnOverGroupByFoodAndDrink();
+                    rp.SetParameterValue("@DateTimeFrom", DateTimeFrom);
+                    rp.SetParameterValue("@DateTimeTo", DateTimeTo);
+                    Stream stream;
+                    if (ExportType == "word") stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.WordForWindows);
+                    else stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    return File(stream, contentType, "Report." + tempFileName);
+                }
+                else if (ReportType == "ReportTurnOverGroupByMonth")
+                {
+                    ReportTurnOverGroupByMonth rp = new ReportTurnOverGroupByMonth();
+                    rp.SetParameterValue("@DateTimeFrom", DateTimeFrom);
+                    rp.SetParameterValue("@DateTimeTo", DateTimeTo);
+                    Stream stream;
+                    if (ExportType == "word") stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.WordForWindows);
+                    else stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    return File(stream, contentType, "Report." + tempFileName);
+                }
+                else
+                {
+                    ReportQuantityGroupByFoodAndDrink rp = new ReportQuantityGroupByFoodAndDrink();
+                    rp.SetParameterValue("@DateTimeFrom", DateTimeFrom);
+                    rp.SetParameterValue("@DateTimeTo", DateTimeTo);
+                    Stream stream;
+                    if (ExportType == "word") stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.WordForWindows);
+                    else stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    return File(stream, contentType, "Report." + tempFileName);
+
+                }
+            }
+            else if(!column && circle && !line)
+            {
+                if (ExportType == "word")
+                {
+                    tempFileName = "doc";
+                    contentType = "application/msword";
+                }
+                else
+                {
+                    tempFileName += "pdf";
+                    contentType = "application/pdf";
+                }
+                if (ReportType == "ReportTurnOverGroupByFoodAndDrink")
+                {
+                    ReportTurnOverGroupByFoodAndDrink rp = new ReportTurnOverGroupByFoodAndDrink();
+                    rp.SetParameterValue("@DateTimeFrom", DateTimeFrom);
+                    rp.SetParameterValue("@DateTimeTo", DateTimeTo);
+                    Stream stream;
+                    if (ExportType == "word") stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.WordForWindows);
+                    else stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    return File(stream, contentType, "Report." + tempFileName);
+                }
+                else if (ReportType == "ReportTurnOverGroupByMonth")
+                {
+                    ReportTurnOverGroupByMonth rp = new ReportTurnOverGroupByMonth();
+                    rp.SetParameterValue("@DateTimeFrom", DateTimeFrom);
+                    rp.SetParameterValue("@DateTimeTo", DateTimeTo);
+                    Stream stream;
+                    if (ExportType == "word") stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.WordForWindows);
+                    else stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    return File(stream, contentType, "Report." + tempFileName);
+                }
+                else
+                {
+                    ReportQuantityGroupByFoodAndDrink rp = new ReportQuantityGroupByFoodAndDrink();
+                    rp.SetParameterValue("@DateTimeFrom", DateTimeFrom);
+                    rp.SetParameterValue("@DateTimeTo", DateTimeTo);
+                    Stream stream;
+                    if (ExportType == "word") stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.WordForWindows);
+                    else stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    return File(stream, contentType, "Report." + tempFileName);
+
+                }
+            }
+            return View();
         }
     }
 }

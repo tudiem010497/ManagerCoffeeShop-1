@@ -157,5 +157,13 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._orderPromotionDAO.InsertOrderPromotion(PromotionID, OrderID);
         }
+        public Ship GetShipByShipID(int ShipID)
+        {
+            return _shipDAO.GetShipByShipID(ShipID);
+        }
+        public int GetLastShipID()
+        {
+            return _shipDAO.GetLastShipID();
+        }
     }
 }

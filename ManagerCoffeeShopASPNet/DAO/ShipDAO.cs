@@ -10,5 +10,7 @@ namespace ManagerCoffeeShopASPNet.DAO
         Ship GetShipByCustName(string CustName);
         bool InsertShip(int EmpolyeeID, string CustName, DateTime ShipDate);
         bool InsertShipWithUserID(int EmpolyeeID, int UserID, string CustName, DateTime ShipDate);
+        Ship GetShipByShipID(int ShipID);
+        int GetLastShipID();
     }
 }

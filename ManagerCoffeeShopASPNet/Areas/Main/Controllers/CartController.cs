@@ -35,7 +35,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
         }
 
         [Route("AddToCart")]
-        [HttpPost]
+        //[HttpPost]
         public ActionResult AddToCart(string json)
         {
             Cart temp = JsonConvert.DeserializeObject<Cart>(json);
@@ -88,36 +88,56 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
             carts.Clear();
             return RedirectToAction("Cart");
         }
-        [Route("Pay")]
+
+
         [HttpPost]
+        [Route("Pay")]
         public ActionResult Pay(string json)
         {
-            List<Cart> carts = Session["cart"] as List<Cart>;
-            int PosID = 1;
-            double TotalAmount = 0;
-            foreach(var item in carts)
-            {
-                TotalAmount = TotalAmount + item.Total;
-            }
-            bool resultOrder = info.InsertOrder(PosID, DateTime.Now, DateTime.Now, TotalAmount, "VND", "Delivery", "WaitToConfirm");
-            int OrderID = info.GetLastOrderIDID();
-            foreach(var item in carts)
-            {
-                info.InsertOrderItem(OrderID, item.FDID, item.Quantity, item.Desc, "WaitToConfirm");
-            }
-            int EmployeeID = 1;
             Cart temp = JsonConvert.DeserializeObject<Cart>(json);
-            if (temp.UserID != 0)
+            if (temp.CustName == null || temp.Address == null || temp.Email == null || temp.Tel == null
+            || temp.CustName == "" || temp.Address == "" || temp.Email == "" || temp.Tel == "")
             {
-                info.InsertShipWithUserID(EmployeeID, temp.UserID, temp.CustName, DateTime.Now);
+                //TempData["errorPay"] = "Vui lòng điền đầy đủ thông tin";
+                //return RedirectToAction("ErrorPay", "Cart");
+                return Json(new { Result = "Vui lòng điền đầy đủ thông tin" }, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                info.InsertShip(EmployeeID, temp.CustName, DateTime.Now);
+
+                List<Cart> carts = Session["cart"] as List<Cart>;
+                int PosID = 1;
+                double TotalAmount = 0;
+                foreach (var item in carts)
+                {
+                    TotalAmount = TotalAmount + item.Total;
+                }
+                bool resultOrder = info.InsertOrder(PosID, DateTime.Now, DateTime.Now, TotalAmount, "VND", "Delivery", "WaitToConfirm");
+                int OrderID = info.GetLastOrderIDID();
+                foreach (var item in carts)
+                {
+                    info.InsertOrderItem(OrderID, item.FDID, item.Quantity, item.Desc, "WaitToConfirm");
+                }
+                int EmployeeID = 1;
+                if (temp.UserID != 0)
+                {
+                    info.InsertShipWithUserID(EmployeeID, temp.UserID, temp.CustName, DateTime.Now);
+                }
+                else
+                {
+                    info.InsertShip(EmployeeID, temp.CustName, DateTime.Now);
+                }
+                int ShipID = info.GetLastShipID();
+
+                info.InsertShipDetail(ShipID, OrderID, temp.CustName, temp.Address, temp.Tel, "Not yet delivery");
+                return Json(new { Result = "Bạn đã đặt hàng thành công. Hãy chờ xác nhận từ nhân viên." }, JsonRequestBehavior.AllowGet);
             }
-            Ship ship = info.GetShipByCustName(temp.CustName);
-            info.InsertShipDetail(ship.ShipID, OrderID, temp.CustName, temp.Address, temp.Tel, "Not yet delivery");
-            return Json(new { UserID = temp.UserID, CustName = temp.CustName, Tel = temp.Tel, Email = temp.Email, Address = temp.Address }, JsonRequestBehavior.AllowGet);
+
+        }
+        public ActionResult ErrorPay()
+        {
+            TempData["errorPay"] = "Vui lòng điền đầy đủ thông tin";
+            return RedirectToAction("Cart", "Cart");
         }
     }
 }

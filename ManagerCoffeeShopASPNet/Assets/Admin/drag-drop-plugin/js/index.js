@@ -267,6 +267,7 @@
             console.groupEnd();
             
             console.log(this.metrics);
+            
         },
         /** 
          *

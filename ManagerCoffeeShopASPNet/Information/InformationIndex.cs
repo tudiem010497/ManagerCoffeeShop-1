@@ -61,5 +61,6 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return _customerDAO.InsertCustomer(UserID, Name, DOB, Address, IdentityNum, Phone);
         }
+        
     }
 }

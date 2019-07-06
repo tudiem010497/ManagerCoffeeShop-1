@@ -167,7 +167,7 @@
 
                         @*Login*@
                         <li>
-                            <a href="#" onclick="prelogin()">Login</a>
+                            <a href="#" onclick="prelogin()">Đăng nhập</a>
                             <div id="id01" class="modal" style="width: 750px; margin: auto;">
                                 
                                 @*<form class="modal-content animate">*@
@@ -212,7 +212,7 @@
                         @*SignIn*@
                         <li>
                             @*<a onclick="preRegister()">Register</a>*@
-                            <a href="#" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign Up</a>
+                            <a href="#" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Đăng ký</a>
                             <div id="id02" class="modal" style="width: 750px; margin: auto;">
                                 <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
                                 @using (Html.BeginForm("SignUp", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))

@@ -13,6 +13,22 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         {
             this.context = new CoffeeShopDBDataContext();
         }
+        public int GetLastShipID()
+        {
+            try
+            {
+                int ShipID = (from ships in context.Ships
+                 orderby ships.ShipID descending
+                 select ships.ShipID
+                 ).FirstOrDefault();
+                return ShipID;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
         public Ship GetShipByCustName(string CustName)
         {
             Ship ship = (from ships in context.Ships
@@ -20,6 +36,22 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                          select ships).SingleOrDefault();
             return ship;
         }
+
+        public Ship GetShipByShipID(int ShipID)
+        {
+            try
+            {
+                Ship ship = (from ships in context.Ships
+                             where ships.ShipID == ShipID
+                             select ships).SingleOrDefault();
+                return ship;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public bool InsertShip(int EmpolyeeID, string CustName, DateTime ShipDate)
         {
             try
@@ -37,6 +69,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 throw new Exception("Error Insert Ship: " + e.Message);
             }
         }
+
         public bool InsertShipWithUserID(int EmpolyeeID, int UserID, string CustName, DateTime ShipDate)
         {
             try
