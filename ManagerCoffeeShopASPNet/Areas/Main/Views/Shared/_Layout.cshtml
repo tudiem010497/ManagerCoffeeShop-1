@@ -25,6 +25,9 @@
     <!-- Bootstrap -->
     @*<link href="css/bootstrap.min.css" rel="stylesheet">*@
     <link href="~/Assets/Main/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    
 
     <!-- Rev slider css -->
     @*<link href="vendors/revolution/css/settings.css" rel="stylesheet">
@@ -173,34 +176,35 @@
                                 @*<form class="modal-content animate">*@
                                 @using (Html.BeginForm("Login", "Home", FormMethod.Post))
                                 {
+                                    
                                     <div class="imgcontainer">
-                                        <h2 style="color:gold; font-size:50px">LOGIN</h2>
+                                        <h2 style="color:gold; font-size:50px">ĐĂNG NHẬP</h2>
                                     </div>
                                     @Html.AntiForgeryToken()
                                     <div class="container" style="width:auto">
                                         <label for="email" style="color:white"><b>Email</b></label>
                                         @*<input type="text" placeholder="Enter Username" name="username" id="username" required>*@
-                                        @Html.TextBoxFor(m => m.Email, new { placeholder = "Enter your email", id = "email", required = "required" })
+                                        @Html.TextBoxFor(m => m.Email, new { placeholder = "Nhập email", id = "email", required = "required" })
                                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
 
-                                        <label for="password" style="color:white"><b>Password</b></label>
+                                        <label for="password" style="color:white"><b>Mật khẩu</b></label>
                                         @*<input type="password" placeholder="Enter Password" name="password" id="password" required>*@
-                                        @Html.PasswordFor(m => m.Password, new { placeholder = "Enter Password", id = "password", required = "required" })
+                                        @Html.PasswordFor(m => m.Password, new { placeholder = "Nhập password", id = "password", required = "required" })
                                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
 
                                         <label style="color:white">
-                                            <input type="checkbox" checked="checked" name="remember"> Remember me
+                                            <input type="checkbox" checked="checked" name="remember"> Nhớ mật khẩu
                                         </label>
 
                                         @*<button type="button" onclick="login()">Login</button>*@
-                                        <button type="submit" onclick="login()">Login</button>
+                                        <button type="submit" onclick="login()">Đăng nhập</button>
 
                                     </div>
 
                                     <div class="container-footer" style="background-color:#f1f1f1">
 
-                                        <span class="password" style="float:right">Forgot <a id="a-password" href="#">Password</a>?</span>
-                                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                                        <span class="password" style="float:right">Quên <a id="a-password" href="#">mật khẩu</a>?</span>
+                                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Thoát</button>
                                     </div>
                                 }
 
@@ -219,47 +223,47 @@
                                 {
                                     @Html.AntiForgeryToken()
                                     <div class="container" style="width: 750px; margin: auto;">
-                                        <h1 style="color: gold;font-size: 36px;margin: 0px;text-align:center">Sign Up</h1>
-                                        <p style="color:white;">Please fill in this form to create an account.</p>
+                                        <h1 style="color: gold;font-size: 36px;margin: 0px;text-align:center">ĐĂNG KÝ</h1>
+                                        <p style="color:white;">Điền thông tin đăng ký tài khoản</p>
                                         <hr>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <label for="name" style="color:white"><b>Name</b></label>
+                                                <label for="name" style="color:white"><b>Tên</b></label>
                                                 @*<input type="text" placeholder="Enter Your Name" name="name" required>*@
-                                                @Html.TextBoxFor(m => m.Name, new { placeholder = "Enter Your Name", required = "required" })
+                                                @Html.TextBoxFor(m => m.Name, new { placeholder = "Nhập tên của bạn", required = "required" })
                                                 @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
                                             </div>
                                             <div class="col-sm-6">
                                                 <label for="email" style="color:white"><b>Email</b></label>
                                                 @*<input type="text" placeholder="Enter Your Email" name="email" required>*@
-                                                @Html.TextBoxFor(m => m.Email, new { placeholder = "Enter Your Email", required = "required" })
+                                                @Html.TextBoxFor(m => m.Email, new { placeholder = "Nhập Email của bạn", required = "required" })
                                                 @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <label for="psw" style="color:white"><b>Password</b></label>
+                                                <label for="psw" style="color:white"><b>Mật khẩu</b></label>
                                                 @*<input type="password" placeholder="Enter Your Password" name="psw" required>*@
-                                                @Html.PasswordFor(m => m.Password, new { placeholder = "Enter Your Password", required = "required", id = "psw" })
+                                                @Html.PasswordFor(m => m.Password, new { placeholder = "Nhập mật khẩu", required = "required", id = "psw" })
                                                 @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
                                             </div>
 
                                             <div class="col-sm-6">
-                                                <label for="DOB" style="color:white"><b>Date of birth</b></label>
+                                                <label for="DOB" style="color:white"><b>Ngày sinh</b></label>
                                                 @*<input type="password" placeholder="Enter Your Password" name="psw" required>*@
-                                                @Html.TextBoxFor(m => m.DOB, "{ 0:dd/MM/yyyy }", new { placeholder = "Enter Your Date of Birth", required = "required", id = "DOB", @class = "datepicker" })
+                                                @Html.TextBoxFor(m => m.DOB, "{ 0:dd/MM/yyyy }", new { placeholder = "Chọn ngày sinh", required = "required", id = "DOB", @class = "datepicker" })
                                                 @Html.ValidationMessageFor(m => m.DOB, null, new { @class = "text-danger" })
                                             </div>
                                         </div>
                                         <div class="row" style="padding:15px">
                                             <div class="col-sm-6">
-                                                <label for="address" style="color:white"><b>Address</b></label>
+                                                <label for="address" style="color:white"><b>Địa chỉ</b></label>
                                                 @*<input type="text" placeholder="Enter Your Email" name="email" required>*@
-                                                @Html.TextBoxFor(m => m.Address, new { placeholder = "Enter Your Address", required = "required" })
+                                                @Html.TextBoxFor(m => m.Address, new { placeholder = "Nhập đĩa chỉ", required = "required" })
                                                 @Html.ValidationMessageFor(m => m.Address, null, new { @class = "text-danger" })
                                             </div>
                                             <div class="col-sm-6">
-                                                <label for="avatar" style="color:white"><b>Avatar</b></label>
+                                                <label for="avatar" style="color:white"><b>Chọn ảnh đại diện</b></label>
                                                 @*<input type="text" placeholder="Enter Your Email" name="email" required>*@
                                                 @Html.TextBoxFor(m => m.Avatar, new { type="file" })
                                                 @Html.ValidationMessageFor(m => m.Avatar, null, new { @class = "text-danger" })
@@ -267,24 +271,24 @@
                                             </div>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <label for="identityNum" style="color:white"><b>Identity Number</b></label>
+                                                <label for="identityNum" style="color:white"><b>CMND</b></label>
                                                 @*<input type="text" placeholder="Enter Your Email" name="email" required>*@
-                                                @Html.TextBoxFor(m => m.IdentityNum, new { placeholder = "Enter Your Identity Number", required = "required" })
+                                                @Html.TextBoxFor(m => m.IdentityNum, new { placeholder = "Nhập số CMND", required = "required" })
                                                 @Html.ValidationMessageFor(m => m.IdentityNum, null, new { @class = "text-danger" })
                                             </div>
                                             <div class="col-sm-6">
-                                                <label for="phone" style="color:white"><b>Phone</b></label>
+                                                <label for="phone" style="color:white"><b>Số điện thoại</b></label>
                                                 @*<input type="text" placeholder="Enter Your Email" name="email" required>*@
-                                                @Html.TextBoxFor(m => m.Phone, new { placeholder = "Enter Your Phone", required = "required" })
+                                                @Html.TextBoxFor(m => m.Phone, new { placeholder = "Nhập số điện thoãi", required = "required" })
                                                 @Html.ValidationMessageFor(m => m.Phone, null, new { @class = "text-danger" })
                                             </div>
                                         </div>
                                         <br />
-                                        <span id="rule" style="color:white">By creating an account you agree to our <a id="a-rule" href="#" style="color:dodgerblue; text-decoration:none">Terms & Privacy</a>.</span>
+                                        <span id="rule" style="color:white">Đồng ý với điều khoản của chúng tôi <a id="a-rule" href="#" style="color:dodgerblue; text-decoration:none">Terms & Privacy</a>.</span>
                                         <br />
                                         <div class="clearfix" style="padding: 10px;">
-                                            <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn-signup">Cancel</button>
-                                            <button type="submit" class="signupbtn" onclick="signUp()">Sign Up</button>
+                                            <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn-signup">Hủy</button>
+                                            <button type="submit" class="signupbtn" onclick="signUp()">Đăng ký</button>
                                         </div>
                                     </div>
                                 }
