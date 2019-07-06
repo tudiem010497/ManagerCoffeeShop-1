@@ -127,7 +127,10 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             {
                 info.InsertOrderItem(OrderID, item.FoodAndDrinkID, item.Quantity, item.Desc, "Pending");
             }
-            info.InsertOrderPromotion(PromotionID, OrderID);
+            if (PromotionID != 0)
+            {
+                info.InsertOrderPromotion(PromotionID, OrderID);
+            }
             return Json(new { PosID = PosID }, JsonRequestBehavior.AllowGet);
         }
 
@@ -325,7 +328,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 }
                 info.UpdateOrderStatus(OrderID, status);
             }
-            return RedirectToAction("GetListOrderService", "Service");
+            return RedirectToAction("GetListOrderServiceGroupByOrder", "Service");
         }
 
         /// <summary>

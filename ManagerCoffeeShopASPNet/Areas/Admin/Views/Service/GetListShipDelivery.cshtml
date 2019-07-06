@@ -62,9 +62,9 @@
         .Grid(Model)
         .Build(column =>
         {
-            column.Add(m => m.ShipID).Titled("Mã Ship").Sortable(false);
-            column.Add(m => m.OrderID).Titled("Mã HĐ");
-            column.Add(m => m.CustName).Titled("Tên KH");
+            //column.Add(m => m.ShipID).Titled("Mã Ship").Sortable(false);
+            //column.Add(m => m.OrderID).Titled("Mã HĐ");
+            column.Add(m => m.CustName).Titled("Tên Khách hàng");
             column.Add(m => m.Address).Titled("Địa chỉ giao hàng").Filterable(false);
             column.Add(m => m.Phone).Titled("Sđt liên hệ").Filterable(false);
             column.Add(m => m.Status).Titled("Trạng thái").Filterable(false);

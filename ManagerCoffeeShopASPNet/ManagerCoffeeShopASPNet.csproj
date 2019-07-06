@@ -272,6 +272,7 @@
     <Compile Include="Areas\Main\Models\AccountModel.cs" />
     <Compile Include="Areas\Main\Models\Cart.cs" />
     <Compile Include="Areas\Main\Models\LoginModel.cs" />
+    <Compile Include="Class\ConvertStatus.cs" />
     <Compile Include="Class\FileExt.cs" />
     <Compile Include="CoffeeShopDB.designer.cs">
       <AutoGen>True</AutoGen>
