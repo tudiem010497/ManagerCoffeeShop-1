@@ -22,9 +22,13 @@
             Html.ActionLink("Xem Chi tiết", "DetailOrder", "Batender", new { OrderID = o.OrderID }, new { @class = "btn btn-primary btnDetailOrder" })
             )).Filterable(false);
         })
-        .Empty("Data is empty")
+        .Empty("Không có dữ liệu.")
         .Filterable()
         .Sortable()
+        .Pageable(pager =>
+        {
+            pager.RowsPerPage = 6;
+        })
     )
 </div>
 

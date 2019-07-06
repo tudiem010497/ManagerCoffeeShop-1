@@ -6,9 +6,7 @@
     ViewBag.Title = "GetAllPromotion";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">DANH SÁCH KHUYẾN MÃI</h2>
-<br />
+<h2 style="text-align:center; padding-top:10px;padding-bottom:10px;">DANH SÁCH KHUYẾN MÃI</h2>
 <div class="row">
     <div class="col-sm-6">@Html.ActionLink("Thêm khuyến mãi", "GetFormAddNewPromotion", "DichVu", new { @class = "btn btn-primary" })</div>
     <div class="col-sm-6">
@@ -21,43 +19,7 @@
 </div>
 <hr />
 <div>
-    @*<table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Desc)
-            </th>
-            <th>Action</th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Desc)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "EditPromotion", "DichVu", new { PromotionID = item.PromotionID }, new { @class = "btn btn-primary" })
-                </td>
-            </tr>
-        }
-    </table>*@
+    
     @(Html
         .Grid(Model)
         .Build(column =>
@@ -68,12 +30,16 @@
             column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);
             column.Add(m => m.PromotionID).Encoded(false).RenderedAs(m => (
                 @Html.ActionLink("Sửa", "EditPromotion", "DichVu", new { PromotionID = m.PromotionID }, new { @class = "btn btn-sm btn-primary" }).ToHtmlString()
-            )).Filterable(false).Sortable(false).Titled("Action");
+            )).Filterable(false).Sortable(false);
         })
-        .WithFilterMode(GridFilterMode.FilterRow)
+        //.WithFilterMode(GridFilterMode.FilterRow)
         .Sortable()
-        .Empty("Data is empty")
+        .Empty("Không có dữ liệu.")
         .Filterable()
+        .Pageable(pager =>
+        {
+            pager.RowsPerPage = 6;
+        })
     )
 </div>
 

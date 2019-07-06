@@ -4,10 +4,10 @@
     ViewBag.Title = "GetAllGift";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">DANH SÁCH QUÀ TẶNG</h2>
-<br />
-<div class="row">
+
+<h2 style="text-align:center; padding:10px">DANH SÁCH QUÀ TẶNG</h2>
+
+<div class="row" style="padding-bottom:10px;">
     <div class="col-sm-8">
         @Html.ActionLink("Thêm quà tặng", "GetFormAddNewGift", "DichVu", new { @class = "btn btn-primary" })
     </div>
@@ -19,7 +19,7 @@
         }
     </div>
 </div>
-<br />
+
 <div>
     @(Html
         .Grid(Model)
@@ -36,7 +36,11 @@
             )).Filterable(false).Sortable(false).Titled("Action");
         })
         .Sortable()
-        .Empty("Data is empty")
+        .Empty("Không có dữ liệu.")
         .Filterable()
+        .Pageable(pager =>
+        {
+            pager.RowsPerPage = 6;
+        })
     )
 </div>

@@ -12,20 +12,22 @@
     .Grid(Model)
     .Build(columns =>
     {
-        //columns.Add(o => o.OrderItemID).Titled("OrderItemID");
-        //columns.Add(o => o.OrderID).Titled("OrderID");
         columns.Add(o => o.Order.PosID).Titled("Vị trí");
-        columns.Add(o => o.FDID).Titled("Mã đồ uống");
+        columns.Add(o => o.FoodAndDrink.Name).Titled("Tên đồ uống");
         columns.Add(o => o.Quantity).Titled("Số lượng");
         columns.Add(o => o.Desc).Titled("Ghi chú").Filterable(false);
         columns.Add(o => o.Status).Titled("Trạng thái");
         columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o => (
             @Html.ActionLink("Xong", "UpdateReady", "Batender", new { OrderItemID = o.OrderItemID, OrderID = o.OrderID, view = "GetListOrderItemNeedPreparetion", NumOfOrderItem = 0 }, new { @class = "btn btn-sm btn-success" }).ToHtmlString()
-            + @Html.ActionLink("Hủy", "UpdateCancel", "Batender", new { OrderItemID = o.OrderItemID, OrderID = o.OrderID, view = "GetListOrderItemNeedPreparetion", NumOfOrderItem = 0 }, new { @class = "btn btn-sm btn-danger btnCancel" }).ToHtmlString()
-            + @Html.ActionLink("Xem công thức pha chế", "ReadRecipe", "Batender", new { FDID = o.FoodAndDrink.FDID }, new { @class = "btn btn-sm btn-info btnReadRecipe" }).ToHtmlString()
+            + " " + @Html.ActionLink("Hủy", "UpdateCancel", "Batender", new { OrderItemID = o.OrderItemID, OrderID = o.OrderID, view = "GetListOrderItemNeedPreparetion", NumOfOrderItem = 0 }, new { @class = "btn btn-sm btn-danger btnCancel" }).ToHtmlString()
+            + " " + @Html.ActionLink("Xem công thức pha chế", "ReadRecipe", "Batender", new { FDID = o.FoodAndDrink.FDID }, new { @class = "btn btn-sm btn-info btnReadRecipe" }).ToHtmlString()
         )).Filterable(false);
     })
-    .Empty("Data is empty")
+    .Empty("Không có dữ liệu.")
     .Filterable()
     .Sortable()
+    .Pageable(pager =>
+    {
+        pager.RowsPerPage = 6;
+    })
 )

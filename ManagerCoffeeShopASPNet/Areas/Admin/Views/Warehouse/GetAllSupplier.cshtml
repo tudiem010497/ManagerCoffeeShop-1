@@ -5,9 +5,9 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<br />
-<h2 style="text-align:center">DANH SÁCH NHÀ CUNG CẤP</h2>
-<br />
+
+<h2 style="text-align:center; padding:10px;">DANH SÁCH NHÀ CUNG CẤP</h2>
+
 @if(TempData["message"] != null)
 {
     <div class="alert alert-success">@TempData["message"]</div>
@@ -18,7 +18,7 @@
 }
 <div class="container-fluid">
     @Html.ActionLink("Thêm", "CreateSupplier", "Warehouse", new { @class = "btn btn-primary" })
-    <div >
+    <div style="padding-top:10px;">
         @(Html
             .Grid(Model)
             .Build(columns =>
@@ -31,6 +31,10 @@
                      Html.ActionLink("Sửa", "EditSupplier", "WareHouse", new { SupplierID = model.SupplierID }, new { @class = "btn btn-sm btn-success" }).ToHtmlString()
                     )).Filterable(false);
             }).Filterable()
+            .Pageable(pager =>
+            {
+                pager.RowsPerPage = 6;
+            })
         )
     </div>
 </div>

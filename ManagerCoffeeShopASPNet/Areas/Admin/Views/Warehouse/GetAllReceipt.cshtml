@@ -5,13 +5,13 @@
     ViewBag.Title = "GetAllReceipt";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">DANH SÁCH PHIẾU NHẬP</h2>
-<br />
-<div>
+
+<h2 style="text-align:center;padding:10px;">DANH SÁCH PHIẾU NHẬP</h2>
+
+<div style="padding-bottom:10px;">
     @Html.ActionLink("Thêm phiếu nhập", "CreateReceipt", "Warehouse", new { @class = "btn btn-primary" })
 </div>
-<br />
+
 <div >
     @(Html
             .Grid(Model)
@@ -22,9 +22,13 @@
                 columns.Add(model => model.Currency).Titled("Đơn vị tiền");
                 columns.Add(model => model.ReceiptID).Encoded(false).
                         RenderedAs(model => (
-                         Html.ActionLink("Xem chi tiết", "DetailReceipt", "WareHouse", new { ReceiptID = model.ReceiptID }, new { @class = "btn btn-success" }).ToHtmlString()
+                         Html.ActionLink("Xem chi tiết", "DetailReceipt", "WareHouse", new { ReceiptID = model.ReceiptID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
                         )).Filterable(false);
             }).Filterable().AppendCss("table-hover")
+            .Pageable(pager =>
+            {
+                pager.RowsPerPage = 6;
+            })
     )
 </div>
 

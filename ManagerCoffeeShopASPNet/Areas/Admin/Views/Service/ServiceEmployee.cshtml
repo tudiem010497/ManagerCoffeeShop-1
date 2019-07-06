@@ -16,7 +16,7 @@
 </div>
 <br />
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-6" style="height:490px; overflow-x:scroll;">
         @{
             IEnumerable<FoodAndDrink>
                 fds = (IEnumerable<FoodAndDrink>
@@ -64,6 +64,7 @@
             </div>
             <div class="col-sm-6">
                 <select class="form-control" id="choosePromotion">
+                    <option value="" disabled selected>Chọn khuyến mãi đang có</option>
                     @foreach(Promotion promotion in (IEnumerable<Promotion>)ViewData["promotions"])
                     {
                         <option value="@promotion.PromotionID">@promotion.Name</option>
@@ -83,7 +84,6 @@
                     </tr>
                 </thead>
                 <tbody class="order">
-
                 </tbody>
             </table>
         </div>

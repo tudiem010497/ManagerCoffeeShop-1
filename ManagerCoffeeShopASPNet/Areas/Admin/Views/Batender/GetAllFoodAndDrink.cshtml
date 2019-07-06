@@ -7,11 +7,10 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<br />
-<h2 style="text-align:center">DANH SÁCH ĐỒ UỐNG</h2>
-<br />
-<div class="row">
-    <div class="col-sm-6">@Html.ActionLink("Thêm đồ uống", "GetFormAddNewFoodAndDrink", "Batender", new { @class = "btn btn-primary" })</div>
+<h2 style="text-align:center; padding-top:10px; padding-bottom:5px;">DANH SÁCH ĐỒ UỐNG</h2>
+
+<div class="row" style="padding-bottom:10px;">
+    <div class="col-sm-6">@Html.ActionLink("Thêm đồ uống", "GetFormAddNewFoodAndDrink", "Batender", new { @class = "btn btn-sm btn-primary" })</div>
     <div class="col-sm-6">
         @using(Html.BeginForm("Batender", "GetAllFoodAndDrink", FormMethod.Get))
         {
@@ -20,70 +19,6 @@
         }
     </div>
 </div>
-<br />
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Desc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Size)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Currency)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Desc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Size)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Currency)
-        </td>
-        <td>
-            @Html.ActionLink("Sửa", "EditFoodAndDrink", "Batender", new { FDID=item.FDID }, new { @class = "btn btn-sm btn-primary" }) 
-            @Html.ActionLink("Xóa", "DeleteFoodAndDrink","Batender", new { FDID = item.FDID }, new { @class = "btn btn-sm btn-danger" })
-            @Html.ActionLink("Xem công thức pha chế", "ReadRecipe", "Batender", new { FDID = item.FDID}, new { @class= "btn btn-sm btn-info" })
-        </td>
-    </tr>
-}
-
-</table>*@
-  
-@*@Html.AjaxGrid(Url.Action("IndexGrid"))
-
-<script>
-        document.getElementById('GridSearch').addEventListener('input', function() {
-            var grid = new MvcGrid(document.querySelector('.mvc-grid'));
-            grid.query.set('search', this.value);
-
-            grid.reload();
-        });
-</script>*@
 
 @(Html
     .Grid(Model)
@@ -98,8 +33,13 @@
         columns.Add(m => m.Currency).Titled("Đơn vị tiền");
         columns.Add(m => m.FDID).Encoded(false).RenderedAs(m => (
               @Html.ActionLink("Sửa", "EditFoodAndDrink", "Batender", new { FDID = m.FDID }, new { @class = "btn btn-sm btn-primary" }).ToHtmlString()
-              + @Html.ActionLink("Xóa", "DeleteFoodAndDrink", "Batender", new { FDID = m.FDID }, new { @class = "btn btn-sm btn-danger" }).ToHtmlString()
-              + @Html.ActionLink("Xem công thức pha chế", "ReadRecipe", "Batender", new { FDID = m.FDID }, new { @class = "btn btn-sm btn-info" }).ToHtmlString()
+              + " " + @Html.ActionLink("Xóa", "DeleteFoodAndDrink", "Batender", new { FDID = m.FDID }, new { @class = "btn btn-sm btn-danger" }).ToHtmlString()
+              + " " + @Html.ActionLink("Xem công thức pha chế", "ReadRecipe", "Batender", new { FDID = m.FDID }, new { @class = "btn btn-sm btn-info" }).ToHtmlString()
         ));
     })
+    .Empty("Không có dữ liệu.")
+    .Pageable(pager =>
+        {
+            pager.RowsPerPage = 3;
+        })
 )

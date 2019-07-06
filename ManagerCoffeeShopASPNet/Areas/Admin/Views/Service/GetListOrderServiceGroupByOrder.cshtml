@@ -30,4 +30,8 @@
     .Empty("Data is empty")
     .Filterable()
     .Sortable()
+    .Pageable(pager =>
+        {
+            pager.RowsPerPage = 6;
+        })
 )

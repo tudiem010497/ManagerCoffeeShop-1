@@ -1,55 +1,35 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.CoffeeShop>
-
+@using NonFactors.Mvc.Grid
 @{
     ViewBag.Title = "GetAllCoffeeShop";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">DANH SÁCH QUÁN COFFEE</h2>
 
-<div>
+<h2 style="text-align:center; padding:10px;">DANH SÁCH QUÁN COFFEE</h2>
+
+<div style="padding-bottom:10px;">
     @Html.ActionLink("Thêm quán mới", "GetAddNewCoffeeShop", "Web", new { @class="btn btn-sm btn-primary"})
 </div>
-<br />
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("Tên quán Coffee")
-        </th>
-        <th>
-            @Html.DisplayName("Địa chỉ")
-        </th>
-        <th>
-            @Html.DisplayName("SĐT")
-        </th>
-        
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.ActionLink("Sửa", "EditCoffeeShop", new { CSID = item.CSID }, new { @class= "btn btn-sm btn-outline-primary" }) 
-            @Html.ActionLink("Chi tiết", "DetailsCoffeeShop", new { CSID = item.CSID }, new { @class= "btn btn-sm btn-outline-info" })
-            @*@Html.ActionLink("Xóa", "DeleteCoffeeShop", new { CSID = item.CSID }, new { @class= "btn btn-sm btn-outline-danger" })*@
-        </td>
-    </tr>
-}
-
-</table>
+<div>
+    @(Html
+        .Grid(Model)
+        .Build(column =>
+        {
+            column.Add(m => m.Name).Titled("Tên quán coffee");
+            column.Add(m => m.Address).Titled("Địa chỉ");
+            column.Add(m => m.Phone).Titled("Số điện thoại");
+            column.Add(m => m.Email).Titled("Email").Filterable(false);
+            column.Add(m => m.CSID).Encoded(false).RenderedAs(m => (
+                @Html.ActionLink("Sửa", "EditCoffeeShop", new { CSID = m.CSID }, new { @class = "btn btn-sm btn-outline-primary" }).ToHtmlString()
+            + " " + @Html.ActionLink("Chi tiết", "DetailsCoffeeShop", new { CSID = m.CSID }, new { @class = "btn btn-sm btn-outline-info" }).ToHtmlString()
+            )).Filterable(false).Sortable(false).Titled("Action");
+        })
+        .Empty("Không có dữ liệu.")
+        .Filterable()
+        .Pageable(pager =>
+        {
+            pager.RowsPerPage = 6;
+        })
+    )
+</div>

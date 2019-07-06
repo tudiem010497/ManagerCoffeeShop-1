@@ -4,13 +4,7 @@
 }
 $(document).ready(function () {
     
-    //$("#grid").mousedown(function (event) {
-    //    switch (event.which) {
-    //        case 3:
-    //            $("#context-menu").show()
-    //            break;
-    //    }
-    //})
+
     $("#grid").contextmenu(function (event) {
         $("#context-menu").css({
             display: "block",

@@ -8,75 +8,6 @@
 <h2 style="text-align:center">DANH SÁCH HÓA ĐƠN CẦN GIAO</h2>
 <br />
 
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CustomerID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PosID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PaidDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DiscountMoney)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalAmount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Currency)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Desc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustomerID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PosID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderDateTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PaidDateTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DiscountMoney)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalAmount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Currency)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Desc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.ActionLink("Xem Chi tiết", "DetailOrderNeedSevice", "Service", new { OrderID = item.OrderID }, new { @class = "btn btn-primary btnDetailOrder" })
-            @Html.ActionLink("Xác nhận giao hàng", "ConfirmDelivery", new { OrderID = item.OrderID}, new { @class = "btn btn-outline-success"})
-        </td>
-    </tr>
-}
-</table>*@
-
 <div>
     @(Html
         .Grid(Model)
@@ -99,5 +30,9 @@
         .Sortable()
         .Empty("Không có dữ liệu.")
         .Filterable()
+        .Pageable(pager =>
+        {
+            pager.RowsPerPage = 6;
+        })
     )
 </div>
