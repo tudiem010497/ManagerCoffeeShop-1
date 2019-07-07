@@ -25,9 +25,6 @@
     <!-- Bootstrap -->
     @*<link href="css/bootstrap.min.css" rel="stylesheet">*@
     <link href="~/Assets/Main/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-    
 
     <!-- Rev slider css -->
     @*<link href="vendors/revolution/css/settings.css" rel="stylesheet">
@@ -72,7 +69,7 @@
 </head>
 <body>
     <!-- Back to top button -->
-    <a id="button" ></a>
+    <a id="button"></a>
     @*===========================*@
     <div id="preloader">
         <div class="loader absolute-center">
@@ -172,11 +169,10 @@
                         <li>
                             <a href="#" onclick="prelogin()">Đăng nhập</a>
                             <div id="id01" class="modal" style="width: 750px; margin: auto;">
-                                
+
                                 @*<form class="modal-content animate">*@
                                 @using (Html.BeginForm("Login", "Home", FormMethod.Post))
                                 {
-                                    
                                     <div class="imgcontainer">
                                         <h2 style="color:gold; font-size:50px">ĐĂNG NHẬP</h2>
                                     </div>
@@ -184,12 +180,12 @@
                                     <div class="container" style="width:auto">
                                         <label for="email" style="color:white"><b>Email</b></label>
                                         @*<input type="text" placeholder="Enter Username" name="username" id="username" required>*@
-                                        @Html.TextBoxFor(m => m.Email, new { placeholder = "Nhập email", id = "email", required = "required" })
+                                        @Html.TextBoxFor(m => m.Email, new { placeholder = "Nhập địa chỉ email", id = "email", required = "required" })
                                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
 
                                         <label for="password" style="color:white"><b>Mật khẩu</b></label>
                                         @*<input type="password" placeholder="Enter Password" name="password" id="password" required>*@
-                                        @Html.PasswordFor(m => m.Password, new { placeholder = "Nhập password", id = "password", required = "required" })
+                                        @Html.PasswordFor(m => m.Password, new { placeholder = "Nhập mật khẩu", id = "password", required = "required" })
                                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
 
                                         <label style="color:white">
@@ -203,8 +199,8 @@
 
                                     <div class="container-footer" style="background-color:#f1f1f1">
 
-                                        <span class="password" style="float:right">Quên <a id="a-password" href="#">mật khẩu</a>?</span>
-                                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Thoát</button>
+                                        <span class="password" style="float:right">Quên <a id="a-password" href="#">Mật khẩu</a>?</span>
+                                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Hủy</button>
                                     </div>
                                 }
 
@@ -212,7 +208,7 @@
                             </div>
 
                         </li>
-                        
+
                         @*SignIn*@
                         <li>
                             @*<a onclick="preRegister()">Register</a>*@
@@ -223,12 +219,12 @@
                                 {
                                     @Html.AntiForgeryToken()
                                     <div class="container" style="width: 750px; margin: auto;">
-                                        <h1 style="color: gold;font-size: 36px;margin: 0px;text-align:center">ĐĂNG KÝ</h1>
-                                        <p style="color:white;">Điền thông tin đăng ký tài khoản</p>
+                                        <h1 style="color: gold;font-size: 36px;margin: 0px;text-align:center">Đăng ký</h1>
+                                        <p style="color:white;">Điền thông tin đăng ký</p>
                                         <hr>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <label for="name" style="color:white"><b>Tên</b></label>
+                                                <label for="name" style="color:white"><b>Họ và tên</b></label>
                                                 @*<input type="text" placeholder="Enter Your Name" name="name" required>*@
                                                 @Html.TextBoxFor(m => m.Name, new { placeholder = "Nhập tên của bạn", required = "required" })
                                                 @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
@@ -236,7 +232,7 @@
                                             <div class="col-sm-6">
                                                 <label for="email" style="color:white"><b>Email</b></label>
                                                 @*<input type="text" placeholder="Enter Your Email" name="email" required>*@
-                                                @Html.TextBoxFor(m => m.Email, new { placeholder = "Nhập Email của bạn", required = "required" })
+                                                @Html.TextBoxFor(m => m.Email, new { placeholder = "Nhập email của bạn", required = "required" })
                                                 @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -244,14 +240,14 @@
                                             <div class="col-sm-6">
                                                 <label for="psw" style="color:white"><b>Mật khẩu</b></label>
                                                 @*<input type="password" placeholder="Enter Your Password" name="psw" required>*@
-                                                @Html.PasswordFor(m => m.Password, new { placeholder = "Nhập mật khẩu", required = "required", id = "psw" })
+                                                @Html.PasswordFor(m => m.Password, new { placeholder = "Nhap mật khẩu", required = "required", id = "psw" })
                                                 @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
                                             </div>
 
                                             <div class="col-sm-6">
-                                                <label for="DOB" style="color:white"><b>Ngày sinh</b></label>
+                                                <label for="DOB" style="color:white"><b>Ngày tháng năm sinh</b></label>
                                                 @*<input type="password" placeholder="Enter Your Password" name="psw" required>*@
-                                                @Html.TextBoxFor(m => m.DOB, "{ 0:dd/MM/yyyy }", new { placeholder = "Chọn ngày sinh", required = "required", id = "DOB", @class = "datepicker" })
+                                                @Html.TextBoxFor(m => m.DOB, "{ 0:dd/MM/yyyy }", new { placeholder = "Nhập ngày tháng năm sinh", required = "required", id = "DOB", @class = "datepicker" })
                                                 @Html.ValidationMessageFor(m => m.DOB, null, new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -259,27 +255,27 @@
                                             <div class="col-sm-6">
                                                 <label for="address" style="color:white"><b>Địa chỉ</b></label>
                                                 @*<input type="text" placeholder="Enter Your Email" name="email" required>*@
-                                                @Html.TextBoxFor(m => m.Address, new { placeholder = "Nhập đĩa chỉ", required = "required" })
+                                                @Html.TextBoxFor(m => m.Address, new { placeholder = "Nhập địa chỉ", required = "required" })
                                                 @Html.ValidationMessageFor(m => m.Address, null, new { @class = "text-danger" })
                                             </div>
                                             <div class="col-sm-6">
-                                                <label for="avatar" style="color:white"><b>Chọn ảnh đại diện</b></label>
+                                                <label for="avatar" style="color:white"><b>Anh đại diện</b></label>
                                                 @*<input type="text" placeholder="Enter Your Email" name="email" required>*@
-                                                @Html.TextBoxFor(m => m.Avatar, new { type="file" })
+                                                @Html.TextBoxFor(m => m.Avatar, new { type = "file" })
                                                 @Html.ValidationMessageFor(m => m.Avatar, null, new { @class = "text-danger" })
-                                            </div>    
                                             </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <label for="identityNum" style="color:white"><b>CMND</b></label>
+                                                <label for="identityNum" style="color:white"><b>Số CMND</b></label>
                                                 @*<input type="text" placeholder="Enter Your Email" name="email" required>*@
-                                                @Html.TextBoxFor(m => m.IdentityNum, new { placeholder = "Nhập số CMND", required = "required" })
+                                                @Html.TextBoxFor(m => m.IdentityNum, new { placeholder = "Nhập Số CMND", required = "required" })
                                                 @Html.ValidationMessageFor(m => m.IdentityNum, null, new { @class = "text-danger" })
                                             </div>
                                             <div class="col-sm-6">
                                                 <label for="phone" style="color:white"><b>Số điện thoại</b></label>
                                                 @*<input type="text" placeholder="Enter Your Email" name="email" required>*@
-                                                @Html.TextBoxFor(m => m.Phone, new { placeholder = "Nhập số điện thoãi", required = "required" })
+                                                @Html.TextBoxFor(m => m.Phone, new { placeholder = "Nhập số điện thoại", required = "required" })
                                                 @Html.ValidationMessageFor(m => m.Phone, null, new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -310,7 +306,7 @@
                             @if (ViewData["successCust"] != null)
                             {
                                 string temp = (string)ViewData["successUserID"];
-                                <span style="float:right"><input type="hidden" value="@temp"/>@Html.ActionLink((string)ViewData["successCust"], "ViewCustomerAccount", "Home", new { UserID = temp }, new { @class = "btn btn-outline-success " }) </span>
+                                <span style="float:right"><input type="hidden" value="@temp" />@Html.ActionLink((string)ViewData["successCust"], "ViewCustomerAccount", "Home", new { UserID = temp }, new { @class = "btn btn-outline-success " }) </span>
                                 <span style="float:right">@Html.ActionLink("Logout", "Logout", "Home", new { UserID = temp }, new { @class = "btn btn-outline-success " }) </span>
                             }
                             @*</div>*@
@@ -318,7 +314,7 @@
                         </div>
 
                     </ul>
-                    
+
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
@@ -327,8 +323,8 @@
 
     @RenderBody();
     @*<div id="main-toolbox" class="toolbox">
-        <div class="toolbox-item"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
-    </div>*@
+            <div class="toolbox-item"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
+        </div>*@
     <!--================ Footer Area =================-->
     <footer class="footer_area">
         <div class="footer_widget_area">
