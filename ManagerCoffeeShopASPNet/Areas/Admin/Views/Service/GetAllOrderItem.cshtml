@@ -4,12 +4,12 @@
     ViewBag.Title = "GetAllOrderItem";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<h2 style="text-align:center; padding-top:10px;">DANH SÁCH CHI TIẾT ĐƠN HÀNG</h2>
+<h2 style="text-align:center; padding:10px;">DANH SÁCH CHI TIẾT ĐƠN HÀNG</h2>
 
-<div>
+<div style="padding-bottom:10px;">
     @Html.ActionLink("Xuất báo cáo", "PrintReport", "Service", new { @class = "btn btn-sm btn-primary" })
 </div>
-<div>
+<div style="padding-bottom:10px;">
     @(Html
         .Grid(Model).Build(columns =>
         {
@@ -23,12 +23,15 @@
             columns.Add(o => o.Status).Titled("Trạng thái").Sortable(false);
         })
         //.WithFilterMode(GridFilterMode.FilterRow)
-        .Empty("Data is empty")
+        .Empty("Không có dữ liệu.")
         .Filterable()
         .Sortable()
         .Pageable(pager =>
         {
-            pager.RowsPerPage = 5;
+            pager.RowsPerPage = 4;
         })
     )
+</div>
+<div>
+    @Html.ActionLink("Trở về", "GetAllOrder", "Service")
 </div>
