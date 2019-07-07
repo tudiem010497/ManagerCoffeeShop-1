@@ -5,7 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2 style="text-align:center">DANH SÁCH GIAO HÀNG</h2>
+<h2 style="text-align:center; padding:10px;">DANH SÁCH GIAO HÀNG</h2>
 
 @*<table class="table">
     <tr>
@@ -66,11 +66,12 @@
             //column.Add(m => m.OrderID).Titled("Mã HĐ");
             column.Add(m => m.CustName).Titled("Tên Khách hàng");
             column.Add(m => m.Address).Titled("Địa chỉ giao hàng").Filterable(false);
-            column.Add(m => m.Phone).Titled("Sđt liên hệ").Filterable(false);
+            column.Add(m => m.Phone).Titled("SĐT liên hệ").Filterable(false);
             column.Add(m => m.Status).Titled("Trạng thái").Filterable(false);
             column.Add(m => m.ShipDetailID).Titled("Xác nhận giao hàng").Encoded(false).RenderedAs(m => (
-                @Html.ActionLink("Thành công", "ConfirmDeliveried", new { ShipDetailID = m.ShipDetailID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
-                + ' ' + @Html.ActionLink("Thất bại", "ConfirmDeliveriedFailed", new { ShipDetailID = m.ShipDetailID }, new { @class = "btn btn-sm btn-outline-danger" }).ToHtmlString()
+                @Html.ActionLink("Xem chi tiết", "DetailShipDelivery", new { ShipDetailID = m.ShipDetailID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
+            //+ ' ' + @Html.ActionLink("Thành công", "ConfirmDeliveried", new { ShipDetailID = m.ShipDetailID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
+            //+ ' ' + @Html.ActionLink("Thất bại", "ConfirmDeliveriedFailed", new { ShipDetailID = m.ShipDetailID }, new { @class = "btn btn-sm btn-outline-danger" }).ToHtmlString()
             )).Filterable(false).Sortable(false);
         })
         .Sortable()

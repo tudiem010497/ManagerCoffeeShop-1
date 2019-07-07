@@ -325,7 +325,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             DateTime DateTimeTo = Convert.ToDateTime(dateTimeTo).AddHours(0).AddMinutes(0).AddSeconds(0);
             string tempFileName = string.Empty;
             string contentType = string.Empty;
-            if(column && !circle && !line) // Xuất biểu đồ cột
+            if (column && !circle && !line) // Xuất biểu đồ cột
             {
                 if (ExportType == "word")
                 {
@@ -374,7 +374,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
 
                 }
             }
-            else if(!column && circle && !line)
+            else if (!column && circle && !line)
             {
                 if (ExportType == "word")
                 {

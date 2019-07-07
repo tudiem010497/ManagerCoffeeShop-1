@@ -221,6 +221,17 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             IEnumerable<ShipDetail> ship = info.GetShipDeliveryByStatus();
             return View(ship);
         }
+        //nhấn nút Xem chi tiết đơn giao hàng
+        [Route("DetailShipDelivery")]
+        public ActionResult DetailShipDelivery(int ShipDetailID)
+        {
+            ShipDetail ship = info.GetShipDeliveryByShipDetailID(ShipDetailID);
+            int OrderID = ship.OrderID;
+            IEnumerable<OrderItem> item = info.GetAllOrderItemByOrderID(OrderID);
+            ViewData["OrderItem"] = item;
+            ViewData["ShipDetailID"] = ShipDetailID;
+            return View();
+        }
         //nhấn nút xác nhận giao hàng thành công, cập nhật là "Close"
         [Route("ConfirmDeliveried")]
         public ActionResult ConfirmDeliveried(int ShipDetailID)

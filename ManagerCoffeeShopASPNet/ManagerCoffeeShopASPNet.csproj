@@ -400,10 +400,28 @@
       <DependentUpon>ExportOrderCustomer.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reporting\ReportQuantityGroupByFoodAndDrink.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportQuantityGroupByFoodAndDrink.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reporting\ReportQuantityGroupByFoodAndDrinkCircle.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportQuantityGroupByFoodAndDrinkCircle.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reporting\ReportTurnOverGroupByFoodAndDrink.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportTurnOverGroupByFoodAndDrink.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reporting\ReportTurnOverGroupByMonth.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportTurnOverGroupByMonth.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Startup.cs" />
@@ -548,6 +566,7 @@
     <Content Include="Areas\Admin\Views\Web\ViewDiagram.cshtml" />
     <Content Include="Areas\Admin\Views\Web\DeleteCoffeeShop.cshtml" />
     <Content Include="Areas\Admin\Views\Accountant\Report.cshtml" />
+    <Content Include="Areas\Admin\Views\Service\DetailShipDelivery.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -653,9 +672,21 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ExportOrderCustomer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\ReportQuantityGroupByFoodAndDrink.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportQuantityGroupByFoodAndDrink.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\ReportQuantityGroupByFoodAndDrinkCircle.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportQuantityGroupByFoodAndDrinkCircle.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reporting\ReportTurnOverGroupByFoodAndDrink.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportTurnOverGroupByFoodAndDrink.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\ReportTurnOverGroupByMonth.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportTurnOverGroupByMonth.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="CoffeeShopDB.dbml.layout">
       <DependentUpon>CoffeeShopDB.dbml</DependentUpon>

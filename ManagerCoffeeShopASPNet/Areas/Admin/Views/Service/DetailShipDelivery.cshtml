@@ -1,0 +1,32 @@
+﻿@model ManagerCoffeeShopASPNet.ShipDetail
+@using NonFactors.Mvc.Grid
+@{
+    ViewBag.Title = "DetailShipDelivery";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="text-align:center;padding:10px">CHI TIẾT ĐƠN GIAO HÀNG</h2>
+
+<div style="padding-bottom:10px">
+    @(Html
+        .Grid((IEnumerable<OrderItem>)ViewData["OrderItem"])
+        .Build(column =>
+        {
+            column.Add(m => m.FoodAndDrink.Name).Titled("Tên đồ uống");
+            column.Add(m => m.Quantity).Titled("Số lượng").Filterable(false);
+            column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);
+        })
+        .Sortable()
+        .Empty("Không có dữ liệu.")
+        .Filterable()
+    )
+</div>
+<div class="row">
+    <div class="col-md-8" style="padding-left:30px">
+        @Html.ActionLink("Trở về", "GetListShipDelivery")
+    </div>
+    <div class="col-md-4">
+        @Html.ActionLink("Thành công", "ConfirmDeliveried", new { ShipDetailID = ViewData["ShipDetailID"] }, new { @class = "btn btn-sm btn-outline-success" })
+        @Html.ActionLink("Thất bại", "ConfirmDeliveriedFailed", new { ShipDetailID = ViewData["ShipDetailID"] }, new { @class = "btn btn-sm btn-outline-danger" })
+    </div>
+</div>
