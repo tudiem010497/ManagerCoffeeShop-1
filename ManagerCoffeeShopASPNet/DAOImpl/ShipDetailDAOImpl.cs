@@ -25,6 +25,20 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                                         select ship;
             return s;
         }
+        public IEnumerable<ShipDetail> GetShipDeliveryWaitToConfirm()
+        {
+            IEnumerable<ShipDetail> s = from ship in context.ShipDetails
+                                        where ship.Status == "Wait"
+                                        select ship;
+            return s;
+        }
+        public ShipDetail GetShipDetailByOrderID(int OrderID)
+        {
+            ShipDetail shipdetail = (from s in context.ShipDetails
+                                     where s.OrderID == OrderID
+                                     select s).Single();
+            return shipdetail;
+        }
         public ShipDetail GetShipDeliveryByShipDetailID(int ShipDetailID)
         {
             ShipDetail s = (from ship in context.ShipDetails

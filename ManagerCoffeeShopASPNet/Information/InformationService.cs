@@ -165,5 +165,21 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return _shipDAO.GetLastShipID();
         }
+        public OrderItem GetOrderItemByOrderID(int OrderID)
+        {
+            return this._orderItemDAO.GetOrderItemByOrderID(OrderID);
+        }
+        public Order GetOrderByStatus(string Status)
+        {
+            return this._orderDAO.GetOrderByStatus(Status);
+        }
+        public ShipDetail GetShipDetailByOrderID(int OrderID)
+        {
+            return this._shipDetailDAO.GetShipDetailByOrderID(OrderID);
+        }
+        public IEnumerable<ShipDetail> GetShipDeliveryWaitToConfirm()
+        {
+            return this._shipDetailDAO.GetShipDeliveryWaitToConfirm();
+        }
     }
 }

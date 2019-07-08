@@ -14,7 +14,7 @@
         .Grid(Model).Build(columns =>
         {
             columns.Add(o => o.PosID).Titled("Vị trí");
-            columns.Add(o => o.Customer.Name).Titled("Tên khách hàng");
+            //columns.Add(o => o.Customer.Name).Titled("Tên khách hàng");
             columns.Add(o => o.OrderDateTime).Titled("Thời gian vào");
             columns.Add(o => o.Desc).Titled("Ghi chú");
             columns.Add(o => o.Status).Titled("Trạng thái").Sortable(false);

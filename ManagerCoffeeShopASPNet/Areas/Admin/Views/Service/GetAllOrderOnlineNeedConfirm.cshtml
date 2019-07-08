@@ -1,26 +1,24 @@
-﻿@model IEnumerable<ManagerCoffeeShopASPNet.Order>
+﻿@model IEnumerable<ManagerCoffeeShopASPNet.ShipDetail>
 @using NonFactors.Mvc.Grid
+
 @{
     ViewBag.Title = "GetAllOrderOnlineNeedConfirm";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <h2 style="text-align:center; padding:10px">DANH SÁCH HÓA ĐƠN ONLINE CẦN XÁC NHẬN</h2>
 <div>
     @(Html
         .Grid(Model)
         .Build(column =>
         {
-            column.Add(m => m.Customer.Name).Titled("Tên khách hàng");
-            //column.Add(m => m.PosID).Titled("Vị trí").Sortable(false);
-            column.Add(m => m.OrderDateTime).Titled("Ngày giờ đặt");
-            column.Add(m => m.TotalAmount).Titled("Tổng tiền");
-            column.Add(m => m.Currency).Titled("Đơn vị tiền");
-            column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);
-            column.Add(m => m.Status).Titled("Trạng thái");
+            column.Add(m=>m.CustName).Titled("Tên khách hàng");
+            column.Add(m => m.Phone).Titled("SĐT liên hệ của khách");
+            column.Add(m => m.Address).Titled("Địa chỉ");
+            column.Add(m => m.Order.TotalAmount).Titled("Tổng tiền");
+            column.Add(m => m.Order.OrderDateTime).Titled("Ngày giờ đặt").Filterable(false);
             column.Add(m => m.OrderID).Encoded(false).RenderedAs(m => (
                 @Html.ActionLink("Xem chi tiết", "UpdateStatusOfOrderItemOnline", new { OrderID = m.OrderID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
-            //    +" "+@Html.ActionLink("Xác nhận", "UpdateStatusOfOrderItemOnline", new { OrderID = m.OrderID }, new { @class = "btn btn-outline-success" }).ToHtmlString()
-            //+ " " + @Html.ActionLink("Xóa", "Delete", new { OrderID = m.OrderID }, new { @class = "btn btn-outline-danger" }).ToHtmlString()
             )).Filterable(false).Sortable(false);
         })
         .Sortable()

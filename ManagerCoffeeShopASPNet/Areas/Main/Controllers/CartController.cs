@@ -129,7 +129,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
                 }
                 int ShipID = info.GetLastShipID();
 
-                info.InsertShipDetail(ShipID, OrderID, temp.CustName, temp.Address, temp.Tel, "NotYetDelivery");
+                info.InsertShipDetail(ShipID, OrderID, temp.CustName, temp.Address, temp.Tel, "Wait");
                 return Json(new { Result = "Bạn đã đặt hàng thành công. Hãy chờ xác nhận từ nhân viên." }, JsonRequestBehavior.AllowGet);
             }
 

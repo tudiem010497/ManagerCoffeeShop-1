@@ -14,7 +14,7 @@
         .Grid(Model).Build(columns =>
         {
             columns.Add(o => o.OrderID).Titled("Mã hóa đơn").Sortable(false);
-            columns.Add(o => o.Order.Customer.Name).Titled("Tên khách hàng").Sortable(false);
+            //columns.Add(o => o.Order.Customer.Name).Titled("Tên khách hàng").Sortable(false);
             columns.Add(o => o.Order.PosID).Titled("Vị trí").Sortable(false);
             columns.Add(o => o.Order.OrderDateTime).Titled("Thời gian vào");
             columns.Add(o => o.FoodAndDrink.Name).Titled("Tên đồ uống").Sortable(false);

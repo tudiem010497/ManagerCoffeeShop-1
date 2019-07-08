@@ -84,6 +84,14 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                                         select order;
             return orders;
         }
+        public Order GetOrderByStatus(string Status)
+        {
+            Order order = (from o in context.Orders
+                           where o.Status == Status
+                           orderby o.OrderDateTime ascending
+                           select o).Single();
+            return order;
+        }
         public IEnumerable<Order> GetAllOrderByDescAndStatus(string Desc, string Status)
         {
             IEnumerable<Order> orders = from order in context.Orders

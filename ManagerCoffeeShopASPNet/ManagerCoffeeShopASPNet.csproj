@@ -412,16 +412,46 @@
       <DependentUpon>ReportQuantityGroupByFoodAndDrinkCircle.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reporting\ReportQuantityGroupByFoodAndDrinkLine.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportQuantityGroupByFoodAndDrinkLine.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reporting\ReportTurnOverGroupByFoodAndDrink.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportTurnOverGroupByFoodAndDrink.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reporting\ReportTurnOverGroupByFoodAndDrinkCircle.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportTurnOverGroupByFoodAndDrinkCircle.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reporting\ReportTurnOverGroupByFoodAndDrinkLine.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportTurnOverGroupByFoodAndDrinkLine.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reporting\ReportTurnOverGroupByMonth.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportTurnOverGroupByMonth.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reporting\ReportTurnOverGroupByMonthCircle.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportTurnOverGroupByMonthCircle.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reporting\ReportTurnOverGroupByMonthLine.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportTurnOverGroupByMonthLine.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Startup.cs" />
@@ -681,13 +711,33 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportQuantityGroupByFoodAndDrinkCircle.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\ReportQuantityGroupByFoodAndDrinkLine.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportQuantityGroupByFoodAndDrinkLine.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reporting\ReportTurnOverGroupByFoodAndDrink.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportTurnOverGroupByFoodAndDrink.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\ReportTurnOverGroupByFoodAndDrinkCircle.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportTurnOverGroupByFoodAndDrinkCircle.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\ReportTurnOverGroupByFoodAndDrinkLine.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportTurnOverGroupByFoodAndDrinkLine.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reporting\ReportTurnOverGroupByMonth.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportTurnOverGroupByMonth.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\ReportTurnOverGroupByMonthCircle.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportTurnOverGroupByMonthCircle.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\ReportTurnOverGroupByMonthLine.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportTurnOverGroupByMonthLine.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="CoffeeShopDB.dbml.layout">
       <DependentUpon>CoffeeShopDB.dbml</DependentUpon>

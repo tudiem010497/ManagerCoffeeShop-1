@@ -130,8 +130,9 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult GetAllOrderOnlineNeedConfirm()
         {
             string status = "WaitToConfirm"; // chỉ có hóa đơn online mới có status này
-            IEnumerable<Order> order = info.GetAllOrderByStatus(status);
-            return View(order);
+            //status ShipDetail = Wait (status đơn hàng chờ xác nhận trong bảng ShipDetail)
+            IEnumerable<ShipDetail> ships = info.GetShipDeliveryWaitToConfirm();
+            return View(ships);
         }
         // Danh sách chi tiết đồ uống của hóa đơn online thực hiện việc xác nhận
         [Route("UpdateStatusOfOrderItemOnline")]
@@ -165,6 +166,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             int temp=0;
             string status1 = "Cancel";
             string status2 = "Pending";
+            string status3 = "NotYetDelivery";
             foreach (var item in orderitem)
             {
                 if(item.Status != "Cancel")
@@ -176,10 +178,12 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             }
             if (temp == 1)
             {
+                info.UpdateShipDetailStatus(OrderID, status1);
                 info.UpdateOrderStatus(OrderID, status1);
             }
             if (temp == 0)
             {
+                info.UpdateShipDetailStatus(OrderID, status3);
                 info.UpdateOrderStatus(OrderID, status2);
             }
             return RedirectToAction("GetAllOrderOnlineNeedConfirm");
@@ -223,22 +227,28 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             ViewData["ShipDetailID"] = ShipDetailID;
             return View();
         }
-        //nhấn nút xác nhận giao hàng thành công, cập nhật là "Close"
+        //nhấn nút xác nhận giao hàng thành công, cập nhật là "Close" trong shipDetail, cập nhật là "Paid" trong Order
         [Route("ConfirmDeliveried")]
         public ActionResult ConfirmDeliveried(int ShipDetailID)
         {
             string Status = "Close";
+            string statusOrder = "Paid";
             ShipDetail ship = info.GetShipDeliveryByShipDetailID(ShipDetailID);
             info.UpdateShipDetailStatusByShipDetailID(ShipDetailID, Status);
+            info.UpdateOrderStatus(ship.OrderID, statusOrder);
             return RedirectToAction("GetListShipDelivery", new { ShipDetailID = ship.ShipDetailID});
         }
-        //nhấn nút xác nhận giao hàng thất bại, cập nhật là "Failed"
+        //nhấn nút xác nhận giao hàng thất bại, cập nhật là "Failed" trong shipDetail, "Cancel" trong Order và OrderItem
         [Route("ConfirmDeliveriedFailed")]
         public ActionResult ConfirmDeliveriedFailed(int ShipDetailID)
         {
             string Status = "Failed";
+            string statusOrder = "Cancel";
             ShipDetail ship = info.GetShipDeliveryByShipDetailID(ShipDetailID);
             info.UpdateShipDetailStatusByShipDetailID(ShipDetailID, Status);
+            info.UpdateOrderStatus(ship.OrderID, statusOrder);
+            OrderItem item = info.GetOrderItemByOrderID(ship.OrderID);
+            info.UpdateOrderItemStatus(item.OrderItemID, statusOrder);
             return RedirectToAction("GetListShipDelivery", new { ShipDetailID = ship.ShipDetailID });
         }
         /// <summary>
