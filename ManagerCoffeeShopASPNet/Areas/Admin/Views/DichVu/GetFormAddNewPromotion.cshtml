@@ -61,6 +61,26 @@
             </div>
         </div>
         <div class="form-group">
+            @Html.Label("Số tiền trên hóa đơn được áp dụng khuyến mãi", htmlAttributes: new { @class = "control-label col-md-10" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MinOrderTotalAmount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MinOrderTotalAmount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Số tiền (%) được giảm", htmlAttributes: new { @class = "control-label col-md-10" })
+            <div class="col-md-10">
+                @Html.Editor("Discount", new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.ValidationMessageFor("Discount", "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Loại khuyến mãi", htmlAttributes: new { @class = "control-label col-md-10" })
+            <div class="col-md-10">
+                @Html.DropDownList("TypePromotion", (List<SelectListItem>)ViewData["listTypePromotion"], new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
             @Html.Label("Ghi chú", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Desc, new { htmlAttributes = new { @class = "form-control" } })

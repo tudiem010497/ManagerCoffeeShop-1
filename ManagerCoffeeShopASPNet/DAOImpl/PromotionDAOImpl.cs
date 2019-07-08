@@ -36,7 +36,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                      select promotion).SingleOrDefault();
             return p;
         }
-        public bool InsertPromotion (string Name, string Desc, DateTime StartDate, DateTime EndDate)
+        public bool InsertPromotion (string Name, string Desc, DateTime StartDate, DateTime EndDate, string TypePromotion, float Discount, float MinOrderTotalAmount)
         {
             try
             {
@@ -46,6 +46,15 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 p.Desc = Desc;
                 p.StartDate = StartDate;
                 p.EndDate = EndDate;
+                p.MinOrderTotalAmount = MinOrderTotalAmount;
+                if (TypePromotion == "DiscountRate")
+                {
+                    p.DiscountRate = Discount / 100;
+                }
+                else
+                {
+                    p.DirectDiscountMoney = Discount;
+                }
                 context.Promotions.InsertOnSubmit(p);
                 context.SubmitChanges();
                 return true;

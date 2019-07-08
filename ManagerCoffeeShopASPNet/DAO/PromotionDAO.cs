@@ -10,7 +10,7 @@ namespace ManagerCoffeeShopASPNet.DAO
         IEnumerable<Promotion> GetAllPromotion();
         int GetLastPromotionID();
         Promotion GetPromotionByID(int PromotionID);
-        bool InsertPromotion(string Name, string Desc, DateTime StartDate, DateTime EndDate);
+        bool InsertPromotion(string Name, string Desc, DateTime StartDate, DateTime EndDate, string TypePromotion, float Discount, float MinOrderTotalAmount);
         bool EditPromotion(Promotion promotion);
         IEnumerable<Promotion> GetPromotionByDateTime();
     }

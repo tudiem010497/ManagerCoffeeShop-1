@@ -13,7 +13,7 @@
         @using (Html.BeginForm("DichVu", "GetAllPromotion", FormMethod.Get))
         {
             @Html.TextBox("Search")
-            <button type="submit">Search</button>
+            <button type="submit">Tìm kiếm</button>
         }
     </div>
 </div>
@@ -27,6 +27,9 @@
             column.Add(m => m.Name).Titled("Tên khuyến mãi").Sortable(false);
             column.Add(m => m.StartDate).Titled("Ngày bắt đầu");
             column.Add(m => m.EndDate).Titled("Ngày kết thúc");
+            column.Add(m => m.MinOrderTotalAmount).Titled("Số tiền tối thiểu để được khuyến mãi");
+            column.Add(m => m.DirectDiscountMoney).Titled("Số tiền được giảm");
+            column.Add(m => m.DiscountRate*100).Titled("Phần trăm được giảm trên tổng hóa đơn(%)");
             column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);
             column.Add(m => m.PromotionID).Encoded(false).RenderedAs(m => (
                 @Html.ActionLink("Sửa", "EditPromotion", "DichVu", new { PromotionID = m.PromotionID }, new { @class = "btn btn-sm btn-primary" }).ToHtmlString()

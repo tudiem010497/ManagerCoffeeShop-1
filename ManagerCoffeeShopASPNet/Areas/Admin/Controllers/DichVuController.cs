@@ -43,24 +43,48 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("GetFormAddNewPromotion")]
         public ActionResult GetFormAddNewPromotion()
         {
+            List<SelectListItem> listTypePromotion = new List<SelectListItem>();
+            SelectListItem DiscountRate = new SelectListItem();
+            DiscountRate.Text = "Giảm theo phần trăm tổng tiền";
+            DiscountRate.Value = "DiscountRate";
+            SelectListItem DirectDiscountMoney = new SelectListItem();
+            DirectDiscountMoney.Text = "Giảm trực tiếp số tiền trên hóa đơn";
+            listTypePromotion.Add(DiscountRate);
+            listTypePromotion.Add(DirectDiscountMoney);
+            ViewData["listTypePromotion"] = listTypePromotion;
+
             return View();
         }
         [Route("CreatePromotion")]
-        public ActionResult CreatePromotion(string Name, string Desc, string dateTimeFrom, string dateTimeTo)
+        public ActionResult CreatePromotion(string Name, string Desc, string dateTimeFrom, string dateTimeTo, string TypePromotion, float Discount, float MinOrderTotalAmount)
         {
             DateTime StartDate = Convert.ToDateTime(dateTimeFrom);
             DateTime EndDate = Convert.ToDateTime(dateTimeTo);
-            bool result = info.InsertPromotion(Name, Desc, StartDate, EndDate);
+            bool result = info.InsertPromotion(Name, Desc, StartDate, EndDate, TypePromotion, Discount, MinOrderTotalAmount);
             return RedirectToAction("GetAllPromotion", "DichVu");
         }
         [Route("EditPromotion")]
         public ActionResult EditPromotion(int PromotionID)
         {
+            List<SelectListItem> listTypePromotion = new List<SelectListItem>();
+            SelectListItem DiscountRate = new SelectListItem();
+            DiscountRate.Text = "Giảm theo phần trăm tổng tiền";
+            DiscountRate.Value = "DiscountRate";
+            SelectListItem DirectDiscountMoney = new SelectListItem();
+            DirectDiscountMoney.Text = "Giảm trực tiếp số tiền trên hóa đơn";
+            listTypePromotion.Add(DiscountRate);
+            listTypePromotion.Add(DirectDiscountMoney);
+            ViewData["listTypePromotion"] = listTypePromotion;
             Promotion p = info.GetPromotionByID(PromotionID);
+            double? Discount = 0;
+            Discount = p.DirectDiscountMoney;
+            if (p.DiscountRate != null) Discount = p.DiscountRate;
+            if (p.DirectDiscountMoney != null) Discount = p.DirectDiscountMoney;
+            ViewData["Discount"] = Discount;
             return View(p);
         }
         [Route("DoEditPromotion")]
-        public ActionResult DoEditPromotion(int PromotionID, string Name, string Desc, DateTime StartDate, DateTime EndDate)
+        public ActionResult DoEditPromotion(int PromotionID, string Name, string Desc, DateTime StartDate, DateTime EndDate, string TypePromotion, float Discount, float MinOrderTotalAmount)
         {
             Promotion p = new Promotion();
             p.PromotionID = PromotionID;
@@ -68,6 +92,14 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             p.Desc = Desc;
             p.StartDate = StartDate;
             p.EndDate = EndDate;
+            if(TypePromotion == "DiscountRate")
+            {
+                p.DiscountRate = Discount;
+            }
+            else
+            {
+                p.DirectDiscountMoney = Discount;
+            }
             bool result = info.EditPromotion(p);
             return RedirectToAction("GetAllPromotion", "DichVu");
         }

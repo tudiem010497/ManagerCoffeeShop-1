@@ -25,9 +25,9 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._promotionDAO.GetPromotionByID(PromotionID);
         }
-        public bool InsertPromotion(string Name, string Desc, DateTime StartDate, DateTime EndDate)
+        public bool InsertPromotion(string Name, string Desc, DateTime StartDate, DateTime EndDate, string TypePromotion, float Discount, float MinOrderTotalAmount)
         {
-            return this._promotionDAO.InsertPromotion(Name, Desc, StartDate, EndDate);
+            return this._promotionDAO.InsertPromotion(Name, Desc, StartDate, EndDate, TypePromotion, Discount, MinOrderTotalAmount);
         }
         public bool EditPromotion(Promotion promotion)
         {
