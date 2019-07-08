@@ -16,14 +16,14 @@ namespace ManagerCoffeeShopASPNet.Reporting {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class ReportQuantityGroupByFoodAndDrinkCircle : ReportClass {
+    public class ReportTurnOverGroupByMonthCircle : ReportClass {
         
-        public ReportQuantityGroupByFoodAndDrinkCircle() {
+        public ReportTurnOverGroupByMonthCircle() {
         }
         
         public override string ResourceName {
             get {
-                return "ReportQuantityGroupByFoodAndDrinkCircle.rpt";
+                return "ReportTurnOverGroupByMonthCircle.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace ManagerCoffeeShopASPNet.Reporting {
         
         public override string FullResourceName {
             get {
-                return "ManagerCoffeeShopASPNet.Reporting.ReportQuantityGroupByFoodAndDrinkCircle.rpt";
+                return "ManagerCoffeeShopASPNet.Reporting.ReportTurnOverGroupByMonthCircle.rpt";
             }
             set {
                 // Do nothing
@@ -114,9 +114,9 @@ namespace ManagerCoffeeShopASPNet.Reporting {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedReportQuantityGroupByFoodAndDrinkCircle : Component, ICachedReport {
+    public class CachedReportTurnOverGroupByMonthCircle : Component, ICachedReport {
         
-        public CachedReportQuantityGroupByFoodAndDrinkCircle() {
+        public CachedReportTurnOverGroupByMonthCircle() {
         }
         
         [Browsable(false)]
@@ -153,7 +153,7 @@ namespace ManagerCoffeeShopASPNet.Reporting {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            ReportQuantityGroupByFoodAndDrinkCircle rpt = new ReportQuantityGroupByFoodAndDrinkCircle();
+            ReportTurnOverGroupByMonthCircle rpt = new ReportTurnOverGroupByMonthCircle();
             rpt.Site = this.Site;
             return rpt;
         }

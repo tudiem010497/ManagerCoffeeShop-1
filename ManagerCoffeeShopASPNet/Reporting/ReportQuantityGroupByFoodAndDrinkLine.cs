@@ -16,14 +16,14 @@ namespace ManagerCoffeeShopASPNet.Reporting {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class ReportQuantityGroupByFoodAndDrinkCircle : ReportClass {
+    public class ReportQuantityGroupByFoodAndDrinkLine : ReportClass {
         
-        public ReportQuantityGroupByFoodAndDrinkCircle() {
+        public ReportQuantityGroupByFoodAndDrinkLine() {
         }
         
         public override string ResourceName {
             get {
-                return "ReportQuantityGroupByFoodAndDrinkCircle.rpt";
+                return "ReportQuantityGroupByFoodAndDrinkLine.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace ManagerCoffeeShopASPNet.Reporting {
         
         public override string FullResourceName {
             get {
-                return "ManagerCoffeeShopASPNet.Reporting.ReportQuantityGroupByFoodAndDrinkCircle.rpt";
+                return "ManagerCoffeeShopASPNet.Reporting.ReportQuantityGroupByFoodAndDrinkLine.rpt";
             }
             set {
                 // Do nothing
@@ -114,9 +114,9 @@ namespace ManagerCoffeeShopASPNet.Reporting {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedReportQuantityGroupByFoodAndDrinkCircle : Component, ICachedReport {
+    public class CachedReportQuantityGroupByFoodAndDrinkLine : Component, ICachedReport {
         
-        public CachedReportQuantityGroupByFoodAndDrinkCircle() {
+        public CachedReportQuantityGroupByFoodAndDrinkLine() {
         }
         
         [Browsable(false)]
@@ -153,7 +153,7 @@ namespace ManagerCoffeeShopASPNet.Reporting {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            ReportQuantityGroupByFoodAndDrinkCircle rpt = new ReportQuantityGroupByFoodAndDrinkCircle();
+            ReportQuantityGroupByFoodAndDrinkLine rpt = new ReportQuantityGroupByFoodAndDrinkLine();
             rpt.Site = this.Site;
             return rpt;
         }

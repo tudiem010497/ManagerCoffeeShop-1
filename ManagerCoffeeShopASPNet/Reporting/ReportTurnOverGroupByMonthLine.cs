@@ -16,14 +16,14 @@ namespace ManagerCoffeeShopASPNet.Reporting {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class ReportQuantityGroupByFoodAndDrinkCircle : ReportClass {
+    public class ReportTurnOverGroupByMonthLine : ReportClass {
         
-        public ReportQuantityGroupByFoodAndDrinkCircle() {
+        public ReportTurnOverGroupByMonthLine() {
         }
         
         public override string ResourceName {
             get {
-                return "ReportQuantityGroupByFoodAndDrinkCircle.rpt";
+                return "ReportTurnOverGroupByMonthLine.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace ManagerCoffeeShopASPNet.Reporting {
         
         public override string FullResourceName {
             get {
-                return "ManagerCoffeeShopASPNet.Reporting.ReportQuantityGroupByFoodAndDrinkCircle.rpt";
+                return "ManagerCoffeeShopASPNet.Reporting.ReportTurnOverGroupByMonthLine.rpt";
             }
             set {
                 // Do nothing
@@ -114,9 +114,9 @@ namespace ManagerCoffeeShopASPNet.Reporting {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedReportQuantityGroupByFoodAndDrinkCircle : Component, ICachedReport {
+    public class CachedReportTurnOverGroupByMonthLine : Component, ICachedReport {
         
-        public CachedReportQuantityGroupByFoodAndDrinkCircle() {
+        public CachedReportTurnOverGroupByMonthLine() {
         }
         
         [Browsable(false)]
@@ -153,7 +153,7 @@ namespace ManagerCoffeeShopASPNet.Reporting {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            ReportQuantityGroupByFoodAndDrinkCircle rpt = new ReportQuantityGroupByFoodAndDrinkCircle();
+            ReportTurnOverGroupByMonthLine rpt = new ReportTurnOverGroupByMonthLine();
             rpt.Site = this.Site;
             return rpt;
         }
