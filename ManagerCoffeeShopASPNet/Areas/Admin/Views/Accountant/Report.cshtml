@@ -17,17 +17,10 @@
         <label for="ReportType">Loại file xuất</label>
         @Html.DropDownList("ExportType", (List<SelectListItem>)ViewData["ListExport"], new { @class = "form-control" })
     </div>
+    
     <div class="form-group">
         <label for="ReportType">Loại sơ đồ</label>
-        <div class="checkbox">
-            <label><input type="checkbox" value="" checked name="column">Biểu đồ cột</label>
-        </div>
-        <div class="checkbox">
-            <label><input type="checkbox" value="" name="circle">Biểu đồ tròn</label>
-        </div>
-        <div class="checkbox disabled">
-            <label><input type="checkbox" value=""  name="line">Biểu đồ đường</label>
-        </div>
+        @Html.DropDownList("MapType", (List<SelectListItem>)ViewData["ListMap"], new { @class = "form-control" })
     </div>
     <fieldset>
         <div class="control-group">

@@ -309,6 +309,23 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             SelectListItem QuantityGroupByFoodAndDrink = new SelectListItem();
             QuantityGroupByFoodAndDrink.Value = "ReportQuantityGroupByFoodAndDrink";
             QuantityGroupByFoodAndDrink.Text = "Thống kê số lượng đồ uống";
+
+            // Loại biểu đồ
+            List<SelectListItem> ListMap = new List<SelectListItem>();
+            SelectListItem Line = new SelectListItem();
+            Line.Text = "Biểu đồ đường";
+            Line.Value = "Line";
+            SelectListItem Column = new SelectListItem();
+            Column.Text = "Biểu đồ cột";
+            Column.Value = "Column";
+            SelectListItem Circle = new SelectListItem();
+            Circle.Text = "Biểu đồ tròn";
+            Circle.Value = "Circle";
+            ListMap.Add(Line);
+            ListMap.Add(Column);
+            ListMap.Add(Circle);
+            ViewData["ListMap"] = ListMap;
+
             ListReportType.Add(GroupByFoodAndDrink);
             ListReportType.Add(GroupByTotalAmount);
             ListReportType.Add(QuantityGroupByFoodAndDrink);
@@ -319,13 +336,20 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
 
         [Route("DoReport")]
         public ActionResult DoReport(string dateTimeFrom, string dateTimeTo, string ReportType, string ExportType,
-            bool column, bool circle, bool line)
+            string MapType)
         {
             DateTime DateTimeFrom = Convert.ToDateTime(dateTimeFrom).AddHours(0).AddMinutes(0).AddSeconds(0);
             DateTime DateTimeTo = Convert.ToDateTime(dateTimeTo).AddHours(0).AddMinutes(0).AddSeconds(0);
+            string FullName = string.Empty;
+            if (Session["email"] != null)
+            {
+                Account acc = info.GetAccountByEmail(Convert.ToString(Session["email"]));
+                FullName = acc.Employees.ElementAt(0).Name;
+            }
+            else FullName = "Phạm Thị Ngọc Hà";
             string tempFileName = string.Empty;
             string contentType = string.Empty;
-            if (column && !circle && !line) // Xuất biểu đồ cột
+            if(MapType == "Column") // Xuất biểu đồ cột
             {
                 if (ExportType == "word")
                 {
@@ -342,6 +366,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                     ReportTurnOverGroupByFoodAndDrink rp = new ReportTurnOverGroupByFoodAndDrink();
                     rp.SetParameterValue("@DateTimeFrom", DateTimeFrom);
                     rp.SetParameterValue("@DateTimeTo", DateTimeTo);
+                    rp.SetParameterValue("FullName", FullName);
                     Stream stream;
                     if (ExportType == "word") stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.WordForWindows);
                     else stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
@@ -353,6 +378,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                     ReportTurnOverGroupByMonth rp = new ReportTurnOverGroupByMonth();
                     rp.SetParameterValue("@DateTimeFrom", DateTimeFrom);
                     rp.SetParameterValue("@DateTimeTo", DateTimeTo);
+                    rp.SetParameterValue("FullName", FullName);
                     Stream stream;
                     if (ExportType == "word") stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.WordForWindows);
                     else stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
@@ -365,6 +391,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                     ReportQuantityGroupByFoodAndDrink rp = new ReportQuantityGroupByFoodAndDrink();
                     rp.SetParameterValue("@DateTimeFrom", DateTimeFrom);
                     rp.SetParameterValue("@DateTimeTo", DateTimeTo);
+                    rp.SetParameterValue("FullName", FullName);
                     Stream stream;
                     if (ExportType == "word") stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.WordForWindows);
                     else stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
@@ -374,7 +401,61 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
 
                 }
             }
-            else if (!column && circle && !line)
+<<<<<<< .mine            else if(MapType == "Circle") // biểu đồ tròn
+=======            else if (!column && circle && !line)
+>>>>>>> .theirs            {
+                if (ExportType == "word")
+                {
+                    tempFileName = "doc";
+                    contentType = "application/msword";
+                }
+                else
+                {
+                    tempFileName += "pdf";
+                    contentType = "application/pdf";
+                }
+                if (ReportType == "ReportTurnOverGroupByFoodAndDrink")
+                {
+                    ReportTurnOverGroupByFoodAndDrinkCircle rp = new ReportTurnOverGroupByFoodAndDrinkCircle();
+                    rp.SetParameterValue("FullName", FullName);
+                    rp.SetParameterValue("@DateTimeFrom", DateTimeFrom);
+                    rp.SetParameterValue("@DateTimeTo", DateTimeTo);
+                    Stream stream;
+                    if (ExportType == "word") stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.WordForWindows);
+                    else stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    return File(stream, contentType, "Report." + tempFileName);
+                }
+                else if (ReportType == "ReportTurnOverGroupByMonth")
+                {
+                    ReportTurnOverGroupByMonthCircle rp = new ReportTurnOverGroupByMonthCircle();
+                    rp.SetParameterValue("FullName", FullName);
+                    rp.SetParameterValue("@DateTimeFrom", DateTimeFrom);
+                    rp.SetParameterValue("@DateTimeTo", DateTimeTo);
+                    Stream stream;
+                    if (ExportType == "word") stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.WordForWindows);
+                    else stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    return File(stream, contentType, "Report." + tempFileName);
+                }
+                else 
+                {
+                    ReportQuantityGroupByFoodAndDrinkCircle rp = new ReportQuantityGroupByFoodAndDrinkCircle();
+                    rp.SetParameterValue("FullName", FullName);
+                    rp.SetParameterValue("@DateTimeFrom", DateTimeFrom);
+                    rp.SetParameterValue("@DateTimeTo", DateTimeTo);
+                    Stream stream;
+                    if (ExportType == "word") stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.WordForWindows);
+                    else stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    return File(stream, contentType, "Report." + tempFileName);
+
+                }
+                
+            }
+            else // biểu đồ đường
             {
                 if (ExportType == "word")
                 {
@@ -388,7 +469,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 }
                 if (ReportType == "ReportTurnOverGroupByFoodAndDrink")
                 {
-                    ReportTurnOverGroupByFoodAndDrink rp = new ReportTurnOverGroupByFoodAndDrink();
+                    ReportTurnOverGroupByFoodAndDrinkLine rp = new ReportTurnOverGroupByFoodAndDrinkLine();
+                    rp.SetParameterValue("FullName", FullName);
                     rp.SetParameterValue("@DateTimeFrom", DateTimeFrom);
                     rp.SetParameterValue("@DateTimeTo", DateTimeTo);
                     Stream stream;
@@ -399,7 +481,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 }
                 else if (ReportType == "ReportTurnOverGroupByMonth")
                 {
-                    ReportTurnOverGroupByMonth rp = new ReportTurnOverGroupByMonth();
+                    ReportTurnOverGroupByMonthLine rp = new ReportTurnOverGroupByMonthLine();
+                    rp.SetParameterValue("FullName", FullName);
                     rp.SetParameterValue("@DateTimeFrom", DateTimeFrom);
                     rp.SetParameterValue("@DateTimeTo", DateTimeTo);
                     Stream stream;
@@ -411,7 +494,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 }
                 else
                 {
-                    ReportQuantityGroupByFoodAndDrink rp = new ReportQuantityGroupByFoodAndDrink();
+                    ReportQuantityGroupByFoodAndDrinkLine rp = new ReportQuantityGroupByFoodAndDrinkLine();
+                    rp.SetParameterValue("FullName", FullName);
                     rp.SetParameterValue("@DateTimeFrom", DateTimeFrom);
                     rp.SetParameterValue("@DateTimeTo", DateTimeTo);
                     Stream stream;
@@ -423,7 +507,6 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
 
                 }
             }
-            return View();
         }
     }
 }

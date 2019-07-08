@@ -18,6 +18,7 @@ namespace ManagerCoffeeShopASPNet.Information
         private TimeSheetDAO _timeSheetDAO;
         private TimeSheetDetailDAO _timeSheetDetailDAO;
         private PayrollDAO _payrollDAO;
+        private AccountDAO _accDAO;
         public InformationAccountant()
         {
             this._orderDAO = (OrderDAO)new OrderDAOImpl();
@@ -27,7 +28,13 @@ namespace ManagerCoffeeShopASPNet.Information
             this._timeSheetDAO = (TimeSheetDAO)new TimeSheetDAOImpl();
             this._timeSheetDetailDAO = (TimeSheetDetailDAO)new TimeSheetDetailDAOImpl();
             this._payrollDAO = (PayrollDAO)new PayrollDAOImpl();
+            this._accDAO = (AccountDAO)new AccountDAOImpl();
         }
+
+        public Account GetAccountByEmail(string Email)
+        {
+            return this._accDAO.GetAccountByEmail(Email);
+        } 
 
         /// <summary>
         /// Tính tổng hóa đơn (chưa tính khuyến mãi)
