@@ -118,6 +118,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             string status = "WaitToConfirm";
             IEnumerable<Order> order = info.GetAllOrderByStatus(status);
+
             return View(order);
         }
         // Danh sách chi tiết đồ uống của hóa đơn online thực hiện việc xác nhận
