@@ -5,67 +5,14 @@
     ViewBag.Title = "UpdateStatusOfOrderItemOnline";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">CHI TIẾT DANH SÁCH CẦN XÁC NHẬN</h2>
-<br />
-
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FDID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Desc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FDID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Desc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.ActionLink("Confirm", "Confirm", new { OrderItemID = item.OrderItemID }, new { @class = "btn btn-outline-success" })
-                @Html.ActionLink("Cancel", "Cancel", new { OrderItemID = item.OrderItemID }, new { @class = "btn btn-outline-danger" })
-            </td>
-        </tr>
-    }
-</table>
-
-<div style="float:right">
-    <a class="btn btn-outline-info" href="@Url.Action("ConfirmAll", "Service", new { OrderID = ViewData["OrderID"]})">Ok</a>
-</div>*@
-
+<h2 style="text-align:center; padding:10px;">CHI TIẾT DANH SÁCH CẦN XÁC NHẬN</h2>
 <div >
     @(Html
         .Grid(Model)
         .Build(column =>
         {
-            column.Add(m => m.OrderID).Titled("Mã hóa đơn").Sortable(false);
-            column.Add(m => m.FDID).Titled("Mã đồ uống");
+            //column.Add(m => m.OrderID).Titled("Mã hóa đơn").Sortable(false);
+            column.Add(m => m.FoodAndDrink.Name).Titled("Tên đồ uống");
             column.Add(m => m.Quantity).Titled("Số lượng");
             column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);
             column.Add(m => m.Status).Titled("Trạng thái").Filterable(false);
@@ -75,13 +22,17 @@
             )).Filterable(false).Sortable(false);
         })
         .Sortable()
-        .Empty("Data is empty")
+        .Empty("Không có dữ liệu.")
         .Filterable()
+        .Pageable(pager =>
+        {
+            pager.RowsPerPage = 6;
+        })
     )
-</div><br />
-<div class="row">
+</div>
+<div class="row" style="padding-top:10px">
     <div class="col-md-9">
-        @Html.ActionLink("Trở về", "GetAllOrderOnlineNeedConfirm")
+        @Html.ActionLink("Trở về", "GetAllOrderOnlineNeedConfirm", "Service")
     </div>
     <div class="col-md-3">
         <a class="btn btn-sm btn-outline-info" href="@Url.Action("ConfirmAll", "Service", new { OrderID = ViewData["OrderID"]})">Hoàn tất</a>

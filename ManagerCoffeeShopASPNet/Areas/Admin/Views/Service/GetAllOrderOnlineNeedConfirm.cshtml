@@ -4,29 +4,31 @@
     ViewBag.Title = "GetAllOrderOnlineNeedConfirm";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">DANH SÁCH HÓA ĐƠN ONLINE CẦN XÁC NHẬN</h2>
-<br />
-
+<h2 style="text-align:center; padding:10px">DANH SÁCH HÓA ĐƠN ONLINE CẦN XÁC NHẬN</h2>
 <div>
     @(Html
         .Grid(Model)
         .Build(column =>
         {
-            column.Add(m => m.CustomerID).Titled("Mã KH");
-            column.Add(m => m.PosID).Titled("Vị trí").Sortable(false);
+            column.Add(m => m.Customer.Name).Titled("Tên khách hàng");
+            //column.Add(m => m.PosID).Titled("Vị trí").Sortable(false);
             column.Add(m => m.OrderDateTime).Titled("Ngày giờ đặt");
             column.Add(m => m.TotalAmount).Titled("Tổng tiền");
             column.Add(m => m.Currency).Titled("Đơn vị tiền");
             column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);
             column.Add(m => m.Status).Titled("Trạng thái");
             column.Add(m => m.OrderID).Encoded(false).RenderedAs(m => (
-                @Html.ActionLink("Xác nhận", "UpdateStatusOfOrderItemOnline", new { OrderID = m.OrderID }, new { @class = "btn btn-outline-success" }).ToHtmlString()
-            + " " + @Html.ActionLink("Xóa", "Delete", new { OrderID = m.OrderID }, new { @class = "btn btn-outline-danger" }).ToHtmlString()
+                @Html.ActionLink("Xem chi tiết", "UpdateStatusOfOrderItemOnline", new { OrderID = m.OrderID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
+            //    +" "+@Html.ActionLink("Xác nhận", "UpdateStatusOfOrderItemOnline", new { OrderID = m.OrderID }, new { @class = "btn btn-outline-success" }).ToHtmlString()
+            //+ " " + @Html.ActionLink("Xóa", "Delete", new { OrderID = m.OrderID }, new { @class = "btn btn-outline-danger" }).ToHtmlString()
             )).Filterable(false).Sortable(false);
         })
         .Sortable()
         .Empty("Không có dữ liệu.")
         .Filterable()
+        .Pageable(pager =>
+        {
+            pager.RowsPerPage = 6;
+        })
     )
 </div>

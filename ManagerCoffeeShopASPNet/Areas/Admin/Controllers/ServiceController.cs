@@ -8,22 +8,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
 using System.Data.Entity.Infrastructure;
-using CrystalDecisions.CrystalReports.Engine;
-using ManagerCoffeeShopASPNet.Areas.Admin.Models;
-using ManagerCoffeeShopASPNet.Information;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Data.Entity.Infrastructure;
-//using CrystalDecisions.CrystalReports.Engine;
-using ManagerCoffeeShopASPNet.Areas.Admin.Models;
-using ManagerCoffeeShopASPNet.Information;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -47,8 +31,6 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             return View();
         }
-
-
         /// <summary>
         /// Nhân viên phục vụ giúp khách đặt món
         /// </summary>
@@ -80,14 +62,12 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             ViewData["successUserID"] = Session["successUserID"];
             return View();
         }
-
         [Route("ListFoodAndDrink")]
         public ActionResult ListFoodAndDrink()
         {
             IEnumerable<FoodAndDrink> fds = info.GetFoodAndDrink();
             return Json(fds, JsonRequestBehavior.AllowGet);
         }
-
         /// <summary>
         /// Lấy thông tin đồ uống theo ID
         /// </summary>
@@ -100,7 +80,6 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             var a = fd.GetType().ToString();
             return Json(new { FDID = fd.FDID, Name = fd.Name, UnitPrice = fd.UnitPrice }, JsonRequestBehavior.AllowGet);
         }
-
         /// <summary>
         /// Gửi thông tin đồ uống lưu trữ xuống database
         /// </summary>
@@ -133,7 +112,6 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             }
             return Json(new { PosID = PosID }, JsonRequestBehavior.AllowGet);
         }
-
         //Xem danh sách hóa đơn đồ uống đặt online cần xác nhận (cập nhật trạng thái)
         [Route("GetAllOrderOnlineNeedConfirm")]
         public ActionResult GetAllOrderOnlineNeedConfirm()
