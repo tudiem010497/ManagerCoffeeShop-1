@@ -53,6 +53,18 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 }
                 fds = (IEnumerable<FoodAndDrink>)temp;
             }
+
+            List<SelectListItem> listDesc = new List<SelectListItem>();
+            SelectListItem ServeAtCafe = new SelectListItem();
+            ServeAtCafe.Text = "Dùng tại quán";
+            ServeAtCafe.Value = "ServeAtCafe";
+            SelectListItem TakeAway = new SelectListItem();
+            TakeAway.Text = "Mang về";
+            TakeAway.Value = "TakeAway";
+            listDesc.Add(ServeAtCafe);
+            listDesc.Add(TakeAway);
+            ViewData["listDesc"] = listDesc;
+
             IEnumerable<Position> positions = info.GetAllPosition();
             IEnumerable<Promotion> promotions = infoDV.GetPromotionByDateTime();
             ViewData["positions"] = positions;
@@ -112,13 +124,13 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             }
             return Json(new { PosID = PosID }, JsonRequestBehavior.AllowGet);
         }
+
         //Xem danh sách hóa đơn đồ uống đặt online cần xác nhận (cập nhật trạng thái)
         [Route("GetAllOrderOnlineNeedConfirm")]
         public ActionResult GetAllOrderOnlineNeedConfirm()
         {
-            string status = "WaitToConfirm";
+            string status = "WaitToConfirm"; // chỉ có hóa đơn online mới có status này
             IEnumerable<Order> order = info.GetAllOrderByStatus(status);
-
             return View(order);
         }
         // Danh sách chi tiết đồ uống của hóa đơn online thực hiện việc xác nhận
@@ -378,6 +390,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             IEnumerable<Order> orders = info.GetAllOrder();
             return View(orders);
         }
+
         [Route("PrintOrder")]
         public ActionResult PrintOrder(int OrderID)
         {

@@ -5,65 +5,72 @@ using System.Web;
 
 namespace ManagerCoffeeShopASPNet.Class
 {
-    public class ConvertStatus
+    public class ConvertStatusOrder
     {
-        public string ConvertNameStatus(string Status)
+        public string ConvertDesc(string Desc)
+        {
+            if (Desc == "ServeAtCafe")
+                return "Dùng tại quán";
+            else if (Desc == "TakeAway")
+                return "Mang về";
+            else if (Desc == "Delivery")
+                return "Giao hàng";
+            else return "";
+        }
+        public string ConvertStatus(string Status)
         {
             if (Status == "WaitToConfirm")
             {
-                Status= "Chờ xác nhận";
+                return "Chờ xác nhận";
             }
-            else if(Status== "Served at the café")
-            {
-                Status= "Phục vụ tại quán";
-            }
-            else if (Status == "Delivery")
-            {
-                Status = "Giao hàng";
-            }
-            //Status bảng Order
             else if (Status == "Pending")
             {
-                Status = "Đang pha chế";
+                return "Đang pha chế";
             }
             else if (Status == "Cancel")
             {
-                Status = "Hủy";
+                return "Hủy";
             }
             else if (Status == "Ready")
             {
-                Status = "Đã pha chế xong";
+                return "Đã pha chế xong";
             }
             else if (Status == "Closed")
             {
-                Status = "Đã thanh toán";
+                return "Đã phục vụ";
             }
-            else if (Status == "Finally")
+            else if (Status == "Paid")
             {
-                Status = "Đã phục vụ";
+                return "Đã thanh toán";
             }
+            else return "";
+        }
+    }
+    public class ConvertStatusTest{
+        public string test(string Status)
+        {
             // Status bảng Position
-            else if(Status== "Not available")
+            if (Status == "Not available")
             {
                 Status = "Trống";
             }
-            else if(Status== "Available")
+            else if (Status == "Available")
             {
                 Status = "Có người";
             }
-            else if(Status== "Reserved")
+            else if (Status == "Reserved")
             {
                 Status = "Đã đặt";
             }
-            else if(Status== "Close")
+            else if (Status == "Close")
             {
                 Status = "Đã đến";
             }
-            else if(Status== "Not yet delivered")
+            else if (Status == "Not yet delivered")
             {
                 Status = "Chưa giao";
             }
-            else if(Status== "Failed")
+            else if (Status == "Failed")
             {
                 Status = "Giao không thành công";
             }
@@ -85,7 +92,7 @@ namespace ManagerCoffeeShopASPNet.Class
                 Status = "Quản lý";
             }
             //Status bảng IngredientMessage
-            else if(Status== "WaitingConfirm")
+            else if (Status == "WaitingConfirm")
             {
                 Status = "Chờ xác nhận";
             }
@@ -93,16 +100,16 @@ namespace ManagerCoffeeShopASPNet.Class
             {
                 Status = "Đồng ý";
             }
-            else if(Status== "NotAccept")
+            else if (Status == "NotAccept")
             {
                 Status = "Không đồng ý";
             }
             //Status bảng Receipt (giống order)
-            else if(Status== "Not yet imported")
+            else if (Status == "Not yet imported")
             {
                 Status = "Chưa nhập";
             }
-            else if(Status== "Inputting")
+            else if (Status == "Inputting")
             {
                 Status = "Đang nhập";
             }
