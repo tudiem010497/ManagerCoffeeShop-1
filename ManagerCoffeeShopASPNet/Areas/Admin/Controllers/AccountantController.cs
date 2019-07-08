@@ -401,9 +401,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
 
                 }
             }
-<<<<<<< .mine            else if(MapType == "Circle") // biểu đồ tròn
-=======            else if (!column && circle && !line)
->>>>>>> .theirs            {
+            else if(MapType == "Circle") // biểu đồ tròn
                 if (ExportType == "word")
                 {
                     tempFileName = "doc";
