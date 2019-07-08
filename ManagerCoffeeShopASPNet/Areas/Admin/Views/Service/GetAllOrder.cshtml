@@ -21,7 +21,7 @@
             Html.ActionLink("Xuất hóa đơn", "PrintOrder", "Service", new { OrderID = o.OrderID }, new { @class = "btn btn-sm btn-primary" })).Filterable(false);
         })
         //.WithFilterMode(GridFilterMode.FilterRow)
-        .Empty("Data is empty")
+        .Empty("Không có dữ liệu.")
         .Filterable()
         .Sortable()
         .Pageable(pager =>

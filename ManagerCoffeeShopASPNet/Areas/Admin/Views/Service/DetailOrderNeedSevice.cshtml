@@ -5,15 +5,15 @@
     ViewBag.Title = "GetDetailOrder";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">CHI TIẾT HÓA ĐƠN</h2>
-<br />
+
+<h2 style="text-align:center; padding:10px;">CHI TIẾT HÓA ĐƠN</h2>
+
 
 @(Html
         .Grid(Model).Build(columns =>
         {
-            columns.Add(o => o.OrderID).Titled("Mã HĐ").Sortable(false);
-            columns.Add(o => o.Order.Customer.Name).Titled("Tên KH").Sortable(false);
+            columns.Add(o => o.OrderID).Titled("Mã hóa đơn").Sortable(false);
+            columns.Add(o => o.Order.Customer.Name).Titled("Tên khách hàng").Sortable(false);
             columns.Add(o => o.Order.PosID).Titled("Vị trí").Sortable(false);
             columns.Add(o => o.Order.OrderDateTime).Titled("Thời gian vào");
             columns.Add(o => o.FoodAndDrink.Name).Titled("Tên đồ uống").Sortable(false);
@@ -25,7 +25,7 @@
             )).Filterable(false);
         })
         //.WithFilterMode(GridFilterMode.FilterRow)
-        .Empty("Data is empty")
+        .Empty("Không có dữ liệu.")
         .Filterable()
         .Sortable()
         .Pageable(pager =>

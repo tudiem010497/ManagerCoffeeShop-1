@@ -63,6 +63,11 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             OrderItem orderItem = context.OrderItems.Single(o => o.OrderItemID == ID);
             return orderItem;
         }
+        public OrderItem GetOrderItemByOrderID(int OrderID)
+        {
+            OrderItem orderItem = context.OrderItems.Single(o => o.OrderID == OrderID);
+            return orderItem;
+        }
         public bool UpdateOrderItemStatus(int orderItemID, string status)
         {
             try

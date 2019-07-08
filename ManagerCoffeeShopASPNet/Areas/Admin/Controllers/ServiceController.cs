@@ -386,9 +386,11 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             //Response.ClearContent();
             //Response.ClearHeaders();
             //rp.SetDatabaseLogon("Diem", "", "DESKTOP-HA2TCUF", "CoffeeShopDB", false);
+            string status = "Paid";
             rp.SetParameterValue("@OrderID", OrderID);
             Stream stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
+            info.UpdateOrderStatus(OrderID, status);
             return File(stream, "application/pdf", "OrderCustomer.pdf");
         }
         [Route("DetailOrder")]
