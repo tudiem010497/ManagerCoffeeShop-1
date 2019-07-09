@@ -77,7 +77,7 @@ namespace ManagerCoffeeShopASPNet.Class
             {
                 return "Bán thời gian";
             }
-            else if (Status == "Lay_off")
+            else if (Status == "Layoff")
             {
                 return "Nghỉ việc";
             }

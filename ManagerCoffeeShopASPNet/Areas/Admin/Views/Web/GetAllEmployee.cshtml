@@ -59,7 +59,8 @@
                        ConvertStatusEmployee test = new ConvertStatusEmployee();
                        string a = test.ConvertStatus(item.Status).ToString();
                    }
-                    @Html.Display(a)
+                    @*@Html.Display(a)*@
+                    @a
                 </td>
                 <td>
                     @if (item.UserID != null)
