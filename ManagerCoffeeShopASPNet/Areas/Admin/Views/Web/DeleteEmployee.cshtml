@@ -1,13 +1,17 @@
 ﻿@model ManagerCoffeeShopASPNet.Employee
-
+@using ManagerCoffeeShopASPNet.Class
 @{
     ViewBag.Title = "DeleteEmployee";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">XÓA THÔNG TIN NHÂN VIÊN</h2>
 
-<h3>Bạn có chắc muốn xóa?   </h3>
+<h2 style="text-align:center; padding:10px;">XÓA THÔNG TIN NHÂN VIÊN</h2>
+
+<h3 style="padding-bottom:10px">Bạn có chắc muốn xóa?   </h3>
+@{ 
+    ConvertStatusEmployee o = new ConvertStatusEmployee();
+    
+}
 <div>
     @*<h4>Employee</h4>*@
     <hr />
@@ -21,11 +25,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CSID)
+            @Html.DisplayName("Chi nhánh làm việc")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CSID)
+            @Html.DisplayFor(model => model.CoffeeShop.Name)
         </dd>
 
         <dt>
@@ -73,7 +77,11 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Gender)
+            @{ 
+                string gender = o.ConvertGender(Model.Gender).ToString();
+            }
+            @gender
+            @*@Html.DisplayFor(model => model.Gender)*@
         </dd>
 
         <dt>
@@ -89,7 +97,11 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Status)
+            @{ 
+                string status = o.ConvertStatus(Model.Status).ToString();
+            }
+            @status
+            @*@Html.DisplayFor(model => model.Status)*@
         </dd>
 
     </dl>

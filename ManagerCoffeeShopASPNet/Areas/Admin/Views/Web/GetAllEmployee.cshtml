@@ -15,7 +15,7 @@
         @using (Html.BeginForm("Web", "GetAllEmployee", FormMethod.Get))
         {
             @Html.TextBox("Search")
-            <button type="submit">Search</button>
+            <button type="submit">Tìm kiếm</button>
         }
     </div>
 </div>
@@ -63,20 +63,22 @@
                     @a
                 </td>
                 <td>
+                    @Html.ActionLink("Chi tiết", "DetailEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-info " })
                     @if (item.UserID != null)
                     {
-                        <input type="button" disabled value="Tạo tài khoản" class="btn btn-sm btn-outline-warning text-dark btn-sm createAccount" onclick="location.href(@Url.Action("GetFormAddNewAccountForEmployee", "Web", new { @EmployeeID = item.EmployeeID }))" />
+                        @Html.ActionLink("Xem tài khoản", "ViewAccountInformation", "Web", new { UserID = item.UserID }, new { @class = "btn btn-sm btn-outline-success " })
+                        @*<input type="button" disabled value="Tạo tài khoản" class="btn btn-sm btn-outline-warning text-dark btn-sm createAccount" onclick="location.href(@Url.Action("GetFormAddNewAccountForEmployee", "Web", new { @EmployeeID = item.EmployeeID }))" />*@
+                        @Html.ActionLink("Thêm bảng lương", "CreatePayroll", "Accountant", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-success" })
+                        @Html.ActionLink("Chi tiết bảng lương", "DetailPayrollOfEmployee", "Accountant", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-success" })
                     }
                     else
                     {
-                        @Html.ActionLink("Tạo tài khoản", "GetFormAddNewAccountForEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-light text-dark btn-sm" })
+                        @Html.ActionLink("Tạo tài khoản", "GetFormAddNewAccountForEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-warning text-dark btn-sm" })
+                        @*<input type="button" disabled value="Thêm bảng lương" class="btn btn-sm btn-outline-success" onclick="location.href(@Url.Action("CreatePayroll", "Accountant", new { @EmployeeID = item.EmployeeID }))" />*@
                     }
-                    @Html.ActionLink("Chi tiết", "DetailEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-info " })
-                    @Html.ActionLink("Thêm bảng lương", "CreatePayroll", "Accountant", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-success" })
-                    @Html.ActionLink("Chi tiết bảng lương", "DetailPayrollOfEmployee", "Accountant", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-success" })
                     @if (item.UserID != null)
-                {
-                        @Html.ActionLink("Xem tài khoản", "ViewAccountInformation", "Web", new { UserID = item.UserID }, new { @class = "btn btn-sm btn-outline-success " })
+                    {
+                        
                     }
                 </td>
             </tr>

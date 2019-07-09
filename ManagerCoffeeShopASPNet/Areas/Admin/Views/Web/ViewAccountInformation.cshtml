@@ -1,27 +1,27 @@
-﻿@*@model ManagerCoffeeShopASPNet.Account*@
-@model IEnumerable<Account>
+﻿@model IEnumerable<Account>
 @using NonFactors.Mvc.Grid
+@using ManagerCoffeeShopASPNet.Class
 @{
     ViewBag.Title = "ViewAccountInformation";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">THÔNG TIN TÀI KHOẢN</h2>
 
+<h2 style="text-align:center;padding:10px">THÔNG TIN TÀI KHOẢN</h2>
 <div>
     <hr />
     @(Html
         .Grid(Model)
         .Build(column =>
         {
-        column.Add(m => m.UserName).Titled("UserName");
-        column.Add(m => m.Email).Titled("Email");
-        column.Add(m => m.AccType).Titled("AccType");
-        column.Add(m => m.Position).Titled("Position");
+            ConvertAccount o = new ConvertAccount();
+            column.Add(m => m.UserName).Titled("UserName");
+            column.Add(m => m.Email).Titled("Email");
+            column.Add(m => o.ConvertAccType(m.AccType).ToString()).Titled("AccType");
+            column.Add(m => o.ConvertPosition(m.Position).ToString()).Titled("Position");
         })
     )
 </div>
-<br />
-<div>
+
+<div style="padding-top:10px">
     @Html.ActionLink("Trở lại", "GetAllEmployee")
 </div>

@@ -1,18 +1,19 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.ReceiptDetail>
 @using NonFactors.Mvc.Grid
-
+@using ManagerCoffeeShopASPNet.Class
 @{
     ViewBag.Title = "GetReceiptDetailByReceiptID";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2 style="text-align:center; padding-top:10px;padding-bottom:5px;">CHI TIẾT PHIẾU NHẬP</h2>
+<h2 style="text-align:center; padding:5px;">CHI TIẾT PHIẾU NHẬP</h2>
 <div style="padding-bottom:5px;">
     @(Html
         .Grid(Model)
         .Build(column =>
         {
-            column.Add(m => m.ReceiptID).Titled("Mã phiếu nhập").Filterable(false);
+            ConvertReceipt o = new ConvertReceipt();
+            //column.Add(m => m.ReceiptID).Titled("Mã phiếu nhập").Filterable(false);
             column.Add(m => m.Ingredient.Name).Titled("Tên NVL");
             column.Add(m => m.Gift.Name).Titled("Tên quà");
             column.Add(m => m.Facility.Name).Titled("Tên CSVC");
@@ -20,9 +21,9 @@
             column.Add(m => m.ReferenceDesc).Titled("Ghi chú").Sortable(false);
             column.Add(m => m.Amount).Titled("Số lượng nhập").Filterable(false);
             column.Add(m => m.Unit).Titled("Đơn vị tính").Filterable(false);
-            column.Add(m => m.UnitPrice).Titled("Đơn giá").Sortable(false);
+            column.Add(m => m.UnitPrice).Titled("Đơn giá").Filterable(false);
             //column.Add(m => m.Currency).Titled("Đơn vị tiền").Sortable(false).Filterable(false);
-            column.Add(m => m.Status).Titled("Trạng thái").Filterable(false);
+            column.Add(m =>o.ConvertStatus(m.Status).ToString()).Titled("Trạng thái").Filterable(false);
             column.Add(m => m.ReceiptDetailID).Encoded(false).RenderedAs(m => (
                 @Html.ActionLink("Xác nhận", "Confirm", new { ReceiptDetailID = m.ReceiptDetailID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
                 + " " + @Html.ActionLink("Hủy", "Cancel", new { ReceiptDetailID = m.ReceiptDetailID }, new { @class = "btn btn-sm btn-outline-danger" }).ToHtmlString()
@@ -42,6 +43,6 @@
         @Html.ActionLink("Trở về", "GetAllReceiptWaitToConfirm", "Accountant")
     </div>
     <div class="col-md-4">
-        @Html.ActionLink("OK", "ConfirmAll", new { ReceiptID = ViewData["ReceiptID"], View = "GetReceiptDetailByReceiptID" }, new { @class = "btn btn-sm btn-outline-info" })
+        @Html.ActionLink("Hoàn tất", "ConfirmAll", new { ReceiptID = ViewData["ReceiptID"], View = "GetReceiptDetailByReceiptID" }, new { @class = "btn btn-sm btn-outline-info" })
     </div>
 </div>

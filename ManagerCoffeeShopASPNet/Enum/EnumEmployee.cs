@@ -8,7 +8,7 @@ namespace ManagerCoffeeShopASPNet.Enum
     public class EnumEmployee
     {
         public enum Gender { Male, Female };
-        public enum Status { Official, Parttime, Manager, Lay_off };
+        public enum Status { Fulltime, Parttime, Manager, Layoff };
 
     }
 }

@@ -1,28 +1,29 @@
-﻿@*@model ManagerCoffeeShopASPNet.Employee*@
-@model IEnumerable<Employee>
+﻿@model IEnumerable<Employee>
 @using NonFactors.Mvc.Grid
+@using ManagerCoffeeShopASPNet.Class
 @{
     ViewBag.Title = "DetailEmployee";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">THÔNG TIN CHI TIẾT CỦA NHÂN VIÊN</h2>
-<br />
-<div>
+
+<h2 style="text-align:center;padding:10px;">THÔNG TIN CHI TIẾT CỦA NHÂN VIÊN</h2>
+
+<div style="padding-bottom:10px">
     @(Html
         .Grid(Model)
         .Build(column =>
         {
+            ConvertStatusEmployee o = new ConvertStatusEmployee();
             column.Add(m => m.UserID).Titled("UserID");
-            column.Add(m => m.CSID).Titled("CSID");
-            column.Add(m => m.Name).Titled("Tên NV");
+            column.Add(m => m.CoffeeShop.Name).Titled("Chi nhánh làm việc");
+            column.Add(m => m.Name).Titled("Tên nhân viên");
             column.Add(m => m.Address).Titled("Địa chỉ");
             column.Add(m => m.Email).Titled("Email");
             column.Add(m => m.Phone).Titled("SĐT");
             column.Add(m => m.DOB).Titled("Ngày sinh");
-            column.Add(m => m.Gender).Titled("Giới tính");
+            column.Add(m => o.ConvertGender(m.Gender).ToString()).Titled("Giới tính");
             column.Add(m => m.IndentityNum).Titled("Số CMND");
-            column.Add(m => m.Status).Titled("Trạng thái");
+            column.Add(m => o.ConvertStatus(m.Status).ToString()).Titled("Trạng thái");
         })
     )
 </div>
@@ -33,7 +34,7 @@
     </div>
     <div class="col-md-3">
         @Html.ActionLink("Sửa", "EditEmployee", "Web", new { EmployeeID = ViewData["EmployeeID"] }, new { @class = "btn btn-sm btn-outline-primary" })
-        @if (ViewData["Status"].ToString() == "Lay_off")
+        @if (ViewData["Status"].ToString() == "Layoff")
         {
             @Html.ActionLink("Xóa", "DeleteEmployee", "Web", new { EmployeeID = ViewData["EmployeeID"] }, new { @class = "btn btn-sm btn-outline-danger active" })
         }

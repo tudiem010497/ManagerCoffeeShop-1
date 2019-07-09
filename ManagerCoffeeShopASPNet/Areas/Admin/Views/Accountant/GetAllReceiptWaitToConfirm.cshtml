@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.Receipt>
 @using NonFactors.Mvc.Grid
+@using ManagerCoffeeShopASPNet.Class
 @{
     ViewBag.Title = "GetAllReceiptWaitToConfirm";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -14,14 +15,15 @@
         .Grid(Model)
         .Build(column =>
         {
+            ConvertReceipt o = new ConvertReceipt();
             column.Add(m => m.Date.ToShortDateString()).Titled("Ngày tạo phiếu").Formatted("{0:dd-MM-yyyy}");
             column.Add(m => m.TotalAmount).Titled("Tổng tiền").Filterable(false);
             column.Add(m => m.Currency).Titled("Đơn vị tiền").Sortable(false);
-            column.Add(m => m.Status).Titled("Trạng thái phiếu nhập").Sortable(false);
+            column.Add(m =>o.ConvertStatus(m.Status).ToString()).Titled("Trạng thái phiếu nhập").Sortable(false);
             column.Add(m => m.ReceiptID).Encoded(false).RenderedAs(m => (
                 @Html.ActionLink("Xem chi tiết", "GetReceiptDetailByReceiptID", new { ReceiptID = m.ReceiptID }, new { @class = "btn btn-sm btn-outline-info" }).ToHtmlString()
-                + " " + @Html.ActionLink("Duyệt", "ConfirmAll", new { ReceiptID = m.ReceiptID, View = "GetAllReceiptWaitToConfirm" }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
-                + " " + @Html.ActionLink("Không duyệt", "CancelAll", new { ReceiptID = m.ReceiptID }, new { @class = "btn btn-sm btn-outline-danger" }).ToHtmlString()
+            //+ " " + @Html.ActionLink("Duyệt", "ConfirmAll", new { ReceiptID = m.ReceiptID, View = "GetAllReceiptWaitToConfirm" }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
+            //+ " " + @Html.ActionLink("Không duyệt", "CancelAll", new { ReceiptID = m.ReceiptID }, new { @class = "btn btn-sm btn-outline-danger" }).ToHtmlString()
             )).Sortable(false).Filterable(false);
         })
         .Sortable()

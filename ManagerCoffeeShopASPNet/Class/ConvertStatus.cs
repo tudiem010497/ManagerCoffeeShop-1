@@ -87,68 +87,121 @@ namespace ManagerCoffeeShopASPNet.Class
             }
             else return "";
         }
-    }
-    public class ConvertStatusTest{
-        public string test(string Status)
+        public string ConvertGender(string Gender)
         {
-            // Status bảng Position
-            if (Status == "Not available")
+            if (Gender == "Male")
+                return "Nam";
+            else return "Nữ";
+        }
+    }
+    public class ConvertAccount
+    {
+        public string ConvertAccType(string AccType)
+        {
+            if (AccType == "Manager")
+                return "Quản lý";
+            else if (AccType == "Employee")
+                return "Nhân viên";
+            else if (AccType == "Customer")
+                return "Khách hàng";
+            else return "";
+        }
+        public string ConvertPosition(string Position)
+        {
+            if (Position == "General")
+                return "Chung";
+            else if (Position == "Service")
+                return "Phục vụ";
+            else if (Position == "Accountant")
+                return "Kế toán";
+            else if (Position == "Bartender")
+                return "Pha chế";
+            else if (Position == "Stokkeeper")
+                return "Kho";
+            else if (Position == "Web")
+                return "Web";
+            else return "";
+        }
+    }
+    public class ConvertReceipt //Status Receipt và ReceiptDetail là giống nhau
+    {
+        public string ConvertStatus(string Status)
+        {
+             if (Status == "Waiting")
             {
-                Status = "Trống";
+                return "Chờ xác nhận";
             }
-            else if (Status == "Available")
+            else if (Status == "Confirm")
             {
-                Status = "Có người";
+                return "Đã xác nhận";
             }
-            else if (Status == "Reserved")
+            else if (Status == "Cancel")
             {
-                Status = "Đã đặt";
-            }
-            else if (Status == "Close")
-            {
-                Status = "Đã đến";
-            }
-            else if (Status == "Not yet delivered")
-            {
-                Status = "Chưa giao";
-            }
-            else if (Status == "Failed")
-            {
-                Status = "Giao không thành công";
-            }
-            //Status bảng Employee
-            
-            //Status bảng IngredientMessage
-            else if (Status == "WaitingConfirm")
-            {
-                Status = "Chờ xác nhận";
-            }
-            else if (Status == "Accept")
-            {
-                Status = "Đồng ý";
-            }
-            else if (Status == "NotAccept")
-            {
-                Status = "Không đồng ý";
-            }
-            //Status bảng Receipt (giống order)
-            else if (Status == "Not yet imported")
-            {
-                Status = "Chưa nhập";
-            }
-            else if (Status == "Inputting")
-            {
-                Status = "Đang nhập";
-            }
-            else if (Status == "Entered")
-            {
-                Status = "Đã nhập";
+                return "Hủy";
             }
             else if (Status == "Paid")
             {
-                Status = "Đã thanh toán";
+                return "Đã thanh toán";
             }
-            return Status;
+            else return "";
         }
+    }
+    public class ConvertFoodAndDrink
+    {
+        public string ConvertSize(string Size)
+        {
+            if (Size == "Small")
+                return "Nhỏ";
+            else if (Size == "Medium")
+                return "Vừa";
+            else if (Size == "Large")
+                return "Lớn";
+            else return "";
+        }
+    }
+    public class ConvertStatusTest{
+        //public string test(string Status)
+        //{
+        //    // Status bảng Position
+        //    if (Status == "Not available")
+        //    {
+        //        Status = "Trống";
+        //    }
+        //    else if (Status == "Available")
+        //    {
+        //        Status = "Có người";
+        //    }
+        //    else if (Status == "Reserved")
+        //    {
+        //        Status = "Đã đặt";
+        //    }
+        //    else if (Status == "Close")
+        //    {
+        //        Status = "Đã đến";
+        //    }
+        //    else if (Status == "Not yet delivered")
+        //    {
+        //        Status = "Chưa giao";
+        //    }
+        //    else if (Status == "Failed")
+        //    {
+        //        Status = "Giao không thành công";
+        //    }
+        //    //Status bảng IngredientMessage
+        //    else if (Status == "WaitingConfirm")
+        //    {
+        //        Status = "Chờ xác nhận";
+        //    }
+        //    else if (Status == "Accept")
+        //    {
+        //        Status = "Đồng ý";
+        //    }
+        //    else if (Status == "NotAccept")
+        //    {
+        //        Status = "Không đồng ý";
+        //    }
+        //    //Status bảng Receipt (giống order)
+            
+        //}
     }
 }

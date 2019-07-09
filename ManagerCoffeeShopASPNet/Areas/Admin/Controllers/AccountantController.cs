@@ -149,8 +149,6 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 TimeSheet timeSheet = info.GetTimeSheetByEmployeeID(EmployeeID);
                 ViewData["WorkDay"] = timeSheet.TotalDay;
             }
-            
-            
             return View();
         }
         //Bước 3: thực hiện tạo bảng lương

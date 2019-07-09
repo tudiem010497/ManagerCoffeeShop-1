@@ -6,11 +6,11 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 <script src="~/Assets/Admin/js/accountant.js"></script>
-<br />
-<h2 style="text-align:center">CHỈNH SỬA BẢNG LƯƠNG CỦA NHÂN VIÊN</h2>
+
+<h2 style="text-align:center;padding:10px">CHỈNH SỬA BẢNG LƯƠNG CỦA NHÂN VIÊN</h2>
 @if (TempData["edit"] != null)
 {
-    <div class="alert alert-success col-md-10" role="alert">
+    <div class="alert alert-success col-md-10" role="alert" style="padding-bottom:10px">
         @TempData["edit"]
     </div>
 }

@@ -1,15 +1,14 @@
 ﻿@model ManagerCoffeeShopASPNet.FoodAndDrink
-
+@using ManagerCoffeeShopASPNet.Class
 @{
     ViewBag.Title = "DeleteFoodAndDrink";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">XÓA ĐỒ UỐNG</h2>
-<br />
-<h3>Bạn có chắc muốn xóa?</h3>
+
+<h2 style="text-align:center;padding:10px;">XÓA ĐỒ UỐNG</h2>
+
+<h3 style="padding-bottom:10px">Bạn có chắc muốn xóa?</h3>
 <div>
-@*    <h4>FoodAndDrink</h4>*@
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -39,9 +38,13 @@
         <dt>
             @Html.DisplayName("Kích thước")
         </dt>
-
+        @{ 
+            ConvertFoodAndDrink o = new ConvertFoodAndDrink();
+            string size = o.ConvertSize(Model.Size).ToString();
+        }
         <dd>
-            @Html.DisplayFor(model => model.Size)
+            @size
+            @*@Html.DisplayFor(model => model.Size)*@
         </dd>
 
         <dt>
