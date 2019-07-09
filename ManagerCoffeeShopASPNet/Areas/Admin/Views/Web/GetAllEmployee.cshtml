@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.Employee>
 @using NonFactors.Mvc.Grid
+@using ManagerCoffeeShopASPNet.Class
 @{
     ViewBag.Title = "GetAllEmployee";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -27,13 +28,10 @@
 {
     <div class="alert alert-danger">@TempData["messageFail"]</div>
 }
-@*fixed_header*@
+
 <table class="table-bordered mvc-grid ">
     <thead>
         <tr>
-            @*<th>
-                @Html.DisplayNameFor(model => model.UserID)
-            </th>*@
             <th>
                 @Html.DisplayName("Chi nhánh")
             </th>
@@ -50,17 +48,6 @@
         @foreach (var item in Model)
         {
             <tr>
-                @*<td>
-                    @if (item.UserID != null)
-                {
-                        @Html.DisplayFor(modelItem => item.UserID)
-
-                    }
-                    else
-                    {
-                        @Html.ActionLink("Tạo tài khoản", "GetFormAddNewAccountForEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-light text-dark btn-sm" })
-                    }
-                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.CoffeeShop.Name)
                 </td>
@@ -68,13 +55,15 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Status)
+                   @{ 
+                       ConvertStatusEmployee test = new ConvertStatusEmployee();
+                       string a = test.ConvertStatus(item.Status).ToString();
+                   }
+                    @Html.Display(a)
                 </td>
                 <td>
                     @if (item.UserID != null)
                     {
-                        @*@Html.DisplayFor(modelItem => item.UserID)*@
-                        @*@Html.ActionLink("Tạo tài khoản", "GetFormAddNewAccountForEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-light text-dark btn-sm", disabled="disabled" })*@
                         <input type="button" disabled value="Tạo tài khoản" class="btn btn-sm btn-outline-warning text-dark btn-sm createAccount" onclick="location.href(@Url.Action("GetFormAddNewAccountForEmployee", "Web", new { @EmployeeID = item.EmployeeID }))" />
                     }
                     else

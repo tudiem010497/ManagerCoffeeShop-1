@@ -14,23 +14,6 @@
       <Association Name="Account_RoleMap" Member="RoleMaps" ThisKey="UserID" OtherKey="UserID" Type="RoleMap" />
     </Type>
   </Table>
-  <Table Name="dbo.TimeSheetDetail" Member="TimeSheetDetails">
-    <Type Name="TimeSheetDetail">
-      <Column Name="TimeSheetDetailID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TimeSheetID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Day" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="RegisterTimeIn" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
-      <Column Name="RegisterTimeOut" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
-      <Column Name="TimeIn" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
-      <Column Name="TimeOut" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
-      <Column Name="Bonus" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Penalty" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Currency" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="TimeSheet_TimeSheetDetail" Member="TimeSheet" ThisKey="TimeSheetID" OtherKey="TimeSheetID" Type="TimeSheet" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.BannerImage" Member="BannerImages">
     <Type Name="BannerImage">
       <Column Name="BannerImageID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -423,6 +406,9 @@
       <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="EndDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="MinOrderTotalAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="DiscountRate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DirectDiscountMoney" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="Promotion_OrderPromotion" Member="OrderPromotions" ThisKey="PromotionID" OtherKey="PromotionID" Type="OrderPromotion" />
       <Association Name="Promotion_ProOnDrinkQuantity" Member="ProOnDrinkQuantities" ThisKey="PromotionID" OtherKey="PromotionID" Type="ProOnDrinkQuantity" />
@@ -447,6 +433,7 @@
   </Table>
   <Table Name="dbo.ProOnOrderAmount" Member="ProOnOrderAmounts">
     <Type Name="ProOnOrderAmount">
+      <Column Name="ProOnOrderAmountID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="PromotionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="MinOrderTotalAmount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="GiftID" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -615,6 +602,23 @@
       <Association Name="Supplier_Ingredient" Member="Ingredients" ThisKey="SupplierID" OtherKey="SupplierID" Type="Ingredient" />
       <Association Name="Supplier_IngredientsMapSupplier" Member="IngredientsMapSuppliers" ThisKey="SupplierID" OtherKey="SupplierID" Type="IngredientsMapSupplier" />
       <Association Name="Supplier_ReceiptDetail" Member="ReceiptDetails" ThisKey="SupplierID" OtherKey="SupplierID" Type="ReceiptDetail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TimeSheetDetail" Member="TimeSheetDetails">
+    <Type Name="TimeSheetDetail">
+      <Column Name="TimeSheetDetailID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TimeSheetID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Day" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="RegisterTimeIn" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="RegisterTimeOut" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="TimeIn" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="TimeOut" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="Bonus" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Penalty" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Currency" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="[Desc]" Member="Desc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="TimeSheet_TimeSheetDetail" Member="TimeSheet" ThisKey="TimeSheetID" OtherKey="TimeSheetID" Type="TimeSheet" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TimeSheet" Member="TimeSheets">

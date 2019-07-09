@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ManagerCoffeeShopASPNet.Class;
 
 namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
 {
@@ -37,6 +38,13 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 }
                 employee = (IEnumerable<Employee>)temp;
             }
+            //ConvertStatusEmployee test = new ConvertStatusEmployee();
+            //foreach(var item in employee)
+            //{
+            //    string a = test.ConvertStatus(item.Status).ToString();
+            //    ViewData["test"] = a;
+            //}
+            
             return View(employee);
         }
         [Route("GetFormAddNewEmployee")]

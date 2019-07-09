@@ -11,7 +11,6 @@
         .Grid(Model)
         .Build(column =>
         {
-            //column.Add(m => m.OrderID).Titled("Mã hóa đơn").Sortable(false);
             column.Add(m => m.FoodAndDrink.Name).Titled("Tên đồ uống");
             column.Add(m => m.Quantity).Titled("Số lượng");
             column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);

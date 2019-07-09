@@ -46,6 +46,48 @@ namespace ManagerCoffeeShopASPNet.Class
             else return "";
         }
     }
+    public class ConvertStatusShipDetail
+    {
+        public string ConvertStatus(string Status)
+        {
+            if (Status == "Wait")
+                return "Chờ xác nhận";
+            else if (Status == "NotYetDelivery")
+                return "Chờ giao";
+            else if (Status == "Delivery")
+                return "Đang giao";
+            else if (Status == "Closed")
+                return "Giao thành công";
+            else if (Status == "Failed")
+                return "Giao thất bại";
+            else if (Status == "Cancel")
+                return "Hủy";
+            else return "";
+        }
+    }
+    public class ConvertStatusEmployee
+    {
+        public string ConvertStatus(string Status)
+        {
+            if (Status == "Fulltime")
+            {
+                return "Chính thức";
+            }
+            else if (Status == "Parttime")
+            {
+                return "Bán thời gian";
+            }
+            else if (Status == "Lay_off")
+            {
+                return "Nghỉ việc";
+            }
+            else if (Status == "Manager")
+            {
+                return "Quản lý";
+            }
+            else return "";
+        }
+    }
     public class ConvertStatusTest{
         public string test(string Status)
         {
@@ -75,22 +117,7 @@ namespace ManagerCoffeeShopASPNet.Class
                 Status = "Giao không thành công";
             }
             //Status bảng Employee
-            else if (Status == "Fulltime")
-            {
-                Status = "Chính thức";
-            }
-            else if (Status == "Parttime")
-            {
-                Status = "Bán thời gian";
-            }
-            else if (Status == "Lay_off")
-            {
-                Status = "Nghỉ việc";
-            }
-            else if (Status == "Manager")
-            {
-                Status = "Quản lý";
-            }
+            
             //Status bảng IngredientMessage
             else if (Status == "WaitingConfirm")
             {

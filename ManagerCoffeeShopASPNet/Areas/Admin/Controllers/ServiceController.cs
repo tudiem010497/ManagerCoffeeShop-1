@@ -400,7 +400,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             IEnumerable<Order> orders = info.GetAllOrder();
             return View(orders);
         }
-
+        //nhấn nút xuất hóa đơn, status của Order được cập nhật là Paid
         [Route("PrintOrder")]
         public ActionResult PrintOrder(int OrderID)
         {
@@ -410,10 +410,10 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             //Response.ClearHeaders();
             //rp.SetDatabaseLogon("Diem", "", "DESKTOP-HA2TCUF", "CoffeeShopDB", false);
             string status = "Paid";
+            info.UpdateOrderStatus(OrderID, status);
             rp.SetParameterValue("@OrderID", OrderID);
             Stream stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
-            info.UpdateOrderStatus(OrderID, status);
             return File(stream, "application/pdf", "OrderCustomer.pdf");
         }
         [Route("DetailOrder")]
