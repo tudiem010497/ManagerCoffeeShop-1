@@ -404,7 +404,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("PrintOrder")]
         public ActionResult PrintOrder(int OrderID)
         {
-            ExportOrderCustomer rp = new ExportOrderCustomer();
+            CrystalReport1 rp = new CrystalReport1();
             //Response.Buffer = false;
             //Response.ClearContent();
             //Response.ClearHeaders();
