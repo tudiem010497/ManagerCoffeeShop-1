@@ -71,20 +71,24 @@ $(document).ready(function () {
         let tel = $('input#tel').val()
         let email = $('input#email').val()
         let address = $('input#address').val()
+        let DescFD = $('div.table-responsive table tbody tr td input.DescFD').val();
+        console.log(DescFD);
         if (userID == undefined) {
             var data = '{"UserID" : ' + 0 + ', '
             data = data + '"CustName" :  "' + custname + '",'
             //var data = '{"CustName" :  "' + custname + '",'
             data = data + '"Tel" : "' + tel + '", '
             data = data + '"Email" :  "' + email + '",'
-            data = data + '"Address" : "' + address + '"}'
+            data = data + '"Address" :  "' + address + '",'
+            data = data + '"DescFD" : "' + DescFD + '"}'
         }
         else {
             var data = '{"UserID" : ' + userID + ', '
             data = data + '"CustName" :  "' + custname + '",'
             data = data + '"Tel" : "' + tel + '", '
             data = data + '"Email" :  "' + email + '",'
-            data = data + '"Address" : "' + address + '"}'
+            data = data + '"Address" :  "' + address + '",'
+            data = data + '"DescFD" : "' + DescFD + '"}'
         }
         
         console.log(data)

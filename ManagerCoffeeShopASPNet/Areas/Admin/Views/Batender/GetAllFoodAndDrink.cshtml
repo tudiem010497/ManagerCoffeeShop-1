@@ -1,5 +1,5 @@
 ﻿@using NonFactors.Mvc.Grid;
-
+@using ManagerCoffeeShopASPNet.Class
 @model IEnumerable<FoodAndDrink>
 
 @{
@@ -15,7 +15,7 @@
         @using(Html.BeginForm("Batender", "GetAllFoodAndDrink", FormMethod.Get))
         {
             @Html.TextBox("Search")
-            <button type="submit" class="btn btn-sm btn-outline-secondary">Search</button>
+            <button type="submit" class="btn btn-sm btn-outline-secondary">Tìm kiếm</button>
         }
     </div>
 </div>
@@ -24,11 +24,12 @@
     .Grid(Model)
     .Build(columns =>
     {
-        columns.Add(m => m.FDID).Titled("Mã đồ uống");
+        ConvertFoodAndDrink o = new ConvertFoodAndDrink();
+        //columns.Add(m => m.FDID).Titled("Mã đồ uống");
         columns.Add(m => m.Name).Titled("Tên đồ uống");
-        columns.Add(m => m.Desc).Titled("Mô tả");
-        columns.Add(m => m.Size).Titled("Kích thước");
-        columns.Add(m => m.Type).Titled("Loại");
+        //columns.Add(m => m.Desc).Titled("Mô tả");
+        columns.Add(m => o.ConvertSize(m.Size).ToString()).Titled("Kích thước");
+        columns.Add(m => o.ConvertType(m.Type).ToString()).Titled("Loại");
         columns.Add(m => m.UnitPrice).Titled("Giá");
         columns.Add(m => m.Currency).Titled("Đơn vị tiền");
         columns.Add(m => m.FDID).Encoded(false).RenderedAs(m => (
@@ -39,7 +40,7 @@
     })
     .Empty("Không có dữ liệu.")
     .Pageable(pager =>
-        {
-            pager.RowsPerPage = 3;
-        })
+    {
+        pager.RowsPerPage = 6;
+    })
 )

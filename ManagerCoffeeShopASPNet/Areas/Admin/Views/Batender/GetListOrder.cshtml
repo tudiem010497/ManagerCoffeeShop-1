@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.Order>
 @using NonFactors.Mvc.Grid;
-
+@using ManagerCoffeeShopASPNet.Class
 @{
     ViewBag.Title = "GetListOrder";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -13,13 +13,14 @@
     @(Html
         .Grid(Model).Build(columns =>
         {
+            ConvertStatusOrder m = new ConvertStatusOrder();
             columns.Add(o => o.PosID).Titled("Vị trí");
             //columns.Add(o => o.Customer.Name).Titled("Tên khách hàng");
             columns.Add(o => o.OrderDateTime).Titled("Thời gian vào");
-            columns.Add(o => o.Desc).Titled("Ghi chú");
-            columns.Add(o => o.Status).Titled("Trạng thái").Sortable(false);
+            columns.Add(o =>m.ConvertDesc(o.Desc).ToString()).Titled("Ghi chú");
+            columns.Add(o =>m.ConvertStatus(o.Status).ToString()).Titled("Trạng thái").Sortable(false);
             columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o => (
-            Html.ActionLink("Xem Chi tiết", "DetailOrder", "Batender", new { OrderID = o.OrderID }, new { @class = "btn btn-primary btnDetailOrder" })
+                Html.ActionLink("Xem Chi tiết", "DetailOrder", "Batender", new { OrderID = o.OrderID }, new { @class = "btn btn-sm btn-primary btnDetailOrder" })
             )).Filterable(false);
         })
         .Empty("Không có dữ liệu.")

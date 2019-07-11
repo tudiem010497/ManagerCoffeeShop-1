@@ -135,7 +135,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             foreach (var item in coffeeShop)
             {
                 SelectListItem select = new SelectListItem();
-                select.Text = item.CSID.ToString();
+                select.Value = item.CSID.ToString();
+                select.Text = item.Name.ToString();
                 listCoffeeShop.Add(select);
             }
             ViewData["listCoffeeShop"] = listCoffeeShop;

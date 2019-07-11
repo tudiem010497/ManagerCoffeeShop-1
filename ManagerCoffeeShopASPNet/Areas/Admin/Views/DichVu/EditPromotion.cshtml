@@ -12,73 +12,76 @@
         $(".datepicker").datepicker();
     });
 </script>
-<br />
-<h2 style="text-align:center">CHỈNH SỬA THÔNG TIN KHUYẾN MÃI</h2>
+
+<h2 style="text-align:center;padding:10px">CHỈNH SỬA THÔNG TIN KHUYẾN MÃI</h2>
 
 @using (Html.BeginForm("DoEditPromotion", "DichVu", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
-        @*        <h4>Promotion</h4>*@
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.PromotionID)
-
         <div class="form-group">
             @Html.Label("Tên khuyến mãi", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-11">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.Label("Ngày bắt đầu", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="control-group col-md-10">
-                <div class="controls input-append date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dateTimeTo" data-link-format="yyyy-mm-dd" name="dateTimeTo">
-                    <input size="25" type="hidden" name="" value="" id="" readonly>
-                    <span class="add-on"><i class="icon-remove"></i></span>
-                    <span class="add-on"><i class="icon-th"></i></span>
-                    @Html.EditorFor(model => model.StartDate, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", id = "dateTimeTo", name = "dateTimeTo" })
+        <div class="form-group row">
+            <div class="col-md-6">
+                @Html.Label("Ngày bắt đầu", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="control-group col-md-10">
+                    <div class="controls input-append date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dateTimeTo" data-link-format="yyyy-mm-dd" name="dateTimeTo">
+                        <input size="25" type="hidden" name="" value="" id="" readonly>
+                        <span class="add-on"><i class="icon-remove"></i></span>
+                        <span class="add-on"><i class="icon-th"></i></span>
+                        @Html.EditorFor(model => model.StartDate, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", id = "dateTimeTo", name = "dateTimeTo" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                @Html.Label("Ngày kết thúc", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="control-group col-md-10">
+                    <div class="controls input-append date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dateTimeTo" data-link-format="yyyy-mm-dd" name="dateTimeTo">
+                        <input size="25" type="hidden" name="" value="" id="" readonly>
+                        <span class="add-on"><i class="icon-remove"></i></span>
+                        <span class="add-on"><i class="icon-th"></i></span>
+                        @Html.EditorFor(model => model.EndDate, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", id = "dateTimeFrom", name = "dateTimeFrom" })
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.Label("Ngày kết thúc", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="control-group col-md-10">
-                <div class="controls input-append date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dateTimeTo" data-link-format="yyyy-mm-dd" name="dateTimeTo">
-                    <input size="25" type="hidden" name="" value="" id="" readonly>
-                    <span class="add-on"><i class="icon-remove"></i></span>
-                    <span class="add-on"><i class="icon-th"></i></span>
-                    @Html.EditorFor(model => model.EndDate, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker", id = "dateTimeFrom", name = "dateTimeFrom" })
+        
+        <div class="form-group row">
+            <div class="col-md-6">
+                @Html.Label("Số tiền trên hóa đơn được áp dụng khuyến mãi", htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-11">
+                    @Html.EditorFor(model => model.MinOrderTotalAmount, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MinOrderTotalAmount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                @Html.Label("Số tiền (%) được giảm", htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+
+                    <input name="Discount" class="form-control" value="@Convert.ToDouble(ViewData["Discount"])" />
+                    @*@Html.ValidationMessageFor("Discount", "", new { @class = "text-danger" })*@
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            @Html.Label("Số tiền trên hóa đơn được áp dụng khuyến mãi", htmlAttributes: new { @class = "control-label col-md-10" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MinOrderTotalAmount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MinOrderTotalAmount, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.Label("Số tiền (%) được giảm", htmlAttributes: new { @class = "control-label col-md-10" })
-            <div class="col-md-10">
-                
-                <input name="Discount" class="form-control" value="@Convert.ToDouble(ViewData["Discount"])"/>
-                @*@Html.ValidationMessageFor("Discount", "", new { @class = "text-danger" })*@
-            </div>
-        </div>
+        
         <div class="form-group">
             @Html.Label("Loại khuyến mãi", htmlAttributes: new { @class = "control-label col-md-10" })
-            <div class="col-md-10">
+            <div class="col-md-11">
                 @Html.DropDownList("TypePromotion", (List<SelectListItem>)ViewData["listTypePromotion"], new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
             @Html.Label("Ghi chú", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-11">
                 @Html.EditorFor(model => model.Desc, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Desc, "", new { @class = "text-danger" })
             </div>
@@ -90,7 +93,7 @@
                     @Html.ActionLink("Trở về", "GetAllPromotion")
                 </div>
                 <div class="col-md-3">
-                    <input type="submit" value="Lưu" class="btn btn-outline-success" />
+                    <input type="submit" value="Lưu" class="btn btn-sm btn-outline-success" />
                 </div>
             </div>
 

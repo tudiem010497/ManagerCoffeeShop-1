@@ -23,17 +23,17 @@
             .Grid(Model)
             .Build(columns =>
             {
-                columns.Add(model => model.Name).Titled("Tên NVL");
-                columns.Add(model => model.Supplier.Name).Titled("Tên NCC");
-                columns.Add(model => model.Amount).Titled("Số lượng");
+                columns.Add(model => model.Name).Titled("Tên nguyên vật liệu");
+                columns.Add(model => model.Supplier.Name).Titled("Tên nhà cung cấp");
+                columns.Add(model => model.Amount).Titled("Số lượng").Filterable(false);
                 columns.Add(model => model.Unit).Titled("Đơn vị tính");
-                columns.Add(model => model.UnitPrice).Titled("Đơn giá");
-                columns.Add(model => model.Currency).Titled("Đơn vị tiền");
-                columns.Add(model => model.IngreID).Encoded(false).
-                    RenderedAs(model => (
+                columns.Add(model => model.UnitPrice).Titled("Đơn giá").Filterable(false);
+                columns.Add(model => model.Currency).Titled("Đơn vị tiền").Filterable(false);
+                columns.Add(model => model.IngreID).Encoded(false).RenderedAs(model => (
                      Html.ActionLink("Sửa", "EditIngredient", "WareHouse", new { IngreID = model.IngreID }, new { @class = "btn btn-sm btn-success" }).ToHtmlString()
-                    )).Filterable(false);
-            }).Filterable()
+                )).Filterable(false);
+            })
+            .Filterable()
             .Pageable(pager =>
             {
                 pager.RowsPerPage = 6;

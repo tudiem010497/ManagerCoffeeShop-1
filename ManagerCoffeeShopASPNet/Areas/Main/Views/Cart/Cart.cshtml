@@ -53,7 +53,7 @@ else
                                         <button type="submit" class="btn btn-success btn-sm"> Cập nhật</button>
                                     </form>
                                 </td>
-                                <td><input type="text" name="desc" value="@item.Desc" /></td>
+                                <td><input type="text" name="desc" value="@item.Desc" class="DescFD"/></td>
                                 <td> @item.Price</td>
                                 <td> @item.Total</td>
                                 <td> <a href="@Url.Action("DeleteFD", new { FDID = item.FDID })" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a> </td>

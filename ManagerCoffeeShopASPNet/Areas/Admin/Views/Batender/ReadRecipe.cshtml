@@ -3,13 +3,12 @@
     ViewBag.Title = "ReadRecipe";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">CÔNG THỨC PHA CHẾ</h2>
-@*<hr />*@
-<div>
+
+<h2 style="text-align:center;padding:10px">CÔNG THỨC PHA CHẾ</h2>
+
+<div style="padding:5px">
     @Html.ActionLink("Thêm bước", "CreateRecipeDetail", "Batender", new { RecipeID = ViewData["RecipeID"] }, new { @class = "btn btn-primary" })
 </div>
-<br />
 <table class="table table-striped">
     <thead>
         <tr>
@@ -48,6 +47,6 @@
     </tbody>
 </table>
 
-<div>
+<div style="padding:10px">
     @Html.ActionLink("Trở về", "GetAllFoodAndDrink")
 </div>

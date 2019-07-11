@@ -3,92 +3,87 @@
     ViewBag.Title = "EditCoffeeShop";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">CHỈNH SỬA THÔNG TIN QUÁN COFFEE</h2>
-
-
+<h2 style="text-align:center;padding:7px">CHỈNH SỬA THÔNG TIN QUÁN COFFEE</h2>
 @using (Html.BeginForm("DoEditCoffeeShop", "Web", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
     <div class="form-horizontal">
-        @*<h4>CoffeeShop</h4>*@
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.FirstOrDefault().CSID)
-
         <div class="form-group">
             @Html.Label("Tên quán coffee", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-11">
                 @Html.EditorFor(model => model.FirstOrDefault().Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FirstOrDefault().Name, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.Label("Địa chỉ", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstOrDefault().Address, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstOrDefault().Address, "", new { @class = "text-danger" })
+        <div class="form-group row">
+            <div class="col-md-6" style="padding-right:0px">
+                @Html.Label("Địa chỉ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FirstOrDefault().Address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstOrDefault().Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6" style="padding:0px">
+                @Html.Label("Số điện thoại", htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FirstOrDefault().Phone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstOrDefault().Phone, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FirstOrDefault().Phone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstOrDefault().Phone, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstOrDefault().Phone, "", new { @class = "text-danger" })
+        <div class="form-group row">
+            <div class="col-md-6" style="padding-right:0px">
+                @Html.Label("Ảnh logo của quán", htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.FirstOrDefault().LogoImagePath, new { type = "file" })
+                    @Html.ValidationMessageFor(model => model.FirstOrDefault().LogoImagePath, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6" style="padding:0px">
+                @Html.LabelFor(model => model.FirstOrDefault().Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FirstOrDefault().Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstOrDefault().Email, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.Label("Ảnh logo của quán", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.FirstOrDefault().LogoImagePath, new { type="file" })
-                @Html.ValidationMessageFor(model => model.FirstOrDefault().LogoImagePath, "", new { @class = "text-danger" })
+        <div class="form-group row">
+            <div class="col-md-4">
+                @Html.Label("Tiêu đề thông tin quán", htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FirstOrDefault().TitleAbout, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstOrDefault().TitleAbout, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-8">
+                @Html.Label("Nội dung", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FirstOrDefault().DescAbout, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstOrDefault().DescAbout, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.Label("Tiêu đề thông tin quán", htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstOrDefault().TitleAbout, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstOrDefault().TitleAbout, "", new { @class = "text-danger" })
+        <div class="form-group row">
+            <div class="col-md-4">
+                @Html.Label("Tiêu đề liên hệ", htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FirstOrDefault().TitleContact, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstOrDefault().TitleContact, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-8">
+                @Html.Label("Mô tả", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FirstOrDefault().DescContact, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstOrDefault().DescContact, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.Label("Nội dung", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstOrDefault().DescAbout, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstOrDefault().DescAbout, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Tiêu đề liên hệ", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstOrDefault().TitleContact, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstOrDefault().TitleContact, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Mô tả", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstOrDefault().DescContact, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstOrDefault().DescContact, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FirstOrDefault().Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstOrDefault().Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstOrDefault().Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
         <div class="form-group">
             <div class="row">
                 <div class="col-md-8">

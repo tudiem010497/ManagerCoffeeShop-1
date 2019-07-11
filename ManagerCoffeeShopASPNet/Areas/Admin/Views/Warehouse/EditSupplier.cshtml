@@ -4,21 +4,20 @@
     ViewBag.Title = "EditSupplier";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">CHỈNH SỬA THÔNG TIN NHÀ CUNG CẤP</h2>
+
+<h2 style="text-align:center;padding:10px">CHỈNH SỬA THÔNG TIN NHÀ CUNG CẤP</h2>
 
 @using (Html.BeginForm("DoEditSupplier", "Warehouse"))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        @*<h4>Supplier</h4>*@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.SupplierID)
 
         <div class="form-group">
-            @Html.Label("Tên NCC", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Tên nhà cung cấp", htmlAttributes: new { @class = "control-label col-md-5" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })

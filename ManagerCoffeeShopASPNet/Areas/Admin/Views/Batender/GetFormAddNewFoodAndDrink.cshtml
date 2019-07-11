@@ -1,84 +1,76 @@
 ﻿@using ManagerCoffeeShopASPNet.Enum
 @model ManagerCoffeeShopASPNet.FoodAndDrink
-
+@using ManagerCoffeeShopASPNet.Class
 @{
     ViewBag.Title = "GetFormAddNewFoodAndDrink";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">THÊM ĐỒ UỐNG MỚI</h2>
 
+<h2 style="text-align:center;padding:5px">THÊM ĐỒ UỐNG MỚI</h2>
 @using (Html.BeginForm("CreateFoodAndDrink", "Batender", FormMethod.Post, new { enctype = "multipart/form-data", id="fromAddNewFoodAndDrink" }))
 {
     @Html.AntiForgeryToken()
-    
     <div class="form-horizontal">
-       @* <h4>FoodAndDrink</h4>*@
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.Label("Tên đồ uống", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-11">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.Label("Mô tả", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Desc, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Desc, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.Label("Ảnh minh họa", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.ImagePath, new { @*htmlAttributes = new { @class = "form-control" }*@ type="file" })
+                @Html.TextBoxFor(model => model.ImagePath, new { type="file" })
                 @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.Label("Kích thước", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Size, new SelectList(Enum.GetValues(typeof(EnumFoodAndDrink.Size))), new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })
+        @{ 
+            ConvertFoodAndDrink o = new ConvertFoodAndDrink();
+        }
+        <div class="form-group row">
+            <div class="col-md-6">
+                @Html.Label("Kích thước", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-11">
+                    @Html.DropDownListFor(model => model.Size, new SelectList(Enum.GetValues(typeof(EnumFoodAndDrink.Size))), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                @Html.Label("Loại", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Type, new SelectList(Enum.GetValues(typeof(EnumFoodAndDrink.Type))), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.Label("Loại", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Type, new SelectList(Enum.GetValues(typeof(EnumFoodAndDrink.Type))), new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+        <div class="form-group row">
+            <div class="col-md-6">
+                @Html.Label("Giá", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-11">
+                    @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Giá", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Đơn vị tiền", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Currency, new SelectList(Enum.GetValues(typeof(EnumUtilities.Currency))), new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
+            <div class="col-md-6">
+                @Html.Label("Đơn vị tiền", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Currency, new SelectList(Enum.GetValues(typeof(EnumUtilities.Currency))), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
         <div class="form-group">
             <div class="row">
                 <div class="col-md-9">
-                    @Html.ActionLink("Trở về", "GetAllFoodAndDrink", "Batender", new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Trở về", "GetAllFoodAndDrink", "Batender"@*, new { @class = "btn  " }*@)
                 </div>
                 <div class="col-md-3">
-                    <input type="submit" value="Thêm" class="btn btn-primary" />
+                    <input type="submit" value="Thêm" class="btn  btn-primary" />
                 </div>
             </div>
         </div>

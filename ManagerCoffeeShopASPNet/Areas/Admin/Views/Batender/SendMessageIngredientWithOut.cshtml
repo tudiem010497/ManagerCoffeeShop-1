@@ -4,16 +4,16 @@
     ViewBag.Title = "SendMessageIngredientWithOut";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">GỬI THÔNG BÁO THIẾU NGUYÊN VẬT LIỆU</h2>
-<br />
+
+<h2 style="text-align:center;padding:7px">GỬI THÔNG BÁO THIẾU NGUYÊN VẬT LIỆU</h2>
+
 @if (TempData["message"] != null)
 {
-    <div class="alert alert-success">@TempData["message"]</div>
+    <div class="alert alert-success" style="padding-bottom:5px">@TempData["message"]</div>
 }
 @if (TempData["error"] != null)
 {
-    <div class="alert alert-danger">@TempData["error"]</div>
+    <div class="alert alert-danger" style="padding-bottom:5px">@TempData["error"]</div>
 }
 
 @using (Html.BeginForm("DoSendMessageIngredientWithOut","Batender", FormMethod.Post)) 

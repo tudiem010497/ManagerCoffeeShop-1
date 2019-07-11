@@ -7,15 +7,14 @@
 }
 
 <script src="~/Assets/Admin/js/web.js"></script>
-<br />
-<h2 style="text-align:center">THÊM TÀI KHOẢN CHO NHÂN VIÊN</h2>
+
+<h2 style="text-align:center;padding:10px">THÊM TÀI KHOẢN CHO NHÂN VIÊN</h2>
 
 @using (Html.BeginForm("CreateAccountForEmployee", "Web", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        @*<h4>Account</h4>*@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">

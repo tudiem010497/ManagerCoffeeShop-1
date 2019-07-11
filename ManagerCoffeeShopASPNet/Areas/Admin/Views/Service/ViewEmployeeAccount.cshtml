@@ -1,12 +1,16 @@
 ﻿@model ManagerCoffeeShopASPNet.Account
-
+@using ManagerCoffeeShopASPNet.Class
 @{
     ViewBag.Title = "ViewEmployeeAccount";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 <br />
 <h2 style="text-align:center">THÔNG TIN TÀI KHOẢN</h2>
-
+@{ 
+    ConvertAccount o = new ConvertAccount();
+    string acctype = o.ConvertAccType(Model.AccType).ToString();
+    string position = o.ConvertPosition(Model.Position).ToString();
+}
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -37,7 +41,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AccType)
+            @acctype
+            @*@Html.DisplayFor(model => model.AccType)*@
         </dd>
 
         <dt>
@@ -45,7 +50,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Position)
+            @position
+            @*@Html.DisplayFor(model => model.Position)*@
         </dd>
     </dl>
 </div>

@@ -15,7 +15,7 @@
         @using (Html.BeginForm("DichVu", "GetAllGift", FormMethod.Get))
         {
             @Html.TextBox("Search")
-            <button type="submit">Search</button>
+            <button type="submit">Tìm kiếm</button>
         }
     </div>
 </div>
@@ -25,7 +25,7 @@
         .Grid(Model)
         .Build(column =>
         {
-            column.Add(m => m.SupplierID).Titled("Mã NCC");
+            column.Add(m => m.Supplier.Name).Titled("Tên NCC");
             column.Add(m => m.Name).Titled("Tên quà tặng").Sortable(false);
             column.Add(m => m.UnitPrice).Titled("Giá");
             column.Add(m => m.Currency).Titled("Đơn vị tiền");

@@ -1,6 +1,6 @@
 ﻿@model IEnumerable <ManagerCoffeeShopASPNet.Order>
 @using NonFactors.Mvc.Grid
-
+@using ManagerCoffeeShopASPNet.Class
 @{
     ViewBag.Title = "GetListOrderServiceGroupByOrder";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -12,26 +12,26 @@
     .Grid(Model)
     .Build(columns =>
     {
-
-    columns.Add(o => o.CustomerID).Titled("Mã KH").Sortable(false);
-    columns.Add(o => o.PosID).Titled("Vị trí").Sortable(true);
-    columns.Add(o => o.OrderDateTime).Titled("Ngày giờ đặt").Sortable(true);
-    columns.Add(o => o.DiscountMoney).Titled("Giảm giá").Sortable(false);
-    columns.Add(o => o.TotalAmount).Titled("Tổng tiền").Sortable(true);
-    columns.Add(o => o.Currency).Titled("Đơn vị tiền").Sortable(false);
-    columns.Add(o => o.Desc).Titled("Ghi chú").Sortable(false);
-    columns.Add(o => o.Status).Titled("Trạng thái").Sortable(false);
-    columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o => (
-        @Html.ActionLink("Xem Chi tiết", "DetailOrderNeedSevice", "Service", new { OrderID = o.OrderID }, new { @class = "btn btn-sm btn-outline-primary btnDetailOrder" }).ToHtmlString()
-        + " " + @Html.ActionLink("Đã phục vụ", "UpdatedOrderClosed", "Service", new { OrderID = o.OrderID }, new { @class = "btn btn-sm btn-primary btnUpdatedOrderClosed" }).ToHtmlString()
-        ));
+        ConvertStatusOrder m = new ConvertStatusOrder();
+        columns.Add(o => o.Customer.Name).Titled("Tên khách hàng").Sortable(false);
+        columns.Add(o => o.PosID).Titled("Vị trí").Filterable(false);
+        columns.Add(o => o.OrderDateTime).Titled("Ngày giờ đặt").Filterable(false);
+        columns.Add(o => o.DiscountMoney).Titled("Giảm giá").Filterable(false);
+        columns.Add(o => o.TotalAmount).Titled("Tổng tiền").Filterable(false);
+        //columns.Add(o => o.Currency).Titled("Đơn vị tiền").Sortable(false);
+        columns.Add(o => m.ConvertDesc(o.Desc).ToString()).Titled("Ghi chú").Sortable(false);
+        columns.Add(o => m.ConvertStatus(o.Status).ToString()).Titled("Trạng thái").Sortable(false);
+        columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o => (
+            @Html.ActionLink("Chi tiết", "DetailOrderNeedSevice", "Service", new { OrderID = o.OrderID }, new { @class = "btn btn-sm btn-outline-primary btnDetailOrder" }).ToHtmlString()
+            + @Html.ActionLink("Đã phục vụ", "UpdatedOrderClosed", "Service", new { OrderID = o.OrderID }, new { @class = "btn btn-sm btn-primary btnUpdatedOrderClosed" }).ToHtmlString()
+            )).Filterable(false).Sortable(false);
     })
     //.WithFilterMode(GridFilterMode.FilterRow)
     .Empty("Data is empty")
     .Filterable()
     .Sortable()
     .Pageable(pager =>
-        {
-            pager.RowsPerPage = 6;
-        })
+    {
+        pager.RowsPerPage = 6;
+    })
 )

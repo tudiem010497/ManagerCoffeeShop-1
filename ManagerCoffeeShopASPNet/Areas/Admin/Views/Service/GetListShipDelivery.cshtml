@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.ShipDetail>
 @using NonFactors.Mvc.Grid
+@using ManagerCoffeeShopASPNet.Class
 @{
     ViewBag.Title = "GetListShipDelivery";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -7,67 +8,16 @@
 
 <h2 style="text-align:center; padding:10px;">DANH SÁCH GIAO HÀNG</h2>
 
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ShipID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShipID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.ActionLink("Confirm Deliveried", "ConfirmDeliveried", new { ShipDetailID=item.ShipDetailID}, new { @class="btn btn-outline-success"})
-        </td>
-    </tr>
-}
-
-</table>*@
 <div>
     @(Html
         .Grid(Model)
         .Build(column =>
         {
-            //column.Add(m => m.ShipID).Titled("Mã Ship").Sortable(false);
-            //column.Add(m => m.OrderID).Titled("Mã HĐ");
+            ConvertStatusShipDetail o = new ConvertStatusShipDetail();
             column.Add(m => m.CustName).Titled("Tên Khách hàng");
             column.Add(m => m.Address).Titled("Địa chỉ giao hàng").Filterable(false);
             column.Add(m => m.Phone).Titled("SĐT liên hệ").Filterable(false);
-            column.Add(m => m.Status).Titled("Trạng thái").Filterable(false);
+            column.Add(m => o.ConvertStatus(m.Status).ToString()).Titled("Trạng thái").Filterable(false);
             column.Add(m => m.ShipDetailID).Titled("Xác nhận giao hàng").Encoded(false).RenderedAs(m => (
                 @Html.ActionLink("Xem chi tiết", "DetailShipDelivery", new { ShipDetailID = m.ShipDetailID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
             //+ ' ' + @Html.ActionLink("Thành công", "ConfirmDeliveried", new { ShipDetailID = m.ShipDetailID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()

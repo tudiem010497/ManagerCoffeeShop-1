@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.Order>
 @using NonFactors.Mvc.Grid
+@using ManagerCoffeeShopASPNet.Class
 @{
     ViewBag.Title = "GetAllOrderNeedDelivery";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -12,15 +13,16 @@
         .Grid(Model)
         .Build(column =>
         {
-            column.Add(m => m.CustomerID).Titled("Mã KH").Sortable(false);
-            column.Add(m => m.PosID).Titled("Vị trí");
-            column.Add(m => m.OrderDateTime).Titled("Ngày giờ đặt");
+            ConvertStatusOrder o = new ConvertStatusOrder();
+            column.Add(m => m.Customer.Name).Titled("Tên khách hàng").Sortable(false);
+            column.Add(m => m.PosID).Titled("Vị trí").Filterable(false);
+            column.Add(m => m.OrderDateTime).Titled("Ngày giờ đặt").Filterable(false);
             column.Add(m => m.PaidDateTime).Titled("Ngày giờ giao").Filterable(false);
             column.Add(m => m.DiscountMoney).Titled("Giảm giá").Filterable(false);
             column.Add(m => m.TotalAmount).Titled("Tổng tiền").Filterable(false);
             column.Add(m => m.Currency).Titled("Đơn vị tiền").Filterable(false);
             column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);
-            column.Add(m => m.Status).Titled("Trạng thái").Filterable(false);
+            column.Add(m => o.ConvertStatus(m.Status).ToString()).Titled("Trạng thái").Filterable(false);
             column.Add(m => m.OrderID).Encoded(false).RenderedAs(m => (
                 @Html.ActionLink("Xem Chi tiết", "DetailOrderNeedSevice", "Service", new { OrderID = m.OrderID }, new { @class = "btn btn-sm btn-primary btnDetailOrder" }).ToHtmlString()
                 + " " + @Html.ActionLink("Xác nhận giao hàng", "ConfirmDelivery", new { OrderID = m.OrderID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()

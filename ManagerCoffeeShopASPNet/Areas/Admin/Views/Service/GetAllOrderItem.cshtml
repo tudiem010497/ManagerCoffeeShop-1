@@ -1,5 +1,6 @@
 ﻿@using NonFactors.Mvc.Grid;
 @model IEnumerable<OrderItem>
+@using ManagerCoffeeShopASPNet.Class
 @{
     ViewBag.Title = "GetAllOrderItem";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -13,14 +14,15 @@
     @(Html
         .Grid(Model).Build(columns =>
         {
-            columns.Add(o => o.OrderID).Titled("Mã HĐ").Sortable(false);
+            ConvertStatusOrder m = new ConvertStatusOrder();
+            //columns.Add(o => o.OrderID).Titled("Mã hóa đơn").Sortable(false);
             columns.Add(o => o.Order.Customer.Name).Titled("Tên khách hàng").Sortable(false);
             columns.Add(o => o.Order.PosID).Titled("Vị trí").Sortable(false);
             columns.Add(o => o.Order.OrderDateTime).Titled("Thời gian vào");
             columns.Add(o => o.FoodAndDrink.Name).Titled("Tên đồ uống").Sortable(false);
             columns.Add(o => o.Quantity).Titled("Số lượng").Sortable(false);
             columns.Add(o => o.Desc).Titled("Ghi chú").Sortable(false);
-            columns.Add(o => o.Status).Titled("Trạng thái").Sortable(false);
+            columns.Add(o => m.ConvertStatus(o.Status).ToString()).Titled("Trạng thái").Sortable(false);
         })
         //.WithFilterMode(GridFilterMode.FilterRow)
         .Empty("Không có dữ liệu.")
@@ -28,7 +30,7 @@
         .Sortable()
         .Pageable(pager =>
         {
-            pager.RowsPerPage = 4;
+            pager.RowsPerPage = 7;
         })
     )
 </div>

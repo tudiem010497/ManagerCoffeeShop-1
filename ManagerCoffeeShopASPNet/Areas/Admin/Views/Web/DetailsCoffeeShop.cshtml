@@ -6,9 +6,9 @@
     ViewBag.Title = "DetailsCoffeeShop";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">THÔNG TIN CHI TIẾT CỦA QUÁN</h2>
-<br />
+
+<h2 style="text-align:center;padding:10px">THÔNG TIN CHI TIẾT CỦA QUÁN</h2>
+
 <div>
     @(Html
         .Grid(Model)
@@ -25,12 +25,12 @@
             column.Add(m => m.Email).Titled("Email").Sortable(false).Filterable(false);
         })
         .Sortable()
-        .Empty("Data is empty")
+        .Empty("Không có dữ liệu.")
         .Filterable()
     )
 </div>
-<br />
-<div class="row">
+
+<div class="row" style="padding-top:5px">
     <div class="col-md-9">
         @Html.ActionLink("Trở về", "GetAllCoffeeShop", "Web")
     </div>

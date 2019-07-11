@@ -5,12 +5,12 @@
     ViewBag.Title = "CreateReceipt";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">THÊM PHIẾU NHẬP MỚI</h2>
-<br />
+
+<h2 style="text-align:center;padding:10px">THÊM PHIẾU NHẬP MỚI</h2>
+
 <div class="row">
     <div class="col-sm-8">
-        <div>
+        <div style="padding-bottom:5px">
             @(Html
                 .Grid((IEnumerable<Ingredient>)ViewData["ingres"])
                 .Build(columns =>
@@ -26,7 +26,6 @@
 
             )
         </div>
-        <br />
         <div>
             @(Html
                 .Grid((IEnumerable<Gift>)ViewData["gifts"])
@@ -41,7 +40,6 @@
                 }).Filterable()
             )
         </div>
-        
     </div>
     <div class="col-sm-4">
         <!-- Modal Ingredient-->
@@ -141,7 +139,7 @@
         </div>
     </div>
 </div>
-<br />
-<div>
+
+<div style="padding-top:5px">
     @Html.ActionLink("Trở về", "GetAllReceipt", "Warehouse")
 </div>

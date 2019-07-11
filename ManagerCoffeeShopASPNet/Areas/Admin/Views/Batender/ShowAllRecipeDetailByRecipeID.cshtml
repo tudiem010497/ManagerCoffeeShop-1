@@ -5,8 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<br />
-<h2 style="text-align:center">THÊM CÔNG THỨC PHA CHẾ</h2>
+<h2 style="text-align:center;padding:10px">THÊM CÔNG THỨC PHA CHẾ</h2>
 
 <div>
     @Html.ActionLink("Thêm bước", "CreateRecipeDetail", "Batender", new { RecipeID = ViewData["RecipeID"] }, new { @class="btn btn-primary" })
@@ -14,9 +13,9 @@
 <br />
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayName("RecID")
-        </th>
+        </th>*@
         <th>
             @Html.DisplayName("Bước")
         </th>
@@ -39,9 +38,9 @@
     foreach (var item in Model)
     {
         <tr>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.RecID)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Step)
             </td>

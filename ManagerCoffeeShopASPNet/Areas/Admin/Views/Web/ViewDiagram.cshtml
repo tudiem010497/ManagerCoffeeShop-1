@@ -32,10 +32,9 @@
     }
     
 }
-<h2>ViewDiagram</h2>
+<h2 style="text-align:center;padding:7px">ViewDiagram</h2>
 <div class="row">
     <div class="col-sm-2">
-        
         @{
             if (ViewData["listCoffeeLandScape"] != null)
             {
@@ -45,7 +44,7 @@
                         <label class="form-control" for="CLSID">Mã sơ đồ</label>
                         @Html.DropDownList("CLSID", (List<SelectListItem>)ViewData["listCoffeeLandScape"], new { @class = "form-control" })
                     </div>
-                    <button type="submit" class="btn btn-outline-info" id="viewDiagram">Xem sơ đồ</button>
+                    <button type="submit" class="btn btn-sm btn-outline-info" id="viewDiagram">Xem sơ đồ</button>
                 }
             }
             else
@@ -54,7 +53,7 @@
                 
             }
         }
-        @Html.ActionLink("Thêm sơ đồ", "CreateDiagram", "Web", new { width = 5, height = 5, ratio = 0.01 }, new { @class = "btn btn-outline-primary" })
+        @Html.ActionLink("Thêm sơ đồ", "CreateDiagram", "Web", new { width = 0, height = 0, ratio = 0 }, new { @class = "btn btn-sm btn-outline-primary" })
 
 
     </div>
@@ -126,7 +125,7 @@
                 </div>
                 
             </form>
-            <button type="button" id="btnEditDiagram" class="btn btn-info btn-outline-primary" data-toggle="modal" data-target="#modalInfomation">Sửa</button>
+            <button type="button" id="btnEditDiagram" class="btn btn-sm btn-info btn-outline-primary" data-toggle="modal" data-target="#modalInfomation">Sửa</button>
         </div>
     }
     
@@ -171,8 +170,8 @@
                             </g>
                         </svg>
                     }
-                    <button type="button" id="btnSaveEditDiagram" class="btn btn-outline-info">Lưu</button>
-                    <button type="button" id="btnDeleteDiagram" class="btn btn-outline-danger" >Xóa sơ đồ</button>
+                    <button type="button" id="btnSaveEditDiagram" class="btn btn-sm btn-outline-info">Lưu</button>
+                    <button type="button" id="btnDeleteDiagram" class="btn btn-outline-danger btn-sm" >Xóa sơ đồ</button>
                 </div>
             }
         }

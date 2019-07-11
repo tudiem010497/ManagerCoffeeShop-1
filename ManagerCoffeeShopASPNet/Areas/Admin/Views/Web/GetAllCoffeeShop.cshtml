@@ -21,8 +21,8 @@
             column.Add(m => m.Phone).Titled("Số điện thoại");
             column.Add(m => m.Email).Titled("Email").Filterable(false);
             column.Add(m => m.CSID).Encoded(false).RenderedAs(m => (
-                @Html.ActionLink("Sửa", "EditCoffeeShop", new { CSID = m.CSID }, new { @class = "btn btn-sm btn-outline-primary" }).ToHtmlString()
-            + " " + @Html.ActionLink("Chi tiết", "DetailsCoffeeShop", new { CSID = m.CSID }, new { @class = "btn btn-sm btn-outline-info" }).ToHtmlString()
+            //@Html.ActionLink("Sửa", "EditCoffeeShop", new { CSID = m.CSID }, new { @class = "btn btn-sm btn-outline-primary" }).ToHtmlString()
+                @Html.ActionLink("Chi tiết", "DetailsCoffeeShop", new { CSID = m.CSID }, new { @class = "btn btn-sm btn-outline-info" }).ToHtmlString()
             )).Filterable(false).Sortable(false).Titled("Action");
         })
         .Empty("Không có dữ liệu.")

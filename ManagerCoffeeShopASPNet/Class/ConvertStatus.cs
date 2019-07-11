@@ -56,7 +56,7 @@ namespace ManagerCoffeeShopASPNet.Class
                 return "Chờ giao";
             else if (Status == "Delivery")
                 return "Đang giao";
-            else if (Status == "Closed")
+            else if (Status == "Close")
                 return "Giao thành công";
             else if (Status == "Failed")
                 return "Giao thất bại";
@@ -157,6 +157,12 @@ namespace ManagerCoffeeShopASPNet.Class
             else if (Size == "Large")
                 return "Lớn";
             else return "";
+        }
+        public string ConvertType(string Type)
+        {
+            if (Type == "coffee")
+                return "Đồ uống";
+            else return "Đồ ăn nhẹ";
         }
     }
     public class ConvertStatusTest{

@@ -1,5 +1,6 @@
 ﻿@using NonFactors.Mvc.Grid
 @model IEnumerable<Order>
+@using ManagerCoffeeShopASPNet.Class
 @{
     ViewBag.Title = "GetAllOrder";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -7,13 +8,13 @@
 
 <h2 style="text-align:center; padding:10px;">DANH SÁCH HÓA ĐƠN</h2>
 <div style="padding-bottom:10px;">
-    @Html.ActionLink("Xem chi tiết tất cả đơn hàng", "GetAllOrderItem", "Service", new { @class="btn btn-sm btn-primary"})
+    @Html.ActionLink("Xem chi tiết tất cả đơn hàng", "GetAllOrderItem", "Service", new { @class = "btn btn-sm btn-primary" })
 </div>
 <div>
     @(Html
         .Grid(Model).Build(columns =>
         {
-            columns.Add(o => o.OrderID).Titled("Mã HĐ").Sortable(false);
+            columns.Add(o => o.OrderID).Titled("Mã hóa đơn").Sortable(false);
             columns.Add(o => o.Customer.Name).Titled("Tên khách hàng").Sortable(false);
             columns.Add(o => o.PosID).Titled("Vị trí").Sortable(false);
             columns.Add(o => o.OrderDateTime).Titled("Thời gian vào");

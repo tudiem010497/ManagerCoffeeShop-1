@@ -5,83 +5,74 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2 style="text-align:center;padding:10px;">XÓA ĐỒ UỐNG</h2>
+<h2 style="text-align:center;padding-top:10px;padding-bottom:5px">XÓA ĐỒ UỐNG</h2>
 
-<h3 style="padding-bottom:10px">Bạn có chắc muốn xóa?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayName("Tên đồ uống")
-        </dt>
+<h3 style="padding-bottom:5px">Bạn có chắc muốn xóa?</h3>
+<div class="row">
+    <div class="col-md-4">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayName("Ảnh minh họa")
+            </dt>
+            <dd>
+                <img src="@Model.ImagePath" style="width:250px;height:250px;"/>
+            </dd>
+        </dl>
+    </div>
+    <div class="col-md-8">
+        <dl class="dl-horizontal">
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            <dt>
+                @Html.DisplayName("Tên đồ uống")
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
 
-        <dt>
-            @Html.DisplayName("Mô tả")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Desc)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Ảnh minh họa")
-        </dt>
-
-        <dd>
-            <img src="@Model.ImagePath" />
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Kích thước")
-        </dt>
-        @{ 
-            ConvertFoodAndDrink o = new ConvertFoodAndDrink();
-            string size = o.ConvertSize(Model.Size).ToString();
-        }
-        <dd>
-            @size
-            @*@Html.DisplayFor(model => model.Size)*@
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Loại")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Giá")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UnitPrice)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Đơn vị tiền")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Currency)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-        <div class="form-actions no-color row">
-            <div class="col-md-9">
-                @Html.ActionLink("Trở về", "GetAllFoodAndDrink", "Batender", new { @class = "btn btn-primary" })
-            </div>
-            <div class="col-md-3">
-                @Html.ActionLink("Xóa", "DoDeleteFoodAndDrink", "Batender", new { FDID = Model.FDID }, new { @class = "btn btn-primary" })
-            </div>
-        </div>
-    }
+            <dt>
+                @Html.DisplayName("Kích thước")
+            </dt>
+            @{
+                ConvertFoodAndDrink o = new ConvertFoodAndDrink();
+                string size = o.ConvertSize(Model.Size).ToString();
+                string type = o.ConvertType(Model.Type).ToString();
+            }
+            <dd>
+                @size
+                @*@Html.DisplayFor(model => model.Size)*@
+            </dd>
+            <dt>
+                @Html.DisplayName("Loại")
+            </dt>
+            <dd>
+                @type
+                @*@Html.DisplayFor(model => model.Type)*@
+            </dd>
+            <dt>
+                @Html.DisplayName("Giá")
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UnitPrice)
+            </dd>
+            <dt>
+                @Html.DisplayName("Đơn vị tiền")
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Currency)
+            </dd>
+        </dl>
+    </div>
+    
 </div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-actions no-color row">
+        <div class="col-md-9">
+            @Html.ActionLink("Trở về", "GetAllFoodAndDrink", "Batender")
+        </div>
+        <div class="col-md-3">
+            @Html.ActionLink("Xóa", "DoDeleteFoodAndDrink", "Batender", new { FDID = Model.FDID }, new { @class = "btn btn-sm btn-primary" })
+        </div>
+    </div>
+}

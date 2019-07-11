@@ -1,5 +1,6 @@
 ﻿@model ManagerCoffeeShopASPNet.ShipDetail
 @using NonFactors.Mvc.Grid
+@using ManagerCoffeeShopASPNet.Class
 @{
     ViewBag.Title = "DetailShipDelivery";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -12,6 +13,7 @@
         .Grid((IEnumerable<OrderItem>)ViewData["OrderItem"])
         .Build(column =>
         {
+            ConvertStatusShipDetail o = new ConvertStatusShipDetail();
             column.Add(m => m.FoodAndDrink.Name).Titled("Tên đồ uống");
             column.Add(m => m.Quantity).Titled("Số lượng").Filterable(false);
             column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);

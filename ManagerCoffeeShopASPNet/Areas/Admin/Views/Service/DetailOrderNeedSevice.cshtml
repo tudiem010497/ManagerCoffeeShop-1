@@ -8,11 +8,10 @@
 
 <h2 style="text-align:center; padding:10px;">CHI TIẾT HÓA ĐƠN</h2>
 
-
 @(Html
         .Grid(Model).Build(columns =>
         {
-            columns.Add(o => o.OrderID).Titled("Mã hóa đơn").Sortable(false);
+            //columns.Add(o => o.OrderID).Titled("Mã hóa đơn").Sortable(false);
             columns.Add(o => o.Order.Customer.Name).Titled("Tên khách hàng").Sortable(false);
             columns.Add(o => o.Order.PosID).Titled("Vị trí").Sortable(false);
             columns.Add(o => o.Order.OrderDateTime).Titled("Thời gian vào");

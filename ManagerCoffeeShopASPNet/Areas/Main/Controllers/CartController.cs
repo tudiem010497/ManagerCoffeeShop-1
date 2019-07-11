@@ -106,8 +106,10 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
             {
 
                 List<Cart> carts = Session["cart"] as List<Cart>;
+                
                 int PosID = 1;
                 double TotalAmount = 0;
+               
                 foreach (var item in carts)
                 {
                     TotalAmount = TotalAmount + item.Total;

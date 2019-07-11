@@ -4,16 +4,15 @@
     ViewBag.Title = "DetailReceipt";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">CHI TIẾT PHIẾU NHẬP</h2>
-<br />
-<div>
+
+<h2 style="text-align:center;padding:10px">CHI TIẾT PHIẾU NHẬP</h2>
+<div style="padding-bottom:10px">
     @(Html
             .Grid(Model)
             .Build(columns =>
             {
                 columns.Add(model => model.ReceiptID).Titled("Mã phiếu nhập");
-                columns.Add(model => model.Ingredient.Name).Titled("Tên NVL");
+                columns.Add(model => model.Ingredient.Name).Titled("Tên nguyên vật liệu");
                 columns.Add(model => model.Gift.Name).Titled("Tên quà tặng");
                 columns.Add(model => model.Facility.Name).Titled("Tên CSVC");
                 columns.Add(model => model.Supplier.Name).Titled("Tên nhà cung cấp");
@@ -24,5 +23,5 @@
             }).Filterable()
     )
 </div>
-<br />
+
 @Html.ActionLink("Trở về", "GetAllReceipt", "Warehouse", new { @class = "btn btn-outline-primary" })

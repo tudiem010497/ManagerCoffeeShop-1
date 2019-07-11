@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="~/Assets/Admin/js/edit-text-svg-js/style.css">
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js'></script>
 <script src="~/Assets/Admin/js/edit-text-svg-js/script.js"></script>
-<h2>CreateDiagram</h2>
-@Html.ActionLink("Xem các sơ đồ quán hiện có", "ViewDiagram", "Web", new { @CLSID = 0},new { @class = "btn btn-outline-info"})
+<h2 style="text-align:center;padding-top:7px;padding-bottom:5px">TẠO SƠ ĐỒ QUÁN</h2>
+@Html.ActionLink("Xem các sơ đồ quán hiện có", "ViewDiagram", "Web", new { @CLSID = 0},new { @class = "btn btn-sm btn-outline-info"})
 <div id= "viewDiagram">
     <div class="row">
         <div id="information" class="col-sm-2">
@@ -28,7 +28,8 @@
                     <input class="form-control" id="ratio" name="ratio" value="@ViewData["ratio"]">
                 </div>
                 <div class="form-group">
-                    @Html.Label("Chi nhánh", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <label>Chi nhánh</label>
+                    @*@Html.Label("Chi nhánh", htmlAttributes: new { @class = "control-label col-md-4" })*@
                         @*@Html.EditorFor(model => model.CSID, new { htmlAttributes = new { @class = "form-control" } })*@
                         @Html.DropDownList("CSID", (List<SelectListItem>)ViewData["listCoffeeShop"], new { @class = "form-control" })
                 </div>
@@ -36,7 +37,7 @@
                     <label for="ratio">Tầng</label>
                     <input class="form-control" id="FoorID" name="ratio" value="@ViewData["FoorID"]">
                 </div>
-                <button type="submit" class="btn btn-outline-primary">Nhập</button>
+                <button type="submit" class="btn btn-sm btn-outline-primary">Nhập</button>
             </form>
         </div>
         <div class="col-sm-10">

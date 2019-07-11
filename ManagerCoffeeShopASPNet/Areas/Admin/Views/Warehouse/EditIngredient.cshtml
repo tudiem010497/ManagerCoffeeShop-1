@@ -5,31 +5,25 @@
     ViewBag.Title = "EditIngredient";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<br />
-<h2 style="text-align:center">CHỈNH SỬA THÔNG TIN NGUYÊN VẬT LIỆU</h2>
-
+<h2 style="text-align:center;padding:10px">CHỈNH SỬA THÔNG TIN NGUYÊN VẬT LIỆU</h2>
 @using (Html.BeginForm("DoEditIngredient","Warehouse", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
     <div class="form-horizontal">
-        @*<h4>Ingredient</h4>*@
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.IngreID)
 
         <div class="form-group">
-            @Html.Label("Tên NCC", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.EditorFor(model => model.SupplierID, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.Label("Tên nhà cung cấp", htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-11">
                 @Html.DropDownListFor(model => model.SupplierID, (List<SelectListItem>)ViewData["listSupplier"], new { @class= "form-control" })
                 @Html.ValidationMessageFor(model => model.SupplierID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.Label("Tên NVL", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.Label("Tên nguyên vật liệu", htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-11">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
@@ -37,7 +31,7 @@
 
         <div class="form-group">
             @Html.Label("Số lượng", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-11">
                 @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
             </div>
@@ -45,28 +39,28 @@
 
         <div class="form-group">
             @Html.Label("Đơn vị tính", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-11">
                 @Html.EditorFor(model => model.Unit, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Unit, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.Label("Giá", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
+        <div class="form-group row">
+            <div class="col-md-6">
+                @Html.Label("Giá", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                @Html.Label("Đơn vị tiền", htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Currency, new SelectList(Enum.GetValues(typeof(EnumUtilities.Currency))), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.Label("Đơn vị tiền", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Currency, new SelectList(Enum.GetValues(typeof(EnumUtilities.Currency))), new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
         <div class="form-group">
             <div class="row">
                 <div class="col-md-9">
@@ -76,7 +70,6 @@
                     <input type="submit" value="Lưu" class="btn btn-info" />
                 </div>
             </div>
-            
         </div>
     </div>
 }
