@@ -5,25 +5,26 @@
     ViewBag.Title = "CreateReceipt";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h2 style="text-align:center;padding:10px">THÊM PHIẾU NHẬP MỚI</h2>
-
+<h2 style="text-align:center;padding:5px">THÊM PHIẾU NHẬP MỚI</h2>
 <div class="row">
     <div class="col-sm-8">
-        <div style="padding-bottom:5px">
+        <div>
             @(Html
                 .Grid((IEnumerable<Ingredient>)ViewData["ingres"])
                 .Build(columns =>
                 {
-                    columns.Add(ingre => ingre.Name).Titled("Tên nguyên vật liệu");
-                    columns.Add(ingre => ingre.Supplier.Name).Titled("Tên nhà cung cấp");
-                    columns.Add(ingre => ingre.UnitPrice).Titled("Đơn giá");
+                    columns.Add(ingre => ingre.Name).Titled("Tên nguyên vật liệu").Sortable(false);
+                    columns.Add(ingre => ingre.Supplier.Name).Titled("Tên nhà cung cấp").Sortable(false);
+                    columns.Add(ingre => ingre.UnitPrice).Titled("Đơn giá").Filterable(false);
                     columns.Add(ingre => ingre.Unit).Titled("Đơn vị tính");
                     columns.Add(ingre => ingre.IngreID).Encoded(false).RenderedAs(ingre =>
-                        "<button data-toggle='modal' data-target='#modalOption' class='btnPreAddToReceipt btn btn-primary' name ='" + ingre.Name + "' ingreid = " + ingre.IngreID + " unitprice = " + ingre.UnitPrice + ">" + "Thêm" + "</button>"
+                        "<button data-toggle='modal' data-target='#modalOption' class='btnPreAddToReceipt btn btn-primary btn-sm' name ='" + ingre.Name + "' ingreid = " + ingre.IngreID + " unitprice = " + ingre.UnitPrice + ">" + "Thêm" + "</button>"
                     ).Filterable(false);
                 }).Filterable()
-
+                .Sortable()
+                .Pageable(pager=> {
+                    pager.RowsPerPage = 4;
+                })
             )
         </div>
         <div>
@@ -31,13 +32,14 @@
                 .Grid((IEnumerable<Gift>)ViewData["gifts"])
                 .Build(columns =>
                 {
-                    columns.Add(gift => gift.Name).Titled("Tên quà tặng");
-                    columns.Add(gift => gift.Supplier.Name).Titled("Tên nhà cung cấp");
-                    columns.Add(gift => gift.UnitPrice).Titled("Đơn giá");
+                    columns.Add(gift => gift.Name).Titled("Tên quà tặng").Sortable(false);
+                    columns.Add(gift => gift.Supplier.Name).Titled("Tên nhà cung cấp").Sortable(false);
+                    columns.Add(gift => gift.UnitPrice).Titled("Đơn giá").Filterable(false);
                     columns.Add(gift => gift.GiftID).Encoded(false).RenderedAs(gift =>
-                        "<button data-toggle='modal' data-target='#modalOption_gift' class='btnPreAddGiftToReceipt btn btn-primary' name ='" + gift.Name + "' giftid = " + gift.GiftID + " unitprice = " + gift.UnitPrice + ">" + "Thêm" + "</button>"
+                        "<button data-toggle='modal' data-target='#modalOption_gift' class='btnPreAddGiftToReceipt btn btn-primary btn-sm' name ='" + gift.Name + "' giftid = " + gift.GiftID + " unitprice = " + gift.UnitPrice + ">" + "Thêm" + "</button>"
                     ).Filterable(false);
                 }).Filterable()
+                .Sortable()
             )
         </div>
     </div>
@@ -129,17 +131,15 @@
                 @Html.DropDownList("SupplierID", (List<SelectListItem>)ViewData["sups"], new { @class= "form-control" })
             </div>
             <table class="list-receiptdetail table">
-                <tbody>
-                </tbody>
+                <tbody></tbody>
             </table>
             <table class="list-receiptdetail-gift table">
                 <tbody></tbody>
             </table>
-            <button class="btn btn-primary btnAddReceipt">Tạo phiếu nhập</button>
+            <button class="btn btn-sm btn-primary btnAddReceipt">Tạo phiếu nhập</button>
         </div>
     </div>
 </div>
-
-<div style="padding-top:5px">
+<div @*style="padding-top:5px"*@>
     @Html.ActionLink("Trở về", "GetAllReceipt", "Warehouse")
 </div>
