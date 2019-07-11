@@ -29,7 +29,7 @@
         <div class="form-group">
             @Html.Label("Tên NVL", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("IngreID", (List<SelectListItem>) ViewData["listIngedients"], new { @class = "form-control" })
+                @Html.DropDownList("IngreID", (List<SelectListItem>) ViewData["listIngedients"], new { @class = "form-control", id = "IngreID" })
             </div>
         </div>
 

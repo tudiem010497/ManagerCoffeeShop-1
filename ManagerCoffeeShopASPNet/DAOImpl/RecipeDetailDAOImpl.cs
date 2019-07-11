@@ -30,12 +30,19 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         }
         public IEnumerable<RecipeDetail> GetAllRecipeDetailByRecipeID(int RecipeID)
         {
-            IEnumerable<RecipeDetail> recipeDetails = from recipedetail in this.context.RecipeDetails
+            try
+            {
+                IEnumerable<RecipeDetail> recipeDetails = from recipedetail in this.context.RecipeDetails
                                                           where recipedetail.RecID == RecipeID
                                                           orderby recipedetail.Step ascending
                                                           select recipedetail;
-            int num = recipeDetails.ToList<RecipeDetail>().Count;
-            return recipeDetails;
+                int num = recipeDetails.ToList<RecipeDetail>().Count;
+                return recipeDetails;
+            }
+            catch
+            {
+                return null;
+            }
         }
         public RecipeDetail GetAllRecipeDetailByrecipeID(int RecipeID)
         {

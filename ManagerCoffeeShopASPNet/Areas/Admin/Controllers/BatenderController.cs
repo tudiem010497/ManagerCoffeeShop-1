@@ -160,23 +160,27 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult ReadRecipe(int FDID)
         {
             Recipe recipe = info.GetRecipeByFDID(FDID);
-            if (recipe != null)
+            if (recipe != null) // đã có công thức
             {
                 IEnumerable<RecipeDetail> recipeDetails = info.GetAllRecipeDetailByRecipeID(recipe.RecID);
                 int count = recipeDetails.Count<RecipeDetail>();
-                if (count == 0)
-                {
-                    return RedirectToAction("ShowAllRecipeDetailByRecipeID", "Batender", new { RecipeID = recipe.RecID });
-                }
-                else
-                {
-                    ViewData["RecipeID"] = recipe.RecID;
-                    ViewData["recipe"] = recipe;
-                    ViewData["recipeDetails"] = recipeDetails;
-                    return View();
-                }
+                //if (count == 0) // chưa có bước
+                //{
+                //    return RedirectToAction("ShowAllRecipeDetailByRecipeID", "Batender", new { RecipeID = recipe.RecID });
+                //} 
+                //else // đã có bước
+                //{
+                //    ViewData["RecipeID"] = recipe.RecID;
+                //    ViewData["recipe"] = recipe;
+                //    ViewData["recipeDetails"] = recipeDetails;
+                //    return View();
+                //}
+                ViewData["RecipeID"] = recipe.RecID;
+                ViewData["recipe"] = recipe;
+                ViewData["recipeDetails"] = recipeDetails;
+                return View();
             }
-            else
+            else // chưa có công thức
             {
                 ViewData["message"] = "Chưa có công thức pha chế cho loại đồ uống này";
                 ViewData["FDID"] = FDID;
@@ -292,38 +296,37 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             bool result = info.InsertRecipe(FDID);
             Recipe recipe = info.GetRecipeByFDID(FDID);
-            return RedirectToAction("ShowAllRecipeDetailByRecipeID", "Batender", new { RecipeID = recipe.RecID });
+            return RedirectToAction("ReadRecipe", "Batender", new { FDID = FDID });
         }
 
-        [Route("ShowAllRecipeDetailByRecipeID")] // show bước làm
-        public ActionResult ShowAllRecipeDetailByRecipeID(int RecipeID)
-        {
-            try
-            {
-                IEnumerable<RecipeDetail> recipeDetails = info.GetAllRecipeDetailByRecipeID(RecipeID);
-                int count = recipeDetails.Count();
-                if (count > 1)
-                {
-                    Recipe rec = info.GetRecipeByRecipeID(RecipeID);
-                    return RedirectToAction("ReadRecipe", new { FDID  = rec.FDID});
-                }
-                else
-                {
-                    ViewData["RecipeID"] = RecipeID;
-                    RecipeDetail RD = info.GetAllRecipeDetailByrecipeID(RecipeID);
-                    Ingredient ingredient = info.GetIngredientByIngreID(RD.IngreID);
+        //[Route("ShowAllRecipeDetailByRecipeID")] // show bước làm
+        //public ActionResult ShowAllRecipeDetailByRecipeID(int RecipeID)
+        //{
+        //    try
+        //    {
+        //        IEnumerable<RecipeDetail> recipeDetails = info.GetAllRecipeDetailByRecipeID(RecipeID);
+        //        int count = recipeDetails.Count();
+        //        if (count > 1)
+        //        {
+        //            Recipe rec = info.GetRecipeByRecipeID(RecipeID);
+        //            return RedirectToAction("ReadRecipe", new { FDID = rec.FDID });
+        //        }
+        //        else
+        //        {
+        //            ViewData["RecipeID"] = RecipeID;
+        //            RecipeDetail RD = info.GetAllRecipeDetailByrecipeID(RecipeID);
+        //            Ingredient ingredient = info.GetIngredientByIngreID(RD.IngreID);
 
-                    ViewData["IngreID"] = ingredient.Name;
-                    return View(recipeDetails);
-                }
-                
-            }
-            catch (Exception ex)
-            {
-                ViewData["RecipeID"] = RecipeID;
-                return View();
-            }
-        }
+        //            ViewData["IngreID"] = ingredient.Name;
+        //            return View(recipeDetails);
+        //        }
+
+        //    }
+        //    catch
+        //    {
+        //        ViewData["RecipeID"] = RecipeID;
+        //        return View();
+        //    }
 
         /// <summary>
         /// Thêm bước làm
@@ -356,8 +359,9 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult DoCreateRecipeDetail(int RecipeID, int Step, int IngreID, double Amount,
             string Unit, string Desc)
         {
+            int FDID = info.GetRecipeByRecipeID(RecipeID).FDID;
             bool result = info.InsertRecipeDetail(RecipeID, Step, IngreID, Amount, Unit, Desc);
-            return RedirectToAction("ShowAllRecipeDetailByRecipeID", "Batender", new { RecipeID = RecipeID });
+            return RedirectToAction("ReadRecipe", "Batender", new { FDID = FDID });
         }
 
         [Route("SendMessageIngredientWithOut")]
@@ -441,6 +445,12 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             Recipe rec = info.GetRecipeByRecipeID(recipedetail.RecID);
             info.DeleteRecipeDetail(RecipeDetailID);
             return RedirectToAction("ReadRecipe", "Batender", new { FDID = rec.FDID });
+        }
+
+        [Route("CreateIngreExchangeForFoodAndDrink")]
+        public ActionResult CreateIngreExchangeForFoodAndDrink()
+        {
+            return View();
         }
     }
 }
