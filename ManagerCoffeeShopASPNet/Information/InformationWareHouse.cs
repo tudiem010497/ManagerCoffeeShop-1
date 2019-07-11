@@ -20,6 +20,11 @@ namespace ManagerCoffeeShopASPNet.Information
             this._receiptDAO = (ReceiptDAO)new ReceiptDAOImpl();
             this._receiptDetailDAO = (ReceiptDetailDAO)new ReceiptDetailDAOImpl();
         }
+
+        public IEnumerable<Ingredient> GetAllIngredientEffete()
+        {
+            return this._ingredientDAO.GetAllIngredientEffete();
+        }
         public IEnumerable<Ingredient> GetAllIngredient()
         {
             return this._ingredientDAO.GetAllIngredient();

@@ -16,6 +16,7 @@ namespace ManagerCoffeeShopASPNet.Information
         private FoodAndDrinkDAO _foodAndDrinkDAO;
         private IngredientDAO _ingredientDAO;
         private IngredientMessageDAO _ingredientMessageDAO;
+        private IngreExchangeDAO _ingreExchangeDAO;
         public InformationBatender()
         {
             this._orderDAO = (OrderDAO)new OrderDAOImpl();
@@ -25,6 +26,39 @@ namespace ManagerCoffeeShopASPNet.Information
             this._foodAndDrinkDAO = (FoodAndDrinkDAO)new FoodAndDrinkDAOImpl();
             this._ingredientDAO = (IngredientDAO)new IngredientDAOImpl();
             this._ingredientMessageDAO = (IngredientMessageDAO)new IngredientMessageDAOImpl();
+            this._ingreExchangeDAO = (IngreExchangeDAO)new IngreExchangeDAOImpl();
+        }
+        public bool UpdateIngredient(Ingredient ingredient)
+        {
+            return this._ingredientDAO.UpdateIngredient(ingredient);
+        }
+        public OrderItem GetOrderItemByOrderItemID(int OrderItemID)
+        {
+            return this._orderItemDAO.GetOrderItemByID(OrderItemID);
+        }
+        public IEnumerable<Order> GetOrderByOrderID(int OrderID)
+        {
+            return this._orderDAO.GetOrderByOrderID(OrderID);
+        }
+        public IngreExchange GetIngreExchangeByRecipeDetailID(int RecipeDetailID)
+        {
+            return this._ingreExchangeDAO.GetIngreExchangeByRecipeDetailID(RecipeDetailID);
+        }
+        public bool EditIngreExchange(IngreExchange exchange)
+        {
+            return this._ingreExchangeDAO.EditIngreExchange(exchange);
+        }
+        public int GetLastRecipeDetailID()
+        {
+            return this._recipeDetailDAO.GetLastRecipeDetailID();
+        }
+        public bool InsertIngreExchange(IngreExchange ingreExchange)
+        {
+            return this._ingreExchangeDAO.InsertIngreExchange(ingreExchange);
+        }
+        public IngreExchange GetIngreExchangeByIngreExchangeID(int IngreExchangeID)
+        {
+            return this._ingreExchangeDAO.GetIngreExchangeByIngreExchangeID(IngreExchangeID);
         }
         public IEnumerable<Order> GetAllOrderByStatus(string status)
         {
@@ -59,10 +93,7 @@ namespace ManagerCoffeeShopASPNet.Information
             int num = this._recipeDetailDAO.GetAllRecipeDetailByRecipeID(RecipeID).Count();
             return this._recipeDetailDAO.GetAllRecipeDetailByRecipeID(RecipeID);
         }
-        public RecipeDetail GetAllRecipeDetailByrecipeID(int RecipeID)
-        {
-            return this._recipeDetailDAO.GetAllRecipeDetailByrecipeID(RecipeID);
-        }
+        
         public IEnumerable<FoodAndDrink> GetAllFoodAndDrink()
         {
             return this._foodAndDrinkDAO.GetAllFoodAndDrink();

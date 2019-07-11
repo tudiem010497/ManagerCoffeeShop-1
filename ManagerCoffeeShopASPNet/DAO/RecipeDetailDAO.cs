@@ -8,8 +8,8 @@ namespace ManagerCoffeeShopASPNet.DAO
 {
     interface RecipeDetailDAO
     {
+        int GetLastRecipeDetailID();
         IEnumerable<RecipeDetail> GetAllRecipeDetailByRecipeID(int RecipeID);
-        RecipeDetail GetAllRecipeDetailByrecipeID(int RecipeID);
         RecipeDetail GetRecipeDetailByRecipeDetailID(int RecipeDetailID);
         bool InsertRecipeDetail(int RecID, int Step, int IngreID, double Amount, string Unit, string Desc);
         int CountRecipeDetailByRecipeID(int RecipeID);

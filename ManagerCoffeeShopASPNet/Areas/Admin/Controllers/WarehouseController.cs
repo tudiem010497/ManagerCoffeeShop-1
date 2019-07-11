@@ -212,5 +212,12 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             }
             return Json(new { SupplierID = receiptModel.SupplierID }, JsonRequestBehavior.AllowGet);
         }
+
+        [Route("GetAllIngredientEffete")]
+        public ActionResult GetAllIngredientEffete()
+        {
+            IEnumerable<Ingredient> ingres = info.GetAllIngredientEffete();
+            return View(ingres);
+        }
     }
 }

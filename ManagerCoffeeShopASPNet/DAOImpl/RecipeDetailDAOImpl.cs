@@ -44,14 +44,6 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 return null;
             }
         }
-        public RecipeDetail GetAllRecipeDetailByrecipeID(int RecipeID)
-        {
-            RecipeDetail recipeDetails = (from recipedetail in this.context.RecipeDetails
-                                          where recipedetail.RecID == RecipeID
-                                          orderby recipedetail.Step ascending
-                                          select recipedetail).SingleOrDefault();
-            return recipeDetails;
-        }
         public RecipeDetail GetRecipeDetailByRecipeDetailID(int RecipeDetailID)
         {
             RecipeDetail recipeDetail = (from RD in context.RecipeDetails
@@ -118,6 +110,20 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             catch(Exception e)
             {
                 throw new Exception("Error delete recipeDetail: " + e.Message);
+            }
+        }
+        public IEnumerable<RecipeDetail> ListRecipeDetailByRecipeID(int RecipeID)
+        {
+            try
+            {
+                IEnumerable<RecipeDetail> details = from detail in context.RecipeDetails
+                                                    where detail.RecID == RecipeID
+                                                    select detail;
+                return details;
+            }
+            catch
+            {
+                return null;
             }
         }
     }

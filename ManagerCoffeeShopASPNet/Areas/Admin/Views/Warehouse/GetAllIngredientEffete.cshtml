@@ -1,0 +1,25 @@
+﻿@using NonFactors.Mvc.Grid
+@model IEnumerable<ManagerCoffeeShopASPNet.Ingredient>
+
+@{
+    ViewBag.Title = "GetAllIngredientEffete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="text-align:center;padding:10px;">DANH SÁCH NGUYÊN VẬT LIỆU DƯỚI ĐỊNH MỨC KHO</h2>
+
+@(Html
+            .Grid(Model)
+            .Build(columns =>
+            {
+                columns.Add(model => model.Name).Filterable(true).Titled("Tên nguyên vật liệu");
+                columns.Add(model => model.Amount).Titled("Số lượng còn lại");
+                columns.Add(model => model.AmountMin).Titled("Định mức kho");
+                columns.Add(model => model.Unit).Titled("Đơn vị tính");
+                columns.Add(model => model.UnitPrice).Titled("Đơn giá");
+            }).AppendCss("table-hover")
+            .Pageable(pager =>
+            {
+                pager.RowsPerPage = 6;
+            })
+)

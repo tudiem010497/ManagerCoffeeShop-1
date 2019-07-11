@@ -56,7 +56,24 @@
                 @Html.ValidationMessageFor(model => model.Desc, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div class="form-group">
+            @Html.Label("Số lượng nguyên vật liệu", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="AmountIngre" name="AmountIngre" value="" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Đơn vị tính", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" id="UnitIngre" name="UnitIngre" readonly value="" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Số lượng đồ uống tương ứng", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="Quantity" name="Quantity" type="number" class="form-control" />
+            </div>
+        </div>
         <div class="form-group">
             <div class="row">
                 <div class="col-md-9">

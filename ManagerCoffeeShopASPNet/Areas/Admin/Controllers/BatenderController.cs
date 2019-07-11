@@ -91,7 +91,19 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult UpdateReady(int OrderItemID, int OrderID, int NumOfOrderItem, string view)
         {
             string status = "Ready";
-            bool result = info.UpdateStatus(OrderItemID, status);
+            //bool result = info.UpdateStatus(OrderItemID, status);
+            OrderItem oi = info.GetOrderItemByOrderItemID(OrderItemID);
+            Recipe recipe = info.GetRecipeByFDID(oi.FDID);
+            IEnumerable<RecipeDetail> details = info.GetAllRecipeDetailByRecipeID(recipe.RecID);
+            foreach(RecipeDetail detail in details)
+            {
+                IngreExchange exchange = info.GetIngreExchangeByRecipeDetailID(detail.RecipeDetailID);
+                int IngreID = Convert.ToInt32(exchange.IngreID);
+                double AmountDiscount = (exchange.Amount / 20) * oi.Quantity;
+                Ingredient ingre = info.GetIngredientByIngreID(IngreID);
+                ingre.Amount = ingre.Amount - AmountDiscount;
+                info.UpdateIngredient(ingre);
+            }
             if (view == "GetListOrderItemNeedPreparetion")
             {
                 return RedirectToAction("GetListOrderItemNeedPreparetion", "Batender");
@@ -357,10 +369,21 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [HttpPost]
         [Route("DoCreateRecipeDetail")]
         public ActionResult DoCreateRecipeDetail(int RecipeID, int Step, int IngreID, double Amount,
-            string Unit, string Desc)
+            string Unit, string Desc, float AmountIngre, string UnitIngre, int Quantity)
         {
             int FDID = info.GetRecipeByRecipeID(RecipeID).FDID;
             bool result = info.InsertRecipeDetail(RecipeID, Step, IngreID, Amount, Unit, Desc);
+            int RecipeDetailID = info.GetLastRecipeDetailID();
+
+            IngreExchange ingreExchange = new IngreExchange();
+            ingreExchange.RecipeDetailID = RecipeDetailID;
+            ingreExchange.FDID = FDID;
+            ingreExchange.IngreID = IngreID;
+            ingreExchange.Amount = Amount;
+            ingreExchange.Unit = UnitIngre;
+            ingreExchange.Quantity = Quantity;
+            bool result1 = info.InsertIngreExchange(ingreExchange);
+
             return RedirectToAction("ReadRecipe", "Batender", new { FDID = FDID });
         }
 
@@ -418,13 +441,22 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             }
             ViewData["listIngreID"] = listIngredient;
             Recipe rec = info.GetRecipeByRecipeID(recipeDetail.RecID);
+            IngreExchange exchange = info.GetIngreExchangeByRecipeDetailID(recipeDetail.RecipeDetailID);
+            ViewData["exchange"] = exchange;
             ViewData["FDID"] = rec.FDID;
             return View(recipeDetail);
         }
         [Route("DoEditRecipeDetail")]
-        public ActionResult DoEditRecipeDetail(int RecipeDetailID, int RecID, int Step, int IngreID, float Amount, string Unit, string Desc)
+        public ActionResult DoEditRecipeDetail(int RecipeDetailID, int RecID, int Step, int IngreID, float Amount
+            , string Unit, string Desc, float AmountIngre, string UnitIngre, int Quantity, int IngreExchangeID)
         {
             info.EditRecipeDetail(RecipeDetailID, Step, IngreID, Amount, Unit, Desc);
+            IngreExchange exchange = info.GetIngreExchangeByIngreExchangeID(IngreExchangeID);
+            exchange.Amount = AmountIngre;
+            exchange.Unit = UnitIngre;
+            exchange.Quantity = Quantity;
+            exchange.IngreExchangeID = IngreExchangeID;
+            info.EditIngreExchange(exchange);
             Recipe rec = info.GetRecipeByRecipeID(RecID);
             return RedirectToAction("ReadRecipe", "Batender", new { FDID = rec.FDID });
         }
@@ -447,10 +479,17 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             return RedirectToAction("ReadRecipe", "Batender", new { FDID = rec.FDID });
         }
 
-        [Route("CreateIngreExchangeForFoodAndDrink")]
-        public ActionResult CreateIngreExchangeForFoodAndDrink()
+        //[Route("CreateIngreExchangeForFoodAndDrink")]
+        //public ActionResult CreateIngreExchangeForFoodAndDrink()
+        //{
+        //    return View();
+        //}
+
+        [Route("GetUnitByIngreID")]
+        public ActionResult GetUnitByIngreID(int IngreID)
         {
-            return View();
+            string Unit = info.GetIngredientByIngreID(IngreID).Unit;
+            return Json(new { Unit = Unit }, JsonRequestBehavior.AllowGet);
         }
     }
 }

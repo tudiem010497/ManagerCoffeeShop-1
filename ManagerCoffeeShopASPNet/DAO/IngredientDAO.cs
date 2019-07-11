@@ -14,5 +14,7 @@ namespace ManagerCoffeeShopASPNet.DAO
             double Amount, string Unit, double UnitPrice, string Currency);
         bool InsertIngredient(int SupplierID, string Name,
             double Amount, string Unit, double UnitPrice, string Currency);
+        bool UpdateIngredient(Ingredient ingredient);
+        IEnumerable<Ingredient> GetAllIngredientEffete();
     }
 }

@@ -27,6 +27,30 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             }
             
         }
+        public bool UpdateIngredient(Ingredient ingredient)
+        {
+            try
+            {
+                Ingredient ingre = (from ingredients in context.Ingredients
+                                    where ingredients.IngreID == ingredient.IngreID
+                                    select ingredients).SingleOrDefault();
+                ingre.SupplierID = ingredient.SupplierID;
+                ingre.Name = ingredient.Name;
+                ingre.Amount = ingredient.Amount;
+                ingre.Unit = ingredient.Unit;
+                ingre.UnitPrice = ingredient.UnitPrice;
+                ingre.Currency = ingredient.Currency;
+                ingre.Amount = ingredient.Amount;
+                context.SubmitChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw new Exception("Error EditIngredient : " + ex.Message);
+
+            }
+        }
         public IEnumerable<Ingredient> GetAllIngredient()
         {
             return context.Ingredients.ToList();
@@ -83,6 +107,20 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             {
                 return false;
                 throw new Exception("Error InsertIngredient : " + ex.Message);
+            }
+        }
+        public IEnumerable<Ingredient> GetAllIngredientEffete()
+        {
+            try
+            {
+                IEnumerable<Ingredient> ingre = from ingres in context.Ingredients
+                                                where ingres.Amount <= ingres.AmountMin
+                                                select ingres;
+                return ingre;
+            }
+            catch
+            {
+                return null;
             }
         }
     }
