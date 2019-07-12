@@ -6,6 +6,14 @@
 }
 
 <h2 style="text-align:center;padding:10px">CHI TIẾT PHIẾU NHẬP</h2>
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-success">@TempData["message"]</div>
+}
+@if (TempData["error"] != null)
+{
+    <div class="alert alert-danger">@TempData["error"]</div>
+}
 <div style="padding-bottom:10px">
     @(Html
             .Grid(Model)
@@ -23,5 +31,11 @@
             }).Filterable()
     )
 </div>
-
-@Html.ActionLink("Trở về", "GetAllReceipt", "Warehouse", new { @class = "btn btn-outline-primary" })
+<div class="row">
+    <div class="col-md-8">
+        @Html.ActionLink("Trở về", "GetAllReceipt", "Warehouse", new { @class = "btn btn-outline-primary btn-sm" })
+    </div>
+    <div class="col-md-4">
+        @Html.ActionLink("Nhập xong", "ClosedReceipt", "Warehouse", new { ReceiptID = ViewData["ReceiptID"] }, new { @class="btn btn-sm btn-outline-success"})
+    </div>
+</div>

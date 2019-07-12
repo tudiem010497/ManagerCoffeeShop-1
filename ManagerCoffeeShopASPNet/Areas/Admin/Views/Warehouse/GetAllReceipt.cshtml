@@ -1,6 +1,6 @@
 ﻿@using NonFactors.Mvc.Grid
 @model IEnumerable<Receipt>
-
+@using ManagerCoffeeShopASPNet.Class
 @{
     ViewBag.Title = "GetAllReceipt";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -17,13 +17,14 @@
             .Grid(Model)
             .Build(columns =>
             {
+                ConvertReceipt o = new ConvertReceipt();
                 columns.Add(model => model.Date).Titled("Ngày nhập");
                 columns.Add(model => model.TotalAmount).Titled("Tổng tiền");
                 columns.Add(model => model.Currency).Titled("Đơn vị tiền").Filterable(false);
-                columns.Add(model => model.ReceiptID).Encoded(false).
-                        RenderedAs(model => (
-                         Html.ActionLink("Xem chi tiết", "DetailReceipt", "WareHouse", new { ReceiptID = model.ReceiptID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
-                        )).Filterable(false);
+                columns.Add(model => o.ConvertStatus(model.Status).ToString()).Titled("Trạng thái").Filterable(false);
+                columns.Add(model => model.ReceiptID).Encoded(false).RenderedAs(model => (
+                    Html.ActionLink("Xem chi tiết", "DetailReceipt", "WareHouse", new { ReceiptID = model.ReceiptID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
+                )).Filterable(false);
             }).Filterable().AppendCss("table-hover")
             .Pageable(pager =>
             {

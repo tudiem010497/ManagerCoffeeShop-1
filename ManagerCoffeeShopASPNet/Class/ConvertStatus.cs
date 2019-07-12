@@ -127,7 +127,7 @@ namespace ManagerCoffeeShopASPNet.Class
     {
         public string ConvertStatus(string Status)
         {
-             if (Status == "Waiting")
+            if (Status == "Waiting")
             {
                 return "Chờ xác nhận";
             }
@@ -138,6 +138,10 @@ namespace ManagerCoffeeShopASPNet.Class
             else if (Status == "Cancel")
             {
                 return "Hủy";
+            }
+            else if (Status == "Closed")
+            {
+                return "Đã nhập xong";
             }
             else if (Status == "Paid")
             {
@@ -165,7 +169,8 @@ namespace ManagerCoffeeShopASPNet.Class
             else return "Đồ ăn nhẹ";
         }
     }
-    public class ConvertStatusTest{
+    public class ConvertStatusTest
+    {
         //public string test(string Status)
         //{
         //    // Status bảng Position
@@ -207,7 +212,7 @@ namespace ManagerCoffeeShopASPNet.Class
         //        Status = "Không đồng ý";
         //    }
         //    //Status bảng Receipt (giống order)
-            
+
         //}
     }
 }

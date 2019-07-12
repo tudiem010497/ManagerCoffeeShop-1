@@ -11,9 +11,10 @@ namespace ManagerCoffeeShopASPNet.DAO
         IEnumerable<Ingredient> GetAllIngredient();
         Ingredient GetIngredientByIngreID(int IngreID);
         bool EditIngredient(int IngreID, int SupplierID, string Name,
-            double Amount, string Unit, double UnitPrice, string Currency);
+            double Amount, double AmountMin, string Unit, double UnitPrice, string Currency);
         bool InsertIngredient(int SupplierID, string Name,
-            double Amount, string Unit, double UnitPrice, string Currency);
+            double Amount, double AmountMin, string Unit, double UnitPrice, string Currency);
+        bool UpdateAmountIngredient(int IngreID, double Amount);
         bool UpdateIngredient(Ingredient ingredient);
         IEnumerable<Ingredient> GetAllIngredientEffete();
     }

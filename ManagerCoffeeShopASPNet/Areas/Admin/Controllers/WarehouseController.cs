@@ -45,9 +45,9 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         }
 
         [Route("DoEditIngredient")]
-        public ActionResult DoEditIngredient(int IngreID, int SupplierID, string Name, double Amount, string Unit, double UnitPrice, string Currency)
+        public ActionResult DoEditIngredient(int IngreID, int SupplierID, string Name, double Amount, double AmountMin, string Unit, double UnitPrice, string Currency)
         {
-            bool result = info.EditIngredient(IngreID, SupplierID, Name, Amount, Unit, UnitPrice, Currency);
+            bool result = info.EditIngredient(IngreID, SupplierID, Name, Amount, AmountMin, Unit, UnitPrice, Currency);
             if (result)
             {
                 TempData["message"] = "Lưu thành công";
@@ -76,10 +76,10 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         }
 
         [Route("DoCreateIngredient")]
-        public ActionResult DoCreateIngredient(int SupplierID, string Name, double Amount, string Unit, double UnitPrice, string Currency)
+        public ActionResult DoCreateIngredient(int SupplierID, string Name, double Amount, double AmountMin, string Unit, double UnitPrice, string Currency)
         {
             
-            bool result = info.InsertIngredient(SupplierID, Name, Amount, Unit, UnitPrice, Currency);
+            bool result = info.InsertIngredient(SupplierID, Name, Amount, AmountMin, Unit, UnitPrice, Currency);
             if (result)
             {
                 TempData["message"] = "Lưu thành công";
@@ -160,9 +160,48 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult DetailReceipt(int ReceiptID)
         {
             IEnumerable<ReceiptDetail> receiptDetails = info.GetAllReceiptDetailByReceiptID(ReceiptID);
+            //int ReceiptDetailID = receiptDetails.Single().ReceiptDetailID;
+            ViewData["ReceiptID"] = ReceiptID;
             return View(receiptDetails);
         }
+        //nhấn nút nhập xong phiếu nhập và cập nhật lại số lượng vào kho (Ingredients)
+        [Route("ClosedReceipt")]
+        public ActionResult ClosedReceipt(int ReceiptID)
+        {
+            string status = "Closed";
+            info.UpdateReceiptDetailByReceiptID(ReceiptID, status);
+            //ReceiptDetail detail = info.GetReceiptDetailByReceiptDetailID(ReceiptDetailID);
+            IEnumerable<ReceiptDetail> details = info.GetAllReceiptDetailByReceiptID(ReceiptID);
+            foreach(var item in details)
+            {
+                if (item.IngreID != null)
+                {
+                    int IngreID = item.IngreID.GetValueOrDefault();
+                    Ingredient ingre = info.GetIngredientByIngreID(IngreID);
+                    double AmountOfReceiptDetail = item.Amount.GetValueOrDefault();
+                    double AmountNew = AmountOfReceiptDetail + ingre.Amount;
+                    info.UpdateAmountIngredient(IngreID, AmountNew);
+                }
+                //if (item.GiftID != null)
+                //{
+                //    int GiftID = item.GiftID.GetValueOrDefault();
+                //    Gift gift = infoDV.GetGiftByID(GiftID);
+                //    double AmountOfReceiptDetail = item.Amount.GetValueOrDefault();
+                //    double AmountNew=AmountOfReceiptDetail+gift
+                //}
+            }
 
+            bool result = info.UpdateReceipt(ReceiptID, status);
+            if (result)
+            {
+                TempData["message"] = "Lưu thành công";
+            }
+            else
+            {
+                TempData["error"] = "Lưu thất bại";
+            }
+            return RedirectToAction("DetailReceipt", "Warehouse");
+        }
         [Route("CreateReceipt")]
         public ActionResult CreateReceipt()
         {

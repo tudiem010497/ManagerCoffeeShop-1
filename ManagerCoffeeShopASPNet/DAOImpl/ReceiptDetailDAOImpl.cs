@@ -1,8 +1,8 @@
-﻿using ManagerCoffeeShopASPNet.DAO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using ManagerCoffeeShopASPNet.DAO;
 
 namespace ManagerCoffeeShopASPNet.DAOImpl
 {
@@ -116,6 +116,20 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 return true;
             }
             catch(Exception e)
+            {
+                throw new Exception("Error Update ReceiptDetail: " + e.Message);
+            }
+        }
+        public bool UpdateReceiptDetailByReceiptID(int ReceiptID, string Status)
+        {
+            try
+            {
+                ReceiptDetail receiptDetail = context.ReceiptDetails.FirstOrDefault(m => m.ReceiptID == ReceiptID);
+                receiptDetail.Status = Status;
+                context.SubmitChanges();
+                return true;
+            }
+            catch (Exception e)
             {
                 throw new Exception("Error Update ReceiptDetail: " + e.Message);
             }

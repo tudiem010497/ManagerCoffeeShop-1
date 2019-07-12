@@ -38,14 +38,14 @@ namespace ManagerCoffeeShopASPNet.Information
             return this._supplierDAO.GetAllSupplier();
         }
         public bool EditIngredient(int IngreID, int SupplierID, string Name,
-            double Amount, string Unit, double UnitPrice, string Currency)
+            double Amount, double AmountMin, string Unit, double UnitPrice, string Currency)
         {
-            return this._ingredientDAO.EditIngredient(IngreID, SupplierID, Name, Amount, Unit, UnitPrice, Currency);
+            return this._ingredientDAO.EditIngredient(IngreID, SupplierID, Name, Amount, AmountMin, Unit, UnitPrice, Currency);
         }
         public bool InsertIngredient(int SupplierID, string Name,
-            double Amount, string Unit, double UnitPrice, string Currency)
+            double Amount, double AmountMin, string Unit, double UnitPrice, string Currency)
         {
-            return this._ingredientDAO.InsertIngredient(SupplierID, Name, Amount, Unit, UnitPrice, Currency);
+            return this._ingredientDAO.InsertIngredient(SupplierID, Name, Amount, AmountMin, Unit, UnitPrice, Currency);
         }
         public Supplier GetSupplierBySupplierID(int SupplierID)
         {
@@ -86,6 +86,26 @@ namespace ManagerCoffeeShopASPNet.Information
         public bool InsertReceiptDetailMissGiftID(int ReceiptID, int IngreID, double Amount, string Unit, double UnitPrice, string ReferenceDesc, string Currency, string Status)
         {
             return this._receiptDetailDAO.InsertReceiptDetailMissGiftID(ReceiptID, IngreID, Amount, Unit, UnitPrice, ReferenceDesc, Currency, Status);
+        }
+        public bool UpdateReceiptDetail(int ReceiptDetailID, string Status)
+        {
+            return this._receiptDetailDAO.UpdateReceiptDetail(ReceiptDetailID, Status);
+        }
+        public ReceiptDetail GetReceiptDetailByReceiptDetailID(int ReceiptDetailID)
+        {
+            return this._receiptDetailDAO.GetReceiptDetailByReceiptDetailID(ReceiptDetailID);
+        }
+        public bool UpdateAmountIngredient(int IngreID, double Amount)
+        {
+            return this._ingredientDAO.UpdateAmountIngredient(IngreID, Amount);
+        }
+        public bool UpdateReceipt(int ReceiptID, string Status)
+        {
+            return this._receiptDAO.UpdateReceipt(ReceiptID, Status);
+        }
+        public bool UpdateReceiptDetailByReceiptID(int ReceiptID, string Status)
+        {
+            return this._receiptDetailDAO.UpdateReceiptDetailByReceiptID(ReceiptID, Status);
         }
     }
 }

@@ -14,5 +14,6 @@ namespace ManagerCoffeeShopASPNet.DAO
         bool InsertReceiptDetailMissIngreID(int ReceiptID, int GiftID, double Amount, double UnitPrice, string ReferenceDesc, string Currency, string Status);
         bool InsertReceiptDetailMissGiftID(int ReceiptID, int IngreID, double Amount, string Unit, double UnitPrice, string ReferenceDesc, string Currency, string Status);
         bool UpdateReceiptDetail(int ReceiptDetailID, string Status);
+        bool UpdateReceiptDetailByReceiptID(int ReceiptID, string Status);
     }
 }

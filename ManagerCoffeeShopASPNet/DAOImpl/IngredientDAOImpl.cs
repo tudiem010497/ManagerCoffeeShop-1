@@ -63,7 +63,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             return ingre;
         }
         public bool EditIngredient(int IngreID, int SupplierID, string Name, 
-            double Amount, string Unit, double UnitPrice, string Currency)
+            double Amount, double AmountMin, string Unit, double UnitPrice, string Currency)
         {
             try
             {
@@ -73,6 +73,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 ingre.SupplierID = SupplierID;
                 ingre.Name = Name;
                 ingre.Amount = Amount;
+                ingre.AmountMin = AmountMin;
                 ingre.Unit = Unit;
                 ingre.UnitPrice = UnitPrice;
                 ingre.Currency = Currency;
@@ -87,7 +88,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             }
         }
         public bool InsertIngredient(int SupplierID, string Name,
-            double Amount, string Unit, double UnitPrice, string Currency)
+            double Amount, double AmountMin, string Unit, double UnitPrice, string Currency)
         {
             try
             {
@@ -96,6 +97,7 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 ingre.SupplierID = SupplierID;
                 ingre.Name = Name;
                 ingre.Amount = Amount;
+                ingre.AmountMin = AmountMin;
                 ingre.Unit = Unit;
                 ingre.UnitPrice = UnitPrice;
                 ingre.Currency = Currency;
@@ -107,6 +109,20 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             {
                 return false;
                 throw new Exception("Error InsertIngredient : " + ex.Message);
+            }
+        }
+        public bool UpdateAmountIngredient(int IngreID, double Amount)
+        {
+            try
+            {
+                Ingredient ingre = this.context.Ingredients.Single(o => o.IngreID == IngreID);
+                ingre.Amount = Amount;
+                context.SubmitChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                throw new Exception("Error Update Amount: " + e.Message);
             }
         }
         public IEnumerable<Ingredient> GetAllIngredientEffete()

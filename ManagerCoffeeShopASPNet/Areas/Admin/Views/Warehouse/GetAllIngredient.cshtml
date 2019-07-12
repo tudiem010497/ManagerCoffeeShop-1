@@ -26,6 +26,7 @@
                 columns.Add(model => model.Name).Titled("Tên nguyên vật liệu");
                 columns.Add(model => model.Supplier.Name).Titled("Tên nhà cung cấp");
                 columns.Add(model => model.Amount).Titled("Số lượng").Filterable(false);
+                columns.Add(model => model.AmountMin).Titled("Định mức kho").Filterable(false);
                 columns.Add(model => model.Unit).Titled("Đơn vị tính");
                 columns.Add(model => model.UnitPrice).Titled("Đơn giá").Filterable(false);
                 columns.Add(model => model.Currency).Titled("Đơn vị tiền").Filterable(false);
