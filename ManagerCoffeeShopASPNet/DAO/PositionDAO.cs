@@ -9,5 +9,7 @@ namespace ManagerCoffeeShopASPNet.DAO
     interface PositionDAO
     {
         IEnumerable<Position> GetAllPosition();
+        IEnumerable<Position> GetAllPositionByStatus(string Status);
+        bool UpdateStatusPostion(int PosID, string Status);
     }
 }

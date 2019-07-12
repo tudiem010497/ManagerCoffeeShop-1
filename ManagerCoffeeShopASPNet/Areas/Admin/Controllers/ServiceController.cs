@@ -65,7 +65,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             listDesc.Add(TakeAway);
             ViewData["listDesc"] = listDesc;
 
-            IEnumerable<Position> positions = info.GetAllPosition();
+            IEnumerable<Position> positions = info.GetAllPositionByStatus("Available");
             IEnumerable<Promotion> promotions = infoDV.GetPromotionByDateTime();
             ViewData["positions"] = positions;
             ViewData["promotions"] = promotions;
@@ -105,23 +105,48 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             OrderModel test = JsonConvert.DeserializeObject<OrderModel>(json);
             string Desc = test.Desc;
             int PosID = test.PosID;
-            int PromotionID = test.PromotionID;
-            double TotalAmount = 0;
-            List<OrderItemModel> OrderItemModel = test.OrderItemModel;
-            foreach (var item in OrderItemModel)
+            if (Desc == "Dùng tại quán")
             {
-                TotalAmount = TotalAmount + info.GetFoodAndDrinkByID(item.FoodAndDrinkID).UnitPrice * item.Quantity;
+                int PromotionID = test.PromotionID;
+                double TotalAmount = 0;
+                List<OrderItemModel> OrderItemModel = test.OrderItemModel;
+                foreach (var item in OrderItemModel)
+                {
+                    TotalAmount = TotalAmount + info.GetFoodAndDrinkByID(item.FoodAndDrinkID).UnitPrice * item.Quantity;
+                }
+                info.InsertOrder(PosID, DateTime.Now, DateTime.Now, TotalAmount, "VND", Desc, "Pending");
+                info.UpdateStatusPostion(PosID, "NotAvailable");
+                int OrderID = info.GetLastOrderIDID();
+                foreach (var item in OrderItemModel)
+                {
+                    info.InsertOrderItem(OrderID, item.FoodAndDrinkID, item.Quantity, item.Desc, "Pending");
+                }
+                if (PromotionID != 0)
+                {
+                    info.InsertOrderPromotion(PromotionID, OrderID);
+                }
             }
-            info.InsertOrder(PosID, DateTime.Now, DateTime.Now, TotalAmount, "VND", Desc, "Pending");
-            int OrderID = info.GetLastOrderIDID();
-            foreach (var item in OrderItemModel)
+            else // nếu mang về thì không cập nhật PosID
             {
-                info.InsertOrderItem(OrderID, item.FoodAndDrinkID, item.Quantity, item.Desc, "Pending");
+                int PromotionID = test.PromotionID;
+                double TotalAmount = 0;
+                List<OrderItemModel> OrderItemModel = test.OrderItemModel;
+                foreach (var item in OrderItemModel)
+                {
+                    TotalAmount = TotalAmount + info.GetFoodAndDrinkByID(item.FoodAndDrinkID).UnitPrice * item.Quantity;
+                }
+                info.InsertOrderWithoutPosID(DateTime.Now, DateTime.Now, TotalAmount, "VND", Desc, "Pending");
+                int OrderID = info.GetLastOrderIDID();
+                foreach (var item in OrderItemModel)
+                {
+                    info.InsertOrderItem(OrderID, item.FoodAndDrinkID, item.Quantity, item.Desc, "Pending");
+                }
+                if (PromotionID != 0)
+                {
+                    info.InsertOrderPromotion(PromotionID, OrderID);
+                }
             }
-            if (PromotionID != 0)
-            {
-                info.InsertOrderPromotion(PromotionID, OrderID);
-            }
+            
             return Json(new { PosID = PosID }, JsonRequestBehavior.AllowGet);
         }
 
@@ -400,7 +425,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             IEnumerable<Order> orders = info.GetAllOrder();
             return View(orders);
         }
-        //nhấn nút xuất hóa đơn, status của Order được cập nhật là Paid
+        //nhấn nút xuất hóa đơn, status của Order được cập nhật là Paid, cập nhật lại vị trí chỗ ngồi
         [Route("PrintOrder")]
         public ActionResult PrintOrder(int OrderID)
         {
@@ -411,6 +436,13 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             //rp.SetDatabaseLogon("Diem", "", "DESKTOP-HA2TCUF", "CoffeeShopDB", false);
             string status = "Paid";
             info.UpdateOrderStatus(OrderID, status);
+            Order order = info.GetOrderByOrderID(OrderID).SingleOrDefault();
+            if(order.PosID != 0)
+            {
+                int PosID = Convert.ToInt32(order.PosID);
+                info.UpdateStatusPostion(PosID, "Available");
+            }
+
             rp.SetParameterValue("@OrderID", OrderID);
             Stream stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);

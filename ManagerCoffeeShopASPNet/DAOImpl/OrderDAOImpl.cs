@@ -49,7 +49,6 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
             }
             catch (Exception ex)
             {
-                throw (new Exception("Error Inser To Order : " + ex.Message));
                 return false;
             }
         }

@@ -14,12 +14,17 @@
     @(Html
         .Grid(Model).Build(columns =>
         {
+            ConvertStatusOrder convert = new ConvertStatusOrder();
             columns.Add(o => o.OrderID).Titled("Mã hóa đơn").Sortable(false);
             columns.Add(o => o.Customer.Name).Titled("Tên khách hàng").Sortable(false);
             columns.Add(o => o.PosID).Titled("Vị trí").Sortable(false);
             columns.Add(o => o.OrderDateTime).Titled("Thời gian vào");
-            columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o =>
-            Html.ActionLink("Xuất hóa đơn", "PrintOrder", "Service", new { OrderID = o.OrderID }, new { @class = "btn btn-sm btn-primary" })).Filterable(false);
+            columns.Add(o => convert.ConvertStatus(o.Status)).Titled("Trạng thái đơn hàng");
+            columns.Add(o => o.Status).Css("Status");
+            //columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o =>
+            //Html.ActionLink("Xuất hóa đơn", "PrintOrder", "Service", new { OrderID = o.OrderID }, new { @class = "btn btn-sm btn-primary", type ="button" })).Filterable(false);
+            columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o => "<button type='button' class='btn btn-sm btn-primary'  OrderID= " + o.OrderID 
+            +" "+">Xuất hóa đơn</button>").Filterable(false);
         })
         //.WithFilterMode(GridFilterMode.FilterRow)
         .Empty("Không có dữ liệu.")
@@ -31,3 +36,20 @@
         })
     )
 </div>
+<style type="text/css">
+    .Status{
+        display:none;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $("div.mvc-grid table tbody tr").each(function (index) {
+            var tr = $(this)
+            var Status = tr.find(".Status").text()
+            if (Status != "Ready") {
+                tr.find("button").attr("disabled", 1)
+            }
+        })
+        
+    })
+</script>

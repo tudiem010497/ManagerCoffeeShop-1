@@ -28,6 +28,14 @@ namespace ManagerCoffeeShopASPNet.Information
             this._shipDAO = (ShipDAO)new ShipDAOImpl();
             this._shipDetailDAO = (ShipDetailDAO)new ShipDetailDAOImpl();
         }
+        public bool UpdateStatusPostion(int PosID, string Status)
+        {
+            return this._positionDAO.UpdateStatusPostion(PosID, Status);
+        }
+        public IEnumerable<Position> GetAllPositionByStatus(string Status)
+        {
+            return this._positionDAO.GetAllPositionByStatus(Status);
+        }
         public IEnumerable<FoodAndDrink> GetFoodAndDrink()
         {
             return _foodAndDrinkDAO.GetAllFoodAndDrink();
