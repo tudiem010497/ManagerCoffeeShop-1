@@ -148,26 +148,37 @@ $(document).ready(function () {
         //$('input[type="checkbox"]').click(function () {
         var test = $('input[type="checkbox"]').is(":checked")
         var data = '[', temp = 0;
-        $('input[type="checkbox"]').each(function () {
-            if ($('input[type="checkbox"]').is(":checked")) {
+        //$('input[type="checkbox"]').each(function () {
+        //    if ($('input[type="checkbox"]').is(":checked")) {
+        //        if (temp != 0)
+        //            data = data + ',';
+        //        var IngreID = Number($("table tbody tr td input").attr('id').substring(6));
+        //        var Name = $("table tbody tr td.Name").text();
+        //        var UnitPrice = $("table tbody tr td.UnitPrice").text();
+        //        data = data + '{"IngreID": ' + IngreID + ',';
+        //        data = data + '"Name": "' + Name + '",';
+        //        data = data + '"UnitPrice": ' + UnitPrice + '}';
+        //        alert(data);
+        //    }
+        //    temp++;
+        //})
+        //data = data + ']';
+        $("table.table-hover tbody tr").each(function () {
+            if ($(this).find('input[type="checkbox"]').is(":checked")) {
                 if (temp != 0)
                     data = data + ',';
                 var IngreID = Number($("table tbody tr td input").attr('id').substring(6));
-                var Name = $("table tbody tr td.Name").text();
-                var UnitPrice = $("table tbody tr td.UnitPrice").text();
+                var IngreID = Number($(this).find('input').attr('id').substring(6));
+                var Name = $(this).find('td.Name').text();
+                var UnitPrice = $(this).find('UnitPrice').text();
                 data = data + '{"IngreID": ' + IngreID + ',';
                 data = data + '"Name": "' + Name + '",';
                 data = data + '"UnitPrice": ' + UnitPrice + '}';
-                alert(data);
+                temp++;
             }
-            temp++;
         })
         data = data + ']';
-        //else if ($('input[type="checkbox"]').is(":not(:checked)")) {
-        //    alert("Checkbox is unchecked.");
-        //}
-        //});
-
+        console.log(data)
     })
     function addRow(IngreID, Name, Quantity, UnitPrice, ReferenceDesc) {
         var TotalAmount = UnitPrice * Quantity;
