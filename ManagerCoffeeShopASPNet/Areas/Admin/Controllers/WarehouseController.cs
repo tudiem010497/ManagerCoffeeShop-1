@@ -172,7 +172,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             info.UpdateReceiptDetailByReceiptID(ReceiptID, status);
             //ReceiptDetail detail = info.GetReceiptDetailByReceiptDetailID(ReceiptDetailID);
             IEnumerable<ReceiptDetail> details = info.GetAllReceiptDetailByReceiptID(ReceiptID);
-            foreach(var item in details)
+            foreach (var item in details)
             {
                 if (item.IngreID != null)
                 {
@@ -200,7 +200,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             {
                 TempData["error"] = "Lưu thất bại";
             }
-            return RedirectToAction("DetailReceipt", "Warehouse");
+            return RedirectToAction("DetailReceipt", "Warehouse", new { ReceiptID = ReceiptID});
         }
         [Route("CreateReceipt")]
         public ActionResult CreateReceipt()
