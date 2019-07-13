@@ -87,64 +87,67 @@ $(document).ready(function () {
             $(".list-receiptdetail-gift tbody").html(row);
         }
     })
-    //$(".btnAddReceipt").on('click', function (event) {
-    //    alert("ok")
-    //    //var temp = 0;
-    //    //var data = '';
-    //    //var SupplierID = $("select#SupplierID option:selected").val();
-    //    //data = data + '{"SupplierID" : ' + SupplierID + ',';
-    //    //data = data + '"ReceiptDetailModel" : ['
-    //    //$("table.list-receiptdetail tbody tr").each(function () {
-    //    //    if (temp != 0)
-    //    //        data = data + ',';
-    //    //    var IngreID = $(this).attr("ingreid");
-    //    //    var Name = $(this).children(".Name").text();
-    //    //    //var Quantity = $(this).children(".Quantity").text();
-    //    //    var Quantity = $(this).find("td.Quantity input").val();
-    //    //    var TotalAmount = $(this).children(".TotalAmount").text();
-    //    //    var ReferenceDesc = $(this).children(".ReferenceDesc").text();
-    //    //    data = data + '{"IngreID" :' + IngreID + ',';
-    //    //    data = data + '"Name" : "' + Name + '",';
-    //    //    data = data + '"Quantity" :' + Quantity + ',';
-    //    //    data = data + '"ReferenceDesc" : "' + ReferenceDesc + '",';
-    //    //    data = data + '"TotalAmount" :' + TotalAmount + '}';
-    //    //    temp++;
-    //    //})
-    //    //$("table.list-receiptdetail-gift tbody tr").each(function () {
-    //    //    if (temp != 0)
-    //    //        data = data + ',';
-    //    //    var GiftID = $(this).attr("giftid");
-    //    //    var Name_gift = $(this).children(".Name_gift").text();
-    //    //    var Quantity_gift = $(this).find("td.Quantity_gift input").val();
-    //    //    var TotalAmount_gift = $(this).children(".TotalAmount_gift").text();
-    //    //    var ReferenceDesc_gift = $(this).children(".ReferenceDesc_gift").text();
-    //    //    data = data + '{"GiftID" :' + GiftID + ',';
-    //    //    data = data + '"Name_gift" : "' + Name_gift + '",';
-    //    //    data = data + '"Quantity_gift" :' + Quantity_gift + ',';
-    //    //    data = data + '"ReferenceDesc_gift" : "' + ReferenceDesc_gift + '",';
-    //    //    data = data + '"TotalAmount_gift" :' + TotalAmount_gift + '}';
-    //    //    temp++;
-    //    //})
-    //    //data = data + "]}";
-    //    //$.ajax({
-    //    //    url: '/admin/warehouse/DoCreateReceipt?json=' + data,
-    //    //    type: "POST",
-    //    //    contenType: "application/json; charset=utf-8",
-    //    //    data: data,
-    //    //    dataType: "json",
-    //    //    success: function (data) {
-    //    //        alert("Gửi thành công phiếu nhập cho nhà cung cấp : " + data.SupplierID);
-    //    //    },
-    //    //    error: function (err) {
-    //    //        alert("Error1 : " + err.error);
-    //    //    }
-    //    //});
-    //})
+    $(".btnAddReceipt").on('click', function (event) {
+        var temp = 0;
+        var data = '';
+        var SupplierID = $("select#SupplierID option:selected").val();
+        data = data + '{"SupplierID" : ' + SupplierID + ',';
+        data = data + '"ReceiptDetailModel" : ['
+        $("table.list-receiptdetail tbody tr").each(function () {
+            if (temp != 0)
+                data = data + ',';
+            var IngreID = $(this).attr("ingreid");
+            var Name = $(this).children(".Name").text();
+            //var Quantity = $(this).children(".Quantity").text();
+            var Quantity = $(this).find("td.Quantity input").val();
+            var TotalAmount = $(this).children(".TotalAmount").text();
+            var ReferenceDesc = $(this).children(".ReferenceDesc").text();
+            data = data + '{"IngreID" :' + IngreID + ',';
+            data = data + '"Name" : "' + Name + '",';
+            data = data + '"Quantity" :' + Quantity + ',';
+            data = data + '"ReferenceDesc" : "' + ReferenceDesc + '",';
+            data = data + '"TotalAmount" :' + TotalAmount + '}';
+            temp++;
+        })
+        $("table.list-receiptdetail-gift tbody tr").each(function () {
+            if (temp != 0)
+                data = data + ',';
+            var GiftID = $(this).attr("giftid");
+            var Name_gift = $(this).children(".Name_gift").text();
+            var Quantity_gift = $(this).find("td.Quantity_gift input").val();
+            var TotalAmount_gift = $(this).children(".TotalAmount_gift").text();
+            var ReferenceDesc_gift = $(this).children(".ReferenceDesc_gift").text();
+            data = data + '{"GiftID" :' + GiftID + ',';
+            data = data + '"Name_gift" : "' + Name_gift + '",';
+            data = data + '"Quantity_gift" :' + Quantity_gift + ',';
+            data = data + '"ReferenceDesc_gift" : "' + ReferenceDesc_gift + '",';
+            data = data + '"TotalAmount_gift" :' + TotalAmount_gift + '}';
+            temp++;
+        })
+        data = data + "]}";
+        $.ajax({
+            url: '/admin/warehouse/DoCreateReceipt?json=' + data,
+            type: "POST",
+            contenType: "application/json; charset=utf-8",
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                alert("Gửi thành công phiếu nhập cho nhà cung cấp : " + data.SupplierID);
+            },
+            error: function (err) {
+                alert("Error1 : " + err.error);
+            }
+        });
+    })
     $("table.list-receiptdetail").on('click', 'button.update', function () {
-        var quantityNew = $("table.list-receiptdetail tbody tr td.Quantity input").val();
-        var UnitPrice = $("table.list-receiptdetail tbody tr td.UnitPrice").text();
+        var parent = $(this).parent().parent();
+        var ingreid = $(parent).attr("ingreid")
+        var quantityNew = parent.find("td.Quantity input").val();
+        var UnitPrice = parent.find("td.UnitPrice").text();
+        //var quantityNew = $("table.list-receiptdetail tbody tr td.Quantity input").val();
+        //var UnitPrice = $("table.list-receiptdetail tbody tr td.UnitPrice").text();
         var totalNew = quantityNew * UnitPrice;
-        $("table.list-receiptdetail tbody tr td.TotalAmount").text(totalNew);
+        parent.find("td.TotalAmount").text(totalNew);
     })
     $("table.list-receiptdetail_gift").on('click', 'button.update_gift', function () {
         var quantityNew_gift = $("table.list-receiptdetail_gift tbody tr td.Quantity_gift input").val();
@@ -225,9 +228,4 @@ $(document).ready(function () {
         return false;
     }
 })
-//$(document).ready(function () {
-//    $(".btn").on('click', function (event) {
-//        alert("ok")
 
-//    })
-//})
