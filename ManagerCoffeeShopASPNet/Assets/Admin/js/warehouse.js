@@ -98,7 +98,8 @@ $(document).ready(function () {
                 data = data + ',';
             var IngreID = $(this).attr("ingreid");
             var Name = $(this).children(".Name").text();
-            var Quantity = $(this).children(".Quantity").text();
+            //var Quantity = $(this).children(".Quantity").text();
+            var Quantity = $(this).find("td.Quantity input").val();
             var TotalAmount = $(this).children(".TotalAmount").text();
             var ReferenceDesc = $(this).children(".ReferenceDesc").text();
             data = data + '{"IngreID" :' + IngreID + ',';
@@ -113,7 +114,7 @@ $(document).ready(function () {
                 data = data + ',';
             var GiftID = $(this).attr("giftid");
             var Name_gift = $(this).children(".Name_gift").text();
-            var Quantity_gift = $(this).children(".Quantity_gift").text();
+            var Quantity_gift = $(this).find("td.Quantity_gift input").val();
             var TotalAmount_gift = $(this).children(".TotalAmount_gift").text();
             var ReferenceDesc_gift = $(this).children(".ReferenceDesc_gift").text();
             data = data + '{"GiftID" :' + GiftID + ',';
@@ -144,41 +145,43 @@ $(document).ready(function () {
         var totalNew = quantityNew * UnitPrice;
         $("table.list-receiptdetail tbody tr td.TotalAmount").text(totalNew);
     })
+    $("table.list-receiptdetail_gift").on('click', 'button.update_gift', function () {
+        var quantityNew_gift = $("table.list-receiptdetail_gift tbody tr td.Quantity_gift input").val();
+        var UnitPrice_gift = $("table.list-receiptdetail_gift tbody tr td.UnitPrice_gift").text();
+        var totalNew = quantityNew_gift * UnitPrice_gift;
+        $("table.list-receiptdetail tbody tr td.TotalAmount").text(totalNew);
+    })
     $(".createReceipt").on('click', function () {
-        //$('input[type="checkbox"]').click(function () {
-        var test = $('input[type="checkbox"]').is(":checked")
-        var data = '[', temp = 0;
-        //$('input[type="checkbox"]').each(function () {
-        //    if ($('input[type="checkbox"]').is(":checked")) {
-        //        if (temp != 0)
-        //            data = data + ',';
-        //        var IngreID = Number($("table tbody tr td input").attr('id').substring(6));
-        //        var Name = $("table tbody tr td.Name").text();
-        //        var UnitPrice = $("table tbody tr td.UnitPrice").text();
-        //        data = data + '{"IngreID": ' + IngreID + ',';
-        //        data = data + '"Name": "' + Name + '",';
-        //        data = data + '"UnitPrice": ' + UnitPrice + '}';
-        //        alert(data);
-        //    }
-        //    temp++;
-        //})
-        //data = data + ']';
+        var data = '{"IngredientEffete": [', temp = 0;
         $("table.table-hover tbody tr").each(function () {
             if ($(this).find('input[type="checkbox"]').is(":checked")) {
                 if (temp != 0)
                     data = data + ',';
-                var IngreID = Number($("table tbody tr td input").attr('id').substring(6));
                 var IngreID = Number($(this).find('input').attr('id').substring(6));
                 var Name = $(this).find('td.Name').text();
-                var UnitPrice = $(this).find('UnitPrice').text();
+                var UnitPrice = $(this).find('td.UnitPrice').text();
                 data = data + '{"IngreID": ' + IngreID + ',';
                 data = data + '"Name": "' + Name + '",';
                 data = data + '"UnitPrice": ' + UnitPrice + '}';
                 temp++;
             }
         })
-        data = data + ']';
+        data = data + ']}';
         console.log(data)
+        $.ajax({
+            url: '/admin/warehouse/CreateReceipt?json=' + data,
+            type: "POST",
+            contenType: "application/json; charset=utf-8",
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                //window.location = url;
+                alert("OK");
+            },
+            error: function (err) {
+                alert("Error1 : " + err.error);
+            }
+        });
     })
     function addRow(IngreID, Name, Quantity, UnitPrice, ReferenceDesc) {
         var TotalAmount = UnitPrice * Quantity;
@@ -200,19 +203,10 @@ $(document).ready(function () {
             + "<td style = 'display:none' class='UnitPrice_gift'>" + UnitPrice_gift + "</td>"
             + "<td class='TotalAmount_gift'>" + TotalAmount_gift + "</td>"
             + "<td class='ReferenceDesc_gift'>" + ReferenceDesc_gift + "</td>"
-            + "<td><button type='submit' class='btnRemoveGiftFromReceipt btn btn-danger' giftid='" + GiftID + "'>Xóa</button></td>"
+            + "<td><button type='button' class='btn btn-sm btn-outline-success update_gift' >Cập nhật</button> <button type='submit' class='btnRemoveGiftFromReceipt btn btn-danger' giftid='" + GiftID + "'>Xóa</button></td>"
             + "</tr>";
         return row;
     }
-    //onchange = 'changevalue()'
-    //var test = $("table.list-receiptdetail tbody tr td.Quantity input").attr("id");
-    //test.change(function changevalue() {
-    //    var quantitynew = $(this).val();
-    //    var unitprice = $("table.list-receiptdetail tbody tr td.unitprice").text();
-    //    alert(unitprice);
-    //})
-
-
     function CheckExistIngre(IngreID, arrayIngreID) {
         for (var item in arrayIngreID) {
             if (IngreID == arrayIngreID[item]) {

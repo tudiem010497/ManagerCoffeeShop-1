@@ -203,23 +203,53 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             return RedirectToAction("DetailReceipt", "Warehouse", new { ReceiptID = ReceiptID});
         }
         [Route("CreateReceipt")]
-        public ActionResult CreateReceipt()
+        public ActionResult CreateReceipt(string json)
         {
-            IEnumerable<Ingredient> ingres = info.GetAllIngredient();
-            IEnumerable<Gift> gifts = infoDV.GetAllGift();
-            IEnumerable<Supplier> suppliers = info.GetAllSupplier();
-            List<SelectListItem> sups = new List<SelectListItem>();
-            foreach(Supplier item in suppliers)
+            if (json == null)
             {
-                SelectListItem select = new SelectListItem();
-                select.Text = item.Name;
-                select.Value = item.SupplierID.ToString();
-                sups.Add(select);
+                IEnumerable<Ingredient> ingres = info.GetAllIngredient();
+                IEnumerable<Gift> gifts = infoDV.GetAllGift();
+                IEnumerable<Supplier> suppliers = info.GetAllSupplier();
+                List<SelectListItem> sups = new List<SelectListItem>();
+                foreach (Supplier item in suppliers)
+                {
+                    SelectListItem select = new SelectListItem();
+                    select.Text = item.Name;
+                    select.Value = item.SupplierID.ToString();
+                    sups.Add(select);
+                }
+                ViewData["gifts"] = gifts;
+                ViewData["sups"] = sups;
+                ViewData["ingres"] = ingres;
+                return View();
             }
-            ViewData["gifts"] = gifts;
-            ViewData["sups"] = sups;
-            ViewData["ingres"] = ingres;
-            return View();
+            else
+            {
+                ListIngreEffete ingreModel = JsonConvert.DeserializeObject<ListIngreEffete>(json);
+                IEnumerable<Ingredient> ingres = info.GetAllIngredient();
+                IEnumerable<Gift> gifts = infoDV.GetAllGift();
+                IEnumerable<Supplier> suppliers = info.GetAllSupplier();
+                List<SelectListItem> sups = new List<SelectListItem>();
+                foreach (Supplier item in suppliers)
+                {
+                    SelectListItem select = new SelectListItem();
+                    select.Text = item.Name;
+                    select.Value = item.SupplierID.ToString();
+                    sups.Add(select);
+                }
+                ViewData["gifts"] = gifts;
+                ViewData["sups"] = sups;
+                ViewData["ingres"] = ingres;
+                List<IngredientEffete> details = ingreModel.IngredientEffete;
+                foreach(IngredientEffete item in details)
+                {
+                    int IngreID = item.IngreID;
+                    string Name = item.Name;
+                    double UnitPrice = item.UnitPrice;
+                }
+                //return View();
+                return Json(JsonRequestBehavior.AllowGet);
+            }
         }
         
         [Route("DoCreateReceipt")]

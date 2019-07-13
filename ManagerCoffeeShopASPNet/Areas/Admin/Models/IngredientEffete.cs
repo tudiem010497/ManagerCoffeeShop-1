@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ManagerCoffeeShopASPNet.Areas.Admin.Models
 {
-    [JsonObject]
+    [JsonObject("IngredientEffete")]
     public class IngredientEffete
     {
         [JsonProperty(PropertyName = "IngreID")]
