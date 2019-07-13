@@ -91,18 +91,21 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult UpdateReady(int OrderItemID, int OrderID, int NumOfOrderItem, string view)
         {
             string status = "Ready";
-            //bool result = info.UpdateStatus(OrderItemID, status);
+            bool result = info.UpdateStatus(OrderItemID, status);
             OrderItem oi = info.GetOrderItemByOrderItemID(OrderItemID);
             Recipe recipe = info.GetRecipeByFDID(oi.FDID);
-            IEnumerable<RecipeDetail> details = info.GetAllRecipeDetailByRecipeID(recipe.RecID);
-            foreach(RecipeDetail detail in details)
+            if (recipe != null)
             {
-                IngreExchange exchange = info.GetIngreExchangeByRecipeDetailID(detail.RecipeDetailID);
-                int IngreID = Convert.ToInt32(exchange.IngreID);
-                double AmountDiscount = (exchange.Amount / 20) * oi.Quantity;
-                Ingredient ingre = info.GetIngredientByIngreID(IngreID);
-                ingre.Amount = ingre.Amount - AmountDiscount;
-                info.UpdateIngredient(ingre);
+                IEnumerable<RecipeDetail> details = info.GetAllRecipeDetailByRecipeID(recipe.RecID);
+                foreach (RecipeDetail detail in details)
+                {
+                    IngreExchange exchange = info.GetIngreExchangeByRecipeDetailID(detail.RecipeDetailID);
+                    int IngreID = Convert.ToInt32(exchange.IngreID);
+                    double AmountDiscount = (exchange.Amount / 20) * oi.Quantity;
+                    Ingredient ingre = info.GetIngredientByIngreID(IngreID);
+                    ingre.Amount = ingre.Amount - AmountDiscount;
+                    info.UpdateIngredient(ingre);
+                }
             }
             if (view == "GetListOrderItemNeedPreparetion")
             {
