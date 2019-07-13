@@ -21,10 +21,11 @@
             columns.Add(o => o.OrderDateTime).Titled("Thời gian vào");
             columns.Add(o => convert.ConvertStatus(o.Status)).Titled("Trạng thái đơn hàng");
             columns.Add(o => o.Status).Css("Status");
-            //columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o =>
-            //Html.ActionLink("Xuất hóa đơn", "PrintOrder", "Service", new { OrderID = o.OrderID }, new { @class = "btn btn-sm btn-primary", type ="button" })).Filterable(false);
-            columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o => "<button type='button' class='btn btn-sm btn-primary'  OrderID= " + o.OrderID 
-            +" "+">Xuất hóa đơn</button>").Filterable(false);
+            columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o =>
+            Html.ActionLink("Xuất hóa đơn", "PrintOrder", "Service", new { OrderID = o.OrderID }, new { @class = "btn btn-sm btn-primary ", type = "button" })).Filterable(false);
+            //columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o => "<button type='button' class='btn btn-sm btn-primary'  "
+            //+ "onclick='"+ Url.Action("PrintOrder", "Service", new { OrderID = o.OrderID }) + "'>Xuất hóa đơn</button>").Filterable(false);
+
         })
         //.WithFilterMode(GridFilterMode.FilterRow)
         .Empty("Không có dữ liệu.")
@@ -36,6 +37,7 @@
         })
     )
 </div>
+<input type="button" value="Detail" onclick="location.href='@Url.Action("PrintOrder", "Service", new { OrderID = 1})'" />
 <style type="text/css">
     .Status{
         display:none;
@@ -48,6 +50,8 @@
             var Status = tr.find(".Status").text()
             if (Status != "Ready") {
                 tr.find("button").attr("disabled", 1)
+                tr.find("a").removeAttr("href").attr("class", "btn btn-light btn-sm")
+                
             }
         })
         
