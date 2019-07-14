@@ -105,7 +105,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             OrderModel test = JsonConvert.DeserializeObject<OrderModel>(json);
             string Desc = test.Desc;
             int PosID = test.PosID;
-            if (Desc == "Dùng tại quán")
+            if (Desc == "ServeAtCafe")
             {
                 int PromotionID = test.PromotionID;
                 double TotalAmount = 0;
@@ -146,7 +146,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                     info.InsertOrderPromotion(PromotionID, OrderID);
                 }
             }
-            
+
             return Json(new { PosID = PosID }, JsonRequestBehavior.AllowGet);
         }
 
@@ -188,13 +188,13 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult ConfirmAll(int OrderID)
         {
             IEnumerable<OrderItem> orderitem = info.GetAllOrderItemByOrderID(OrderID);
-            int temp=0;
+            int temp = 0;
             string status1 = "Cancel";
             string status2 = "Pending";
             string status3 = "NotYetDelivery";
             foreach (var item in orderitem)
             {
-                if(item.Status != "Cancel")
+                if (item.Status != "Cancel")
                 {
                     temp = 0;
                     break;
@@ -261,7 +261,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             ShipDetail ship = info.GetShipDeliveryByShipDetailID(ShipDetailID);
             info.UpdateShipDetailStatusByShipDetailID(ShipDetailID, Status);
             info.UpdateOrderStatus(ship.OrderID, statusOrder);
-            return RedirectToAction("GetListShipDelivery", new { ShipDetailID = ship.ShipDetailID});
+            return RedirectToAction("GetListShipDelivery", new { ShipDetailID = ship.ShipDetailID });
         }
         //nhấn nút xác nhận giao hàng thất bại, cập nhật là "Failed" trong shipDetail, "Cancel" trong Order và OrderItem
         [Route("ConfirmDeliveriedFailed")]
@@ -280,10 +280,13 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         /// Xem thông tin đồ uống để phục vụ (theo hóa đơn) => hiển thị status = Ready && Pending
         /// </summary>  
         /// <returns></returns>
+        //danh sách hóa đơn phục vụ chỉ cần xem những hóa đơn có status = Ready để nv đem đi phục vụ
         [Route("GetListOrderServiceGroupByOrder")]
         public ActionResult GetListOrderServiceGroupByOrder()
         {
-            IEnumerable<Order> orders = info.GetAllOrderPendingOrReady();
+            string status = "Ready";
+            //IEnumerable<Order> orders = info.GetAllOrderPendingOrReady();
+            IEnumerable<Order> orders = info.GetAllOrderByStatus(status);
             ViewData["orders"] = orders;
             return View(orders);
         }
@@ -297,7 +300,42 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult DetailOrderNeedSevice(int OrderID)
         {
             IEnumerable<OrderItem> orderItems = info.GetAllOrderItemByOrderIDAndNeedService(OrderID);
+            ViewData["OrderID"] = OrderID;
             return View(orderItems);
+        }
+
+        //nhấn nút đã phục vụ từng đồ uống trong chi tiết đồ uống
+        [Route("UpdatedOrderItemClosed")]
+        public ActionResult UpdatedOrderItemClosed(int OrderItemID)
+        {
+            string status = "Closed";
+            OrderItem ot = info.GetOrderItemByOrderItemID(OrderItemID);
+            info.UpdateOrderItemStatus(OrderItemID, status);
+            return RedirectToAction("DetailOrderNeedSevice", "Service", new { OrderID = ot.OrderID });
+        }
+
+        //nhấn nút xác nhận đã phục vụ tất cả đồ uống trong chi tiết đồ uống
+        //cập nhật lại status = "Closed" cho Order
+        [Route("UpdatedOrderClosed")]
+        public ActionResult UpdatedOrderClosed(int OrderID)
+        {
+            string status = "Closed";
+            IEnumerable<OrderItem> orderItems = info.GetAllOrderItemByOrderID(OrderID);
+            int temp = 0;
+            foreach (var item in orderItems)
+            {
+                if (item.Status != "Closed")
+                {
+                    temp = 0;
+                    break;
+                }
+                else temp = 1;
+            }
+            if (temp != 0)
+            {
+                info.UpdateOrderStatus(OrderID, status);
+            }
+            return RedirectToAction("GetListOrderServiceGroupByOrder", "Service");
         }
 
         /// <summary>
@@ -308,43 +346,43 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         /// <param name="OrderItemID"></param>
         /// <param name="OrderID"></param>
         /// <returns></returns>
-        [Route("UpdatedOrderItemClosed")]
-        public ActionResult UpdateOrderItemClosed(int OrderItemID, int OrderID, string View)
-        {
-            string status1 = "CancelClosed";
-            string status2 = "Closed";
-            OrderItem orderItem = info.GetOrderItemByOrderItemID(OrderItemID);
-            // Nếu status là cancel cập nhật status của orderitem là status1 ngược lại là status 2
-            if (orderItem.Status == "Cancel")
-            {
-                bool result = info.UpdateOrderItemStatus(OrderItemID, status1);
-            }
-            else
-            {
-                info.UpdateOrderItemStatus(OrderItemID, status2);
-            }
+        //[Route("UpdatedOrderItemClosed")]
+        //public ActionResult UpdateOrderItemClosed(int OrderItemID, int OrderID, string View)
+        //{
+        //    string status1 = "CancelClosed";
+        //    string status2 = "Closed";
+        //    OrderItem orderItem = info.GetOrderItemByOrderItemID(OrderItemID);
+        //    // Nếu status là cancel cập nhật status của orderitem là status1 ngược lại là status 2
+        //    if (orderItem.Status == "Cancel")
+        //    {
+        //        bool result = info.UpdateOrderItemStatus(OrderItemID, status1);
+        //    }
+        //    else
+        //    {
+        //        info.UpdateOrderItemStatus(OrderItemID, status2);
+        //    }
 
-            // Nếu đang ở view Chi tiết hóa đơn 
-            if(View == "DetailOrderNeedSevice")
-            {
-                // Nếu chi tiết hóa đơn != 0 thì redirect về DetailOrderNeedSevice ngược lại thì redirect về GetListOrderServiceGroupByOrder
-                if (info.GetAllOrderItemByOrderIDAndNeedService(OrderID).Count() != 0)
-                {
-                    return RedirectToAction("DetailOrderNeedSevice", "Service", new { OrderID = OrderID });
-                }
-                else
-                {
-                    info.UpdateOrderStatus(OrderID, status1);
-                    return RedirectToAction("GetListOrderServiceGroupByOrder", "Service");
-                }
-            }
-            // nếu đang ở view xem thông tin pha chế nhóm theo từng loại món
-            else
-            {
-                return RedirectToAction("GetListOrderItemNeedServiceGroupByFoodAnDrink", "Service");
-            }
+        //    // Nếu đang ở view Chi tiết hóa đơn 
+        //    if (View == "DetailOrderNeedSevice")
+        //    {
+        //        // Nếu chi tiết hóa đơn != 0 thì redirect về DetailOrderNeedSevice ngược lại thì redirect về GetListOrderServiceGroupByOrder
+        //        if (info.GetAllOrderItemByOrderIDAndNeedService(OrderID).Count() != 0)
+        //        {
+        //            return RedirectToAction("DetailOrderNeedSevice", "Service", new { OrderID = OrderID });
+        //        }
+        //        else
+        //        {
+        //            // info.UpdateOrderStatus(OrderID, status1);
+        //            return RedirectToAction("GetListOrderServiceGroupByOrder", "Service");
+        //        }
+        //    }
+        //    // nếu đang ở view xem thông tin pha chế nhóm theo từng loại món
+        //    else
+        //    {
+        //        return RedirectToAction("GetListOrderItemNeedServiceGroupByFoodAnDrink", "Service");
+        //    }
 
-        }
+        //}
 
         /// <summary>
         /// Cập nhật đã phục vụ 
@@ -352,21 +390,21 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         /// <param name="OrderID"></param>
         /// <param name="confirm"></param>
         /// <returns></returns>
-        [Route("UpdatedOrderClosed")]
-        public ActionResult UpdatedOrderClosed(int OrderID, string confirm)
-        {
-            string status = "Closed";
-            if (confirm == "true")
-            {
-                IEnumerable<OrderItem> orderItems = info.GetAllOrderItemByOrderID(OrderID);
-                foreach (OrderItem orderItem in orderItems)
-                {
-                    info.UpdateOrderItemStatus(orderItem.OrderItemID, status);
-                }
-                info.UpdateOrderStatus(OrderID, status);
-            }
-            return RedirectToAction("GetListOrderServiceGroupByOrder", "Service");
-        }
+        //[Route("UpdatedOrderClosed")]
+        //public ActionResult UpdatedOrderClosed(int OrderID, string confirm)
+        //{
+        //    string status = "Closed";
+        //    if (confirm == "true")
+        //    {
+        //        IEnumerable<OrderItem> orderItems = info.GetAllOrderItemByOrderID(OrderID);
+        //        foreach (OrderItem orderItem in orderItems)
+        //        {
+        //            info.UpdateOrderItemStatus(orderItem.OrderItemID, status);
+        //        }
+        //        info.UpdateOrderStatus(OrderID, status);
+        //    }
+        //    return RedirectToAction("GetListOrderServiceGroupByOrder", "Service");
+        //}
 
         /// <summary>
         /// Danh sách đồ uống cần phục vụ theo món
@@ -424,9 +462,9 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             IEnumerable<Order> orders = info.GetAllOrder();
             List<Order> temp = new List<Order>();
-            foreach(Order o in orders)
+            foreach (Order o in orders)
             {
-                if(o.Status != "Cancel" && o.Status != "Paid")
+                if (o.Status != "Cancel" && o.Status != "Paid")
                 {
                     temp.Add(o);
                 }
@@ -445,7 +483,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             string status = "Paid";
             info.UpdateOrderStatus(OrderID, status);
             Order order = info.GetOrderByOrderID(OrderID).SingleOrDefault();
-            if(order.PosID != 0)
+            if (order.PosID != 0)
             {
                 int PosID = Convert.ToInt32(order.PosID);
                 info.UpdateStatusPostion(PosID, "Available");
@@ -472,7 +510,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult DetailOrderNeedDelivery(int OrderID)
         {
             IEnumerable<OrderItem> orderItems = info.GetAllOrderItemByOrderID(OrderID);
-            return View(orderItems); 
+            return View(orderItems);
         }
     }
 }

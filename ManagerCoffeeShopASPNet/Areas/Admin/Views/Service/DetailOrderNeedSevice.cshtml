@@ -23,9 +23,9 @@
             columns.Add(o => o.Quantity).Titled("Số lượng").Sortable(false);
             columns.Add(o => o.Desc).Titled("Ghi chú").Sortable(false);
             columns.Add(o => o.Status).Titled("Trạng thái").Css("Status").Sortable(false);
-            columns.Add(o => m.ConvertStatus(o.Status)).Titled("Trạng thái").Css("Status").Sortable(false).Filterable(false);
+            columns.Add(o => m.ConvertStatus(o.Status)).Titled("Trạng thái")/*.Css("Status")*/.Sortable(false).Filterable(false);
             columns.Add(o => o.OrderItemID).Encoded(false).RenderedAs(o => (
-                Html.ActionLink("Đã phục vụ", "UpdateOrderItemClosed", "Service", new { OrderItemID = o.OrderItemID, OrderID = o.OrderID, View = "DetailOrderNeedSevice" }, new { @class = "btn btn-sm btn-primary btnDetailOrder" }).ToHtmlString()
+                Html.ActionLink("Đã phục vụ", "UpdatedOrderItemClosed", "Service", new { OrderItemID = o.OrderItemID/*, OrderID = o.OrderID, View = "DetailOrderNeedSevice" */}, new { @class = "btn btn-sm btn-primary btnDetailOrder" }).ToHtmlString()
             )).Filterable(false);
         })
         //.WithFilterMode(GridFilterMode.FilterRow)
@@ -39,6 +39,10 @@
 
 )
 <div class="Status">@Model.First().Status</div>
+<div>
+    @Html.ActionLink("Trở về", "GetListOrderServiceGroupByOrder", "Service")
+    @Html.ActionLink("Đã phục vụ", "UpdatedOrderClosed", "Service", new { OrderID = ViewData["OrderID"] }, new { @class = "btn btn-sm btn-primary btnUpdatedOrderClosed btnAll float-right" })
+</div>
 <style>
     .Status{
         display:none;
@@ -51,15 +55,13 @@
             var Status = tr.find(".Status").text()
             if (Status != "Ready") { // 
                 //tr.find("button").attr("disabled", 1)
-                tr.find("a.Confirm").removeAttr("href").attr("class", "btn btn-light btn-sm")
+                tr.find("a.btnDetailOrder").removeAttr("href").attr("class", "btn btn-light btn-sm")
             }
 
         })
-        var status = $("div.Status").text()
-        if (status != "Ready") {
-            $("a.btnAll").removeAttr("href").attr("role", "NotAllow").attr("class", "btn btn-light btn-sm")
-        }
+        //var status = $("div.Status").text()
+        //if (status != "Closed") {
+        //    $("a.btnAll").removeAttr("href").attr("role", "NotAllow").attr("class", "btn btn-light btn-sm")
+        //}
     })
 </script>
-@Html.ActionLink("Trở về", "GetListOrderServiceGroupByOrder", "Service")
-@Html.ActionLink("Đã phục vụ", "UpdatedOrderClosed", "Service", new { OrderID = Model.First().OrderID }, new { @class = "btn btn-sm btn-primary btnUpdatedOrderClosed btnAll float-right" })

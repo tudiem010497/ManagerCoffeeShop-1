@@ -104,17 +104,15 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
             }
             else
             {
-
+                //Đặt online không cần để PosID
                 List<Cart> carts = Session["cart"] as List<Cart>;
-                
-                int PosID = 1;
                 double TotalAmount = 0;
                
                 foreach (var item in carts)
                 {
                     TotalAmount = TotalAmount + item.Total;
                 }
-                bool resultOrder = info.InsertOrder(PosID, DateTime.Now, DateTime.Now, TotalAmount, "VND", "Delivery", "WaitToConfirm");
+                bool resultOrder = info.InsertOrderWithoutPosID(DateTime.Now, DateTime.Now, TotalAmount, "VND", "Delivery", "WaitToConfirm");
                 int OrderID = info.GetLastOrderIDID();
                 foreach (var item in carts)
                 {

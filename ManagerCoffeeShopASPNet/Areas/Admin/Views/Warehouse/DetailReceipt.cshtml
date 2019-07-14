@@ -28,14 +28,34 @@
                 columns.Add(model => model.Amount).Titled("Số lượng");
                 columns.Add(model => model.Unit).Titled("Đơn vị tính");
                 columns.Add(model => model.UnitPrice).Titled("Đơn giá");
+                columns.Add(model => model.Status).Css("Status");
             }).Filterable()
     )
 </div>
-<div class="row">
+<div class="Status">
+    @ViewData["StatusReceipt"]
+</div>
+<div class="row test">
     <div class="col-md-8">
         @Html.ActionLink("Trở về", "GetAllReceipt", "Warehouse", new { @class = "btn btn-outline-primary btn-sm" })
     </div>
     <div class="col-md-4">
-        @Html.ActionLink("Nhập xong", "ClosedReceipt", "Warehouse", new { ReceiptID = ViewData["ReceiptID"] }, new { @class="btn btn-sm btn-outline-success"})
+        @Html.ActionLink("Nhập xong", "ClosedReceipt", "Warehouse", new { ReceiptID = ViewData["ReceiptID"] }, new { @class = "btn btn-sm btn-outline-success btnNhapXong" })
     </div>
 </div>
+
+<style>
+    .Status {
+        display: none;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        var status = $("div.Status").text().trim();
+        console.log(status);
+        if (status == "Closed") {
+            $("div.test div.col-md-4 a.btnNhapXong").removeAttr("href").attr("class", "btn btn-light btn-sm")
+        }
+    })
+</script>

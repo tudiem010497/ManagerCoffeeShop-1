@@ -162,6 +162,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             IEnumerable<ReceiptDetail> receiptDetails = info.GetAllReceiptDetailByReceiptID(ReceiptID);
             //int ReceiptDetailID = receiptDetails.Single().ReceiptDetailID;
             ViewData["ReceiptID"] = ReceiptID;
+            Receipt receipt = info.GetReceiptByID(ReceiptID);
+            ViewData["StatusReceipt"] = receipt.Status;
             return View(receiptDetails);
         }
         //nhấn nút nhập xong phiếu nhập và cập nhật lại số lượng vào kho (Ingredients)
@@ -169,11 +171,13 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult ClosedReceipt(int ReceiptID)
         {
             string status = "Closed";
-            info.UpdateReceiptDetailByReceiptID(ReceiptID, status);
+            
             //ReceiptDetail detail = info.GetReceiptDetailByReceiptDetailID(ReceiptDetailID);
             IEnumerable<ReceiptDetail> details = info.GetAllReceiptDetailByReceiptID(ReceiptID);
             foreach (var item in details)
             {
+                info.UpdateReceiptDetail(item.ReceiptDetailID, status);
+                //info.UpdateReceiptDetailByReceiptID(ReceiptID, status);
                 if (item.IngreID != null)
                 {
                     int IngreID = item.IngreID.GetValueOrDefault();

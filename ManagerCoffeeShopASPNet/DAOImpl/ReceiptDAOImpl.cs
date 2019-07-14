@@ -100,5 +100,19 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                 throw new Exception("Error Update Receipt" + ex.Message);
             }
         }
+        public Receipt GetReceiptByID(int ReceiptID)
+        {
+            try
+            {
+                Receipt r = (from receipt in context.Receipts
+                             where receipt.ReceiptID == ReceiptID
+                             select receipt).Single();
+                return r;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
     }
 }

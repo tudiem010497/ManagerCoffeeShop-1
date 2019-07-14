@@ -15,7 +15,7 @@
         {
             ConvertStatusOrder o = new ConvertStatusOrder();
             column.Add(m => m.Customer.Name).Titled("Tên khách hàng").Sortable(false);
-            column.Add(m => m.PosID).Titled("Vị trí").Filterable(false);
+            //column.Add(m => m.PosID).Titled("Vị trí").Filterable(false);
             column.Add(m => m.OrderDateTime).Titled("Ngày giờ đặt").Filterable(false);
             column.Add(m => m.PaidDateTime).Titled("Ngày giờ giao").Filterable(false);
             column.Add(m => m.DiscountMoney).Titled("Giảm giá").Filterable(false);

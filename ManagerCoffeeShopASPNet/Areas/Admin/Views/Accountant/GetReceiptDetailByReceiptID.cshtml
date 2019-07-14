@@ -24,9 +24,10 @@
             column.Add(m => m.UnitPrice).Titled("Đơn giá").Filterable(false);
             //column.Add(m => m.Currency).Titled("Đơn vị tiền").Sortable(false).Filterable(false);
             column.Add(m =>o.ConvertStatus(m.Status).ToString()).Titled("Trạng thái").Filterable(false);
+            column.Add(m => m.Status).Css("Status");
             column.Add(m => m.ReceiptDetailID).Encoded(false).RenderedAs(m => (
-                @Html.ActionLink("Xác nhận", "Confirm", new { ReceiptDetailID = m.ReceiptDetailID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
-                + " " + @Html.ActionLink("Hủy", "Cancel", new { ReceiptDetailID = m.ReceiptDetailID }, new { @class = "btn btn-sm btn-outline-danger" }).ToHtmlString()
+                @Html.ActionLink("Xác nhận", "Confirm", new { ReceiptDetailID = m.ReceiptDetailID }, new { @class = "btn btn-sm btn-outline-success confirm" }).ToHtmlString()
+                + " " + @Html.ActionLink("Hủy", "Cancel", new { ReceiptDetailID = m.ReceiptDetailID }, new { @class = "btn btn-sm btn-outline-danger cancel" }).ToHtmlString()
             )).Filterable(false).Sortable(false);
         })
         .Sortable()
@@ -46,3 +47,22 @@
         @Html.ActionLink("Hoàn tất", "ConfirmAll", new { ReceiptID = ViewData["ReceiptID"], View = "GetReceiptDetailByReceiptID" }, new { @class = "btn btn-sm btn-outline-info" })
     </div>
 </div>
+
+<style>
+    .Status{
+        display:none;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $("div.mvc-grid table tbody tr").each(function (index) {
+            var tr = $(this)
+            var Status = tr.find(".Status").text()
+            if (Status != "Waiting") {
+                tr.find("a.confirm").removeAttr("href").attr("class", "btn btn-light btn-sm")
+                tr.find("a.cancel").removeAttr("href").attr("class", "btn btn-light btn-sm")
+            }
+        })
+    })
+</script>

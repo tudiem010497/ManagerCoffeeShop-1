@@ -107,5 +107,9 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._receiptDetailDAO.UpdateReceiptDetailByReceiptID(ReceiptID, Status);
         }
+        public Receipt GetReceiptByID(int ReceiptID)
+        {
+            return this._receiptDAO.GetReceiptByID(ReceiptID);
+        }
     }
 }
