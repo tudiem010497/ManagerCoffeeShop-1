@@ -20,9 +20,10 @@
             columns.Add(o => o.FoodAndDrink.Name).Titled("Tên đồ uống").Sortable(false);
             columns.Add(o => o.Quantity).Titled("Số lượng").Sortable(false);
             columns.Add(o => o.Desc).Titled("Ghi chú").Sortable(false);
+            columns.Add(o => o.Status).Titled("").Css("Status").Sortable(false);
             columns.Add(o =>m.ConvertStatus(o.Status).ToString()).Titled("Trạng thái").Sortable(false);
             columns.Add(o => o.OrderItemID).Encoded(false).RenderedAs(o => (
-                Html.ActionLink("Xong", "UpdateReady", "Batender", new { OrderItemID = o.OrderItemID, OrderID = o.OrderID, NumOfOrderItem = Model.Count(), view = "DetailOrder" }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
+                Html.ActionLink("Xong", "UpdateReady", "Batender", new { OrderItemID = o.OrderItemID, OrderID = o.OrderID, NumOfOrderItem = Model.Count(), view = "DetailOrder" }, new { @class = "btn btn-sm btn-outline-success Ready" }).ToHtmlString()
                 + Html.ActionLink("Hủy", "UpdateCancel", "Batender", new { OrderItemID = o.OrderItemID, OrderID = o.OrderID, NumOfOrderItem = Model.Count(), view = "DetailOrder" }, new { @class = "btn btn-sm btn-outline-danger btnCancel" }).ToHtmlString()
                 + Html.ActionLink("Xem công thức pha chế", "ReadRecipe", "Batender", new { FDID = o.FDID }, new { @class = "btn btn-sm btn-outline-info btnReadRecipe" }).ToHtmlString()
             )).Filterable(false);
@@ -36,3 +37,10 @@
         })
     )
 </div>
+@Html.ActionLink("Trở về","batender", "GetListOrder")
+<style type="text/css">
+    .Status {
+        display: none;
+    }
+</style>
+

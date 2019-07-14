@@ -99,7 +99,9 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 alert(data.Result);
+                location.reload()
                 //window.location="/Cart/Cart"
+
             }
             ,
             error: function (err) {

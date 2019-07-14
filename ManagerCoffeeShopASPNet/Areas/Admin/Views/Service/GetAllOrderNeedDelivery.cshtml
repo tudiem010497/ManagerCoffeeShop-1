@@ -24,7 +24,7 @@
             column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);
             column.Add(m => o.ConvertStatus(m.Status).ToString()).Titled("Trạng thái").Filterable(false);
             column.Add(m => m.OrderID).Encoded(false).RenderedAs(m => (
-                @Html.ActionLink("Xem Chi tiết", "DetailOrderNeedSevice", "Service", new { OrderID = m.OrderID }, new { @class = "btn btn-sm btn-primary btnDetailOrder" }).ToHtmlString()
+                @Html.ActionLink("Xem Chi tiết", "DetailOrderNeedDelivery", "Service", new { OrderID = m.OrderID }, new { @class = "btn btn-sm btn-primary btnDetailOrder" }).ToHtmlString()
                 + " " + @Html.ActionLink("Xác nhận giao hàng", "ConfirmDelivery", new { OrderID = m.OrderID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
             )).Filterable(false).Sortable(false);
         })

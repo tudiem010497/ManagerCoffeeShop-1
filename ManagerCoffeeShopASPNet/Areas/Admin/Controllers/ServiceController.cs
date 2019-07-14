@@ -460,5 +460,11 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             Account acc = info.GetAccountByUserID(UserID);
             return View(acc);
         }
+        [Route("DetailOrderNeedDelivery")]
+        public ActionResult DetailOrderNeedDelivery(int OrderID)
+        {
+            IEnumerable<OrderItem> orderItems = info.GetAllOrderItemByOrderID(OrderID);
+            return View(orderItems); abc
+        }
     }
 }

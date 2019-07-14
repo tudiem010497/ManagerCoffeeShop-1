@@ -57,7 +57,6 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
                 //cart.Total = test * temp.Price;
                 //cart.Price = cart.Price * test;
             }
-            Session["cart"] = list;
             
             return Json(new { FDID = temp.FDID, Name = temp.Name, Quantity = temp.Quantity, UnitPrice = temp.Total, Price = temp.Price }, JsonRequestBehavior.AllowGet);
         }
@@ -100,6 +99,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
             {
                 //TempData["errorPay"] = "Vui lòng điền đầy đủ thông tin";
                 //return RedirectToAction("ErrorPay", "Cart");
+
                 return Json(new { Result = "Vui lòng điền đầy đủ thông tin" }, JsonRequestBehavior.AllowGet);
             }
             else
@@ -132,6 +132,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
                 int ShipID = info.GetLastShipID();
 
                 info.InsertShipDetail(ShipID, OrderID, temp.CustName, temp.Address, temp.Tel, "Wait");
+
+                Session["cart"] = null;
                 return Json(new { Result = "Bạn đã đặt hàng thành công. Hãy chờ xác nhận từ nhân viên." }, JsonRequestBehavior.AllowGet);
             }
 

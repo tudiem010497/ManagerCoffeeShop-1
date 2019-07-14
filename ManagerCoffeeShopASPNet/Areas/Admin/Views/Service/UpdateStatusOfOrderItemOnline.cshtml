@@ -16,10 +16,11 @@
             column.Add(m => m.FoodAndDrink.Name).Titled("Tên đồ uống");
             column.Add(m => m.Quantity).Titled("Số lượng");
             column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);
+            column.Add(m => m.Status).Titled("").Css("Status").Filterable(false);
             column.Add(m => o.ConvertStatus(m.Status).ToString()).Titled("Trạng thái").Filterable(false);
             column.Add(m => m.OrderID).Encoded(false).RenderedAs(m => (
-                @Html.ActionLink("Xác nhận", "Confirm", new { OrderItemID = m.OrderItemID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
-                + " "+ @Html.ActionLink("Hủy", "Cancel", new { OrderItemID = m.OrderItemID }, new { @class = "btn btn-sm btn-outline-danger" }).ToHtmlString()
+                @Html.ActionLink("Xác nhận", "Confirm", new { OrderItemID = m.OrderItemID }, new { @class = "btn btn-sm btn-outline-success Confirm" }).ToHtmlString()
+                + " "+ @Html.ActionLink("Hủy", "Cancel", new { OrderItemID = m.OrderItemID }, new { @class = "btn btn-sm btn-outline-danger Cancel" }).ToHtmlString()
             )).Filterable(false).Sortable(false);
         })
         .Sortable()
@@ -39,3 +40,23 @@
         <a class="btn btn-sm btn-outline-info" href="@Url.Action("ConfirmAll", "Service", new { OrderID = ViewData["OrderID"]})">Hoàn tất</a>
     </div>
 </div>
+<style type="text/css">
+    .Status {
+        display: none;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $("div.mvc-grid table tbody tr").each(function (index) {
+            var tr = $(this)
+            var Status = tr.find(".Status").text()
+            if (Status != "WaitToConfirm") { // ẩn btn xác nhận khi đã xác nhận, ẩn btn cancel khi đã xn
+                //tr.find("button").attr("disabled", 1)
+                tr.find("a.Confirm").removeAttr("href").attr("class", "btn btn-light btn-sm")
+                tr.find("a.Cancel").removeAttr("href").attr("class", "btn btn-light btn-sm")
+            }
+            
+        })
+
+    })
+</script>

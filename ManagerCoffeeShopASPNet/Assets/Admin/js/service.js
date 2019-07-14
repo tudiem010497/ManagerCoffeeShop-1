@@ -147,6 +147,8 @@
             dataType: "json",
             success: function (data) {
                 alert("Gửi thành công " + data.PosID);
+                $("tbody.order").html("")
+                arrayID = []
             },
             error: function (err) {
                 alert("Error1 : " + err.error);

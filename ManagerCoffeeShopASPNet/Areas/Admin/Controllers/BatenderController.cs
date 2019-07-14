@@ -494,5 +494,6 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             string Unit = info.GetIngredientByIngreID(IngreID).Unit;
             return Json(new { Unit = Unit }, JsonRequestBehavior.AllowGet);
         }
+
     }
 }

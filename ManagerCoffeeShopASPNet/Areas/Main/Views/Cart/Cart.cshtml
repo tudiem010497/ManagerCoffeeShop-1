@@ -14,11 +14,95 @@
 
 @if (ViewData["carts"] == null)
 {
-    <h2><i class="fa fa-shopping-basket"></i>Thông tin giỏ hàng</h2>
+    @*<h2><i class="fa fa-shopping-basket"></i>Thông tin giỏ hàng</h2>
     <p class="text-info text-center">
         Giỏ hàng của bạn rỗng!
     </p>
-    <a class="btn btn-outline-dark" type="button" href="@Url.Action("Index", "Home")">Về trang chủ</a>
+    <a class="btn btn-outline-dark" type="button" href="@Url.Action("Index", "Home")">Về trang chủ</a>*@
+        <div class="row" style="margin-left: auto;margin-right: auto;">
+        <div class="col-sm-8">
+            <h2><i class="fa fa-shopping-basket"></i>Thông tin giỏ hàng</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered" style="width:auto">
+                    <thead>
+                        <tr>
+                            <th>Tên đồ uống</th>
+                            <th>Số lượng</th>
+                            <th>Yêu cầu thêm</th>
+                            <th>Số lượng</th>
+                            <th>Đơn giá</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            <td colspan="2" class="text-right">Tổng số lượng: 0</td>
+                            <td colspan="3" class="text-right">Tổng tiền: 0 VNĐ</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h2><i class="fa fa-truck"></i> Thông tin giao hàng</h2>
+            @if(TempData["errorPay"] != null)
+            {
+                <div class="alert alert-danger">@TempData["errorPay"]</div>
+            }
+            <form class="needs-validation" novalidate>
+                @if (ViewData["successUserID"] != null)
+                {
+                    <div class="form-group">
+                        <input type="hidden" name="UserID" id="userID" value="@ViewData["successUserID"]" />
+                        <label for="name">Tên</label>
+                        @*<input type="text" class="form-control" id="name" placeholder="Enter your name" name="name" required>*@
+                        @Html.TextBoxFor(model=>model.UserName, new { placeholder = "Nhập tên của bạn", required = "required", id = "name", @class ="form-control" })
+                        @Html.ValidationMessageFor(model=>model.UserName, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="tel">Số điện thoại:</label>
+                        <input type="tel" class="form-control" id="tel" placeholder="Nhập số điện thoại" name="tel" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        @*<input type="email" class="form-control" id="email" placeholder="Enter your email" name="email" required>*@
+                        @Html.TextBoxFor(model => model.Email, new { placeholder = "Enter Your Email", required = "required", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Địa chỉ</label>
+                        <input type="text" class="form-control" id="address" placeholder="Nhập địa chỉ" name="address" required>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group">
+                        <input type="hidden" name="UserID" value="0" />
+                        <label for="name">Tên</label>
+                        <input type="text" class="form-control" id="name" placeholder="Nhập tên của bạn" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tel">Số điện thoại:</label>
+                        <input type="tel" class="form-control" id="tel" placeholder="Nhập số điện thoại" name="tel" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Nhập email của bạn" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Địa chỉ:</label>
+                        <input type="text" class="form-control" id="address" placeholder="Nhập địa chỉ của bạn" name="address" required>
+                    </div>
+                }
+            </form>
+        </div>
+        <div style="margin-left:auto; margin-right:auto; width:250px">
+            <a class="btn btn-info" href="@Url.Action("Index", "Home")">Tiếp tục mua sắm</a>
+            <a class="btn btn-default" id="pay" @*href="@Url.Action("Pay", "Cart")"*@>Thanh toán</a>
+        </div>
+    </div>
 }
 else
 {
