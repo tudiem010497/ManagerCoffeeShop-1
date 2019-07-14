@@ -17,11 +17,11 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         {
             return context.ShipDetails.ToList();
         }
-        public IEnumerable<ShipDetail> GetShipDeliveryByStatus()
+        public IEnumerable<ShipDetail> GetShipDeliveryByStatus(string Status)
         {
             //string Status
             IEnumerable<ShipDetail> s = from ship in context.ShipDetails
-                                        where ship.Status == "Delivery" || ship.Status == "Close" || ship.Status == "Failed"
+                                        where ship.Status == Status /*|| ship.Status == "Close" || ship.Status == "Failed"*/
                                         select ship;
             return s;
         }

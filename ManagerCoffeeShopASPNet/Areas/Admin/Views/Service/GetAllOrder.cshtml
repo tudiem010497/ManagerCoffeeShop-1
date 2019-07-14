@@ -37,7 +37,6 @@
         })
     )
 </div>
-<input type="button" value="Detail" onclick="location.href='@Url.Action("PrintOrder", "Service", new { OrderID = 1})'" />
 <style type="text/css">
     .Status{
         display:none;
@@ -48,7 +47,7 @@
         $("div.mvc-grid table tbody tr").each(function (index) {
             var tr = $(this)
             var Status = tr.find(".Status").text()
-            if (Status != "Ready") {
+            if (Status != "Closed") {
                 tr.find("button").attr("disabled", 1)
                 tr.find("a").removeAttr("href").attr("class", "btn btn-light btn-sm")
                 

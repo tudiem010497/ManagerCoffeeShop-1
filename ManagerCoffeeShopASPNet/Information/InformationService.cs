@@ -141,9 +141,9 @@ namespace ManagerCoffeeShopASPNet.Information
         {
             return this._shipDetailDAO.GetListShipDelivery();
         }
-        public IEnumerable<ShipDetail> GetShipDeliveryByStatus()
+        public IEnumerable<ShipDetail> GetShipDeliveryByStatus(string Status)
         {
-            return this._shipDetailDAO.GetShipDeliveryByStatus();
+            return this._shipDetailDAO.GetShipDeliveryByStatus(Status);
         }
         public ShipDetail GetShipDeliveryByShipDetailID(int ShipDetailID)
         {

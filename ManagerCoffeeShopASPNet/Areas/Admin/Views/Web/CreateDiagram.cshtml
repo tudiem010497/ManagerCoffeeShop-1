@@ -118,12 +118,13 @@
                     </pattern>
                 </defs>
                 <rect class="test" width="100%" height="100%" fill="url(#grid)" />
-                <text x="50" y="250" @*fill="url(#svg-dropzone)" font-size="20" stroke="black" text-anchor="middle"*@ class="edit-text">Bàn số</text>
+                @*<text x="50" y="250" fill="url(#svg-dropzone)" font-size="20" stroke="black" text-anchor="middle" class="edit-text">Bàn số</text>*@
                 @*<text x="100" y="200" fill="url(#svg-dropzone)" font-size="20" stroke="black" text-anchor="middle">Bàn số</text>*@
                 
             </svg>
         }
     </div>
+    <button class="btn btn-outline-info" id="btnSaveDiagram">Lưu</button>
     <div id="contextMenu" class="dropdown clearfix">
         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
             <li>
@@ -133,9 +134,9 @@
             <li>
                 <a tabindex="-1" href="#" id="rotate-right">Xoay </a>
             </li>
-            <li>
+            @*<li>
                 <a tabindex="-1" id="add-text">Thêm text</a>
-            </li>
+            </li>*@
         </ul>
     </div>
     @*<div contenteditable id="app">

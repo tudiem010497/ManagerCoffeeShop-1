@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.OrderItem>
+@using ManagerCoffeeShopASPNet.Class
 @using NonFactors.Mvc.Grid;
 
 @{
@@ -7,6 +8,9 @@
 }
 
 <h2 style="text-align:center; padding:10px;">CHI TIẾT HÓA ĐƠN</h2>
+@{ 
+    ConvertStatusOrder m = new ConvertStatusOrder();
+}
 
 @(Html
         .Grid(Model).Build(columns =>
@@ -18,7 +22,8 @@
             columns.Add(o => o.FoodAndDrink.Name).Titled("Tên đồ uống").Sortable(false);
             columns.Add(o => o.Quantity).Titled("Số lượng").Sortable(false);
             columns.Add(o => o.Desc).Titled("Ghi chú").Sortable(false);
-            columns.Add(o => o.Status).Titled("Trạng thái").Sortable(false);
+            columns.Add(o => o.Status).Titled("Trạng thái").Css("Status").Sortable(false);
+            columns.Add(o => m.ConvertStatus(o.Status)).Titled("Trạng thái").Css("Status").Sortable(false).Filterable(false);
             columns.Add(o => o.OrderItemID).Encoded(false).RenderedAs(o => (
                 Html.ActionLink("Đã phục vụ", "UpdateOrderItemClosed", "Service", new { OrderItemID = o.OrderItemID, OrderID = o.OrderID, View = "DetailOrderNeedSevice" }, new { @class = "btn btn-sm btn-primary btnDetailOrder" }).ToHtmlString()
             )).Filterable(false);
@@ -31,4 +36,30 @@
         {
             pager.RowsPerPage = 6;
         })
+
 )
+<div class="Status">@Model.First().Status</div>
+<style>
+    .Status{
+        display:none;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $("div.mvc-grid table tbody tr").each(function (index) {
+            var tr = $(this)
+            var Status = tr.find(".Status").text()
+            if (Status != "Ready") { // 
+                //tr.find("button").attr("disabled", 1)
+                tr.find("a.Confirm").removeAttr("href").attr("class", "btn btn-light btn-sm")
+            }
+
+        })
+        var status = $("div.Status").text()
+        if (status != "Ready") {
+            $("a.btnAll").removeAttr("href").attr("role", "NotAllow").attr("class", "btn btn-light btn-sm")
+        }
+    })
+</script>
+@Html.ActionLink("Trở về", "GetListOrderServiceGroupByOrder", "Service")
+@Html.ActionLink("Đã phục vụ", "UpdatedOrderClosed", "Service", new { OrderID = Model.First().OrderID }, new { @class = "btn btn-sm btn-primary btnUpdatedOrderClosed btnAll float-right" })

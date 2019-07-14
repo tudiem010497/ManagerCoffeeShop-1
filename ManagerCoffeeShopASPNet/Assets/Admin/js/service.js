@@ -158,14 +158,17 @@
     
     // Xử lý nhân viên phục vụ cập nhật thông tin phục vụ
     $(".btnUpdatedOrderClosed").click(function () {
-        if (confirm("Bạn muốn cập nhật thông tin của toàn bộ đơn hàng ???")) {
-            var data = $(".btnUpdatedOrderClosed").attr("href") + "&confirm=true";
-            $(this).attr("href", data);
+        if ($(this).attr("role") == "Allow") {
+            if (confirm("Bạn muốn cập nhật thông tin của toàn bộ đơn hàng ???")) {
+                var data = $(".btnUpdatedOrderClosed").attr("href") + "&confirm=true";
+                $(this).attr("href", data);
+            }
+            else {
+                var data = $(".btnUpdatedOrderClosed").attr("href") + "&confirm=false";
+                $(this).attr("href", data);
+            }
         }
-        else {
-            var data = $(".btnUpdatedOrderClosed").attr("href") + "&confirm=false";
-            $(this).attr("href", data);
-        }
+        
     });
 });
 

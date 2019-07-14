@@ -74,6 +74,7 @@ $(document).ready(function () {
                 dataType: "json",
                 success: function (data) {
                     alert("Lưu dữ liệu thành công ");
+                    $("g.dragOn-drawArea").html("")
                 },
                 error: function (err) {
                     alert("Error1 : " + err.error);
@@ -204,6 +205,7 @@ $(document).ready(function () {
                 dataType: "json",
                 success: function (data) {
                     alert("Lưu dữ liệu thành công ");
+                    $("g.dragOn-drawArea ").html("")
                 },
                 error: function (err) {
                     alert("Error1 : " + err.error);

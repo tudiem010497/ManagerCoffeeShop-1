@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ManagerCoffeeShopASPNet.OrderItem>
+@using ManagerCoffeeShopASPNet.Class
+
+
+@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "DetailOrderNeedDelivery";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="text-align:center;padding:10px">CHI TIẾT HÓA ĐƠN</h2>
+
+<div style="padding-bottom:10px;">
+    @(Html
+        .Grid(Model)
+        .Build(column =>
+        {
+            ConvertStatusOrder o = new ConvertStatusOrder();
+            //column.Add(m => m.OrderID).Titled("Mã hóa đơn").Sortable(false);
+            column.Add(m => m.FoodAndDrink.Name).Titled("Tên đồ uống");
+            column.Add(m => m.Quantity).Titled("Số lượng");
+            column.Add(m => m.Desc).Titled("Ghi chú").Filterable(false);
+            column.Add(m => o.ConvertStatus(m.Status).ToString()).Titled("Trạng thái").Filterable(false);
+            //column.Add(m => m.OrderItemID).Encoded(false).RenderedAs(m => (
+            //    @Html.ActionLink("Đã phục vụ", "UpdatedOrderItemClosed", "Service", new { OrderItemID = m.OrderItemID, OrderID = m.OrderID, View = "DetailOrder" }, new { @class = "btn btn-sm btn-success" }).ToHtmlString()
+            //)).Filterable(false).Sortable(false).Titled("Action");
+        })
+        //.WithFilterMode(GridFilterMode.FilterRow)
+        .Sortable()
+        .Empty("Không có dữ liệu.")
+        .Filterable()
+    )
+</div>
+<div>
+    @Html.ActionLink("Trở về", "GetAllOrderNeedDelivery", "Service")
+</div>

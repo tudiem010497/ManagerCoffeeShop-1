@@ -10,7 +10,7 @@ namespace ManagerCoffeeShopASPNet.DAO
     {
         IEnumerable<ShipDetail> GetListShipDelivery();
         //string Status
-        IEnumerable<ShipDetail> GetShipDeliveryByStatus();
+        IEnumerable<ShipDetail> GetShipDeliveryByStatus(string Status);
         IEnumerable<ShipDetail> GetShipDeliveryWaitToConfirm();
         ShipDetail GetShipDetailByOrderID(int OrderID);
         ShipDetail GetShipDeliveryByShipDetailID(int ShipDetailID);

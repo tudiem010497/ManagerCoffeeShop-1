@@ -238,7 +238,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             string status = "Delivery";
             //IEnumerable<ShipDetail> ship = info.GetListShipDelivery();
-            IEnumerable<ShipDetail> ship = info.GetShipDeliveryByStatus();
+            IEnumerable<ShipDetail> ship = info.GetShipDeliveryByStatus(status);
             return View(ship);
         }
         //nhấn nút Xem chi tiết đơn giao hàng
@@ -423,7 +423,15 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult GetAllOrder()
         {
             IEnumerable<Order> orders = info.GetAllOrder();
-            return View(orders);
+            List<Order> temp = new List<Order>();
+            foreach(Order o in orders)
+            {
+                if(o.Status != "Cancel" && o.Status != "Paid")
+                {
+                    temp.Add(o);
+                }
+            }
+            return View(temp);
         }
         //nhấn nút xuất hóa đơn, status của Order được cập nhật là Paid, cập nhật lại vị trí chỗ ngồi
         [Route("PrintOrder")]
@@ -464,7 +472,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult DetailOrderNeedDelivery(int OrderID)
         {
             IEnumerable<OrderItem> orderItems = info.GetAllOrderItemByOrderID(OrderID);
-            return View(orderItems); abc
+            return View(orderItems); 
         }
     }
 }

@@ -23,11 +23,11 @@
         columns.Add(o => m.ConvertStatus(o.Status).ToString()).Titled("Trạng thái").Sortable(false);
         columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o => (
             @Html.ActionLink("Chi tiết", "DetailOrderNeedSevice", "Service", new { OrderID = o.OrderID }, new { @class = "btn btn-sm btn-outline-primary btnDetailOrder" }).ToHtmlString()
-            + @Html.ActionLink("Đã phục vụ", "UpdatedOrderClosed", "Service", new { OrderID = o.OrderID }, new { @class = "btn btn-sm btn-primary btnUpdatedOrderClosed" }).ToHtmlString()
+            //+ @Html.ActionLink("Đã phục vụ", "UpdatedOrderClosed", "Service", new { OrderID = o.OrderID }, new { @class = "btn btn-sm btn-primary btnUpdatedOrderClosed" }).ToHtmlString()
             )).Filterable(false).Sortable(false);
     })
     //.WithFilterMode(GridFilterMode.FilterRow)
-    .Empty("Data is empty")
+    .Empty("Không có dữ liệu")
     .Filterable()
     .Sortable()
     .Pageable(pager =>
