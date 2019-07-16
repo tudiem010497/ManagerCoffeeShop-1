@@ -292,7 +292,15 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             string status = "Ready";
             //IEnumerable<Order> orders = info.GetAllOrderPendingOrReady();
-            IEnumerable<Order> orders = info.GetAllOrderByStatus(status);
+            IEnumerable<Order> list = info.GetAllOrderByStatus(status);
+            List<Order> orders = new List<Order>();
+            foreach(Order order in list)
+            {
+                if(order.Desc != "Delivery")
+                {
+                    orders.Add(order);
+                }
+            }
             ViewData["orders"] = orders;
             return View(orders);
         }
