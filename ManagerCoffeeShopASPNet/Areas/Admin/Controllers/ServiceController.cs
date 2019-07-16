@@ -192,24 +192,30 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             string status1 = "Cancel";
             string status2 = "Pending";
             string status3 = "NotYetDelivery";
+            int n = orderitem.Count(); // số lượng chi tiết hóa đơn
             foreach (var item in orderitem)
             {
-                if (item.Status != "Cancel")
+                if (item.Status == "Cancel")
                 {
-                    temp = 0;
-                    break;
+                    temp++; // đếm sl cancel
                 }
-                else temp = 1;
             }
-            if (temp == 1)
+            if( n == temp) // nếu tất cả đều cancel 
             {
-                info.UpdateShipDetailStatus(OrderID, status1);
                 info.UpdateOrderStatus(OrderID, status1);
+                info.UpdateShipDetailStatus(OrderID, status1);
             }
-            if (temp == 0)
+            else
             {
-                info.UpdateShipDetailStatus(OrderID, status3);
+                foreach(var item in orderitem)
+                {
+                    if(item.Status != status1) // nếu ko cancel thì update thành Pending
+                    {
+                        info.UpdateOrderItemStatus(item.OrderItemID, status2);
+                    }
+                }
                 info.UpdateOrderStatus(OrderID, status2);
+                info.UpdateShipDetailStatus(OrderID, status3);
             }
             return RedirectToAction("GetAllOrderOnlineNeedConfirm");
         }
@@ -475,7 +481,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("PrintOrder")]
         public ActionResult PrintOrder(int OrderID)
         {
-            CrystalReport1 rp = new CrystalReport1();
+            
             //Response.Buffer = false;
             //Response.ClearContent();
             //Response.ClearHeaders();
@@ -488,7 +494,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 int PosID = Convert.ToInt32(order.PosID);
                 info.UpdateStatusPostion(PosID, "Available");
             }
-
+            CrystalReport1 rp = new CrystalReport1();
             rp.SetParameterValue("@OrderID", OrderID);
             Stream stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
