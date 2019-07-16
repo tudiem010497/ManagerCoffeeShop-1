@@ -109,6 +109,10 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             }
             if (view == "GetListOrderItemNeedPreparetion")
             {
+                if(NumOfOrderItem <= 1)
+                {
+                    bool resultUpdateStatusOrder = info.UpdateOrderStatus(OrderID, status);
+                }
                 return RedirectToAction("GetListOrderItemNeedPreparetion", "Batender");
             }
             else

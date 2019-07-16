@@ -7,10 +7,6 @@
 }
 
 <h2 style="text-align:center; padding:10px;">DANH SÁCH HÓA ĐƠN TRONG NGÀY</h2>
-<div style="padding-bottom:10px;">
-    @Html.ActionLink("Xem tất cả đơn hàng", "GetOrder", "Service", new { @class = "btn btn-sm btn-outline-primary" })
-    @Html.ActionLink("Xem chi tiết tất cả đơn hàng", "GetAllOrderItem", "Service", new { @class = "btn btn-sm btn-outline-success" })
-</div>
 <div>
     @(Html
         .Grid(Model).Build(columns =>
@@ -23,7 +19,7 @@
             columns.Add(o => convert.ConvertStatus(o.Status)).Titled("Trạng thái đơn hàng");
             columns.Add(o => o.Status).Css("Status");
             columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o =>
-            Html.ActionLink("Xuất hóa đơn", "PrintOrder", "Service", new { OrderID = o.OrderID }, new { @class = "btn btn-sm btn-primary ", type = "button" })).Filterable(false);
+            @Html.ActionLink("Xem chi tiết", "ListDetailOrder", "Service", new { OrderID = o.OrderID }, new { @class = "btn btn-outline-info btn-sm", type = "button" })).Filterable(false);
             //columns.Add(o => o.OrderID).Encoded(false).RenderedAs(o => "<button type='button' class='btn btn-sm btn-primary'  "
             //+ "onclick='"+ Url.Action("PrintOrder", "Service", new { OrderID = o.OrderID }) + "'>Xuất hóa đơn</button>").Filterable(false);
 
@@ -38,22 +34,11 @@
         })
     )
 </div>
+<div>
+    @Html.ActionLink("Trở về", "GetAllOrder", "Service")
+</div>
 <style type="text/css">
-    .Status{
-        display:none;
+    .Status {
+        display: none;
     }
 </style>
-<script>
-    $(document).ready(function () {
-        $("div.mvc-grid table tbody tr").each(function (index) {
-            var tr = $(this)
-            var Status = tr.find(".Status").text()
-            if (Status != "Closed") {
-                tr.find("button").attr("disabled", 1)
-                tr.find("a").removeAttr("href").attr("class", "btn btn-light btn-sm")
-                
-            }
-        })
-        
-    })
-</script>

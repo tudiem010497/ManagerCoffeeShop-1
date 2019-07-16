@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ManagerCoffeeShopASPNet.OrderItem>
+@using NonFactors.Mvc.Grid
+@using ManagerCoffeeShopASPNet.Class
+@{
+    ViewBag.Title = "ListDetailOrder";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 style="text-align:center;padding:10px">Danh sách chi tiết hóa đơn</h2>
+@{ 
+    ConvertStatusOrder m = new ConvertStatusOrder();
+}
+@(Html
+        .Grid(Model).Build(columns =>
+        {
+            //columns.Add(o => o.OrderID).Titled("Mã hóa đơn").Sortable(false);
+            columns.Add(o => o.Order.Customer.Name).Titled("Tên khách hàng").Sortable(false);
+            columns.Add(o => o.Order.PosID).Titled("Vị trí").Sortable(false);
+            columns.Add(o => o.Order.OrderDateTime).Titled("Thời gian vào");
+            columns.Add(o => o.FoodAndDrink.Name).Titled("Tên đồ uống").Sortable(false);
+            columns.Add(o => o.Quantity).Titled("Số lượng").Sortable(false);
+            columns.Add(o => o.Desc).Titled("Ghi chú").Sortable(false);
+            columns.Add(o => o.Status).Titled("Trạng thái").Css("Status").Sortable(false);
+            columns.Add(o => m.ConvertStatus(o.Status)).Titled("Trạng thái")/*.Css("Status")*/.Sortable(false).Filterable(false);
+            //columns.Add(o => o.OrderItemID).Encoded(false).RenderedAs(o => (
+            //    Html.ActionLink("Đã phục vụ", "UpdatedOrderItemClosed", "Service", new { OrderItemID = o.OrderItemID/*, OrderID = o.OrderID, View = "DetailOrderNeedSevice" */}, new { @class = "btn btn-sm btn-primary btnDetailOrder" }).ToHtmlString()
+            //)).Filterable(false);
+        })
+        //.WithFilterMode(GridFilterMode.FilterRow)
+        .Empty("Không có dữ liệu.")
+        .Filterable()
+        .Sortable()
+        .Pageable(pager =>
+        {
+            pager.RowsPerPage = 6;
+        })
+
+)
+
+@Html.ActionLink("Trở về", "GetOrder", "Service")
+<style>
+    .Status{
+        display:none;
+    }
+</style>

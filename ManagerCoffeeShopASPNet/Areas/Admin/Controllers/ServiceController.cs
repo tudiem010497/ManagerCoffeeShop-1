@@ -305,7 +305,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("DetailOrderNeedSevice")]
         public ActionResult DetailOrderNeedSevice(int OrderID)
         {
-            IEnumerable<OrderItem> orderItems = info.GetAllOrderItemByOrderIDAndNeedService(OrderID);
+            //IEnumerable<OrderItem> orderItems = info.GetAllOrderItemByOrderIDAndNeedService(OrderID);
+            IEnumerable<OrderItem> orderItems = info.GetAllOrderItemByOrderID(OrderID);
             ViewData["OrderID"] = OrderID;
             return View(orderItems);
         }
@@ -327,19 +328,26 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             string status = "Closed";
             IEnumerable<OrderItem> orderItems = info.GetAllOrderItemByOrderID(OrderID);
-            int temp = 0;
+            int temp = 0; // biến đếm có bao nhiêu status == cancel
+            int n = orderItems.Count();
             foreach (var item in orderItems)
             {
-                if (item.Status != "Closed")
+                if (item.Status == "Cancel")
                 {
-                    temp = 0;
-                    break;
+                    temp++;
                 }
-                else temp = 1;
+                else
+                {
+                    info.UpdateOrderItemStatus(item.OrderID, status);
+                }
             }
-            if (temp != 0)
+            if (temp != n) 
             {
                 info.UpdateOrderStatus(OrderID, status);
+            }
+            else // nếu sl = sl hủy
+            {
+                info.UpdateOrderStatus(OrderID, "Cancel");
             }
             return RedirectToAction("GetListOrderServiceGroupByOrder", "Service");
         }
@@ -470,7 +478,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             List<Order> temp = new List<Order>();
             foreach (Order o in orders)
             {
-                if (o.Status != "Cancel" && o.Status != "Paid")
+                // Xuất dsach hóa đơn trong ngày trừ hóa đơn giao hàng
+                if (o.OrderDateTime.Date == DateTime.Now.Date && o.Desc != "Delivery")
                 {
                     temp.Add(o);
                 }
@@ -518,5 +527,20 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             IEnumerable<OrderItem> orderItems = info.GetAllOrderItemByOrderID(OrderID);
             return View(orderItems);
         }
+
+        [Route("GetOrder")]
+        public ActionResult GetOrder()
+        {
+            IEnumerable<Order> orders = info.GetAllOrder();
+            return View(orders);
+        }
+        [Route("ListDetailOrder")]
+        public ActionResult ListDetailOrder(int OrderID)
+        {
+            IEnumerable<OrderItem> orderitems = info.GetAllOrderItemByOrderID(OrderID);
+            return View(orderitems);
+        }
+
+
     }
 }

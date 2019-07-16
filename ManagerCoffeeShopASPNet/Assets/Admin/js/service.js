@@ -170,6 +170,16 @@
         }
         
     });
+    $("#chooseService").change(function () {
+        // jQuery
+        var selectedVal = $(this).find(':selected').val();
+        if (selectedVal == "TakeAway") {
+            $("#choosePos").prop("disabled", true)
+        }
+        else {
+            $("#choosePos").prop("disabled", false)
+        }
+    });
 });
 
 
