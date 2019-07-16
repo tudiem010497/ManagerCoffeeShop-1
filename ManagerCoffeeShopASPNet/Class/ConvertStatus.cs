@@ -25,7 +25,7 @@ namespace ManagerCoffeeShopASPNet.Class
             }
             else if (Status == "Pending")
             {
-                return "Đang pha chế";
+                return "Chờ pha chế";
             }
             else if (Status == "Cancel")
             {
