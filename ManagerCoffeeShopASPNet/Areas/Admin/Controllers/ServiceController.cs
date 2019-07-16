@@ -498,14 +498,24 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("PrintOrder")]
         public ActionResult PrintOrder(int OrderID)
         {
-            
+
             //Response.Buffer = false;
             //Response.ClearContent();
             //Response.ClearHeaders();
             //rp.SetDatabaseLogon("Diem", "", "DESKTOP-HA2TCUF", "CoffeeShopDB", false);
-            string status = "Paid";
-            info.UpdateOrderStatus(OrderID, status);
+
             Order order = info.GetOrderByOrderID(OrderID).SingleOrDefault();
+            if(order.Desc == "ServeAtCafe" || order.Desc == "TakeAway")
+            {
+                string status = "Paid";
+                info.UpdateOrderStatus(OrderID, status);
+            }
+            else
+            {
+                string Status1 = "Closed", Status2 = "Delivery";
+                info.UpdateOrderStatus(OrderID, Status1);
+                info.UpdateShipDetailStatus(OrderID, Status2);
+            }
             if (order.PosID != 0)
             {
                 int PosID = Convert.ToInt32(order.PosID);

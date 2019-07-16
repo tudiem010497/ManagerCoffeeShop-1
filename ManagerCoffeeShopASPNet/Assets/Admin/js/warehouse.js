@@ -133,6 +133,12 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 alert("Gửi thành công phiếu nhập cho nhà cung cấp : " + data.SupplierID);
+                $(".list-receiptdetail tbody").html("")
+                $(".list-receiptdetail-gift tbody").html("")
+                arrIngreID = []
+                arrIngre = []
+                arrGiftID = [];
+                arrGift = [];
             },
             error: function (err) {
                 alert("Error1 : " + err.error);
@@ -144,16 +150,31 @@ $(document).ready(function () {
         var ingreid = $(parent).attr("ingreid")
         var quantityNew = parent.find("td.Quantity input").val();
         var UnitPrice = parent.find("td.UnitPrice").text();
+        //var item = [IngreID, Name, Quantity, UnitPrice, ReferenceDesc]
+        var n = arrIngre.length;
+        for (var i = 0; i< n; i++){
+            if (arrIngre[i][0] == ingreid) {
+                arrIngre[i][2] = quantityNew
+            }
+        }
         //var quantityNew = $("table.list-receiptdetail tbody tr td.Quantity input").val();
         //var UnitPrice = $("table.list-receiptdetail tbody tr td.UnitPrice").text();
         var totalNew = quantityNew * UnitPrice;
         parent.find("td.TotalAmount").text(totalNew);
     })
-    $("table.list-receiptdetail_gift").on('click', 'button.update_gift', function () {
-        var quantityNew_gift = $("table.list-receiptdetail_gift tbody tr td.Quantity_gift input").val();
-        var UnitPrice_gift = $("table.list-receiptdetail_gift tbody tr td.UnitPrice_gift").text();
+    $("table.list-receiptdetail-gift").on('click', 'button.update_gift', function () {
+        var parent = $(this).parent().parent();
+        var giftid = $(parent).attr("giftid")
+        var quantityNew_gift = parent.find("td.Quantity_gift input").val();
+        var UnitPrice_gift = parent.find("td.UnitPrice_gift").text();
+        var n = arrGift.length;
+        for (var i = 0; i < n; i++) {
+            if (arrGift[i][0] == giftid) {
+                arrGift[i][2] = quantityNew_gift
+            }
+        }
         var totalNew = quantityNew_gift * UnitPrice_gift;
-        $("table.list-receiptdetail tbody tr td.TotalAmount").text(totalNew);
+        parent.find("td.TotalAmount_gift").text(totalNew);
     })
     $(".createReceipt").on('click', function () {
         var data = '{"IngredientEffete": [', temp = 0;
@@ -203,7 +224,7 @@ $(document).ready(function () {
         var TotalAmount_gift = UnitPrice_gift * Quantity_gift;
         var row = "<tr giftid=" + GiftID
             + "><td class= 'Name_gift'>" + Name_gift + "</td>"
-            + "<td class= 'Quantity_gift'>" + Quantity_gift + "</td>"
+            + "<td class= 'Quantity_gift'><input type='text' id='changea' style='width:50px;height:28px'  value= " + Quantity_gift + "> </td>"
             + "<td style = 'display:none' class='UnitPrice_gift'>" + UnitPrice_gift + "</td>"
             + "<td class='TotalAmount_gift'>" + TotalAmount_gift + "</td>"
             + "<td class='ReferenceDesc_gift'>" + ReferenceDesc_gift + "</td>"
