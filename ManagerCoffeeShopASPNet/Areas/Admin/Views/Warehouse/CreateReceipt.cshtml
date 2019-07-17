@@ -10,6 +10,29 @@
 <div class="row">
     <div class="col-sm-7">
         <div>
+            <h5>Danh sách nguyên vật liệu dưới định mức kho</h5>
+            @(Html
+            .Grid((IEnumerable<Ingredient>)ViewData["test"])
+            .Build(columns =>
+            {
+                columns.Add(model => Html.CheckBox("check_" + model.IngreID)).Titled(Html.CheckBox("CheckAll"));
+                columns.Add(model => model.Name).Filterable(true).Titled("Tên nguyên vật liệu").Css("Name");
+                columns.Add(model => model.Amount).Titled("Số lượng còn lại");
+                columns.Add(model => model.AmountMin).Titled("Định mức kho");
+                columns.Add(model => model.Unit).Titled("Đơn vị tính");
+                columns.Add(model => model.UnitPrice).Titled("Đơn giá").Css("UnitPrice");
+            }).AppendCss("table-hover")
+            .Pageable(pager =>
+            {
+                pager.RowsPerPage = 6;
+            })
+            )
+
+                <button type="button" class="btnAddToReceiptEffete btn-sm float-right btn btn-primary">Thêm vào phiếu nhập</button>
+
+        </div>
+        <div style="padding-top:2px">
+            <h5>Danh sách nguyên vật liệu</h5>
             @(Html
                 .Grid((IEnumerable<Ingredient>)ViewData["ingres"])
                 .Build(columns =>
@@ -29,6 +52,7 @@
             )
         </div>
         <div>
+            <h5>Danh sách quà tặng</h5>
             @(Html
                 .Grid((IEnumerable<Gift>)ViewData["gifts"])
                 .Build(columns =>

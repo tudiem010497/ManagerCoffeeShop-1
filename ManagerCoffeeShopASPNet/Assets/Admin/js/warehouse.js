@@ -54,7 +54,32 @@ $(document).ready(function () {
         }
         $(".list-receiptdetail-gift tbody").html(row);
     })
-
+    $(".btnAddToReceiptEffete").click(function () {
+        $("table.table-hover tbody tr").each(function () {
+            var temp = 0, row = '';
+            if ($(this).find('input[type="checkbox"]').is(":checked")) {
+                if (temp != 0)
+                    data = data + ',';
+                //var IngreID = $("table.table-hover tbody tr td").find('input[type="checkbox"]').attr("id");
+                var IngreID = Number($(this).find('input[type="checkbox"]').attr('id').substring(6));
+                var Name = $(this).find('td.Name').text();
+                var UnitPrice = $(this).find('td.UnitPrice').text();
+                //data = data + '{"IngreID": ' + IngreID + ',';
+                //data = data + '"Name": "' + Name + '",';
+                //data = data + '"UnitPrice": ' + UnitPrice + '}';
+                if (!CheckExistIngre(IngreID, arrIngreID)) {
+                    var item = [IngreID, Name, 0, UnitPrice, ""]
+                    arrIngreID.push(IngreID);
+                    arrIngre.push(item)
+                }
+                for (var index in arrIngre) {
+                    row = row + addRow(arrIngre[index][0], arrIngre[index][1], arrIngre[index][2], arrIngre[index][3], arrIngre[index][4])
+                }
+                $(".list-receiptdetail tbody").html(row);
+                temp++;
+            }
+        })
+    })
     $("table.list-receiptdetail").on('click', 'button.btnRemoveFromReceipt', function () {
         var row = "";
         var IngreID = $(this).attr("ingreid");
@@ -152,7 +177,7 @@ $(document).ready(function () {
         var UnitPrice = parent.find("td.UnitPrice").text();
         //var item = [IngreID, Name, Quantity, UnitPrice, ReferenceDesc]
         var n = arrIngre.length;
-        for (var i = 0; i< n; i++){
+        for (var i = 0; i < n; i++) {
             if (arrIngre[i][0] == ingreid) {
                 arrIngre[i][2] = quantityNew
             }
@@ -200,11 +225,11 @@ $(document).ready(function () {
             data: data,
             dataType: "json",
             success: function (data) {
-                //window.location = url;
+                window.location = url;
                 alert("OK");
             },
             error: function (err) {
-                alert("Error1 : " + err.error);
+                //alert("Error1 : " + err.error);
             }
         });
     })

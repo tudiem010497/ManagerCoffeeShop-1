@@ -222,6 +222,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                     select.Value = item.SupplierID.ToString();
                     sups.Add(select);
                 }
+                IEnumerable<Ingredient> ingreEffete = info.GetAllIngredientEffete();
+                ViewData["test"] = ingreEffete;
                 ViewData["gifts"] = gifts;
                 ViewData["sups"] = sups;
                 ViewData["ingres"] = ingres;
@@ -250,12 +252,13 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                     int IngreID = item.IngreID;
                     string Name = item.Name;
                     double UnitPrice = item.UnitPrice;
+                    
                 }
                 //return View();
                 return Json(JsonRequestBehavior.AllowGet);
             }
         }
-        
+        //[Route("")]
         [Route("DoCreateReceipt")]
         public ActionResult DoCreateReceipt(string json)
         {
@@ -290,7 +293,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult GetAllIngredientEffete()
         {
             IEnumerable<Ingredient> ingres = info.GetAllIngredientEffete();
-            return View(ingres);
+            //ViewData["test"] = ingres;
+            return RedirectToAction("CreateReceipt", "Warehouse");
         }
     }
 }
