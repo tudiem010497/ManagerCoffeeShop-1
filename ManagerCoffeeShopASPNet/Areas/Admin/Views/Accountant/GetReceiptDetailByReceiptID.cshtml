@@ -44,7 +44,8 @@
         @Html.ActionLink("Trở về", "GetAllReceiptWaitToConfirm", "Accountant")
     </div>
     <div class="col-md-4">
-        @Html.ActionLink("Hoàn tất", "ConfirmAll", new { ReceiptID = ViewData["ReceiptID"], View = "GetReceiptDetailByReceiptID" }, new { @class = "btn btn-sm btn-outline-info" })
+        @Html.ActionLink("Xác nhận tất cả", "ConfirmAll", new { ReceiptID = ViewData["ReceiptID"]@*, View = "GetReceiptDetailByReceiptID"*@ }, new { @class = "btn btn-sm btn-outline-info" })
+        @Html.ActionLink("Hủy tất cả", "CancelAll", new { ReceiptID = ViewData["ReceiptID"] }, new { @class = "btn btn-sm btn-outline-danger" })
     </div>
 </div>
 

@@ -29,8 +29,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("GetAllReceiptWaitToConfirm")]
         public ActionResult GetAllReceiptWaitToConfirm()
         {
-            IEnumerable<Receipt> receipt = info.GetAllReceipt();
-            //IEnumerable<Receipt> receipt = info.GetReceiptWaitToConfirm();
+            //IEnumerable<Receipt> receipt = info.GetAllReceipt();
+            IEnumerable<Receipt> receipt = info.GetReceiptWaitToConfirm();
             return View(receipt);
         }
         //xem danh sách chi tiết của phiếu nhập
@@ -43,38 +43,35 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         }
         //nhấn nút duyệt phiếu nhập
         [Route("ConfirmAll")]
-        public ActionResult ConfirmAll(int ReceiptID, string View)
+        public ActionResult ConfirmAll(int ReceiptID/*, string View*/)
         {
             string Status1 = "Confirm";
             int temp = 0;
-            IEnumerable<Receipt> receipt = info.GetReceiptByReceiptID(ReceiptID);
-            if (View == "GetAllReceiptWaitToConfirm")
+            Receipt receipt = info.GetReceiptByReceiptID(ReceiptID).SingleOrDefault();
+            IEnumerable<ReceiptDetail> details = info.GetReceiptDetailByReceiptID(ReceiptID);
+            int n = details.Count();
+            // Đếm sl receiptdetail cancel
+            foreach(ReceiptDetail item in details)
             {
-                info.UpdateReceipt(ReceiptID, Status1);
-                IEnumerable<ReceiptDetail> receiptDetail = info.GetReceiptDetailByReceiptID(ReceiptID);
-                foreach(var item in receiptDetail)
+                if(item.Status == "Cancel")
                 {
-                    info.UpdateReceiptDetail(item.ReceiptDetailID, Status1);
+                    temp++;
                 }
             }
-            if (View == "GetReceiptDetailByReceiptID")
+            // Nếu sl cancel = tổng sl => status = cancel
+            if(temp == n)
             {
-                IEnumerable<ReceiptDetail> receiptDetail = info.GetReceiptDetailByReceiptID(ReceiptID);
-                foreach (var item in receiptDetail)
+                info.UpdateReceipt(ReceiptID, "Cancel");
+            }
+            else // nếu sl cancel < tổng sl 
+            {
+                info.UpdateReceipt(ReceiptID, Status1);
+                foreach(ReceiptDetail item in details)
                 {
-                    if (item.Status != Status1)
+                    if(item.Status != "Cancel")
                     {
-                        temp = 0;
-                        break;
+                        info.UpdateReceiptDetail(item.ReceiptDetailID, Status1);
                     }
-                    else
-                    {
-                        temp = 1;
-                    }
-                }
-                if (temp == 1)
-                {
-                    info.UpdateReceipt(ReceiptID, Status1);
                 }
             }
             return RedirectToAction("GetAllReceiptWaitToConfirm");
@@ -84,7 +81,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         public ActionResult CancelAll(int ReceiptID)
         {
             string Status = "Cancel";
-            IEnumerable<Receipt> receipt = info.GetReceiptByReceiptID(ReceiptID);
+            //IEnumerable<Receipt> receipt = info.GetReceiptByReceiptID(ReceiptID);
             info.UpdateReceipt(ReceiptID, Status);
             IEnumerable<ReceiptDetail> receiptDetail = info.GetReceiptDetailByReceiptID(ReceiptID);
             foreach(var item in receiptDetail)
@@ -99,15 +96,64 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         {
             ReceiptDetail receiptDetail = info.GetReceiptDetailByReceiptDetailID(ReceiptDetailID);
             info.UpdateReceiptDetail(ReceiptDetailID, "Confirm");
-            return RedirectToAction("GetReceiptDetailByReceiptID", new { ReceiptID = receiptDetail.ReceiptID });
+            Receipt receipt = info.GetReceiptByReceiptID(receiptDetail.ReceiptID).SingleOrDefault();
+            IEnumerable<ReceiptDetail> details = info.GetReceiptDetailByReceiptID(receipt.ReceiptID);
+            int n = details.Count();
+            int temp = 0; 
+            foreach(ReceiptDetail detail in details)
+            {
+                if (detail.Status == "Confirm" || detail.Status == "Cancel")
+                    temp++;
+            }
+            if(temp == n) // status cuối cùng trong phiếu nhập
+            {
+                info.UpdateReceipt(receipt.ReceiptID, "Confirm");
+                return RedirectToAction("GetAllReceiptWaitToConfirm");
+            }
+            else
+            {
+                return RedirectToAction("GetReceiptDetailByReceiptID", new { ReceiptID = receiptDetail.ReceiptID });
+            }
         }
         //nhấn nút không duyệt chi tiết phiếu nhập
         [Route("Cancel")]
         public ActionResult Cancel(int ReceiptDetailID)
         {
             ReceiptDetail receiptDetail = info.GetReceiptDetailByReceiptDetailID(ReceiptDetailID);
+            Receipt receipt = info.GetReceiptByReceiptID(receiptDetail.ReceiptID).SingleOrDefault();
+            IEnumerable<ReceiptDetail> details = info.GetReceiptDetailByReceiptID(receipt.ReceiptID);
             info.UpdateReceiptDetail(ReceiptDetailID, "Cancel");
-            return RedirectToAction("GetReceiptDetailByReceiptID", new { ReceiptID = receiptDetail.ReceiptID });
+            int temp1 = 0, temp2 = 0; // số status confirm, cancel
+            int n = details.Count();
+            foreach(ReceiptDetail detail in details)
+            {
+                if (detail.Status == "Confirm") temp1++;
+                else if (detail.Status == "Cancel") temp2++;
+            }
+            if((temp1 + temp2) == n) { // status cuối cùng
+                if(temp1 != 0) // có status confirm
+                {
+                    info.UpdateReceipt(receipt.ReceiptID, "Confirm");
+                }
+                return RedirectToAction("GetAllReceiptWaitToConfirm");
+            }
+            else
+            {
+                return RedirectToAction("GetReceiptDetailByReceiptID", new { ReceiptID = receiptDetail.ReceiptID });
+            }
+        }
+        [Route("GetAllReceipt")]
+        public ActionResult GetAllReceipt()
+        {
+            IEnumerable<Receipt> receipt = info.GetAllReceipt();
+            return View(receipt);
+        }
+
+        [Route("ReceiptDetail")]
+        public ActionResult ReceiptDetail(int ReceiptID)
+        {
+            IEnumerable<ReceiptDetail> details = info.GetReceiptDetailByReceiptID(ReceiptID);
+            return View(details);
         }
         //Tạo phiếu lập bảng lương
         //Bước 1: chọn mã nhân viên cần tạo phiếu

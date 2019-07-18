@@ -1,19 +1,15 @@
 ﻿@model IEnumerable<ManagerCoffeeShopASPNet.Receipt>
 @using NonFactors.Mvc.Grid
 @using ManagerCoffeeShopASPNet.Class
+
 @{
-    ViewBag.Title = "GetAllReceiptWaitToConfirm";
+    ViewBag.Title = "GetAllReceipt";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<script>
-    setTimeout(function () {
-        location.reload();
-    }, 10000);
-</script>
-<h2 style="text-align:center;padding:10px">DANH SÁCH PHIẾU NHẬP CẦN XÁC NHẬN</h2>
+
+<h2 style="text-align:center;padding:10px">DANH SÁCH PHIẾU NHẬP</h2>
 <hr />
 
-@Html.ActionLink("Xem tất cả phiếu nhập", "GetAllReceipt", "Accountant", new { @class = "btn btn-sm btn-outline-info" })
 <div>
     @(Html
         .Grid(Model)
@@ -23,9 +19,9 @@
             column.Add(m => m.Date.ToShortDateString()).Titled("Ngày tạo phiếu").Formatted("{0:dd-MM-yyyy}");
             column.Add(m => m.TotalAmount).Titled("Tổng tiền").Filterable(false);
             column.Add(m => m.Currency).Titled("Đơn vị tiền").Sortable(false);
-            column.Add(m =>o.ConvertStatus(m.Status).ToString()).Titled("Trạng thái phiếu nhập").Sortable(false);
+            column.Add(m => o.ConvertStatus(m.Status).ToString()).Titled("Trạng thái phiếu nhập").Sortable(false);
             column.Add(m => m.ReceiptID).Encoded(false).RenderedAs(m => (
-                @Html.ActionLink("Xem chi tiết", "GetReceiptDetailByReceiptID", new { ReceiptID = m.ReceiptID }, new { @class = "btn btn-sm btn-outline-info" }).ToHtmlString()
+                @Html.ActionLink("Xem chi tiết", "ReceiptDetail", "Accountant", new { ReceiptID = m.ReceiptID }, new { @class = "btn btn-sm btn-outline-info" }).ToHtmlString()
             //+ " " + @Html.ActionLink("Duyệt", "ConfirmAll", new { ReceiptID = m.ReceiptID, View = "GetAllReceiptWaitToConfirm" }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
             //+ " " + @Html.ActionLink("Không duyệt", "CancelAll", new { ReceiptID = m.ReceiptID }, new { @class = "btn btn-sm btn-outline-danger" }).ToHtmlString()
             )).Sortable(false).Filterable(false);
@@ -39,3 +35,4 @@
         })
     )
 </div>
+@Html.ActionLink("Trở về", "GetAllReceiptWaitToConfirm", new { @class = "btn btn-sm btn-info" })
