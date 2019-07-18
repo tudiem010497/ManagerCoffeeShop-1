@@ -5,7 +5,11 @@
     ViewBag.Title = "GetAllOrder";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
+<script>
+    setTimeout(function () {
+        location.reload();
+    }, 10000);
+</script>
 <h2 style="text-align:center; padding:10px;">DANH SÁCH HÓA ĐƠN TRONG NGÀY</h2>
 <div style="padding-bottom:10px;">
     @Html.ActionLink("Xem tất cả đơn hàng", "GetOrder", "Service", new { @class = "btn btn-sm btn-outline-primary" })

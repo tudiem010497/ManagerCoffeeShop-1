@@ -4,7 +4,11 @@
     ViewBag.Title = "SendMessageIngredientWithOut";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
+<script>
+    setTimeout(function () {
+        location.reload();
+    }, 1000*60*2);
+</script>
 <h2 style="text-align:center;padding:7px">GỬI THÔNG BÁO THIẾU NGUYÊN VẬT LIỆU</h2>
 
 @if (TempData["message"] != null)
