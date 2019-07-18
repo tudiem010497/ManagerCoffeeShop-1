@@ -15,7 +15,7 @@
             .Grid((IEnumerable<Ingredient>)ViewData["test"])
             .Build(columns =>
             {
-                columns.Add(model => Html.CheckBox("check_" + model.IngreID)).Titled(Html.CheckBox("CheckAll"));
+                columns.Add(model => Html.CheckBox("check_" + model.IngreID)).Titled("");
                 columns.Add(model => model.Name).Filterable(true).Titled("Tên nguyên vật liệu").Css("Name");
                 columns.Add(model => model.Amount).Titled("Số lượng còn lại");
                 columns.Add(model => model.AmountMin).Titled("Định mức kho");
@@ -24,13 +24,13 @@
             }).AppendCss("table-hover")
             .Pageable(pager =>
             {
-                pager.RowsPerPage = 6;
+                pager.RowsPerPage = 3;
             })
             )
-
-                <button type="button" class="btnAddToReceiptEffete btn-sm float-right btn btn-primary">Thêm vào phiếu nhập</button>
-
+            <button type="button" class="btnAddToReceiptEffete btn-sm float-right btn btn-primary">Thêm vào phiếu nhập</button>
         </div>
+        <br />
+        <br />
         <div style="padding-top:2px">
             <h5>Danh sách nguyên vật liệu</h5>
             @(Html
@@ -46,7 +46,8 @@
                     ).Filterable(false);
                 }).Filterable()
                 .Sortable()
-                .Pageable(pager=> {
+                .Pageable(pager =>
+                {
                     pager.RowsPerPage = 4;
                 })
             )
@@ -153,7 +154,7 @@
         </div>
         <div>
             <div>
-                @Html.DropDownList("SupplierID", (List<SelectListItem>)ViewData["sups"], new { @class= "form-control" })
+                @Html.DropDownList("SupplierID", (List<SelectListItem>)ViewData["sups"], new { @class = "form-control" })
             </div>
             <table class="list-receiptdetail table">
                 <tbody></tbody>

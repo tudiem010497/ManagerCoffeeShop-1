@@ -6,9 +6,21 @@
 
 <h2 style="text-align:center;padding:10px">CÔNG THỨC PHA CHẾ</h2>
 
+
 <div style="padding:5px">
-    @Html.ActionLink("Thêm bước", "CreateRecipeDetail", "Batender", new { RecipeID = ViewData["RecipeID"] }, new { @class = "btn btn-primary" })
+    <p class="test">@ViewData["message"]</p>
+    @{
+        if (ViewData["recipe"] == null)
+        {
+            @Html.ActionLink("Thêm công thức", "CreateRecipe", "Batender", new { FDID = ViewData["FDID"] }, new { @class = "btn btn-primary" });
+        }
+        else
+        {
+            @Html.ActionLink("Thêm bước", "CreateRecipeDetail", "Batender", new { RecipeID = ViewData["RecipeID"] }, new { @class = "btn btn-primary addStep" })
+        }
+    }
 </div>
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -19,9 +31,8 @@
         </tr>
     </thead>
     <tbody>
-        <tr>@ViewData["message"]</tr>
         @{
-            if (ViewData["recipe"] != null && ((IEnumerable<RecipeDetail>) ViewData["recipeDetails"]).Count<RecipeDetail>() !=0)
+            if (ViewData["recipe"] != null && ((IEnumerable<RecipeDetail>)ViewData["recipeDetails"]).Count<RecipeDetail>() != 0)
             {
                 foreach (RecipeDetail item in (IEnumerable<RecipeDetail>)ViewData["recipeDetails"])
                 {
@@ -38,15 +49,12 @@
                     </tr>
                 }
             }
-            else
-            {
-                @Html.ActionLink("Thêm công thức","CreateRecipe", "Batender", new { FDID = ViewData["FDID"] }, new { @class="btn btn-primary" });
-            }
         }
-        
+
     </tbody>
 </table>
 
 <div style="padding:10px">
     @Html.ActionLink("Trở về", "GetAllFoodAndDrink")
 </div>
+
