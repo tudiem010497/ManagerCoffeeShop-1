@@ -8,6 +8,7 @@ namespace ManagerCoffeeShopASPNet.DAO
 {
     interface PayrollDAO
     {
+        IEnumerable<Payroll> GetAllAddedOnOfPayrollByEmID(int EmID);
         Payroll GetPayrollByPayrollID(int PayrollID);
         Payroll GetPayrollByEmployeeID(int EmployeeID);
         Payroll GetPayrollByEmployeeIDAndAddedOnNo(int EmployeeID, DateTime AddedOn);

@@ -119,7 +119,7 @@ namespace ManagerCoffeeShopASPNet.Class
             else if (Position == "Stokkeeper")
                 return "Kho";
             else if (Position == "Web")
-                return "Web";
+                return "Hệ thống";
             else return "";
         }
     }

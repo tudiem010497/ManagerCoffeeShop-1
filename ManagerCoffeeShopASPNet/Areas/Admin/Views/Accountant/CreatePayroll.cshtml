@@ -26,7 +26,8 @@
         <div class="form-group">
             @Html.Label("Chức vụ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="text" value="@ViewData["Position"]" class="form-control" id="Position" disabled />
+                <input type="text" value="@ViewData["Position"]" class="form-control" id="Position" hidden />
+                <input type="text" value="@ViewData["PositionDisplay"]" class="form-control" id="Position" disabled />
                 @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -38,7 +39,7 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("Số ngày/giờ làm việc", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Số ngày/giờ/tháng làm việc", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @if (ViewData["WorkDay"] != null)
                 {
@@ -54,7 +55,7 @@
         <div class="form-group">
             @Html.Label("Đơn vị tính", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="text" value="@ViewData["SalaryType"]" class="form-control" , id="SalaryType" />
+                <input type="text" value="@ViewData["SalaryType"]" class="form-control" readonly id="SalaryType" />
                 @Html.ValidationMessageFor(model => model.SalaryType, "", new { @class = "text-danger" })
             </div>
         </div>

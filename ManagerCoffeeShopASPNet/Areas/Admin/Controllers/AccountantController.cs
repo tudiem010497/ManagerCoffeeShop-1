@@ -12,6 +12,7 @@ using System.Web.Mvc;
 using System.IO;
 using Microsoft.Ajax.Utilities;
 using ManagerCoffeeShopASPNet.Reporting;
+using ManagerCoffeeShopASPNet.Class;
 
 namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
 {
@@ -179,9 +180,11 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             Account acc = infoWeb.GetAccountByEmail(em.Email);
             BasicSalary basicSalary = infoWeb.GetBasicSalaryByEmployeeID(EmployeeID);
             Salary salary = infoWeb.GetSalaryBySalaryID(basicSalary.SalaryID);
-            
+            ConvertAccount c = new ConvertAccount();
+             
             ViewData["EmployeeID"] = EmployeeID;
             ViewData["EmployeeName"] = em.Name;
+            ViewData["PositionDisplay"] = c.ConvertAccType(acc.AccType) + " " + c.ConvertPosition(acc.Position);
             ViewData["Position"] = acc.AccType + " " + acc.Position;
             ViewData["SalaryType"] = salary.Type;
             ViewData["BasicSalary"] = salary.UnitPrice;
@@ -211,6 +214,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         [Route("ImportExcelFileCreatePayrollForAllEmployee")]
         public ActionResult ImportExcelFileCreatePayrollForAllEmployee()
         {
+            IEnumerable<Employee> employees = info.GetAllEmployee();
+            ViewData["employees"] = employees;
             return View();
         }
         [HttpPost]
@@ -262,6 +267,24 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             }
             return RedirectToAction("ImportExcelFileCreatePayrollForAllEmployee");
         }
+
+        [Route("DetailPayRoll")]
+        public ActionResult DetailPayRoll(int EmployeeID)
+        {
+            IEnumerable<Payroll> payroll = info.GetAllAddedOnOfPayroll();
+            List<SelectListItem> listAddedOnPayroll = new List<SelectListItem>();
+            foreach (var item in payroll.DistinctBy(p => p.AddedOn))
+            {
+                SelectListItem select = new SelectListItem();
+                select.Text = item.AddedOn.ToString();
+                listAddedOnPayroll.Add(select);
+            }
+            ViewData["listAddedOnPayroll"] = listAddedOnPayroll;
+            ViewData["Name"] = info.GetInfoEmployeeByEmID(EmployeeID).Name;
+            ViewData["EmID"] = info.GetInfoEmployeeByEmID(EmployeeID).EmployeeID;
+            return View();
+        }
+
         //xem bảng lương của nhân viên dựa vào EmployeeID
         [Route("DetailPayrollOfEmployee")]
         public ActionResult DetailPayrollOfEmployee(/*int EmployeeID*/)

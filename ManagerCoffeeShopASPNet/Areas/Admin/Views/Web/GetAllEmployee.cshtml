@@ -72,8 +72,8 @@
                     {
                         @Html.ActionLink("Xem tài khoản", "ViewAccountInformation", "Web", new { UserID = item.UserID }, new { @class = "btn btn-sm btn-outline-success " })
                         @*<input type="button" disabled value="Tạo tài khoản" class="btn btn-sm btn-outline-warning text-dark btn-sm createAccount" onclick="location.href(@Url.Action("GetFormAddNewAccountForEmployee", "Web", new { @EmployeeID = item.EmployeeID }))" />*@
-                        @Html.ActionLink("Thêm bảng lương", "CreatePayroll", "Accountant", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-success" })
-                        @Html.ActionLink("Chi tiết bảng lương", "DetailPayrollOfEmployee", "Accountant", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-success" })
+                        @*@Html.ActionLink("Thêm bảng lương", "CreatePayroll", "Accountant", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-success" })
+                        @Html.ActionLink("Chi tiết bảng lương", "DetailPayrollOfEmployee", "Accountant", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-success" })*@
                     }
                     else
                     {

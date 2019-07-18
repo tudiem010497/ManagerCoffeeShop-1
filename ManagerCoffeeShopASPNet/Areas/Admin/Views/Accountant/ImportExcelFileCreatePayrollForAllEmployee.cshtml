@@ -1,4 +1,7 @@
-﻿@model ManagerCoffeeShopASPNet.Areas.Admin.Models.ImportExcel
+﻿@using NonFactors.Mvc.Grid
+@using ManagerCoffeeShopASPNet.Class
+
+@model ManagerCoffeeShopASPNet.Areas.Admin.Models.ImportExcel
 @{
     ViewBag.Title = "ImportExcelFileCreatePayrollForAllEmployee";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -25,4 +28,32 @@
             </div>
         </div>
     }
+</div>
+@{ 
+    ConvertStatusEmployee c = new ConvertStatusEmployee();
+}
+<div>
+    @(Html
+        .Grid((IEnumerable<Employee>)ViewData["employees"]).Build(columns =>
+        {
+            columns.Add(e => e.Name).Titled("Tên nhân viên").Filterable(true);
+            columns.Add(e => e.Email).Titled("Email");
+            columns.Add(e => e.Address).Titled("Địa chỉ");
+            columns.Add(e => e.Phone).Titled("Số điện thoại");
+            columns.Add(e => c.ConvertGender(e.Gender)).Titled("Giới tính");
+            columns.Add(e => e.IndentityNum).Titled("CMND");
+            columns.Add(e => c.ConvertStatus(e.Status)).Titled("Trạng thái");
+            columns.Add(e => e.EmployeeID).Encoded(false).RenderedAs(e => (
+                Html.ActionLink("Thêm bảng lương", "CreatePayroll", "Accountant", new { EmployeeID = e.EmployeeID }, new { @class = "btn btn-sm btn-outline-primary" }).ToHtmlString()
+                + Html.ActionLink("Xem chi tiết bảng lương", "DetailPayRoll", "Accountant", new { EmployeeID = e.EmployeeID }, new { @class = "btn btn-sm btn-outline-success" }).ToHtmlString()
+
+            ));
+        })
+        .Empty("Không có dữ liệu.")
+        .Sortable()
+        .Pageable(pager =>
+        {
+            pager.RowsPerPage = 6;
+        })
+    )
 </div>

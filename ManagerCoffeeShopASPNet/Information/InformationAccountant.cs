@@ -29,8 +29,20 @@ namespace ManagerCoffeeShopASPNet.Information
             this._timeSheetDetailDAO = (TimeSheetDetailDAO)new TimeSheetDetailDAOImpl();
             this._payrollDAO = (PayrollDAO)new PayrollDAOImpl();
             this._accDAO = (AccountDAO)new AccountDAOImpl();
+            this._employeeDAO = (EmployeeDAO)new EmployeeDAOImpl();
         }
-
+        public Employee GetInfoEmployeeByEmID(int EmID)
+        {
+            return this._employeeDAO.GetEmployeeByID(EmID);
+        }
+        public IEnumerable<Payroll> GetAllAddedOnOfPayrollByEmID(int EmID)
+        {
+            return this._payrollDAO.GetAllAddedOnOfPayrollByEmID(EmID);
+        }
+        public IEnumerable<Employee> GetAllEmployee()
+        {
+            return this._employeeDAO.GetAllEmployee();
+        }
         public Account GetAccountByEmail(string Email)
         {
             return this._accDAO.GetAccountByEmail(Email);

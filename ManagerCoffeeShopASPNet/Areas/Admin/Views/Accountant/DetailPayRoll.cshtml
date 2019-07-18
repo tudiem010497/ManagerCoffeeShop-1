@@ -1,0 +1,41 @@
+﻿@model ManagerCoffeeShopASPNet.Payroll
+
+@{
+    ViewBag.Title = "DetailPayRoll";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2 style="padding:10px">Xem chi tiết bảng lương của nhân viên dựa vào ngày tạo</h2>
+
+@using (Html.BeginForm("DoDetailPayrollOfEmployee", "Accountant", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Tên nhân viên", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" value="@ViewData["Name"]" readonly  />
+                <input class="form-control" value="@ViewData["EmID"]" name="EmployeeName" hidden />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Ngày tạo bảng lương", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("AddedOn", (List<SelectListItem>)ViewData["listAddedOnPayroll"], new { @class = "form-control", id = "addedOn" })
+                @Html.ValidationMessageFor(model => model.AddedOn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-3" style="float:right">
+                <input type="submit" value="Xem chi tiết" class="btn btn-sm btn-outline-primary btn-detailpayroll" />
+            </div>
+        </div>
+    </div>
+}
+
+
+

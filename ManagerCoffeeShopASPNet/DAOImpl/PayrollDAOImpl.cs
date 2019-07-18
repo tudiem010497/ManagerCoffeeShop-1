@@ -54,12 +54,34 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
                                      select payroll;
             return p;
         }
+        public IEnumerable<Payroll> GetAllAddedOnOfPayrollByEmID(int EmID)
+        {
+            try
+            {
+                IEnumerable<Payroll> p = from payroll in context.Payrolls
+                                         where payroll.EmployeeID == EmID
+                                         select payroll;
+                return p;
+            }
+            catch
+            {
+                return null;
+            }
+            
+        }
         public Payroll GetPayrollByEmployeeIDAndAddedOnNo(int EmployeeID, DateTime AddedOn)
         {
-            Payroll p = (from payroll in context.Payrolls
-                         where payroll.EmployeeID == EmployeeID && payroll.AddedOn == AddedOn
-                         select payroll).SingleOrDefault();
-            return p;
+            try
+            {
+                Payroll p = (from payroll in context.Payrolls
+                             where payroll.EmployeeID == EmployeeID && payroll.AddedOn == AddedOn
+                             select payroll).LastOrDefault();
+                return p;
+            }
+            catch 
+            {
+                return null;
+            }
         }
         public IEnumerable<Payroll> GetParyollByEmployeeIDAndAddedOn(int Employee, DateTime AddedOn)
         {
