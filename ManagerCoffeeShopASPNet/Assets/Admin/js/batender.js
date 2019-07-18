@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    
     var href;
     $(".btnCancel").click(function () {
         if (confirm("Bạn có muốn hủy phục vụ loại đồ uống này!!!")) {
