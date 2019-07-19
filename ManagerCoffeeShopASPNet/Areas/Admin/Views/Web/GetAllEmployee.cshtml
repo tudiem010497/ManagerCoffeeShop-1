@@ -59,7 +59,6 @@
                        ConvertStatusEmployee test = new ConvertStatusEmployee();
                        string a = test.ConvertStatus(item.Status).ToString();
                    }
-                    @*@Html.Display(a)*@
                     @a
                 </td>
                 <td>
@@ -67,18 +66,10 @@
                     @if (item.UserID != null)
                     {
                         @Html.ActionLink("Xem tài khoản", "ViewAccountInformation", "Web", new { UserID = item.UserID }, new { @class = "btn btn-sm btn-outline-success " })
-                        @*<input type="button" disabled value="Tạo tài khoản" class="btn btn-sm btn-outline-warning text-dark btn-sm createAccount" onclick="location.href(@Url.Action("GetFormAddNewAccountForEmployee", "Web", new { @EmployeeID = item.EmployeeID }))" />*@
-                        @*@Html.ActionLink("Thêm bảng lương", "CreatePayroll", "Accountant", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-success" })
-                        @Html.ActionLink("Chi tiết bảng lương", "DetailPayrollOfEmployee", "Accountant", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-success" })*@
                     }
                     else
                     {
                         @Html.ActionLink("Tạo tài khoản", "GetFormAddNewAccountForEmployee", "Web", new { EmployeeID = item.EmployeeID }, new { @class = "btn btn-sm btn-outline-warning text-dark btn-sm" })
-                        @*<input type="button" disabled value="Thêm bảng lương" class="btn btn-sm btn-outline-success" onclick="location.href(@Url.Action("CreatePayroll", "Accountant", new { @EmployeeID = item.EmployeeID }))" />*@
-                    }
-                    @if (item.UserID != null)
-                    {
-                        
                     }
                 </td>
             </tr>
@@ -124,7 +115,7 @@
     .mvc-grid tbody{
         display:block;
         overflow:auto;
-        height:400px;
+        /*height:400px;*/
     }
     .mvc-grid thead tr{
         display:block;
