@@ -4,17 +4,47 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 <br />
+<h2 style="text-align:center">Đặt đồ uống</h2>
+
+<br />
+<style>
+    .fooddrinkgr .btnPlus{
+        background: #fef2f2;
+        margin-top: -190px;
+        margin-left: 70px;
+    }
+    .fooddrinkgr .btnMinus{
+        background: #fef2f2;
+        margin-top: -190px;
+    }
+    .btnMinus:hover,.btnPlus:hover{
+        background:#cbf5ef;
+    }
+    .fooddrinkgr h5{
+        margin-top:-20px;
+    }
+    .fooddrinkgr{
+        padding-bottom: 20px;
+    }
+    .Quantity .btnPlus{
+        margin-left: 10px;
+    }
+    .Quantity .btnMinus{
+         margin-top: -70px;
+    margin-left: 50px;
+    }
+</style>
 <div class="row">
-    <div class="col-sm-8"></div>
-    <div class="col-sm-4">
+    <div class="col-sm-8">
         @using (Html.BeginForm("Service", "ServiceEmployee", FormMethod.Get))
         {
             @Html.TextBox("SearchString")
-            <button type="submit">Search</button>
+            <button type="submit">Tìm kiếm</button>
         }
     </div>
+
 </div>
-<br />
+<br /><br />
 <div class="row">
     <div class="col-sm-6" style="height:490px; overflow-x:scroll;">
         @{
@@ -35,7 +65,7 @@
                                 <img class="image-fooddrink img-responsive" src="@fds.ElementAt(i).ImagePath" /><br />
                                 <button class='btn btnPlus'><i class='fas fa-plus'></i></button>
                                 <button class='btn btnMinus'><i class='fas fa-minus'></i></button>
-                                <h3>@fds.ElementAt(i).Name</h3>
+                                <h5>@fds.ElementAt(i).Name</h5>
                                 
                             </div>
                             i++;
@@ -81,7 +111,7 @@
                         <th>Tên món</th>
                         <th>Số lượng</th>
                         <th>Thành tiền</th>
-                        <th>Yêu cầu thêm</th>
+                        <th>Ghi chú</th>
                     </tr>
                 </thead>
                 <tbody class="order">

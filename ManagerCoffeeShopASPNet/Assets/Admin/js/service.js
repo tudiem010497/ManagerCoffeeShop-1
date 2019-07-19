@@ -27,11 +27,41 @@
             PlusQuantity(strID);
         }
     });
+    $(".order").on('click', '.btnPlus', function () {
+        var strID = $(this).parent().parent("tr").attr("class")
+        var id = strID.substr(14);
+        if (!CheckExistOrder(id, arrayID)) {
+            arrayID.push(id);
+            $.ajax({
+                url: '/admin/service/GetFoodAndDrinkByID?id=' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var FDID = data.FDID;
+                    var Name = data.Name;
+                    var UnitPrice = data.UnitPrice;
+                    var Price = UnitPrice;
+                    AppendNewOrder(FDID, Name, Price);
+                },
+                error: function (err) {
+                    alert("Error : " + err.responseText);
+                }
+            });
+        }
+        else {
+            PlusQuantity(strID);
+        }
+    })
     $(".fooddrinkgr .btnMinus").click(function () {
         var strID = $(this).parent(".fooddrinkgr").attr("id");
         var id = strID.substr(14);
         MinusQuantity(strID,arrayID);
     });
+    $(".order").on('click', '.btnMinus', function () {
+        var strID = $(this).parent().parent("tr").attr("class")
+        var id = strID.substr(14);
+        MinusQuantity(strID, arrayID);
+    })
     function CheckExistOrder(FDID, arrayID) {
         for (var item in arrayID) {
             if (FDID == arrayID[item]) {
@@ -45,7 +75,7 @@
         element_price = "." + strID + " > td.Price";
         quantity = parseInt($(element_quantity).text()) + 1;
         price = parseInt($(element_price).text()) + parseInt($(element_price).text()) / (quantity - 1);
-        $(element_quantity).html(quantity.toString());
+        $(element_quantity).html(quantity.toString() + "<button class='btn btnPlus'><i class='fas fa-plus'></i></button>" + "<button class='btn btnMinus'><i class='fas fa-minus'></i></button>");
         $(element_price).html(price.toString());
     }
     function MinusQuantity(strID, arrayID) {
@@ -54,7 +84,7 @@
         quantity = parseInt($(element_quantity).text()) - 1;
         price = parseInt($(element_price).text()) - parseInt($(element_price).text()) / (quantity + 1);
         if (quantity != 0) {
-            $(element_quantity).html(quantity.toString());
+            $(element_quantity).html(quantity.toString() + "<button class='btn btnPlus'><i class='fas fa-plus'></i></button>" + "<button class='btn btnMinus'><i class='fas fa-minus'></i></button>");
             $(element_price).html(price.toString());
         }
         else {
@@ -74,7 +104,11 @@
         row += "</td>";
         row += "<td class='Quantity'>";
         row += "1";
+        row += "<button class='btn btnPlus'><i class='fas fa-plus'></i></button>"
+        row += "<button class='btn btnMinus'><i class='fas fa-minus'></i></button>"
         row += "</td>";
+        //row += "<td>"
+        //row += "</td>"
         row += "<td class='Price'>";
         row += Price;              
         row += "</td>";
@@ -84,7 +118,7 @@
         row += "</tr>";
         $("table#order > .order").append(row);
     }
-
+    
     // Xử lý button Gửi đến quầy pha chế
     $("#btnSendToBatender").click(function () {
        var temp = 0;
@@ -147,8 +181,9 @@
             dataType: "json",
             success: function (data) {
                 alert("Gửi thành công " + data.PosID);
-                $("tbody.order").html("")
+                //$("tbody.order").html("")
                 arrayID = []
+                location.reload()
             },
             error: function (err) {
                 alert("Error1 : " + err.error);

@@ -13,6 +13,8 @@ using System.IO;
 using Microsoft.Ajax.Utilities;
 using ManagerCoffeeShopASPNet.Reporting;
 using ManagerCoffeeShopASPNet.Class;
+using System.Data;
+using Microsoft.Office.Interop.Excel;
 
 namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
 {
@@ -218,6 +220,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             ViewData["employees"] = employees;
             return View();
         }
+
+        
         [HttpPost]
         [Route("DoImportExcelFileCreatePayrollForAllEmployee")]
         public ActionResult DoImportExcelFileCreatePayrollForAllEmployee(ImportExcel importExcel)
