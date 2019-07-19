@@ -34,7 +34,7 @@
     }
 </style>
 <div class="row">
-    <div class="col-sm-8">
+    <div class="col-sm-8" style="padding-bottom:5px">
         @using (Html.BeginForm("Service", "ServiceEmployee", FormMethod.Get))
         {
             @Html.TextBox("SearchString")
@@ -43,9 +43,8 @@
     </div>
 
 </div>
-<br /><br />
 <div class="row">
-    <div class="col-sm-6" style="height:490px; overflow-x:scroll;">
+    <div class="col-sm-6" style="height:465px; overflow-x:scroll;">
         @{
             IEnumerable<FoodAndDrink>
                 fds = (IEnumerable<FoodAndDrink>
