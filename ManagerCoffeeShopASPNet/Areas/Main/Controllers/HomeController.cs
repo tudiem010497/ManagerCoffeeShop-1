@@ -55,7 +55,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Main.Controllers
                     Session["successEmployee"] = "Chào mừng " + acc.UserName;
                     Session["successUserID"] = acc.UserID.ToString();
                     Session["email"] = model.Email;
-                    return RedirectToAction("ServiceEmployee", "Admin/Service"/*, new { Areas = "Admin" }*/);
+                    
+                    return RedirectToAction("Service", "admin/service"/*, new { Areas = "Admin" }*/);
                 }
                 else
                 {

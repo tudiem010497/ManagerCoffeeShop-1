@@ -24,6 +24,20 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
     {
         private InformationService info = new InformationService();
         private InformationDichVu infoDV = new InformationDichVu();
+
+        [Route("Login")]
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("ServiceEmployee", "Service");
+            }
+            //ViewBag.ReturnUrl = returnUrl ?? Url.Action("Index", "Dashboard");
+            //return View();
+            return RedirectToAction("Index", "Home", new { Areas = "Main" });
+        }
+
         // GET: Admin/Service
         [Route("Index")]
         [HttpGet]
@@ -505,7 +519,9 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             //rp.SetDatabaseLogon("Diem", "", "DESKTOP-HA2TCUF", "CoffeeShopDB", false);
 
             Order order = info.GetOrderByOrderID(OrderID).SingleOrDefault();
-            if(order.Desc == "ServeAtCafe" || order.Desc == "TakeAway")
+
+            CrystalReport1 rp = new CrystalReport1();
+            if (order.Desc == "ServeAtCafe" || order.Desc == "TakeAway")
             {
                 string status = "Paid";
                 info.UpdateOrderStatus(OrderID, status);
@@ -520,8 +536,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             {
                 int PosID = Convert.ToInt32(order.PosID);
                 info.UpdateStatusPostion(PosID, "Available");
+                    rp.SetParameterValue("@orderid", OrderID);
             }
-            CrystalReport1 rp = new CrystalReport1();
             rp.SetParameterValue("@OrderID", OrderID);
             Stream stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);

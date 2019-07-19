@@ -36,6 +36,10 @@
             pager.RowsPerPage = 6;
         })
     )
+    @{ 
+        string DescOrder = Model.FirstOrDefault().Order.Desc;
+    }
+    <div style="display:none" id="DescOrder" DescOrder="@DescOrder"></div>
 </div>
 @Html.ActionLink("Trở về", "GetListOrder", "batender")
 <style type="text/css">
@@ -43,4 +47,13 @@
         display: none;
     }
 </style>
+<script>
+    $(document).ready(function () {
+        var DescOrder = $("#DescOrder").attr("DescOrder")
+        if (DescOrder == "Delivery") {
+            $(".btnCancel").removeAttr("href").attr("class", "btn btn-light btn-sm")
+        }
+        console.log(DescOrder)
+    })
+</script>
 
