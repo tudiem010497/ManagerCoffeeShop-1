@@ -8,26 +8,32 @@
 }
 <script src="~/Assets/Admin/js/accountant.js"></script>
 
-<br />
-<h2 style="text-align:center">THÊM BẢNG LƯƠNG CHO NHÂN VIÊN BẰNG FILE EXCEL</h2>
-<hr />
+<h2 style="text-align:center;padding:10px">THÊM BẢNG LƯƠNG CHO NHÂN VIÊN BẰNG FILE EXCEL</h2>
 
-<div id="viewContent">
-    @if (ViewData["ResultImportExcel"] != null)
-    {
-        <h3>@ViewData["ResultImportExcel"]</h3>
-    }
-    @using (Html.BeginForm("DoImportExcelFileCreatePayrollForAllEmployee", "Accountant", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <div class="form-group">
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.file, new { type = "file" })
-                @Html.ValidationMessageFor(model => model.file)
-                <button id="submitButton" type="submit">Thêm</button>
+<div class="row">
+    <div id="viewContent" class="float-left col-md-8">
+        @{
+            if (TempData["ResultImportExcel"] != null)
+            {
+                <h5>@TempData["ResultImportExcel"]</h5>
+            }
+        }
+        @using (Html.BeginForm("DoImportExcelFileCreatePayrollForAllEmployee", "Accountant", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.file, new { type = "file" })
+                    @Html.ValidationMessageFor(model => model.file)
+                    <button id="submitButton" type="submit">Thêm</button>
+                </div>
             </div>
-        </div>
-    }
+        }
+    </div>
+    <div class="float-right col-md-4">
+        @Html.ActionLink("Xuất danh sách NV", "ExportExcel", "Accountant", new { @class = "btn btn-sm btn-primary" })
+    </div>
 </div>
+
 @{ 
     ConvertStatusEmployee c = new ConvertStatusEmployee();
 }

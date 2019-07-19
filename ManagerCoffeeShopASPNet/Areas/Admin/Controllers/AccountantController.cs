@@ -13,8 +13,8 @@ using System.IO;
 using Microsoft.Ajax.Utilities;
 using ManagerCoffeeShopASPNet.Reporting;
 using ManagerCoffeeShopASPNet.Class;
-using System.Data;
 using Microsoft.Office.Interop.Excel;
+using System.Data;
 
 namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
 {
@@ -255,20 +255,101 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 //Give your Destination table name
                 sqlBulk.DestinationTableName = "Payroll";
                 //Mappings
-                sqlBulk.ColumnMappings.Add("Date", "AddedOn");
-                sqlBulk.ColumnMappings.Add("Desc", "Desc");
-                sqlBulk.ColumnMappings.Add("BasicSalary", "BasicSalary");
-                sqlBulk.ColumnMappings.Add("EmployeeName", "EmployeeName");
-                sqlBulk.ColumnMappings.Add("EmployeeID", "EmployeeID");
-                sqlBulk.ColumnMappings.Add("WorkDay", "WorkDay");
-                sqlBulk.ColumnMappings.Add("Bonus", "Bonus");
-                sqlBulk.ColumnMappings.Add("Penalty", "Penalty");
-                sqlBulk.ColumnMappings.Add("Total", "Total");
-                sqlBulk.ColumnMappings.Add("Currency", "Currency");
+                sqlBulk.ColumnMappings.Add("Mã nhân viên", "EmployeeID");
+                sqlBulk.ColumnMappings.Add("Tên nhân viên", "EmployeeName");
+                sqlBulk.ColumnMappings.Add("Lương cơ bản", "BasicSalary");
+                sqlBulk.ColumnMappings.Add("Số ngày làm việc", "WorkDay");
+                sqlBulk.ColumnMappings.Add("Thưởng", "Bonus");
+                sqlBulk.ColumnMappings.Add("Phạt", "Penalty");
+                sqlBulk.ColumnMappings.Add("Tổng", "Total");
+                sqlBulk.ColumnMappings.Add("Ghi chú", "Desc");
+                sqlBulk.ColumnMappings.Add("Đơn vị tiền", "Currency");
+                sqlBulk.ColumnMappings.Add("Ngày tạo", "AddedOn");
                 sqlBulk.WriteToServer(dReader);
                 excelConnection.Close();
-                ViewData["ResultImportExcel"] = "Successfully Imported";
+                TempData["ResultImportExcel"] = "Nhập thành công";
             }
+            return RedirectToAction("ImportExcelFileCreatePayrollForAllEmployee");
+        }
+        DataSet GetRecordsFromDatabase()
+        {
+            DataSet dataSet = new DataSet();
+
+            SqlConnection conn = new SqlConnection();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["CoffeeShopDBConnectionString"].ConnectionString;
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "Select distinct e.EmployeeID, e.Name, s.UnitPrice, p.WorkDay, p.Bonus, p.Penalty, p.[Total], p.[Desc], p.Currency, p.AddedOn FROM((Employee as e left join BasicSalary as bs on e.EmployeeID = bs.EmployeeID) left join Salary as s on bs.SalaryID = s.SalaryID) left join Payroll as p on p.EmployeeID = e.EmployeeID";
+            cmd.Connection = conn;
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            sqlDataAdapter.SelectCommand = cmd;
+            sqlDataAdapter.Fill(dataSet);
+
+            return dataSet;
+        }
+        //xuất danh sách nhân viên ra file excel
+        [Route("ExportExcel")]
+        public ActionResult ExportExcel()
+        {
+            DataSet dataSet = GetRecordsFromDatabase();
+            var excelApp = new Application();
+            excelApp.Visible = true;
+            excelApp.Workbooks.Add();
+
+            Worksheet wookSheet = (Worksheet)excelApp.ActiveSheet;
+            wookSheet.Name = "Info";
+
+            var columnName = dataSet.Tables[0].Columns.Cast<DataColumn>().Select(x => x.ColumnName).ToArray();
+            
+            int i = 0;
+            foreach(var col in columnName)
+            {
+                i++;
+                if (col == "Name")
+                    wookSheet.Cells[1, i] = "Tên nhân viên";
+                else if (col == "UnitPrice")
+                    wookSheet.Cells[1, i] = "Lương cơ bản";
+                else if (col == "EmployeeID")
+                    wookSheet.Cells[1, i] = "Mã nhân viên";
+                else if (col == "AddedOn")
+                    wookSheet.Cells[1, i] = "Ngày tạo";
+                else if (col == "Bonus")
+                    wookSheet.Cells[1, i] = "Thưởng";
+                else if (col == "Penalty")
+                    wookSheet.Cells[1, i] = "Phạt";
+                else if (col == "Total")
+                    wookSheet.Cells[1, i] = "Tổng";
+                else if (col == "Desc")
+                    wookSheet.Cells[1, i] = "Ghi chú";
+                else if (col == "WorkDay")
+                    wookSheet.Cells[1, i] = "Số ngày làm việc";
+                else if (col == "Currency")
+                    wookSheet.Cells[1, i] = "Đơn vị tiền";
+            }
+            int j;
+            for (i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+            {
+                int n = dataSet.Tables[0].Columns.Count;
+                for (j = 0; j < n; j++)
+                {
+                    if (j > 2)
+                    {
+                        wookSheet.Cells[i + 2, j + 1] = "";
+                    }
+                    //else if (j == n - 1)
+                    //{
+                    //    var dtm = DateTime.Now.Day + "/" + DateTime.Now.Month + "/" + DateTime.Now.Year;
+                    //    wookSheet.Cells[i + 2, j + 1] = dtm;
+                    //}
+                    else
+                    {
+                        wookSheet.Cells[i + 2, j + 1] = Convert.ToString(dataSet.Tables[0].Rows[i][j]);
+                    }
+                    
+                }
+            }
+            wookSheet.SaveAs("E:\\" + wookSheet.Name);
             return RedirectToAction("ImportExcelFileCreatePayrollForAllEmployee");
         }
 
