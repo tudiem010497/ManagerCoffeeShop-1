@@ -26,6 +26,10 @@ namespace ManagerCoffeeShopASPNet.Information
             this._coffeeLandScapeDAO = (CoffeeLandScapeDAO)new CoffeeLandScapeDAOImpl();
             this._coffeeLandScapeDetailDAO = (CoffeeLandScapeDetailDAO)new CoffeeLandScapeDetailDAOImpl();
         }
+        public int GetLastCoffeeLandScapeDetailID()
+        {
+            return this._coffeeLandScapeDetailDAO.GetLastCoffeeLandScapeDetailID();
+        }
         public IEnumerable<Employee> GetAllEmployee()
         {
             return this._employeeDAO.GetAllEmployee();

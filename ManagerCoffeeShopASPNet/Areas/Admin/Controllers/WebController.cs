@@ -437,6 +437,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             string FloorID = diagram.FloorID;
             int CSID = diagram.CSID;
             int CLSID = diagram.CLSID;
+            List<int> listNewDetail = new List<int>();
+            List<int> newtemp = new List<int>();
             List<ImageDiagram> ListImageDiagram = diagram.ListImageDiagram;
             bool result = info.UpdateCoffeeLandScape(CLSID, widthDiagram, heightDiagram, ratioDiagram, CSID, FloorID);
             foreach (ImageDiagram image in ListImageDiagram)
@@ -448,26 +450,39 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
                 else
                 {
                     result = info.InsertCoffeeLandScapeDetail(CLSID, image.Href, image.x, image.y, image.width, image.height, image.rotate);
+                    int detailID = info.GetLastCoffeeLandScapeDetailID();
+                    //listNewDetail.Add(detailID);
+                    //newtemp.Add(image.ID);
+                    image.ID = detailID;
                 }
             }
             //xóa image trong db
-            List<int> intListID = new List<int>();
-            List<int> ItemID = new List<int>();
+            List<int> intListID = new List<int>(); // sơ đồ
+            List<int> ItemID = new List<int>(); // db
+            // Lấy trong db
             IEnumerable<CoffeeLandScapeDetail> detail = info.GetAllCoffeeLandScapeDetailByCoffeeLandScapeID(CLSID);
             foreach (var imagedelete in detail)
             {
                 ItemID.Add(imagedelete.ItemID);
             }
 
+            // Lấy trong sơ đồ 
             foreach (ImageDiagram temp in ListImageDiagram)
             {
                 intListID.Add(temp.ID);
-            }
-            IEnumerable<int> differenceTwoList = ItemID.Except(intListID);
-            foreach(var temp in differenceTwoList)
+            } 
+            foreach(int item in ItemID) // db
             {
-                info.DeleteCoffeeLandScapeDetail(temp);
+                if(!intListID.Contains(item))
+                {
+                    info.DeleteCoffeeLandScapeDetail(item);
+                }
             }
+
+            //foreach(var temp in differenceTwoList)
+            //{
+            //    info.DeleteCoffeeLandScapeDetail(temp);
+            //}
             return Json(JsonRequestBehavior.AllowGet);
         }
         [Route("DeleteDiagram")]

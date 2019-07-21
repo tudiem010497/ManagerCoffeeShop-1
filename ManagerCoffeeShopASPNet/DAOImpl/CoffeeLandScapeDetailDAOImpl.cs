@@ -13,6 +13,18 @@ namespace ManagerCoffeeShopASPNet.DAOImpl
         {
             this.context = new CoffeeShopDBDataContext();
         }
+        public int GetLastCoffeeLandScapeDetailID()
+        {
+            try
+            {
+                int id = (from detail in context.CoffeeLandScapeDetails orderby detail.ItemID descending select detail.ItemID).FirstOrDefault();
+                return id;
+            }
+            catch(Exception ex)
+            {
+                return 0;
+            }
+        }
         public bool InsertCoffeeLandScapeDetail(int CLSID, string Href,float x, float y, float width, float height, int Rotate)
         {
             try

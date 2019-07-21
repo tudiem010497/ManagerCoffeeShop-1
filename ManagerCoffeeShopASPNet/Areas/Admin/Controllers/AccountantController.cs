@@ -301,6 +301,8 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             Worksheet wookSheet = (Worksheet)excelApp.ActiveSheet;
             wookSheet.Name = "Info";
 
+            wookSheet.EnableSelection = Microsoft.Office.Interop.Excel.XlEnableSelection.xlNoSelection;
+
             var columnName = dataSet.Tables[0].Columns.Cast<DataColumn>().Select(x => x.ColumnName).ToArray();
             
             int i = 0;

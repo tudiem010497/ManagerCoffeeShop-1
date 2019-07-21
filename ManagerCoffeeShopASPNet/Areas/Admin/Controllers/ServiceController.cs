@@ -25,18 +25,18 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
         private InformationService info = new InformationService();
         private InformationDichVu infoDV = new InformationDichVu();
 
-        [Route("Login")]
-        [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("ServiceEmployee", "Service");
-            }
-            //ViewBag.ReturnUrl = returnUrl ?? Url.Action("Index", "Dashboard");
-            //return View();
-            return RedirectToAction("Index", "Home", new { Areas = "Main" });
-        }
+        //[Route("Login")]
+        //[AllowAnonymous]
+        //public ActionResult Login(string returnUrl)
+        //{
+        //    if (User.Identity.IsAuthenticated)
+        //    {
+        //        return RedirectToAction("ServiceEmployee", "Service");
+        //    }
+        //    //ViewBag.ReturnUrl = returnUrl ?? Url.Action("Index", "Dashboard");
+        //    //return View();
+        //    return RedirectToAction("Index", "Home", new { Areas = "Main" });
+        //}
 
         // GET: Admin/Service
         [Route("Index")]
@@ -536,7 +536,7 @@ namespace ManagerCoffeeShopASPNet.Areas.Admin.Controllers
             {
                 int PosID = Convert.ToInt32(order.PosID);
                 info.UpdateStatusPostion(PosID, "Available");
-                    rp.SetParameterValue("@orderid", OrderID);
+                   //rp.SetParameterValue("@orderid", OrderID);
             }
             rp.SetParameterValue("@OrderID", OrderID);
             Stream stream = rp.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
